@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "start": "next start",
@@ -33,6 +33,7 @@
     "@types/node": "20.14.9",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
+    "autoprefixer": "10.4.20",
     "dotenv-cli": "7.4.2",
     "eslint": "catalog:",
     "jiti": "1.21.6",

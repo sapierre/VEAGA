@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./native": "./native.ts",
-    "./web": "./web.ts"
+    "./mobile": "./config/mobile.ts",
+    "./web": "./config/web.ts",
+    "./variables": "./config/variables.css"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",

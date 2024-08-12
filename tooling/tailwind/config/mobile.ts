@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
-
 import base from "./base";
+
+import type { Config } from "tailwindcss";
 
 export default {
   content: base.content,
