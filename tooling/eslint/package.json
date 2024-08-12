@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    "./base": "./config/base.js",
-    "./next": "./config/next.js",
-    "./react": "./config/react.js"
+    "./base": "./base.js",
+    "./next": "./next.js",
+    "./react": "./react.js"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",

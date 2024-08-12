@@ -1,4 +1,4 @@
-/// <reference types="../types.d.ts" />
+/// <reference types="./types.d.ts" />
 
 import * as path from "node:path";
 import { includeIgnoreFile } from "@eslint/compat";

@@ -16,13 +16,13 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: "input",
         name: "name",
         message:
-          "What is the name of the package? (You can skip the `@turbostarter/` prefix)",
+          "What is the name of the package? (You can skip the `@turbostarter/` prefix): ",
       },
       {
         type: "input",
         name: "deps",
         message:
-          "Enter a space separated list of dependencies you would like to install",
+          "Enter a space separated list of dependencies you would like to install: ",
       },
     ],
     actions: [
