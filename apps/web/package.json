@@ -1,0 +1,44 @@
+{
+  "name": "@turbostarter/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "clean": "git clean -xdf .cache .next .turbo node_modules",
+    "dev": "next dev",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "0.10.1",
+    "@tanstack/react-query": "catalog:",
+    "@trpc/client": "catalog:",
+    "@trpc/react-query": "catalog:",
+    "@trpc/server": "catalog:",
+    "geist": "1.3.0",
+    "next": "14.2.4",
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
+    "superjson": "2.2.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@turbostarter/eslint-config": "workspace:*",
+    "@turbostarter/prettier-config": "workspace:*",
+    "@turbostarter/tailwind-config": "workspace:*",
+    "@turbostarter/tsconfig": "workspace:*",
+    "@types/node": "20.14.9",
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18",
+    "dotenv-cli": "7.4.2",
+    "eslint": "catalog:",
+    "jiti": "1.21.6",
+    "prettier": "catalog:",
+    "tailwindcss": "3.4.4",
+    "typescript": "catalog:"
+  },
+  "prettier": "@turbostarter/prettier-config"
+}
