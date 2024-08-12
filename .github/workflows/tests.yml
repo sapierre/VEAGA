@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  pull_request:
+    branches: ["*"]
+  push:
+    branches: ["main"]
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+# You can leverage Vercel Remote Caching with Turbo to speed up your builds
+# @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds
+env:
+  FORCE_COLOR: 3
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
+jobs:
+  test:
+    name: 🧪 Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔨 Setup
+        uses: ./tooling/github/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 🖌️ Format
+        run: pnpm run format
+
+      - name: 🛻 Lint
+        run: pnpm run lint
+
+      - name: 🧪 Typecheck
+        run: pnpm run typecheck
