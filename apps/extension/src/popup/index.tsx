@@ -1,13 +1,28 @@
-import "@turbostarter/ui/globals";
+import { APP_LINK } from "@turbostarter/shared";
 import { Icons } from "@turbostarter/ui";
+import "@turbostarter/ui/globals";
 
 import "~styles/globals.css";
 
 const Popup = () => {
   return (
-    <div className="font-sans">
-      <h1 className="p-10 text-destructive">Hellosss World</h1>
-      <Icons.Logo className="w-10 text-primary" />
+    <div className="flex w-64 flex-col items-center justify-center gap-4 px-8 py-6 font-sans text-base">
+      <Icons.Logo className="w-20 animate-pulse text-primary" />
+      <p className="text-pretty text-center leading-tight">
+        Edit{" "}
+        <code className="inline-block rounded-sm bg-muted px-1.5 text-sm text-muted-foreground">
+          src/popup
+        </code>{" "}
+        and save to reload.
+      </p>
+      <a
+        href={APP_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-1 text-sm text-primary underline hover:no-underline"
+      >
+        Learn more
+      </a>
     </div>
   );
 };
