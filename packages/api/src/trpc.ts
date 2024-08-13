@@ -11,18 +11,20 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import { db } from "@turbostarter/db";
+import { db } from "@turbostarter/db/client";
+
+import type { AuthClient } from "@turbostarter/auth";
 
 /**
- * Isomorphic Session getter for API requests
+ * Isomorphic user getter for API requests
  * - Expo requests will have a session token in the Authorization header
  * - Next.js requests will have a session token in cookies
  */
-// const isomorphicGetSession = async (headers: Headers) => {
-//   const authToken = headers.get("Authorization") ?? null;
-//   if (authToken) return validateToken(authToken);
-//   return auth();
-// };
+const isomorphicGetUser = async (headers: Headers, auth: AuthClient) => {
+  const authToken = headers.get("Authorization") ?? null;
+  if (authToken) return auth.getUser(authToken);
+  return auth.getUser();
+};
 
 /**
  * 1. CONTEXT
@@ -38,19 +40,15 @@ import { db } from "@turbostarter/db";
  */
 export const createTRPCContext = async (opts: {
   headers: Headers;
-  //   session: Session | null;
+  auth: AuthClient;
 }) => {
-  const authToken = opts.headers.get("Authorization") ?? null;
-  //   const session = await isomorphicGetSession(opts.headers);
+  const user = await isomorphicGetUser(opts.headers, opts.auth);
 
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
-  //   console.log(">>> tRPC Request from", source, "by", user?.data.user?.email);
+  console.log(">>> tRPC Request from", source, "by", user.data.user?.email);
 
   return {
-    // user: user.data.user,
-    user: {
-      id: null,
-    },
+    user: user.data.user,
     db,
   };
 };
@@ -131,7 +129,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  * procedure
  */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-  if (!ctx.user.id) {
+  if (!ctx.user?.id) {
     // throw new ApiError(
     //   HTTP_STATUS_CODE.UNAUTHORIZED,
     //   "You need to be logged in to access this feature!",

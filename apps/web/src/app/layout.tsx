@@ -14,7 +14,7 @@ const sans = DM_Sans({
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={sans.variable}>
-      <body className="min-h-screen bg-destructive font-sans text-foreground antialiased">
+      <body className="min-h-screen bg-muted font-sans text-foreground antialiased">
         <Providers>{props.children}</Providers>
       </body>
     </html>

@@ -6,7 +6,7 @@ import "~styles/globals.css";
 
 const Popup = () => {
   return (
-    <div className="flex w-64 flex-col items-center justify-center gap-4 px-8 py-6 font-sans text-base">
+    <div className="flex w-64 flex-col items-center justify-center gap-4 bg-background px-8 py-6 font-sans text-base text-foreground">
       <Icons.Logo className="w-20 animate-pulse text-primary" />
       <p className="text-pretty text-center leading-tight">
         Edit{" "}

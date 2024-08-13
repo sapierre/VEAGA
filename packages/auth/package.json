@@ -1,5 +1,5 @@
 {
-  "name": "@turbostarter/api",
+  "name": "@turbostarter/auth",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -7,17 +7,12 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@turbostarter/auth": "workspace:*",
-    "@turbostarter/db": "workspace:*",
-    "@trpc/server": "catalog:",
-    "superjson": "2.2.1",
-    "zod": "catalog:"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",
@@ -27,5 +22,9 @@
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@turbostarter/prettier-config"
+  "prettier": "@turbostarter/prettier-config",
+  "dependencies": {
+    "@supabase/ssr": "0.4.0",
+    "@supabase/supabase-js": "2.45.1"
+  }
 }

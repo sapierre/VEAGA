@@ -1,22 +1,28 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalEnv": ["NODE_ENV", "CI"],
+  "globalDependencies": [".env"],
   "tasks": {
     "build": {
-      "dependsOn": ["clean", "^build"],
-      "outputs": [".cache/tsbuildinfo.json", "dist/**"]
+      "dependsOn": ["^build"],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**",
+        ".expo/**",
+        ".output/**",
+        ".vercel/output/**"
+      ]
     },
     "format": {
       "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^lint"],
+      "dependsOn": ["^build"],
       "outputs": [".cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json"]
     },
     "dev": {

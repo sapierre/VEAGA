@@ -30,9 +30,9 @@ enable_signup = true
 double_confirm_changes = true
 enable_confirmations = true
 
-# [auth.email.template.confirmation]
-# subject = "Confirm email"
-# content_path = "./supabase/templates/confirmation.html"
+[auth.email.template.confirmation]
+subject = "Confirm email"
+content_path = "./supabase/templates/confirmation.html"
 
 # [auth.external.github]
 # enabled = true

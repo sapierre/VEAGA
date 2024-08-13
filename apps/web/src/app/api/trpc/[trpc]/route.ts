@@ -2,6 +2,7 @@ import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import { appRouter, createTRPCContext } from "@turbostarter/api";
 
+import { auth } from "~/lib/auth/server";
 import { env } from "~/lib/env";
 
 import type { NextRequest } from "next/server";
@@ -31,7 +32,7 @@ const handler = async (req: NextRequest) => {
     createContext: () =>
       createTRPCContext({
         headers: req.headers,
-        // supabase: supabase(),
+        auth: auth(),
       }),
     onError:
       // TODO: change to enum

@@ -4,6 +4,8 @@ import { cache } from "react";
 
 import { createCaller, createTRPCContext } from "@turbostarter/api";
 
+import { auth } from "~/lib/auth/server";
+
 import { createQueryClient } from "./shared";
 
 import type { AppRouter } from "@turbostarter/api";
@@ -17,7 +19,7 @@ const createContext = cache(async () => {
   heads.set("x-trpc-source", "rsc");
 
   return createTRPCContext({
-    // session: await auth(),
+    auth: auth(),
     headers: heads,
   });
 });

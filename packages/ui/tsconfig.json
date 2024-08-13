@@ -1,7 +1,6 @@
 {
   "extends": "@turbostarter/tsconfig/internal.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
     },
