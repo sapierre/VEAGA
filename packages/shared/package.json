@@ -1,22 +1,18 @@
 {
-  "name": "@turbostarter/tailwind-config",
-  "version": "0.1.0",
+  "name": "@turbostarter/shared",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
   "exports": {
-    "./mobile": "./config/mobile.ts",
-    "./web": "./config/web.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "clean": "git clean -xdf .cache .turbo node_modules",
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "postcss": "^8.4.39",
-    "tailwindcss": "^3.4.4",
-    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",

@@ -1,9 +1,13 @@
-import "@turbostarter/tailwind-config/variables";
+import "@turbostarter/ui/globals";
+import { Icons } from "@turbostarter/ui";
+
+import "~styles/globals.css";
 
 const Popup = () => {
   return (
-    <div>
-      <h1 className="text-destructive">Hello World</h1>
+    <div className="font-sans">
+      <h1 className="p-10 text-destructive">Hellosss World</h1>
+      <Icons.Logo className="w-10 text-primary" />
     </div>
   );
 };
