@@ -16,7 +16,7 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "dev": "tsc",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",

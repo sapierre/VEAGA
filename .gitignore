@@ -30,6 +30,10 @@ apps/mobile/android
 # production
 build
 
+# supabase
+.temp
+.branches
+
 # misc
 .DS_Store
 *.pem
