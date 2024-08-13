@@ -8,9 +8,10 @@
  */
 // import type { SupabaseClient } from "@supabase/supabase-js";
 import { initTRPC, TRPCError } from "@trpc/server";
-import { db } from "@turbostarter/db";
 import superjson from "superjson";
 import { ZodError } from "zod";
+
+import { db } from "@turbostarter/db";
 
 /**
  * Isomorphic Session getter for API requests

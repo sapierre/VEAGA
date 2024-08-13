@@ -1,5 +1,6 @@
-import "@turbostarter/ui/globals";
 import { DM_Sans } from "next/font/google";
+
+import "@turbostarter/ui/globals";
 
 import { Providers } from "~/providers/providers";
 import "~/styles/globals.css";

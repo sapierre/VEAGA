@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": ["NODE_ENV", "CI"],
   "tasks": {
     "build": {
       "dependsOn": ["clean", "^build"],
@@ -21,10 +22,6 @@
     "dev": {
       "cache": false,
       "persistent": false
-    },
-    "db:generate": {
-      "dependsOn": ["^db:generate"],
-      "cache": false
     },
     "db:setup": {
       "cache": false

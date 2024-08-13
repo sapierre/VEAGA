@@ -1,10 +1,11 @@
 import { ThemeProvider } from "next-themes";
 import { memo } from "react";
+
 import { TRPCReactProvider } from "~/trpc/react";
 
-type ProvidersProps = {
+interface ProvidersProps {
   readonly children: React.ReactNode;
-};
+}
 
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (

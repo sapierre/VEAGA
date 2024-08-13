@@ -1,9 +1,8 @@
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
-import { createCaller, createTRPCContext } from "@turbostarter/api";
 import { headers } from "next/headers";
 import { cache } from "react";
 
-// import { auth } from "@acme/auth";
+import { createCaller, createTRPCContext } from "@turbostarter/api";
 
 import { createQueryClient } from "./shared";
 
