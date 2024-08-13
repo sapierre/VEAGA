@@ -1,7 +1,8 @@
-export const runtime = "edge";
+import { api } from "~/trpc/server";
 
-const HomePage = () => {
-  return <h1>Home page</h1>;
+const HomePage = async () => {
+  const { greeting } = await api.user.hello();
+  return <h1>{greeting}</h1>;
 };
 
 export default HomePage;

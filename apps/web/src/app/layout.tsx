@@ -1,5 +1,8 @@
-import "@turbostarter/tailwind-config/variables";
+import "@turbostarter/ui/globals";
 import { DM_Sans } from "next/font/google";
+
+import { Providers } from "~/providers/providers";
+import "~/styles/globals.css";
 
 const sans = DM_Sans({
   subsets: ["latin"],
@@ -11,7 +14,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={sans.variable}>
       <body className="min-h-screen bg-destructive font-sans text-foreground antialiased">
-        {props.children}
+        <Providers>{props.children}</Providers>
       </body>
     </html>
   );
