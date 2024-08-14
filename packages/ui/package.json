@@ -6,8 +6,8 @@
   "exports": {
     "./globals": "./src/styles/variables.css",
     ".": {
-      "types": "./dist/src/components/index.d.ts",
-      "default": "./src/components/index.ts"
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
     }
   },
   "scripts": {
@@ -26,5 +26,10 @@
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@turbostarter/prettier-config"
+  "prettier": "@turbostarter/prettier-config",
+  "dependencies": {
+    "class-variance-authority": "0.7.0",
+    "lucide-react": "0.427.0",
+    "tailwind-merge": "2.5.2"
+  }
 }
