@@ -2,9 +2,9 @@ import { DM_Mono, DM_Sans } from "next/font/google";
 
 import "@turbostarter/ui/globals";
 
+import { Footer } from "~/components/common/layout/footer";
 import { Providers } from "~/providers/providers";
 import "~/styles/globals.css";
-import { Footer } from "~/components/common/layout/footer";
 
 const sans = DM_Sans({
   subsets: ["latin"],
@@ -26,11 +26,12 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       suppressHydrationWarning
       className={`${sans.variable} ${mono.variable}`}
     >
-      <body className="flex min-h-screen flex-col items-center justify-center bg-background pb-6 font-sans text-foreground antialiased sm:pb-8 md:pb-10 lg:pb-12">
+      <body className="flex min-h-screen flex-col items-center justify-center bg-background font-sans text-foreground antialiased">
         <Providers>
-          {props.children}
-
-          <Footer />
+          <div className="flex w-full max-w-[80rem] grow flex-col items-center gap-10 p-6 sm:p-8 md:p-10 lg:gap-12 lg:p-12">
+            {props.children}
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

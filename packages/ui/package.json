@@ -8,6 +8,10 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "default": "./src/index.ts"
+    },
+    "./web": {
+      "types": "./dist/src/web.d.ts",
+      "default": "./src/web.ts"
     }
   },
   "scripts": {
@@ -28,8 +32,14 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
+    "@hookform/resolvers": "3.9.0",
+    "@radix-ui/react-label": "2.1.0",
+    "@radix-ui/react-slot": "1.1.0",
+    "@turbostarter/shared": "workspace:*",
     "class-variance-authority": "0.7.0",
     "lucide-react": "0.427.0",
-    "tailwind-merge": "2.5.2"
+    "react-hook-form": "7.52.2",
+    "tailwind-merge": "2.5.2",
+    "zod": "3.23.8"
   }
 }

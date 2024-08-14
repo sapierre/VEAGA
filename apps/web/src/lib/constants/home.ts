@@ -5,7 +5,7 @@ export const HOME_LINKS = [
     title: "Auth",
     description:
       "Check how to use the auth flow. Social logins, magic link, email/password and many more.",
-    href: "#",
+    href: "/auth/login",
   },
   {
     title: "Protected routes",
