@@ -70,7 +70,7 @@ export const RegisterForm = memo(() => {
           key="success"
         >
           <Icons.CheckCircle2
-            className="text-success h-20 w-20"
+            className="h-20 w-20 text-success"
             strokeWidth={1.2}
           />
           <h2 className="text-center text-2xl font-semibold">Success!</h2>

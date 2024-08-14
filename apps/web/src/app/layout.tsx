@@ -3,6 +3,7 @@ import { DM_Mono, DM_Sans } from "next/font/google";
 import "@turbostarter/ui/globals";
 
 import { Footer } from "~/components/common/layout/footer";
+import { Toaster } from "~/components/common/toast";
 import { Providers } from "~/providers/providers";
 import "~/styles/globals.css";
 
@@ -32,6 +33,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
             {props.children}
             <Footer />
           </div>
+          <Toaster />
         </Providers>
       </body>
     </html>

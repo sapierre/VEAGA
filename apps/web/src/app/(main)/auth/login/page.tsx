@@ -8,7 +8,7 @@ import { SOCIAL_PROVIDER } from "@turbostarter/auth";
 
 import { Auth } from "~/components/auth/auth";
 
-const Login = async () => {
+const Login = () => {
   // const { data } = await supabase().auth.getUser();
 
   // if (data.user) {

@@ -7,4 +7,7 @@ export const userRouter = createTRPCRouter({
   secret: protectedProcedure.query(() => ({
     secret: "This is a secret message.",
   })),
+  get: publicProcedure.query(({ ctx }) => {
+    return ctx.user;
+  }),
 });

@@ -18,7 +18,7 @@ export const BuiltWith = () => {
         withText
         asLink={false}
         className="ml-1.5"
-        logoClassName="h-5 shrink-0"
+        logoClassName="h-[1.35rem] shrink-0"
       />
     </a>
   );

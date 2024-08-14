@@ -13,7 +13,7 @@ import { HOME_LINKS } from "~/lib/constants";
 
 const HomePage = () => {
   return (
-    <div className="flex w-full grow flex-col items-center justify-between gap-20">
+    <main className="flex w-full grow flex-col items-center justify-between gap-20">
       <div className="flex w-full flex-col items-center justify-between gap-2 md:flex-row-reverse">
         <AuthStatus />
         <p className="w-full rounded-md border border-input bg-muted/25 px-6 py-3 text-center md:w-fit">
@@ -46,7 +46,7 @@ const HomePage = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -8,6 +8,7 @@ import type {
 import type {
   SupabaseClientOptions as SupabaseClientOptionsType,
   EmailOtpType,
+  User,
 } from "@supabase/supabase-js";
 import type { SupabaseAuthClient } from "@supabase/supabase-js/dist/module/lib/SupabaseAuthClient";
 
@@ -31,7 +32,7 @@ interface AuthClientConfig {
 type AuthClient = SupabaseAuthClient;
 
 const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
 
 const registerSchema = z.object({
   email: z
@@ -83,6 +84,7 @@ export type {
   EmailOtpType,
   LoginData,
   RegisterData,
+  User,
 };
 
 export {

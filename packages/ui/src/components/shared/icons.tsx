@@ -1,4 +1,4 @@
-import { ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Loader2, CheckCircle2, UserRound } from "lucide-react";
 import * as React from "react";
 
 export const Icons = {
@@ -71,4 +71,5 @@ export const Icons = {
   ArrowRight,
   Loader2,
   CheckCircle2,
+  UserRound,
 };
