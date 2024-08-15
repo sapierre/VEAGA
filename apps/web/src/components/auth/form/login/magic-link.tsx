@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -27,85 +27,110 @@ import { login } from "../actions";
 
 import type { MagicLinkLoginData } from "@turbostarter/auth";
 
+type LoginStatus = "pending" | "success" | "error" | "idle";
+
 export const MagicLinkLoginForm = memo(() => {
-  const searchParams = useSearchParams();
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
-  const router = useRouter();
+  const [status, setStatus] = useState<LoginStatus>("idle");
+
   const form = useForm<MagicLinkLoginData>({
     resolver: zodResolver(magicLinkLoginSchema),
   });
 
-  //   const redirectTo = searchParams.get("redirectTo") ?? "/";
+  useEffect(() => {
+    setIsSubmitting(status === "pending");
+  }, [status, setIsSubmitting]);
 
   const onSubmit = async (data: MagicLinkLoginData) => {
     setProvider(AUTH_PROVIDER.MAGIC_LINK);
-    setIsSubmitting(true);
+    setStatus("pending");
 
-    const loadingToast = toast.loading("Signing in...");
-    const { error } = await login(data);
+    const loadingToast = toast.loading("Sending link...");
+    const { error } = await login({ data, option: AUTH_PROVIDER.MAGIC_LINK });
 
     if (error) {
-      setIsSubmitting(false);
+      setStatus("error");
       return toast.error(`${error}!`, { id: loadingToast });
     }
 
-    toast.success("Signed in!", { id: loadingToast });
-    setIsSubmitting(false);
-    // router.replace(redirectTo);
-    // return router.refresh();
+    toast.success("Success! Now check your inbox!", {
+      id: loadingToast,
+    });
+    setStatus("success");
   };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={onPromise(form.handleSubmit(onSubmit))}
-        className="space-y-6"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="email"
-                  disabled={form.formState.isSubmitting}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="flex items-center justify-end">
-          <div className="text-sm text-muted-foreground">
-            Don&apos;t have an account yet?
-            <Link
-              href="/auth/register"
-              className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-            >
-              Sign up!
-            </Link>
-          </div>
-        </div>
-
-        <Button
-          type="submit"
-          className="w-full"
-          size="lg"
-          disabled={isSubmitting}
+    <AnimatePresence mode="wait">
+      {status === "success" ? (
+        <motion.div
+          className="mt-6 flex flex-col items-center justify-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          key="success"
         >
-          {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
-            <Icons.Loader2 className="animate-spin" />
-          ) : (
-            "Sign in"
-          )}
-        </Button>
-      </form>
-    </Form>
+          <Icons.CheckCircle2
+            className="h-20 w-20 text-success"
+            strokeWidth={1.2}
+          />
+          <h2 className="text-center text-2xl font-semibold">Success!</h2>
+          <p className="text-center">
+            Email with a magic link has been sent to your inbox. Click it to
+            login!
+          </p>
+        </motion.div>
+      ) : (
+        <Form {...form}>
+          <form
+            onSubmit={onPromise(form.handleSubmit(onSubmit))}
+            className="space-y-6"
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="email"
+                      disabled={form.formState.isSubmitting}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="flex items-center justify-end">
+              <div className="text-sm text-muted-foreground">
+                Don&apos;t have an account yet?
+                <Link
+                  href="/auth/register"
+                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
+                >
+                  Sign up!
+                </Link>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full"
+              size="lg"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && provider === AUTH_PROVIDER.MAGIC_LINK ? (
+                <Icons.Loader2 className="animate-spin" />
+              ) : (
+                "Send magic link"
+              )}
+            </Button>
+          </form>
+        </Form>
+      )}
+    </AnimatePresence>
   );
 });
 

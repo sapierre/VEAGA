@@ -34,6 +34,15 @@ enable_confirmations = true
 subject = "Confirm email"
 content_path = "./supabase/templates/confirmation.html"
 
+[auth.email.template.recovery]
+subject = "Reset password"
+content_path = "./supabase/templates/recovery.html"
+
+[auth.email.template.magic_link]
+subject = "Your link to login"
+content_path = "./supabase/templates/magic_link.html"
+
+
 # [auth.external.github]
 # enabled = true
 # client_id = "env(GITHUB_CLIENT_ID)"

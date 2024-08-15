@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@turbostarter/ui/web";
 import { MagicLinkLoginForm } from "./magic-link";
 import { PasswordLoginForm } from "./password";
 
-import type { LoginOption } from "~/app/auth/login/page";
+import type { LoginOption } from "~/lib/constants";
 
 const LOGIN_OPTIONS_DETAILS = {
   [AUTH_PROVIDER.PASSWORD]: {

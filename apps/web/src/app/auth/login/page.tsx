@@ -4,14 +4,11 @@
 //   canonical: "/auth/login",
 // });
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
-
 import { Auth } from "~/components/auth/auth";
 import { authConfig } from "~/config/auth";
+import { LOGIN_OPTIONS } from "~/lib/constants";
 
-const LOGIN_OPTIONS = [AUTH_PROVIDER.PASSWORD, AUTH_PROVIDER.MAGIC_LINK];
-
-export type LoginOption = (typeof LOGIN_OPTIONS)[number];
+import type { LoginOption } from "~/lib/constants";
 
 const Login = () => {
   // const { data } = await supabase().auth.getUser();

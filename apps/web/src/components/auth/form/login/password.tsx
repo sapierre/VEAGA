@@ -43,7 +43,7 @@ export const PasswordLoginForm = memo(() => {
     setIsSubmitting(true);
 
     const loadingToast = toast.loading("Signing in...");
-    const { error } = await login(data);
+    const { error } = await login({ data, option: AUTH_PROVIDER.PASSWORD });
 
     if (error) {
       setIsSubmitting(false);

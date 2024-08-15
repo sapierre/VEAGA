@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 import { auth } from "~/lib/auth/server";
 
@@ -11,6 +11,9 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
   const next = searchParams.get("next") ?? "/";
 
+  const redirectTo = request.nextUrl.clone();
+  redirectTo.pathname = next;
+
   if (token_hash && type) {
     const { error } = await auth().verifyOtp({
       type,
@@ -18,10 +21,11 @@ export async function GET(request: NextRequest) {
     });
     if (!error) {
       // redirect user to specified redirect URL or root of app
-      redirect(next);
+      return NextResponse.redirect(redirectTo);
     }
   }
 
   // redirect the user to an error page with some instructions
-  redirect("/error");
+  redirectTo.pathname = "/auth/auth-code-error";
+  return NextResponse.redirect(redirectTo);
 }
