@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 import { createClient } from "~/lib/auth/middleware";
 
 import type { NextRequest } from "next/server";
@@ -7,24 +5,24 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const { auth, response } = createClient(request);
 
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // IMPORTANT: Avoid writing any logic between createClient and
+  // auth.getUser(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
 
   const {
     data: { user },
   } = await auth.getUser();
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
-  }
+  // if (
+  //   !user &&
+  //   !request.nextUrl.pathname.startsWith("/login") &&
+  //   !request.nextUrl.pathname.startsWith("/auth")
+  // ) {
+  //   // no user, potentially respond by redirecting the user to the login page
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = "/login";
+  //   return NextResponse.redirect(url);
+  // }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
   // creating a new response object with NextResponse.next() make sure to:

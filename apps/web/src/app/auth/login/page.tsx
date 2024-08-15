@@ -4,9 +4,8 @@
 //   canonical: "/auth/login",
 // });
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
-
 import { Auth } from "~/components/auth/auth";
+import { authConfig } from "~/config/auth.config";
 
 const Login = () => {
   // const { data } = await supabase().auth.getUser();
@@ -22,8 +21,8 @@ const Login = () => {
           title="Welcome back! 👋"
           description="Enter your email below to login to your account "
         />
-        <Auth.Providers providers={Object.values(SOCIAL_PROVIDER)} />
-        <Auth.Divider />
+        <Auth.Providers providers={authConfig.providers.oAuth} />
+        {authConfig.providers.oAuth.length > 0 && <Auth.Divider />}
         <Auth.Login />
       </Auth.Layout>
     </>

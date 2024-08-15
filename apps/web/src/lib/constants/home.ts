@@ -26,9 +26,9 @@ export const HOME_LINKS = [
     href: "#",
   },
   {
-    title: "i18n",
+    title: "Analytics",
     description:
-      "Internationalize your app. Support multiple languages and locales.",
+      "Track user behavior, page views, and more. Integrate with multiple providers.",
     href: "#",
   },
   {

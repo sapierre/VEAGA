@@ -85,7 +85,15 @@ export const LoginForm = memo(() => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <div className="flex w-full items-center justify-between">
+                <FormLabel>Password</FormLabel>
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
+                >
+                  Forgot password?
+                </Link>
+              </div>
               <FormControl>
                 <Input
                   {...field}

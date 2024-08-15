@@ -76,6 +76,16 @@ const AUTH_PROVIDER = {
 
 type AUTH_PROVIDER = (typeof AUTH_PROVIDER)[keyof typeof AUTH_PROVIDER];
 
+const authConfigSchema = z.object({
+  providers: z.object({
+    password: z.boolean(),
+    magicLink: z.boolean(),
+    oAuth: z.array(z.nativeEnum(SOCIAL_PROVIDER)),
+  }),
+});
+
+type AuthConfig = z.infer<typeof authConfigSchema>;
+
 export type {
   AuthClient,
   AuthClientConfig,
@@ -85,9 +95,11 @@ export type {
   LoginData,
   RegisterData,
   User,
+  AuthConfig,
 };
 
 export {
+  authConfigSchema,
   registerSchema,
   loginSchema,
   PASSWORD_REGEX,

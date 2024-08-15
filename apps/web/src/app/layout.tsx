@@ -20,7 +20,11 @@ const mono = DM_Mono({
   weight: ["300", "400", "500"],
 });
 
-export default function RootLayout(props: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
@@ -30,7 +34,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body className="flex min-h-screen flex-col items-center justify-center bg-background font-sans text-foreground antialiased">
         <Providers>
           <div className="flex w-full max-w-[80rem] grow flex-col items-center gap-10 p-6 sm:p-8 md:p-10 lg:gap-12 lg:p-12">
-            {props.children}
+            {children}
             <Footer />
           </div>
           <Toaster />

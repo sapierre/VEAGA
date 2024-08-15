@@ -3,9 +3,8 @@
 //   url: "/auth/register",
 // });
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
-
 import { Auth } from "~/components/auth/auth";
+import { authConfig } from "~/config/auth.config";
 
 const Register = () => {
   return (
@@ -15,8 +14,8 @@ const Register = () => {
           title="Create an account"
           description="Please fill in the form below to create your account"
         />
-        <Auth.Providers providers={Object.values(SOCIAL_PROVIDER)} />
-        <Auth.Divider />
+        <Auth.Providers providers={authConfig.providers.oAuth} />
+        {authConfig.providers.oAuth.length > 0 && <Auth.Divider />}
         <Auth.Register />
       </Auth.Layout>
     </>
