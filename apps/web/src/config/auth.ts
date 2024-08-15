@@ -1,9 +1,8 @@
-import {
-  AuthConfig,
-  SOCIAL_PROVIDER,
-  authConfigSchema,
-} from "@turbostarter/auth";
+import { SOCIAL_PROVIDER, authConfigSchema } from "@turbostarter/auth";
+
 import { env } from "~/lib/env";
+
+import type { AuthConfig } from "@turbostarter/auth";
 
 export const authConfig = authConfigSchema.parse({
   providers: {

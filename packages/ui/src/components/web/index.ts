@@ -7,3 +7,4 @@ export * from "./input";
 export * from "./dropdown-menu";
 export * from "./skeleton";
 export * from "./avatar";
+export * from "./tabs";

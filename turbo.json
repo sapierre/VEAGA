@@ -56,6 +56,14 @@
       "cache": false
     }
   },
-  "globalEnv": ["DATABASE_URL", "SUPABASE_ANON_KEY", "SUPABASE_URL"],
+  "globalEnv": [
+    "DATABASE_URL",
+    "SUPABASE_ANON_KEY",
+    "SUPABASE_URL",
+    "PRODUCT_NAME",
+    "SITE_TITLE",
+    "SITE_LINK",
+    "SITE_DESCRIPTION"
+  ],
   "globalPassThroughEnv": ["NODE_ENV", "CI", "npm_lifecycle_event"]
 }

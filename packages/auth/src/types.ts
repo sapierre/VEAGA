@@ -46,7 +46,7 @@ const registerSchema = z.object({
     ),
 });
 
-const loginSchema = z.object({
+const passwordLoginSchema = z.object({
   email: z
     .string({ required_error: "This field is required." })
     .email("Email must be a valid email."),
@@ -58,7 +58,14 @@ const loginSchema = z.object({
     ),
 });
 
-type LoginData = z.infer<typeof loginSchema>;
+const magicLinkLoginSchema = z.object({
+  email: z
+    .string({ required_error: "This field is required." })
+    .email("Email must be a valid email."),
+});
+
+type PasswordLoginData = z.infer<typeof passwordLoginSchema>;
+type MagicLinkLoginData = z.infer<typeof magicLinkLoginSchema>;
 type RegisterData = z.infer<typeof registerSchema>;
 
 const SOCIAL_PROVIDER = {
@@ -72,14 +79,15 @@ type SOCIAL_PROVIDER = (typeof SOCIAL_PROVIDER)[keyof typeof SOCIAL_PROVIDER];
 const AUTH_PROVIDER = {
   ...SOCIAL_PROVIDER,
   PASSWORD: "password",
+  MAGIC_LINK: "magicLink",
 } as const;
 
 type AUTH_PROVIDER = (typeof AUTH_PROVIDER)[keyof typeof AUTH_PROVIDER];
 
 const authConfigSchema = z.object({
   providers: z.object({
-    password: z.boolean(),
-    magicLink: z.boolean(),
+    [AUTH_PROVIDER.PASSWORD]: z.boolean(),
+    [AUTH_PROVIDER.MAGIC_LINK]: z.boolean(),
     oAuth: z.array(z.nativeEnum(SOCIAL_PROVIDER)),
   }),
 });
@@ -92,7 +100,8 @@ export type {
   AuthBrowserClientOptions,
   AuthServerClientOptions,
   EmailOtpType,
-  LoginData,
+  PasswordLoginData,
+  MagicLinkLoginData,
   RegisterData,
   User,
   AuthConfig,
@@ -101,7 +110,8 @@ export type {
 export {
   authConfigSchema,
   registerSchema,
-  loginSchema,
+  passwordLoginSchema,
+  magicLinkLoginSchema,
   PASSWORD_REGEX,
   SOCIAL_PROVIDER,
   AUTH_PROVIDER,

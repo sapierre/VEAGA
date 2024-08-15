@@ -4,7 +4,7 @@
 // });
 
 import { Auth } from "~/components/auth/auth";
-import { authConfig } from "~/config/auth.config";
+import { authConfig } from "~/config/auth";
 
 const Register = () => {
   return (

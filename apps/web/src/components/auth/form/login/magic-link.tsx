@@ -7,7 +7,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER, passwordLoginSchema } from "@turbostarter/auth";
+import { AUTH_PROVIDER, magicLinkLoginSchema } from "@turbostarter/auth";
 import { Icons } from "@turbostarter/ui";
 import {
   Button,
@@ -25,21 +25,21 @@ import { onPromise } from "~/utils";
 
 import { login } from "../actions";
 
-import type { PasswordLoginData } from "@turbostarter/auth";
+import type { MagicLinkLoginData } from "@turbostarter/auth";
 
-export const PasswordLoginForm = memo(() => {
+export const MagicLinkLoginForm = memo(() => {
   const searchParams = useSearchParams();
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
   const router = useRouter();
-  const form = useForm<PasswordLoginData>({
-    resolver: zodResolver(passwordLoginSchema),
+  const form = useForm<MagicLinkLoginData>({
+    resolver: zodResolver(magicLinkLoginSchema),
   });
 
-  const redirectTo = searchParams.get("redirectTo") ?? "/";
+  //   const redirectTo = searchParams.get("redirectTo") ?? "/";
 
-  const onSubmit = async (data: PasswordLoginData) => {
-    setProvider(AUTH_PROVIDER.PASSWORD);
+  const onSubmit = async (data: MagicLinkLoginData) => {
+    setProvider(AUTH_PROVIDER.MAGIC_LINK);
     setIsSubmitting(true);
 
     const loadingToast = toast.loading("Signing in...");
@@ -52,8 +52,8 @@ export const PasswordLoginForm = memo(() => {
 
     toast.success("Signed in!", { id: loadingToast });
     setIsSubmitting(false);
-    router.replace(redirectTo);
-    return router.refresh();
+    // router.replace(redirectTo);
+    // return router.refresh();
   };
 
   return (
@@ -72,32 +72,6 @@ export const PasswordLoginForm = memo(() => {
                 <Input
                   {...field}
                   type="email"
-                  disabled={form.formState.isSubmitting}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex w-full items-center justify-between">
-                <FormLabel>Password</FormLabel>
-                <Link
-                  href="#"
-                  className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="password"
                   disabled={form.formState.isSubmitting}
                 />
               </FormControl>
@@ -135,4 +109,4 @@ export const PasswordLoginForm = memo(() => {
   );
 });
 
-PasswordLoginForm.displayName = "PasswordLoginForm";
+MagicLinkLoginForm.displayName = "MagicLinkLoginForm";

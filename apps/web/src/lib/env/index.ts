@@ -4,8 +4,6 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
-console.log(process.env);
-
 export const env = createEnv({
   extends: [vercel()],
   shared: {
@@ -52,7 +50,7 @@ export const env = createEnv({
     NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME,
     NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
     NEXT_PUBLIC_SITE_LINK: process.env.NEXT_PUBLIC_SITE_LINK,
-    NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE,
+    NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
