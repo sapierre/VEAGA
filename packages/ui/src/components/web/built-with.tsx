@@ -1,16 +1,18 @@
-import { APP_LINK } from "@turbostarter/shared";
-
 import { Logo } from "~/components/shared";
 import { buttonVariants } from "~/components/web/button";
 
-export const BuiltWith = () => {
+interface BuiltWithProps {
+  readonly href: string;
+}
+
+export const BuiltWith = ({ href }: BuiltWithProps) => {
   return (
     <a
       className={buttonVariants({
         variant: "outline",
         className: "cursor-pointer",
       })}
-      href={APP_LINK}
+      href={href}
       target="_blank"
     >
       Built with{" "}

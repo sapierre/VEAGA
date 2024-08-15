@@ -1,4 +1,4 @@
-import { APP_NAME } from "@turbostarter/shared";
+import { appConfig } from "~/config/app";
 
 export const HOME_LINKS = [
   {
@@ -33,7 +33,7 @@ export const HOME_LINKS = [
   },
   {
     title: "Docs",
-    description: `Learn how to use ${APP_NAME}. From installation to deployment.`,
+    description: `Learn how to use ${appConfig.name}. From installation to deployment.`,
     href: "#",
   },
 ];

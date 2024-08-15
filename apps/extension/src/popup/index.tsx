@@ -1,4 +1,4 @@
-import { APP_LINK } from "@turbostarter/shared";
+// import { APP_LINK } from "@turbostarter/shared";
 import { Icons } from "@turbostarter/ui";
 import "@turbostarter/ui/globals";
 
@@ -16,7 +16,7 @@ const Popup = () => {
         and save to reload.
       </p>
       <a
-        href={APP_LINK}
+        // href={APP_LINK}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-1 text-sm text-primary underline hover:no-underline"

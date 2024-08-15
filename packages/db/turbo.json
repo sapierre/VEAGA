@@ -3,12 +3,12 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "next-env.d.ts"],
+      "outputs": [".cache/tsbuildinfo.json", "dist/**"],
       "env": ["DATABASE_URL"]
     },
     "dev": {
-      "persistent": true,
+      "cache": false,
+      "persistent": false,
       "env": ["DATABASE_URL"]
     }
   }
