@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   redirectTo.pathname = next;
 
   if (token_hash && type) {
-    const { error } = await auth().verifyOtp({
+    const { error, data } = await auth().verifyOtp({
       type,
       token_hash,
     });

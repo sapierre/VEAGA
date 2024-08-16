@@ -131,18 +131,6 @@ export const RegisterForm = memo(() => {
               )}
             />
 
-            <div className="flex items-center justify-end">
-              <div className="text-sm text-muted-foreground">
-                Already have an account?
-                <Link
-                  href={pathsConfig.auth.login}
-                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-                >
-                  Sign in!
-                </Link>
-              </div>
-            </div>
-
             <Button
               type="submit"
               className="w-full"
@@ -155,6 +143,18 @@ export const RegisterForm = memo(() => {
                 "Sign up"
               )}
             </Button>
+
+            <div className="flex items-center justify-center pt-2">
+              <div className="text-sm text-muted-foreground">
+                Already have an account?
+                <Link
+                  href={pathsConfig.auth.login}
+                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
+                >
+                  Sign in!
+                </Link>
+              </div>
+            </div>
           </motion.form>
         </Form>
       )}

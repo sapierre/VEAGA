@@ -6,10 +6,14 @@ on:
   push:
     branches: ["main"]
   merge_group:
+  workflow_run:
+    workflows: ["CI / Publish web"]
+    types:
+      - requested
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  cancel-in-progress: true
 
 # You can leverage Vercel Remote Caching with Turbo to speed up your builds
 # @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds

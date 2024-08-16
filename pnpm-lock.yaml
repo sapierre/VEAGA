@@ -446,8 +446,8 @@ importers:
   packages/auth:
     dependencies:
       '@supabase/ssr':
-        specifier: 0.4.0
-        version: 0.4.0(@supabase/supabase-js@2.45.1)
+        specifier: 0.4.1
+        version: 0.4.1(@supabase/supabase-js@2.45.1)
       '@supabase/supabase-js':
         specifier: 2.45.1
         version: 2.45.1
@@ -616,7 +616,7 @@ importers:
         version: 7.35.0(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-19bd26be-20240815(eslint@9.9.0(jiti@1.21.6))
+        version: 5.1.0-rc-fa6eab58-20240815(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.0.8
         version: 2.0.12(eslint@9.9.0(jiti@1.21.6))
@@ -3426,8 +3426,8 @@ packages:
   '@supabase/realtime-js@2.10.2':
     resolution: {integrity: sha512-qyCQaNg90HmJstsvr2aJNxK2zgoKh9ZZA8oqb7UT2LCh3mj9zpa3Iwu167AuyNxsxrUE8eEJ2yH6wLCij4EApA==}
 
-  '@supabase/ssr@0.4.0':
-    resolution: {integrity: sha512-6WS3NUvHDhCPAFN2kJ79AQDO8+M9fJ7y2fYpxgZqIuJEpnnGsHDNnB5Xnv8CiaJIuRU+0pKboy62RVZBMfZ0Lg==}
+  '@supabase/ssr@0.4.1':
+    resolution: {integrity: sha512-000i7y4ITXjXU0T1JytZYU33VbUNklX9YN47hCweaLKsTBAEigJJJCeq3G+/IiwEggBt58Vu0KQ3UGXON7OmDQ==}
     peerDependencies:
       '@supabase/supabase-js': ^2.43.4
 
@@ -5233,8 +5233,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-19bd26be-20240815:
-    resolution: {integrity: sha512-ZfRFl05f62HZra++udScYiLMhkH67/agk/s9eru5qCn/gXbGEIvhCH/25zp9pfIK8gl8zlNIYqo1A5Hu2rzOFQ==}
+  eslint-plugin-react-hooks@5.1.0-rc-fa6eab58-20240815:
+    resolution: {integrity: sha512-jIkwdgEA5sE8m38slKIVLW0xe1gSSjds6sPRijV2aAdCgfFtCt2Bk9J4TWsTUNxO70q89TRcTh/Q1Jb68fcJcw==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -13072,7 +13072,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@supabase/ssr@0.4.0(@supabase/supabase-js@2.45.1)':
+  '@supabase/ssr@0.4.1(@supabase/supabase-js@2.45.1)':
     dependencies:
       '@supabase/supabase-js': 2.45.1
       cookie: 0.6.0
@@ -15040,7 +15040,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-19bd26be-20240815(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-fa6eab58-20240815(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 

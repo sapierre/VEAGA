@@ -104,18 +104,6 @@ export const MagicLinkLoginForm = memo(() => {
               )}
             />
 
-            <div className="flex items-center justify-end">
-              <div className="text-sm text-muted-foreground">
-                Don&apos;t have an account yet?
-                <Link
-                  href={pathsConfig.auth.register}
-                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-                >
-                  Sign up!
-                </Link>
-              </div>
-            </div>
-
             <Button
               type="submit"
               className="w-full"
@@ -128,6 +116,18 @@ export const MagicLinkLoginForm = memo(() => {
                 "Send magic link"
               )}
             </Button>
+
+            <div className="flex items-center justify-center pt-2">
+              <div className="text-sm text-muted-foreground">
+                Don&apos;t have an account yet?
+                <Link
+                  href="/auth/register"
+                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
+                >
+                  Sign up!
+                </Link>
+              </div>
+            </div>
           </form>
         </Form>
       )}

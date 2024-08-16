@@ -102,15 +102,6 @@ export const ForgotPasswordForm = memo(() => {
               )}
             />
 
-            <div className="flex items-center justify-end">
-              <Link
-                href={pathsConfig.auth.login}
-                className="pl-2 text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-primary"
-              >
-                Back to sign in
-              </Link>
-            </div>
-
             <Button
               type="submit"
               className="w-full"
@@ -123,6 +114,15 @@ export const ForgotPasswordForm = memo(() => {
                 "Send reset link"
               )}
             </Button>
+
+            <div className="flex items-center justify-center pt-2">
+              <Link
+                href={pathsConfig.auth.login}
+                className="pl-2 text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-primary"
+              >
+                Back to sign in
+              </Link>
+            </div>
           </motion.form>
         </Form>
       )}

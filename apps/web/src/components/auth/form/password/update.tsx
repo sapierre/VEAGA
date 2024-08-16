@@ -39,7 +39,7 @@ export const UpdatePasswordForm = memo(() => {
     console.log({ success, message });
 
     if (!success) {
-      return toast.error(`${message}!`, { id: loadingToast });
+      return toast.error(message, { id: loadingToast });
     }
 
     toast.success("Success! Now you can login with your new password!", {
