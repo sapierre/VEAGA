@@ -31,43 +31,6 @@ interface AuthClientConfig {
 
 type AuthClient = SupabaseAuthClient;
 
-const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
-
-const registerSchema = z.object({
-  email: z
-    .string({ required_error: "This field is required." })
-    .email("Email must be a valid email."),
-  password: z
-    .string({ required_error: "This field is required." })
-    .regex(
-      PASSWORD_REGEX,
-      "Password must contain an uppercase letter, a special character, a number and must be at least 8 characters long.",
-    ),
-});
-
-const passwordLoginSchema = z.object({
-  email: z
-    .string({ required_error: "This field is required." })
-    .email("Email must be a valid email."),
-  password: z
-    .string({ required_error: "This field is required." })
-    .regex(
-      PASSWORD_REGEX,
-      "Password must contain an uppercase letter, a special character, a number and must be at least 8 characters long.",
-    ),
-});
-
-const magicLinkLoginSchema = z.object({
-  email: z
-    .string({ required_error: "This field is required." })
-    .email("Email must be a valid email."),
-});
-
-type PasswordLoginData = z.infer<typeof passwordLoginSchema>;
-type MagicLinkLoginData = z.infer<typeof magicLinkLoginSchema>;
-type RegisterData = z.infer<typeof registerSchema>;
-
 const SOCIAL_PROVIDER = {
   GOOGLE: "google",
   TWITTER: "twitter",
@@ -100,19 +63,8 @@ export type {
   AuthBrowserClientOptions,
   AuthServerClientOptions,
   EmailOtpType,
-  PasswordLoginData,
-  MagicLinkLoginData,
-  RegisterData,
   User,
   AuthConfig,
 };
 
-export {
-  authConfigSchema,
-  registerSchema,
-  passwordLoginSchema,
-  magicLinkLoginSchema,
-  PASSWORD_REGEX,
-  SOCIAL_PROVIDER,
-  AUTH_PROVIDER,
-};
+export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER };

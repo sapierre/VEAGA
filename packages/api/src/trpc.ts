@@ -7,11 +7,13 @@
  * The pieces you will need to use are documented accordingly near the end
  */
 // import type { SupabaseClient } from "@supabase/supabase-js";
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@turbostarter/db/client";
+import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
+import { ApiError } from "@turbostarter/shared/utils";
 
 import type { AuthClient } from "@turbostarter/auth";
 
@@ -48,6 +50,7 @@ export const createTRPCContext = async (opts: {
   console.log(">>> tRPC Request from", source, "by", user.data.user?.email);
 
   return {
+    auth: opts.auth,
     user: user.data.user,
     db,
   };
@@ -130,11 +133,10 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.user?.id) {
-    // throw new ApiError(
-    //   HTTP_STATUS_CODE.UNAUTHORIZED,
-    //   "You need to be logged in to access this feature!",
-    // );
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new ApiError(
+      HTTP_STATUS_CODE.UNAUTHORIZED,
+      "You need to be logged in to access this feature!",
+    );
   }
 
   return next({

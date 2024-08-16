@@ -7,7 +7,8 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER, passwordLoginSchema } from "@turbostarter/auth";
+import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { passwordLoginSchema } from "@turbostarter/shared/validators";
 import { Icons } from "@turbostarter/ui";
 import {
   Button,
@@ -21,11 +22,11 @@ import {
 } from "@turbostarter/ui/web";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
+import { pathsConfig } from "~/config/paths";
+import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
-import { login } from "../actions";
-
-import type { PasswordLoginData } from "@turbostarter/auth";
+import type { PasswordLoginData } from "@turbostarter/shared/validators";
 
 export const PasswordLoginForm = memo(() => {
   const searchParams = useSearchParams();
@@ -88,7 +89,7 @@ export const PasswordLoginForm = memo(() => {
               <div className="flex w-full items-center justify-between">
                 <FormLabel>Password</FormLabel>
                 <Link
-                  href="#"
+                  href={pathsConfig.auth.forgotPassword}
                   className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
                 >
                   Forgot password?

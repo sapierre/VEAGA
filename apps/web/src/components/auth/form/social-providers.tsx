@@ -7,8 +7,7 @@ import { Icons } from "@turbostarter/ui";
 import { Button } from "@turbostarter/ui/web";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
-import { pathsConfig } from "~/config/paths";
-import { auth } from "~/lib/auth/client";
+import { loginWithOAuth } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
 import type { AUTH_PROVIDER } from "@turbostarter/auth";
@@ -79,12 +78,7 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
     setProvider(provider);
     setIsSubmitting(true);
 
-    await auth().signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${location.origin}${pathsConfig.auth.callback}`,
-      },
-    });
+    await loginWithOAuth(provider);
 
     setIsSubmitting(false);
   };

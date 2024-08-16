@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@turbostarter/ui/web";
 
-import { auth } from "~/lib/auth/client";
+import { logout } from "~/lib/actions";
 import { getAvatar, getName, onPromise } from "~/utils";
 
 import type { User } from "@turbostarter/auth";
@@ -66,11 +66,11 @@ export const UserNavigation = memo<UserNavigationProps>(
               className="w-full"
               onClick={onPromise(() =>
                 Promise.resolve(
-                  toast.promise(auth().signOut(), {
+                  toast.promise(logout(), {
                     loading: "Logging out...",
                     success: () => {
                       onNavigate?.();
-                      router.push("/");
+                      router.replace("/");
                       router.refresh();
                       return "Logged out!";
                     },

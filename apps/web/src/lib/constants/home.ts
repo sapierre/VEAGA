@@ -1,11 +1,12 @@
 import { appConfig } from "~/config/app";
+import { pathsConfig } from "~/config/paths";
 
 export const HOME_LINKS = [
   {
     title: "Auth",
     description:
       "Check how to use the auth flow. Social logins, magic link, email/password and many more.",
-    href: "/auth/login",
+    href: pathsConfig.auth.login,
   },
   {
     title: "Protected routes",

@@ -1,7 +1,8 @@
 import { memo } from "react";
 
-import { LoginForm } from "~/components/auth/form/login/form";
-
+import { LoginForm } from "./form/login/form";
+import { ForgotPasswordForm } from "./form/password/forgot";
+import { UpdatePasswordForm } from "./form/password/update";
 import { RegisterForm } from "./form/register-form";
 import { SocialProviders } from "./form/social-providers";
 import { AuthDivider } from "./layout/auth-divider";
@@ -32,4 +33,6 @@ export const Auth = {
   Divider: AuthDivider,
   Login: LoginForm,
   Register: RegisterForm,
+  ForgotPassword: ForgotPasswordForm,
+  UpdatePassword: UpdatePasswordForm,
 };

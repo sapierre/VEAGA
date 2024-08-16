@@ -7,7 +7,8 @@ import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER, magicLinkLoginSchema } from "@turbostarter/auth";
+import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { magicLinkLoginSchema } from "@turbostarter/shared/validators";
 import { Icons } from "@turbostarter/ui";
 import {
   Button,
@@ -21,11 +22,11 @@ import {
 } from "@turbostarter/ui/web";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
+import { pathsConfig } from "~/config/paths";
+import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
-import { login } from "../actions";
-
-import type { MagicLinkLoginData } from "@turbostarter/auth";
+import type { MagicLinkLoginData } from "@turbostarter/shared/validators";
 
 type LoginStatus = "pending" | "success" | "error" | "idle";
 
@@ -107,7 +108,7 @@ export const MagicLinkLoginForm = memo(() => {
               <div className="text-sm text-muted-foreground">
                 Don&apos;t have an account yet?
                 <Link
-                  href="/auth/register"
+                  href={pathsConfig.auth.register}
                   className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
                 >
                   Sign up!

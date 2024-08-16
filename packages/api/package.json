@@ -15,6 +15,7 @@
   "dependencies": {
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/db": "workspace:*",
+    "@turbostarter/shared": "workspace:*",
     "@trpc/server": "catalog:",
     "superjson": "2.2.1",
     "zod": "catalog:"

@@ -4,12 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { registerSchema } from "@turbostarter/shared/validators";
+import { forgotPasswordSchema } from "@turbostarter/shared/validators";
 import { Icons } from "@turbostarter/ui";
 import {
   Button,
@@ -23,39 +22,30 @@ import {
 } from "@turbostarter/ui/web";
 
 import { pathsConfig } from "~/config/paths";
-import { register } from "~/lib/actions";
+import { forgotPassword } from "~/lib/actions/auth";
 import { onPromise } from "~/utils";
 
-import { useAuthFormStore } from "./store";
+import type { ForgotPasswordData } from "@turbostarter/shared/validators";
 
-import type { RegisterData } from "@turbostarter/shared/validators";
+type Status = "pending" | "success" | "error" | "idle";
 
-type RegisterStatus = "pending" | "success" | "error" | "idle";
-
-export const RegisterForm = memo(() => {
-  const { provider, setProvider, isSubmitting, setIsSubmitting } =
-    useAuthFormStore();
-  const [status, setStatus] = useState<RegisterStatus>("idle");
-  const form = useForm<RegisterData>({
-    resolver: zodResolver(registerSchema),
+export const ForgotPasswordForm = memo(() => {
+  const [status, setStatus] = useState<Status>("idle");
+  const form = useForm<ForgotPasswordData>({
+    resolver: zodResolver(forgotPasswordSchema),
   });
 
-  useEffect(() => {
-    setIsSubmitting(status === "pending");
-  }, [status, setIsSubmitting]);
-
-  const onSubmit = async (data: RegisterData) => {
-    setProvider(AUTH_PROVIDER.PASSWORD);
+  const onSubmit = async (data: ForgotPasswordData) => {
     setStatus("pending");
-    const loadingToast = toast.loading("Registering...");
-    const { error } = await register(data);
+    const loadingToast = toast.loading("Sending...");
+    const { error } = await forgotPassword(data);
 
     if (error) {
       setStatus("error");
       return toast.error(`${error}!`, { id: loadingToast });
     }
 
-    toast.success("Success! Now verify your email!", {
+    toast.success("Success! Now check your inbox!", {
       id: loadingToast,
     });
 
@@ -77,7 +67,7 @@ export const RegisterForm = memo(() => {
           />
           <h2 className="text-center text-2xl font-semibold">Success!</h2>
           <p className="text-center">
-            You have successfully registered! Now verify your email to continue.
+            We've sent you an email with a link to reset your password.
           </p>
           <Link
             href={pathsConfig.auth.login}
@@ -112,47 +102,25 @@ export const RegisterForm = memo(() => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="password"
-                      disabled={form.formState.isSubmitting}
-                      autoComplete="new-password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <div className="flex items-center justify-end">
-              <div className="text-sm text-muted-foreground">
-                Already have an account?
-                <Link
-                  href={pathsConfig.auth.login}
-                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-                >
-                  Sign in!
-                </Link>
-              </div>
+              <Link
+                href={pathsConfig.auth.login}
+                className="pl-2 text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-primary"
+              >
+                Back to sign in
+              </Link>
             </div>
 
             <Button
               type="submit"
               className="w-full"
               size="lg"
-              disabled={isSubmitting}
+              disabled={form.formState.isSubmitting}
             >
-              {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
+              {form.formState.isSubmitting ? (
                 <Icons.Loader2 className="animate-spin" />
               ) : (
-                "Sign up"
+                "Send reset link"
               )}
             </Button>
           </motion.form>
@@ -162,4 +130,4 @@ export const RegisterForm = memo(() => {
   );
 });
 
-RegisterForm.displayName = "RegisterForm";
+ForgotPasswordForm.displayName = "ForgotPasswordForm";

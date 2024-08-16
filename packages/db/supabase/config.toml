@@ -42,17 +42,16 @@ content_path = "./supabase/templates/recovery.html"
 subject = "Your link to login"
 content_path = "./supabase/templates/magic_link.html"
 
+[auth.external.google]
+enabled = true
+client_id = "env(GOOGLE_CLIENT_ID)"
+secret = "env(GOOGLE_CLIENT_SECRET)"
+redirect_uri = "http://localhost:3000/auth/callback"
 
 # [auth.external.github]
 # enabled = true
 # client_id = "env(GITHUB_CLIENT_ID)"
 # secret = "env(GITHUB_CLIENT_SECRET)"
-# redirect_uri = "http://localhost:3000/auth/callback"
-
-# [auth.external.google]
-# enabled = true
-# client_id = "env(GOOGLE_CLIENT_ID)"
-# secret = "env(GOOGLE_CLIENT_SECRET)"
 # redirect_uri = "http://localhost:3000/auth/callback"
 
 # [auth.external.twitter]

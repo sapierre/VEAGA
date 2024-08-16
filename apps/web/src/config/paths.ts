@@ -3,7 +3,7 @@ export const pathsConfig = {
     login: "/auth/login",
     register: "/auth/register",
     forgotPassword: "/auth/password/forgot",
-    resetPassword: "/auth/password/reset",
+    updatePassword: "/auth/password/update",
     callback: "/auth/callback",
   },
 } as const;

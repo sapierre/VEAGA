@@ -1,12 +1,15 @@
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 
+import { pathsConfig } from "~/config/paths";
 import { auth } from "~/lib/auth/client";
 
+import type { SOCIAL_PROVIDER } from "@turbostarter/auth";
 import type {
+  ForgotPasswordData,
   MagicLinkLoginData,
   PasswordLoginData,
   RegisterData,
-} from "@turbostarter/auth";
+} from "@turbostarter/shared/validators";
 import type { LoginOption } from "~/lib/constants";
 
 type LoginPayload =
@@ -36,11 +39,30 @@ export const login = async ({ data, option }: LoginPayload) => {
   return { error: error?.message ?? null };
 };
 
+export const loginWithOAuth = (provider: SOCIAL_PROVIDER) => {
+  return auth().signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${location.origin}${pathsConfig.auth.callback}`,
+    },
+  });
+};
+
 export const register = async (input: RegisterData) => {
   const { error } = await auth().signUp({
     email: input.email,
     password: input.password,
   });
+
+  return { error: error?.message ?? null };
+};
+
+export const logout = async () => {
+  await auth().signOut();
+};
+
+export const forgotPassword = async (input: ForgotPasswordData) => {
+  const { error } = await auth().resetPasswordForEmail(input.email);
 
   return { error: error?.message ?? null };
 };
