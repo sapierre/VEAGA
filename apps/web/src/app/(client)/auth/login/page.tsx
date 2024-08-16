@@ -5,7 +5,6 @@ import { getMetadata } from "~/lib/metadata";
 
 import type { LoginOption } from "~/lib/constants";
 
-
 export const metadata = getMetadata({
   title: "Login",
 });

@@ -37,18 +37,10 @@
     "db:stop": {
       "cache": false
     },
-    "db:migrate": {
-      "cache": false
-    },
-    "db:generate": {
-      "cache": false
-    },
-    "db:push": {
-      "cache": false
-    },
-    "db:link": {
-      "cache": false
-    },
+    "db:migrate": {},
+    "db:generate": {},
+    "db:push": {},
+    "db:check": {},
     "clean": {
       "cache": false
     },

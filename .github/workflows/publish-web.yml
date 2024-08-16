@@ -1,0 +1,51 @@
+name: CI / Publish web
+
+on:
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 20.x
+
+jobs:
+  web:
+    name: 🚀 Publish web
+    runs-on: ubuntu-latest
+    environment: Production
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔥 Run tests
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: CI / Tests
+
+      - name: 💾 Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 🧪 Test
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+          allowed-conclusions: success,skipped,cancelled
+
+      - name: 🔨 Setup
+        uses: ./tooling/github/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 🔼 Install Vercel CLI
+        run: pnpm install --global vercel@latest
+
+      - name: 💪 Pull environment information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 📦 Build
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 💨 Publish!
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
