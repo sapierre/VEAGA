@@ -24,13 +24,13 @@
     "db:start": "supabase start",
     "db:stop": "supabase stop",
     "db:setup": "pnpm run db:start && pnpm run db:migrate",
-    "db:migrate": "pnpm with-env drizzle-kit migrate",
-    "db:push": "pnpm with-env drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
+    "db:check": "drizzle-kit check",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../.env --"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",

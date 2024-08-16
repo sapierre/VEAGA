@@ -1,10 +1,9 @@
-
-import { NextResponse  } from "next/server";
+import { NextResponse } from "next/server";
 
 import { ADMIN_PREFIX, pathsConfig } from "~/config/paths";
 import { createClient } from "~/lib/auth/middleware";
 
-import type {NextRequest} from "next/server";
+import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const { auth, response } = createClient(request);

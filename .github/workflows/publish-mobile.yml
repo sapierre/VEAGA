@@ -1,0 +1,46 @@
+name: CI / Publish mobile
+
+on:
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 20.x
+
+jobs:
+  web:
+    name: 🚀 Publish mobile
+    runs-on: ubuntu-latest
+    environment: Production
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔥 Run tests
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: CI / Tests
+
+      - name: 💾 Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 🧪 Test
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+          allowed-conclusions: success,skipped,cancelled
+
+      - name: 🔨 Setup
+        uses: ./tooling/github/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 💨 Publish!
+        run: cd apps/mobile && eas build --platform all --profile preview --non-interactive --no-wait
+        # run: eas build --platform all --profile preview --non-interactive --no-wait --auto-submit

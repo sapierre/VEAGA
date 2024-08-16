@@ -1,11 +1,10 @@
 {
-  "name": "@turbostarter/extension",
-  "displayName": "__MSG_extensionName__",
-  "version": "0.1.0",
+  "name": "extension",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "plasmo build",
+    "build": "plasmo build --zip",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
     "dev": "plasmo dev",
     "format": "prettier --check . --ignore-path ../../.gitignore",

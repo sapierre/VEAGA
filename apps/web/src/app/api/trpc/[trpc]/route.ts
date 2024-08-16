@@ -14,8 +14,6 @@ const setCorsHeaders = (res: Response) => {
   res.headers.set("Access-Control-Allow-Headers", "*");
 };
 
-export const runtime = "edge";
-
 export const OPTIONS = () => {
   const response = new Response(null, {
     status: 204,

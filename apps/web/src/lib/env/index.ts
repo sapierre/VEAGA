@@ -27,8 +27,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
 
-    NEXT_PUBLIC_AUTH_PASSWORD: z.coerce.boolean().optional().default(true),
-    NEXT_PUBLIC_AUTH_MAGIC_LINK: z.coerce.boolean().optional().default(true),
+    NEXT_PUBLIC_AUTH_PASSWORD: z.coerce.boolean().optional(),
+    NEXT_PUBLIC_AUTH_MAGIC_LINK: z.coerce.boolean().optional(),
 
     NEXT_PUBLIC_PRODUCT_NAME: z.string(),
     NEXT_PUBLIC_SITE_TITLE: z.string(),
@@ -44,8 +44,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 
-    NEXT_PUBLIC_AUTH_PASSWORD: process.env.NEXT_PUBLIC_AUTH_PASSWORD,
-    NEXT_PUBLIC_AUTH_MAGIC_LINK: process.env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
+    NEXT_PUBLIC_AUTH_PASSWORD: !!process.env.NEXT_PUBLIC_AUTH_PASSWORD,
+    NEXT_PUBLIC_AUTH_MAGIC_LINK: !!process.env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
 
     NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME,
     NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
@@ -56,12 +56,14 @@ export const env = createEnv({
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });
 
+console.log(env);
+
 const vercelHost =
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
     ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
     : process.env.NEXT_PUBLIC_VERCEL_URL;
 const vercelUrl = vercelHost ? `https://${vercelHost}` : undefined;
-const publicUrl = process.env.NEXT_PUBLIC_URL || vercelUrl;
+const publicUrl = process.env.NEXT_PUBLIC_URL ?? vercelUrl;
 
 if (!publicUrl) {
   throw new Error(

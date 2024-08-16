@@ -22,7 +22,6 @@ import {
 } from "@turbostarter/ui/web";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
-import { pathsConfig } from "~/config/paths";
 import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 

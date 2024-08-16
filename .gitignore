@@ -57,3 +57,6 @@ dist/
 
 # turbo
 .turbo
+
+# extension keys
+apps/extension/keys.json
