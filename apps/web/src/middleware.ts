@@ -1,6 +1,10 @@
+
+import { NextResponse  } from "next/server";
+
+import { ADMIN_PREFIX, pathsConfig } from "~/config/paths";
 import { createClient } from "~/lib/auth/middleware";
 
-import type { NextRequest } from "next/server";
+import type {NextRequest} from "next/server";
 
 export async function middleware(request: NextRequest) {
   const { auth, response } = createClient(request);
@@ -13,16 +17,12 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await auth.getUser();
 
-  // if (
-  //   !user &&
-  //   !request.nextUrl.pathname.startsWith("/login") &&
-  //   !request.nextUrl.pathname.startsWith("/auth")
-  // ) {
-  //   // no user, potentially respond by redirecting the user to the login page
-  //   const url = request.nextUrl.clone();
-  //   url.pathname = "/login";
-  //   return NextResponse.redirect(url);
-  // }
+  if (!user && request.nextUrl.pathname.startsWith(ADMIN_PREFIX)) {
+    // no user, potentially respond by redirecting the user to the login page
+    const url = request.nextUrl.clone();
+    url.pathname = pathsConfig.auth.login;
+    return NextResponse.redirect(url);
+  }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
   // creating a new response object with NextResponse.next() make sure to:

@@ -1,9 +1,6 @@
 {
   "extends": "@turbostarter/tsconfig/internal.json",
   "compilerOptions": {
-    "paths": {
-      "~/*": ["./src/*"]
-    },
     "lib": ["dom", "dom.iterable", "ES2022"],
     "jsx": "preserve",
     "rootDir": ".",

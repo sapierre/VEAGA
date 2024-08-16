@@ -4,6 +4,7 @@ import "@turbostarter/ui/globals";
 
 import { Footer } from "~/components/common/layout/footer";
 import { Toaster } from "~/components/common/toast";
+import { DEFAULT_VIEWPORT, DEFAULT_METADATA } from "~/lib/metadata";
 import { Providers } from "~/providers/providers";
 import "~/styles/globals.css";
 
@@ -19,6 +20,9 @@ const mono = DM_Mono({
   variable: "--font-mono",
   weight: ["300", "400", "500"],
 });
+
+export const viewport = DEFAULT_VIEWPORT;
+export const metadata = DEFAULT_METADATA;
 
 export default function RootLayout({
   children,

@@ -9,11 +9,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
+  sdkVersion: "51.0.0",
   splash: {
     image: "./assets/icon.png",
     resizeMode: "contain",
     backgroundColor: "#1F104A",
   },
+  platforms: ["ios", "android"],
   updates: {
     fallbackToCacheTimeout: 0,
   },

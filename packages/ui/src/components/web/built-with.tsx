@@ -1,27 +1,19 @@
-import { Logo } from "~/components/shared";
-import { buttonVariants } from "~/components/web/button";
+import { Logo } from "../shared";
 
-interface BuiltWithProps {
-  readonly href: string;
-}
+import { buttonVariants } from "./button";
 
-export const BuiltWith = ({ href }: BuiltWithProps) => {
+export const BuiltWith = () => {
   return (
     <a
       className={buttonVariants({
         variant: "outline",
         className: "cursor-pointer",
       })}
-      href={href}
+      href="https://www.turbostarter.dev"
       target="_blank"
     >
       Built with{" "}
-      <Logo
-        withText
-        asLink={false}
-        className="ml-1.5"
-        logoClassName="h-[1.35rem] shrink-0"
-      />
+      <Logo withText className="ml-1.5" logoClassName="h-[1.35rem] shrink-0" />
     </a>
   );
 };

@@ -24,6 +24,7 @@ jwt_expiry = 86400 # 24 hours
 enable_refresh_token_rotation = true
 refresh_token_reuse_interval = 10
 enable_signup = true
+additional_redirect_urls = ["http://localhost:54321/auth/v1/callback"]
 
 [auth.email]
 enable_signup = true
@@ -46,19 +47,13 @@ content_path = "./supabase/templates/magic_link.html"
 enabled = true
 client_id = "env(GOOGLE_CLIENT_ID)"
 secret = "env(GOOGLE_CLIENT_SECRET)"
-redirect_uri = "http://localhost:3000/auth/callback"
+redirect_uri = "http://localhost:54321/auth/v1/callback"
 
-# [auth.external.github]
-# enabled = true
-# client_id = "env(GITHUB_CLIENT_ID)"
-# secret = "env(GITHUB_CLIENT_SECRET)"
-# redirect_uri = "http://localhost:3000/auth/callback"
-
-# [auth.external.twitter]
-# enabled = true
-# client_id = "env(TWITTER_CLIENT_ID)"
-# secret = "env(TWITTER_CLIENT_SECRET)"
-# redirect_uri = "http://localhost:3000/auth/callback"
+[auth.external.github]
+enabled = true
+client_id = "env(GITHUB_CLIENT_ID)"
+secret = "env(GITHUB_CLIENT_SECRET)"
+redirect_uri = "http://localhost:54321/auth/v1/callback"
 
 [inbucket]
 enabled = true

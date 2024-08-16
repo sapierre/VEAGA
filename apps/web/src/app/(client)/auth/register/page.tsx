@@ -1,10 +1,10 @@
-// export const metadata = getMetadata({
-//   title: "Register",
-//   url: "/auth/register",
-// });
-
 import { Auth } from "~/components/auth/auth";
 import { authConfig } from "~/config/auth";
+import { getMetadata } from "~/lib/metadata";
+
+export const metadata = getMetadata({
+  title: "Register",
+});
 
 const Register = () => {
   return (

@@ -2,7 +2,8 @@
 
 <p>Follow this link to confirm your email:</p>
 <p>
-  <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=signup"
+  <a
+    href="{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&type=signup"
     >Confirm your mail</a
   >
 </p>

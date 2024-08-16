@@ -9,9 +9,9 @@ export const HOME_LINKS = [
     href: pathsConfig.auth.login,
   },
   {
-    title: "Protected routes",
+    title: "Admin",
     description:
-      "Restrict access to certain routes. Redirect users to login if they're not authenticated.",
+      "Admin dashboard with restricted access, CRUD operations, feature-based access and more.",
     href: "#",
   },
   {

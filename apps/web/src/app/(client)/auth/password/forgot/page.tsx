@@ -1,9 +1,9 @@
-// export const metadata = getMetadata({
-//   title: "Register",
-//   url: "/auth/register",
-// });
-
 import { Auth } from "~/components/auth/auth";
+import { getMetadata } from "~/lib/metadata";
+
+export const metadata = getMetadata({
+  title: "Forgot Password",
+});
 
 const ForgotPassword = () => {
   return (

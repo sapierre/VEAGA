@@ -1,22 +1,16 @@
-// export const metadata = getMetadata({
-//   title: "Login",
-//   url: "/auth/login",
-//   canonical: "/auth/login",
-// });
-
 import { Auth } from "~/components/auth/auth";
 import { authConfig } from "~/config/auth";
 import { LOGIN_OPTIONS } from "~/lib/constants";
+import { getMetadata } from "~/lib/metadata";
 
 import type { LoginOption } from "~/lib/constants";
 
+
+export const metadata = getMetadata({
+  title: "Login",
+});
+
 const Login = () => {
-  // const { data } = await supabase().auth.getUser();
-
-  // if (data.user) {
-  //   return redirect("/dashboard");
-  // }
-
   const options = Object.entries(authConfig.providers)
     .filter(
       ([provider, enabled]) =>

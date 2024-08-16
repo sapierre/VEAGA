@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { pathsConfig } from "~/config/paths";
 import { auth } from "~/lib/auth/server";
 
 import type { EmailOtpType } from "@turbostarter/auth";
@@ -15,19 +16,21 @@ export async function GET(request: NextRequest) {
   redirectTo.pathname = next;
 
   if (token_hash && type) {
-    const { error, data } = await auth().verifyOtp({
+    const { error } = await auth().verifyOtp({
       type,
       token_hash,
     });
 
-    console.log({ error, data });
-    if (!error) {
-      // redirect user to specified redirect URL or root of app
+    if (error) {
+      // redirect the user to an error page with some instructions
+      redirectTo.pathname = pathsConfig.auth.error;
+
+      if (error.code) {
+        redirectTo.searchParams.set("code", error.code);
+      }
       return NextResponse.redirect(redirectTo);
     }
   }
 
-  // redirect the user to an error page with some instructions
-  redirectTo.pathname = "/auth/auth-code-error";
   return NextResponse.redirect(redirectTo);
 }

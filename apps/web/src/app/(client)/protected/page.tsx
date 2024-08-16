@@ -1,4 +1,4 @@
-const ProtectedPage = async () => {
+const ProtectedPage = () => {
   return (
     <div>
       <h1>Protected Page</h1>

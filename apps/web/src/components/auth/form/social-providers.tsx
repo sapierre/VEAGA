@@ -23,7 +23,6 @@ const ICONS: Record<
 > = {
   [SOCIAL_PROVIDER.GITHUB]: Icons.Github,
   [SOCIAL_PROVIDER.GOOGLE]: Icons.Google,
-  [SOCIAL_PROVIDER.TWITTER]: Icons.Twitter,
 };
 
 const SocialProvider = ({

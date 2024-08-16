@@ -1,22 +1,18 @@
-import { cn } from "~/utils";
+import { cn } from "../../utils";
 
 interface LogoProps {
-  readonly asLink?: boolean;
   readonly withText?: boolean;
   readonly className?: string;
   readonly logoClassName?: string;
 }
 
 export const Logo = ({
-  asLink = false,
   withText = false,
   className,
   logoClassName,
 }: LogoProps) => {
-  const Tag = asLink ? "a" : "div";
-
   return (
-    <Tag className={cn("flex items-center gap-2.5", className)} href="/">
+    <div className={cn("flex items-center gap-2.5", className)}>
       <svg
         viewBox={withText ? "0 0 181 38" : "0 0 38 38"}
         fill="none"
@@ -36,6 +32,6 @@ export const Logo = ({
           />
         )}
       </svg>
-    </Tag>
+    </div>
   );
 };

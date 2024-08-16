@@ -1,3 +1,4 @@
+import { isAuthApiError } from "@supabase/supabase-js";
 import { z } from "zod";
 
 import type {
@@ -9,6 +10,7 @@ import type {
   SupabaseClientOptions as SupabaseClientOptionsType,
   EmailOtpType,
   User,
+  AuthApiError,
 } from "@supabase/supabase-js";
 import type { SupabaseAuthClient } from "@supabase/supabase-js/dist/module/lib/SupabaseAuthClient";
 
@@ -33,7 +35,6 @@ type AuthClient = SupabaseAuthClient;
 
 const SOCIAL_PROVIDER = {
   GOOGLE: "google",
-  TWITTER: "twitter",
   GITHUB: "github",
 } as const;
 
@@ -65,6 +66,7 @@ export type {
   EmailOtpType,
   User,
   AuthConfig,
+  AuthApiError,
 };
 
-export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER };
+export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER, isAuthApiError };

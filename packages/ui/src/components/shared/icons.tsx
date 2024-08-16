@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Loader2,
   CheckCircle2,
+  CircleX,
   UserRound,
   Sun,
   Moon,
@@ -81,4 +82,5 @@ export const Icons = {
   UserRound,
   Sun,
   Moon,
+  CircleX,
 };
