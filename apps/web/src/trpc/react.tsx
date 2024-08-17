@@ -12,6 +12,7 @@ import { createQueryClient, transformer } from "./shared";
 
 import type { QueryClient } from "@tanstack/react-query";
 import type { AppRouter } from "@turbostarter/api";
+import { NODE_ENV } from "@turbostarter/shared/constants";
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 const getQueryClient = () => {
@@ -34,7 +35,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
       links: [
         loggerLink({
           enabled: (op) =>
-            env.NODE_ENV === "development" ||
+            env.NODE_ENV === NODE_ENV.DEVELOPMENT ||
             (op.direction === "down" && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({

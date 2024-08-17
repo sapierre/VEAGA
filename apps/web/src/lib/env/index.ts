@@ -4,12 +4,12 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
+import { NODE_ENV } from "@turbostarter/shared/constants";
+
 export const env = createEnv({
   extends: [vercel()],
   shared: {
-    NODE_ENV: z
-      .enum(["development", "production", "test"])
-      .default("development"),
+    NODE_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
   },
   /**
    * Specify your server-side environment variables schema here.
@@ -55,8 +55,6 @@ export const env = createEnv({
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });
-
-console.log(env);
 
 const vercelHost =
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production"

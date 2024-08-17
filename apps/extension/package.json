@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@t3-oss/env-core": "0.11.0",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
@@ -49,7 +50,8 @@
     "permissions": [
       "storage",
       "sidePanel",
-      "scripting"
+      "scripting",
+      "cookies"
     ]
   }
 }
