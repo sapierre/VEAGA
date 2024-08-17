@@ -30,6 +30,11 @@ jobs:
           wait-interval: 10
           allowed-conclusions: success,skipped,cancelled
 
+      - name: 🔨 Setup
+        uses: ./tooling/github/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
         with:
@@ -37,5 +42,5 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: 💨 Publish!
-        run: eas build --platform all --profile preview --non-interactive --no-wait
-        # run: eas build --platform all --profile preview --non-interactive --no-wait --auto-submit
+        run: cd apps/mobile && eas build --platform all --profile preview --non-interactive --no-wait
+        # run: cd apps/mobile && eas build --platform all --profile production --non-interactive --no-wait --auto-submit

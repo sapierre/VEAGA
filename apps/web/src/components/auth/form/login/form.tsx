@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@turbostarter/ui/web";
 
@@ -50,7 +52,9 @@ export const LoginForm = ({ options }: LoginFormProps) => {
         const Component = LOGIN_OPTIONS_DETAILS[provider].component;
         return (
           <TabsContent key={provider} value={provider} className="w-full">
-            <Component />
+            <Suspense>
+              <Component />
+            </Suspense>
           </TabsContent>
         );
       })}

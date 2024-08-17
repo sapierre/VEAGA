@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { Logo } from "../shared";
 
 import { buttonVariants } from "./button";
@@ -7,7 +9,7 @@ export const BuiltWith = () => {
     <a
       className={buttonVariants({
         variant: "outline",
-        className: "cursor-pointer",
+        className: "cursor-pointer font-sans",
       })}
       href="https://www.turbostarter.dev"
       target="_blank"

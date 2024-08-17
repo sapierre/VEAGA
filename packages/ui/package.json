@@ -26,9 +26,12 @@
     "@turbostarter/eslint-config": "workspace:*",
     "@turbostarter/prettier-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
+    "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "react": "catalog:react18",
+    "typescript": "catalog:",
+    "zod": "catalog:"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
@@ -42,7 +45,10 @@
     "class-variance-authority": "0.7.0",
     "lucide-react": "0.427.0",
     "react-hook-form": "7.52.2",
-    "tailwind-merge": "2.5.2",
-    "zod": "3.23.8"
+    "tailwind-merge": "2.5.2"
+  },
+  "peerDependencies": {
+    "react": "catalog:react18",
+    "zod": "catalog:"
   }
 }

@@ -42,10 +42,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ github.sha }}
-          path: ./apps/extension/build/chrome-mv3-prod.zip
+          path: apps/extension/build/chrome-mv3-prod
 
       - name: 💨 Publish!
         uses: PlasmoHQ/bpp@v3
         with:
-          zip: ./apps/extension/build/chrome-mv3-prod.zip
+          artifact: apps/extension/build/chrome-mv3-prod.zip
           keys: ${{ secrets.EXTENSION_SUBMIT_KEYS }}

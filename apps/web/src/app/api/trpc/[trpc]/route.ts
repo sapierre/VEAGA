@@ -1,6 +1,7 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import { appRouter, createTRPCContext } from "@turbostarter/api";
+import { NODE_ENV } from "@turbostarter/shared/constants";
 
 import { auth } from "~/lib/auth/server";
 import { env } from "~/lib/env";
@@ -33,8 +34,7 @@ const handler = async (req: NextRequest) => {
         auth: auth(),
       }),
     onError:
-      // TODO: change to enum
-      env.NODE_ENV === "development"
+      env.NODE_ENV === NODE_ENV.DEVELOPMENT
         ? ({ path, error }) => {
             console.error(
               `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
