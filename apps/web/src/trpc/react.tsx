@@ -5,6 +5,8 @@ import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { useState } from "react";
 
+import { NODE_ENV } from "@turbostarter/shared/constants";
+
 import { env } from "~/lib/env";
 import { getUrl } from "~/trpc/shared";
 
@@ -34,7 +36,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
       links: [
         loggerLink({
           enabled: (op) =>
-            env.NODE_ENV === "development" ||
+            env.NODE_ENV === NODE_ENV.DEVELOPMENT ||
             (op.direction === "down" && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({

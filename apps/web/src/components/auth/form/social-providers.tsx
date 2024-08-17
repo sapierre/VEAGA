@@ -84,25 +84,15 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
 
   return (
     <div className="flex w-full flex-col items-stretch justify-center gap-2">
-      {topProvider && (
+      {Object.values(providers).map((provider) => (
         <SocialProvider
-          provider={topProvider}
+          key={provider}
+          provider={provider}
           isSubmitting={isSubmitting}
-          onClick={() => handleSignIn(topProvider)}
+          onClick={() => handleSignIn(provider)}
           actualProvider={actualProvider}
         />
-      )}
-      <div className="flex items-center justify-center gap-2">
-        {Object.values(providers.slice(1)).map((provider) => (
-          <SocialProvider
-            key={provider}
-            provider={provider}
-            isSubmitting={isSubmitting}
-            onClick={() => handleSignIn(provider)}
-            actualProvider={actualProvider}
-          />
-        ))}
-      </div>
+      ))}
     </div>
   );
 });
