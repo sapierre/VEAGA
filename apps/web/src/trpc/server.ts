@@ -16,7 +16,7 @@ import type { AppRouter } from "@turbostarter/api";
  */
 const createContext = cache(async () => {
   const heads = new Headers(headers());
-  heads.set("x-trpc-source", "rsc");
+  heads.set("x-trpc-source", "web-server");
 
   return createTRPCContext({
     auth: auth(),

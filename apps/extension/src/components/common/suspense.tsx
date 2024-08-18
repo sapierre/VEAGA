@@ -2,7 +2,7 @@ import { Suspense as ReactSuspense } from "react";
 
 import { Icons } from "@turbostarter/ui";
 
-import type { ReactElement} from "react";
+import type { ReactElement } from "react";
 
 const Loading = () => {
   return (

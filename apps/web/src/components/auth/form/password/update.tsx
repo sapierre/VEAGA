@@ -36,8 +36,6 @@ export const UpdatePasswordForm = memo(() => {
     const loadingToast = toast.loading("Updating password...");
     const { success, message } = await updateUser(data);
 
-    console.log({ success, message });
-
     if (!success) {
       return toast.error(message, { id: loadingToast });
     }

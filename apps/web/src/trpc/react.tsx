@@ -44,7 +44,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
           url: getUrl(),
           headers() {
             const headers = new Headers();
-            headers.set("x-trpc-source", "next-react");
+            headers.set("x-trpc-source", "web-client");
             return headers;
           },
         }),

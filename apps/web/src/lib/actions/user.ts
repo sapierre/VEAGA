@@ -10,8 +10,6 @@ export const updateUser = async (input: UpdateUserData) => {
   try {
     const { message, data, success } = await api.user.update(input);
 
-    console.log({ message, data, success });
-
     return {
       message,
       success,

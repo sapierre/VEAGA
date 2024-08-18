@@ -11,6 +11,7 @@ import type {
   EmailOtpType,
   User,
   AuthApiError,
+  Session,
 } from "@supabase/supabase-js";
 import type { SupabaseAuthClient } from "@supabase/supabase-js/dist/module/lib/SupabaseAuthClient";
 
@@ -61,12 +62,14 @@ type AuthConfig = z.infer<typeof authConfigSchema>;
 export type {
   AuthClient,
   AuthClientConfig,
+  AuthClientOptions,
   AuthBrowserClientOptions,
   AuthServerClientOptions,
   EmailOtpType,
   User,
   AuthConfig,
   AuthApiError,
+  Session,
 };
 
 export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER, isAuthApiError };

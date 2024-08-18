@@ -18,7 +18,9 @@ import {
 } from "@turbostarter/ui/web";
 
 import { logout } from "~/lib/actions";
-import { getAvatar, getName, onPromise } from "~/utils";
+import { getAvatar, getName } from "@turbostarter/auth";
+
+import { onPromise } from "~/utils";
 
 import type { User } from "@turbostarter/auth";
 

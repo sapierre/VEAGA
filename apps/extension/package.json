@@ -13,13 +13,16 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@plasmohq/messaging": "0.6.2",
     "@t3-oss/env-core": "0.11.0",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
-    "@turbostarter/ui": "workspace:*",
+    "@turbostarter/api": "workspace:*",
+    "@turbostarter/auth": "workspace:*",
     "@turbostarter/shared": "workspace:*",
+    "@turbostarter/ui": "workspace:*",
     "plasmo": "0.88.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",

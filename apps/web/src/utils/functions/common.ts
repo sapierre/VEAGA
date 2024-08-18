@@ -6,10 +6,6 @@ export const retrieveChild = (
   children: React.ReactNode,
   childType?: string,
 ) => {
-  console.log(
-    childType,
-    // Children.toArray(children).map((t) => t.type),
-  );
   return (
     childType &&
     Children.toArray(children).find(

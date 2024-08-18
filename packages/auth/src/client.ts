@@ -3,10 +3,13 @@ import {
   createServerClient as createServerSupabaseClient,
 } from "@supabase/ssr";
 
+import { createClient as createClientSupabase } from "@supabase/supabase-js";
+
 import type {
   AuthBrowserClientOptions,
   AuthClient,
   AuthClientConfig,
+  AuthClientOptions,
   AuthServerClientOptions,
 } from "./types";
 
@@ -24,4 +27,11 @@ const createServerClient = (
   return createServerSupabaseClient(config.url, config.key, options).auth;
 };
 
-export { createBrowserClient, createServerClient };
+const createClient = (
+  config: AuthClientConfig,
+  options?: AuthClientOptions,
+) => {
+  return createClientSupabase(config.url, config.key, options).auth;
+};
+
+export { createBrowserClient, createServerClient, createClient };
