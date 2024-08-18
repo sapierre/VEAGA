@@ -1,5 +1,6 @@
 import { memo } from "react";
 
+import { getAvatar, getName } from "@turbostarter/auth";
 import { Icons } from "@turbostarter/ui";
 import {
   Avatar,
@@ -13,10 +14,10 @@ import {
   DropdownMenuTrigger,
 } from "@turbostarter/ui/web";
 
-import { getAvatar, getName } from "@turbostarter/auth";
+
+import { Logout } from "./logout";
 
 import type { User } from "@turbostarter/auth";
-import { Logout } from "./logout";
 
 interface UserNavigationProps {
   readonly user: User;

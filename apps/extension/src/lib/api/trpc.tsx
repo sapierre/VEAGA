@@ -1,14 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createTRPCReact } from "@trpc/react-query";
 import { httpBatchLink, loggerLink } from "@trpc/client";
-import type { AppRouter } from "@turbostarter/api";
-
+import { createTRPCReact } from "@trpc/react-query";
+import { useState } from "react";
 import superjson from "superjson";
 
-import { useState } from "react";
-import { env } from "~lib/env";
-import { auth } from "~lib/auth";
 import { NODE_ENV } from "@turbostarter/shared/constants";
+
+import type { AppRouter } from "@turbostarter/api";
+
+
+import { auth } from "~lib/auth";
+import { env } from "~lib/env";
+
 
 export const api = createTRPCReact<AppRouter>();
 export { type RouterInputs, type RouterOutputs } from "@turbostarter/api";

@@ -1,4 +1,4 @@
-import { User } from "../types";
+import type { User } from "../types";
 
 export const getName = (user: User) => {
   const identity = user.identities?.[0]?.identity_data;

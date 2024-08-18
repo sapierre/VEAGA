@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { memo } from "react";
 import { toast } from "sonner";
 
+import { getAvatar, getName } from "@turbostarter/auth";
 import { Icons } from "@turbostarter/ui";
 import {
   Avatar,
@@ -18,8 +19,6 @@ import {
 } from "@turbostarter/ui/web";
 
 import { logout } from "~/lib/actions";
-import { getAvatar, getName } from "@turbostarter/auth";
-
 import { onPromise } from "~/utils";
 
 import type { User } from "@turbostarter/auth";

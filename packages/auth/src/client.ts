@@ -2,7 +2,6 @@ import {
   createBrowserClient as createBrowserSupabaseClient,
   createServerClient as createServerSupabaseClient,
 } from "@supabase/ssr";
-
 import { createClient as createClientSupabase } from "@supabase/supabase-js";
 
 import type {

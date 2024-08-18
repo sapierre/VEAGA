@@ -71,8 +71,6 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
     setIsSubmitting,
   } = useAuthFormStore();
 
-  const topProvider = providers[0];
-
   const handleSignIn = async (provider: SOCIAL_PROVIDER) => {
     setProvider(provider);
     setIsSubmitting(true);

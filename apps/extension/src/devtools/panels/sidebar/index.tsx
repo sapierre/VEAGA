@@ -11,5 +11,7 @@ const Sidebar = () => {
   );
 };
 
-const root = createRoot(document.getElementById("root") as HTMLElement);
-root.render(<Sidebar />);
+const element = document.getElementById("root");
+
+const root = element ? createRoot(element) : null;
+root?.render(<Sidebar />);

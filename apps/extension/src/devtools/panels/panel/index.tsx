@@ -11,5 +11,7 @@ const Panel = () => {
   );
 };
 
-const root = createRoot(document.getElementById("root") as HTMLElement);
-root.render(<Panel />);
+const element = document.getElementById("root");
+
+const root = element ? createRoot(element) : null;
+root?.render(<Panel />);

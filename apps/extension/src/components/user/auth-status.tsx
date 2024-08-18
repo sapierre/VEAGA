@@ -1,11 +1,14 @@
 import { sendToBackground } from "@plasmohq/messaging";
 import { useQuery } from "@tanstack/react-query";
-import { User } from "@turbostarter/auth";
+
 import { cn } from "@turbostarter/ui";
 import { Skeleton } from "@turbostarter/ui/web";
-import { MESSAGE } from "~background";
 
 import { UserNavigation } from "./navigation/user-navigation";
+
+import type { Session } from "@turbostarter/auth";
+
+import { MESSAGE } from "~background";
 import { SESSION_MESSAGE_TYPE } from "~background/messages/session";
 
 const AuthStatusSkeleton = () => {
@@ -16,7 +19,14 @@ export const AuthStatus = () => {
   const { data, isLoading } = useQuery({
     queryKey: [MESSAGE.SESSION],
     queryFn: () =>
-      sendToBackground({
+      sendToBackground<
+        {
+          type: typeof SESSION_MESSAGE_TYPE.GET;
+        },
+        {
+          session: Session | null;
+        }
+      >({
         name: MESSAGE.SESSION,
         body: { type: SESSION_MESSAGE_TYPE.GET },
       }),
@@ -45,7 +55,7 @@ export const AuthStatus = () => {
         )}
       </p>
 
-      {user && <UserNavigation user={user as User} />}
+      {user && <UserNavigation user={user} />}
     </div>
   );
 };
