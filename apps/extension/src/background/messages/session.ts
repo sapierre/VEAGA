@@ -100,7 +100,7 @@ const getSession = async () => {
 
     const { data } = await auth().setSession(parsedSession);
     return data.session ?? null;
-  } catch (e) {
+  } catch {
     return null;
   }
 };

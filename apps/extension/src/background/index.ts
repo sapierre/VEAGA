@@ -1,7 +1,11 @@
-export const MESSAGE = {
-  SESSION: "session",
-} as const;
+import { setupStorage } from "~lib/storage";
 
-console.log(
-  "Background service worker is running! Edit `src/background` and save to reload.",
-);
+const main = async () => {
+  await setupStorage();
+
+  console.log(
+    "Background service worker is running! Edit `src/background` and save to reload.",
+  );
+};
+
+void main();

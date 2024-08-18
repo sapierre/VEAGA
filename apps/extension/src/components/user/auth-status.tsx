@@ -8,7 +8,6 @@ import { UserNavigation } from "./navigation/user-navigation";
 
 import type { Session } from "@turbostarter/auth";
 
-import { MESSAGE } from "~background";
 import { SESSION_MESSAGE_TYPE } from "~background/messages/session";
 
 const AuthStatusSkeleton = () => {
@@ -17,7 +16,7 @@ const AuthStatusSkeleton = () => {
 
 export const AuthStatus = () => {
   const { data, isLoading } = useQuery({
-    queryKey: [MESSAGE.SESSION],
+    queryKey: ["session"],
     queryFn: () =>
       sendToBackground<
         {
@@ -27,7 +26,7 @@ export const AuthStatus = () => {
           session: Session | null;
         }
       >({
-        name: MESSAGE.SESSION,
+        name: "session",
         body: { type: SESSION_MESSAGE_TYPE.GET },
       }),
   });

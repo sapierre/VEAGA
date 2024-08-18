@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Logo } from "@turbostarter/ui";
 
-import { ThemeSwitch } from "~/components/common/theme-switch";
+import { ThemeControls } from "~/components/common/theme";
 import { pathsConfig } from "~/config/paths";
 
 export const Header = () => {
@@ -12,7 +12,7 @@ export const Header = () => {
         <Logo withText />
       </Link>
 
-      <ThemeSwitch />
+      <ThemeControls />
     </header>
   );
 };

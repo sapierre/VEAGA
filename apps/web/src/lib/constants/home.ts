@@ -24,7 +24,7 @@ export const HOME_LINKS = [
     title: "Themes",
     description:
       "Change the look and feel of your app. Light, dark, or custom themes.",
-    href: "#",
+    href: "",
   },
   {
     title: "Analytics",

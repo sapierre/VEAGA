@@ -14,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "@turbostarter/ui/web";
 
-
 import { Logout } from "./logout";
 
 import type { User } from "@turbostarter/auth";

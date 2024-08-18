@@ -6,6 +6,9 @@ import {
   UserRound,
   Sun,
   Moon,
+  Check,
+  Undo2,
+  SunMoon,
 } from "lucide-react";
 import * as React from "react";
 
@@ -83,4 +86,7 @@ export const Icons = {
   Sun,
   Moon,
   CircleX,
+  Check,
+  Undo2,
+  SunMoon,
 };

@@ -1,7 +1,8 @@
-import { ThemeProvider } from "next-themes";
 import { memo } from "react";
 
 import { TRPCReactProvider } from "~/trpc/react";
+
+import { ThemeProvider } from "./theme";
 
 interface ProvidersProps {
   readonly children: React.ReactNode;
@@ -10,14 +11,7 @@ interface ProvidersProps {
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (
     <TRPCReactProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        {children}
-      </ThemeProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </TRPCReactProvider>
   );
 });

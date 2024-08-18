@@ -56,7 +56,9 @@ const SocialProvider = ({
           <div className="h-6 w-6 dark:brightness-125">
             <Icon />
           </div>
-          <span className="capitalize">{provider}</span>
+          <span>
+            Sign in with <span className="capitalize">{provider}</span>
+          </span>
         </>
       )}
     </Button>
