@@ -1,6 +1,10 @@
 import { updateUserSchema } from "@turbostarter/shared/validators";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "../../trpc";
 
 import { userControllerFactory } from "./user.controller";
 

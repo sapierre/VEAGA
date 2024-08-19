@@ -63,7 +63,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
             </Button>
           )}
         </div>
-        <div className="mt-2 flex flex-1 flex-col items-center space-y-4 overflow-scroll md:space-y-6">
+        <div className="mt-2 flex flex-1 flex-col items-center space-y-4 md:space-y-6">
           <div className="w-full space-y-1.5">
             <Label className="text-xs">Color</Label>
             <div className="flex flex-wrap gap-2">

@@ -15,10 +15,10 @@ export const HOME_LINKS = [
     href: "#",
   },
   {
-    title: "Payments",
+    title: "Billing",
     description:
-      "Billing your customers with subscriptions or one-time payments. Stripe and LemonSqueezy.",
-    href: "#",
+      "Receive payments from your users using configured providers - Stripe or LemonSqueezy.",
+    href: pathsConfig.pricing,
   },
   {
     title: "Themes",

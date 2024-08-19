@@ -21,6 +21,7 @@
     "@trpc/server": "catalog:",
     "@turbostarter/api": "workspace:*",
     "@turbostarter/auth": "workspace:*",
+    "@turbostarter/billing": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
     "accept-language": "3.0.20",

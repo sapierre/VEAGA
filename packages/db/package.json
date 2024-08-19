@@ -6,15 +6,15 @@
   "exports": {
     ".": {
       "types": "./dist/db/index.d.ts",
-      "default": "./dist/db/index.js"
+      "default": "./src/db/index.ts"
     },
     "./client": {
       "types": "./dist/db/client.d.ts",
-      "default": "./dist/db/client.js"
+      "default": "./src/db/client.ts"
     },
     "./schema": {
-      "types": "./dist/db/schema.d.ts",
-      "default": "./dist/db/schema.js"
+      "types": "./dist/db/schema/index.d.ts",
+      "default": "./src/db/schema/index.ts"
     }
   },
   "scripts": {
@@ -47,6 +47,8 @@
   "dependencies": {
     "@t3-oss/env-core": "0.11.0",
     "drizzle-orm": "0.33.0",
-    "postgres": "3.4.4"
+    "drizzle-zod": "0.5.1",
+    "postgres": "3.4.4",
+    "zod": "catalog:"
   }
 }

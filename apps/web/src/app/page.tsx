@@ -19,7 +19,7 @@ const HomePage = () => {
         <p className="w-full rounded-md border border-input bg-muted/25 px-6 py-3 text-center md:w-fit">
           Edit{" "}
           <code className="rounded-md bg-muted px-2 py-0.5 font-mono">
-            app/(client)/page.tsx
+            app/page.tsx
           </code>{" "}
           and save to reload.
         </p>

@@ -10,3 +10,5 @@ export * from "./avatar";
 export * from "./tabs";
 export * from "./theme";
 export * from "./popover";
+export * from "./switch";
+export * from "./badge";
