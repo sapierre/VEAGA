@@ -1,6 +1,7 @@
 import { pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { usersTable } from "../users";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+
+import { usersTable } from "../users";
 
 export const billingStatusEnum = pgEnum("status", [
   "ACTIVE",
@@ -20,14 +21,14 @@ export const pricingPlanTypeEnum = pgEnum("plan", [
 ]);
 
 export const customers = pgTable("customers", {
-  userId: uuid("user_id")
+  userId: uuid("userId")
     .references(() => usersTable.id)
-    .notNull(),
-  customerId: text("customer_id").notNull(),
+    .primaryKey(),
+  customerId: text("customerId").notNull(),
   status: billingStatusEnum("status"),
   plan: pricingPlanTypeEnum("plan"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at")
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt")
     .notNull()
     .$onUpdate(() => new Date()),
 });

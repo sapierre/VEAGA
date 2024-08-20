@@ -1,15 +1,27 @@
 import { Pricing } from "~/components/pricing/pricing";
-import { api } from "~/trpc/server";
 import { getMetadata } from "~/lib/metadata";
+import { api } from "~/trpc/server";
 
 export const metadata = getMetadata({
   title: "Pricing",
 });
 
 const PricingPage = async () => {
-  const { plans, config } = await api.billing.getPlans();
+  const user = await api.user.get();
 
-  return <Pricing plans={plans} config={config} />;
+  const { plans, config } = await api.billing.getPlans();
+  const customer = user ? await api.billing.getCustomer() : null;
+
+  const sortedPlans = plans.sort((a, b) => a.order - b.order);
+
+  return (
+    <Pricing
+      plans={sortedPlans}
+      config={config}
+      user={user}
+      customer={customer}
+    />
+  );
 };
 
 export default PricingPage;

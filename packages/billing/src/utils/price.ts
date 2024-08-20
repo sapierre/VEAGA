@@ -1,5 +1,6 @@
-import {
-  BillingModel,
+import { BillingDiscountType, BillingModel } from "../types";
+
+import type {
   PricingPlanPrice,
   PricingPlanWithPrices,
   RecurringInterval,
@@ -11,9 +12,6 @@ const INTERVAL_MULTIPLIER: Record<RecurringInterval, number> = {
   month: 12,
   year: 1,
 };
-
-// year 1000
-// week 50
 
 export const getProductPrice = (
   product: PricingPlanWithPrices,
@@ -58,11 +56,11 @@ export const calculateRecurringDiscount = (
   }
 
   const minMultiplierIndex = Object.entries(INTERVAL_MULTIPLIER).findIndex(
-    ([intervalKey, multiplier]) => intervalKey === minPrice.recurring?.interval,
+    ([intervalKey]) => intervalKey === minPrice.recurring?.interval,
   );
 
   const maxMultiplierIndex = Object.entries(INTERVAL_MULTIPLIER).findIndex(
-    ([intervalKey, multiplier]) => intervalKey === interval,
+    ([intervalKey]) => intervalKey === interval,
   );
 
   const multiplersToApply = Object.values(INTERVAL_MULTIPLIER).slice(
@@ -101,6 +99,7 @@ export const calculatePriceDiscount = (price: PricingPlanPrice) => {
         amount: amount - amountOff,
       },
       percentage: Math.floor((amountOff / amount) * 100),
+      type: BillingDiscountType.AMOUNT,
     };
   }
 
@@ -112,8 +111,29 @@ export const calculatePriceDiscount = (price: PricingPlanPrice) => {
         amount: amount - (amount * percentOff) / 100,
       },
       percentage: percentOff,
+      type: BillingDiscountType.PERCENT,
     };
   }
 
   return null;
+};
+
+export const getPriceWithHighestDiscount = (plans: PricingPlanWithPrices[]) => {
+  const pricesWithDiscount = plans
+    .flatMap((plan) => plan.prices)
+    .filter((price) => price.promotionCode && price.amount > 0);
+
+  const [highestDiscount] = pricesWithDiscount.sort((a, b) => {
+    const discountA = calculatePriceDiscount(a);
+    const discountB = calculatePriceDiscount(b);
+
+    const amountA =
+      (discountA?.original.amount ?? 0) - (discountA?.discounted.amount ?? 0);
+    const amountB =
+      (discountB?.original.amount ?? 0) - (discountB?.discounted.amount ?? 0);
+
+    return amountB - amountA;
+  });
+
+  return highestDiscount;
 };

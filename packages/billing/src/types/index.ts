@@ -1,10 +1,11 @@
+import { z } from "zod";
+
 import {
   billingStatusEnum,
   pricingPlanTypeEnum,
 } from "@turbostarter/db/schema";
 
-import { z } from "zod";
-import { billingConfigSchema } from "../config/schema";
+import type { billingConfigSchema } from "../config/schema";
 
 const billingStatusEnumSchema = z.enum(billingStatusEnum.enumValues);
 const pricingPlanTypeEnumSchema = z.enum(pricingPlanTypeEnum.enumValues);
@@ -28,6 +29,18 @@ export const RecurringInterval = {
   YEAR: "year",
 } as const;
 
+export const BillingDiscountType = {
+  PERCENT: "percent",
+  AMOUNT: "amount",
+} as const;
+
+export const RecurringIntervalDuration: Record<RecurringInterval, number> = {
+  [RecurringInterval.DAY]: 1,
+  [RecurringInterval.WEEK]: 7,
+  [RecurringInterval.MONTH]: 30,
+  [RecurringInterval.YEAR]: 365,
+};
+
 export type BillingStatus = z.infer<typeof billingStatusEnumSchema>;
 export type BillingProvider =
   (typeof BillingProvider)[keyof typeof BillingProvider];
@@ -35,10 +48,12 @@ export type PricingPlanType = z.infer<typeof pricingPlanTypeEnumSchema>;
 export type BillingModel = (typeof BillingModel)[keyof typeof BillingModel];
 export type RecurringInterval =
   (typeof RecurringInterval)[keyof typeof RecurringInterval];
+export type BillingDiscountType =
+  (typeof BillingDiscountType)[keyof typeof BillingDiscountType];
 
 export type BillingConfig = z.infer<typeof billingConfigSchema>;
 
-export type PricingPlan = {
+export interface PricingPlan {
   readonly id: string;
   readonly order: number;
   readonly name: string;
@@ -46,37 +61,37 @@ export type PricingPlan = {
   readonly badge: string | null;
   readonly description: string | null;
   readonly custom: boolean;
-};
+}
 
-export type PricingPlanPrice = {
+export interface PricingPlanPrice {
   readonly id: string;
   readonly amount: number;
   readonly currency: string;
   readonly recurring: {
     readonly interval: RecurringInterval;
-    readonly trialPeriodDays: number | null;
+    readonly trialDays: number | null;
   } | null;
   readonly type: BillingModel;
   readonly promotionCode: PromotionCode | null;
-};
+}
 
 export type PricingPlanWithPrices = PricingPlan & {
   readonly prices: PricingPlanPrice[];
 };
 
-export type Coupon = {
+export interface Coupon {
   readonly id: string;
   readonly amountOff: number | null;
   readonly percentOff: number | null;
   readonly currency: string | null;
-};
+}
 
-export type PromotionCode = {
+export interface PromotionCode {
   readonly id: string;
   readonly coupon: Coupon;
   readonly code: string;
   readonly maxRedemptions: number | null;
   readonly timesRedeemed: number;
-};
+}
 
 export type { SelectCustomer as Customer } from "@turbostarter/db/schema";

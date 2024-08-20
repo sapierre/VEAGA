@@ -1,6 +1,6 @@
 import { stripe } from "../client";
 
-export const constructEvent = async (data: {
+export const constructEvent = (data: {
   payload: string;
   sig: string;
   secret: string;

@@ -1,16 +1,18 @@
 import { ApiError } from "@turbostarter/shared/utils";
+
 import { getCustomerByCustomerId, updateCustomer } from "../../../api/customer";
-import Stripe from "stripe";
-import { toBillingStatus } from "../mappers/toBillingStatus";
+import { config } from "../../../config";
+import { CUSTOM_PLANS } from "../../../constants";
 import { stripe } from "../client";
+import { toBillingStatus } from "../mappers/toBillingStatus";
 import {
   toPricingPlan,
   toPricingPlanPrice,
   toPricingPlanType,
 } from "../mappers/toPricingPlan";
-import { PricingPlanPrice, PricingPlanWithPrices } from "../../../types";
-import { CUSTOM_PLANS } from "../../../constants";
-import { config } from "../../../config";
+
+import type { PricingPlanPrice, PricingPlanWithPrices } from "../../../types";
+import type Stripe from "stripe";
 
 const getSubscription = async (subscriptionId: string) => {
   return stripe.subscriptions.retrieve(subscriptionId, {
@@ -53,7 +55,7 @@ export const getPlans = async () => {
       ...toPricingPlan(product),
       prices: product.prices.filter((price) => price.type === config.model),
     }))
-    .filter((x): x is PricingPlanWithPrices => !!x);
+    .filter((x): x is PricingPlanWithPrices => Boolean(x));
 
   return [...CUSTOM_PLANS, ...filteredProducts];
 };

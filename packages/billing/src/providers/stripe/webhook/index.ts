@@ -1,13 +1,15 @@
-import type Stripe from "stripe";
-import { STRIPE_SIGNATURE_HEADER, relevantEvents } from "./constants";
-import { constructEvent } from "./event";
 import { env } from "../../../env";
 import { checkoutStatusChangeHandler } from "../checkout";
 import { subscriptionStatusChangeHandler } from "../subscription";
 
+import { STRIPE_SIGNATURE_HEADER, relevantEvents } from "./constants";
+import { constructEvent } from "./event";
+
+import type Stripe from "stripe";
+
 export const webhookHandler = async (req: Request) => {
   const body = await req.text();
-  const sig = req.headers.get(STRIPE_SIGNATURE_HEADER) as string;
+  const sig = req.headers.get(STRIPE_SIGNATURE_HEADER);
   const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
   let event: Stripe.Event;
 
@@ -16,7 +18,7 @@ export const webhookHandler = async (req: Request) => {
       return new Response("Webhook secret not found.", { status: 400 });
     }
 
-    event = await constructEvent({
+    event = constructEvent({
       payload: body,
       sig,
       secret: webhookSecret,
@@ -39,10 +41,9 @@ export const webhookHandler = async (req: Request) => {
         case "customer.subscription.created":
         case "customer.subscription.updated":
         case "customer.subscription.deleted":
-          const subscription = event.data.object;
           await subscriptionStatusChangeHandler({
-            id: subscription.id,
-            customerId: subscription.customer as string,
+            id: event.data.object.id,
+            customerId: event.data.object.customer as string,
           });
           break;
         case "checkout.session.completed":

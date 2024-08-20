@@ -2,8 +2,9 @@ import Link from "next/link";
 
 import { Logo } from "@turbostarter/ui";
 
-import { ThemeControls } from "~/components/common/theme";
 import { pathsConfig } from "~/config/paths";
+
+import { HeaderControls } from "./controls";
 
 export const Header = () => {
   return (
@@ -12,7 +13,7 @@ export const Header = () => {
         <Logo withText />
       </Link>
 
-      <ThemeControls />
+      <HeaderControls />
     </header>
   );
 };

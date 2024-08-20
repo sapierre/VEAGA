@@ -8,14 +8,14 @@ import {
   CardTitle,
 } from "@turbostarter/ui/web";
 
-import { AuthStatus } from "~/components/auth/layout/auth-status";
+import { HeaderControls } from "~/components/common/layout/header/controls";
 import { HOME_LINKS } from "~/lib/constants";
 
 const HomePage = () => {
   return (
     <main className="flex w-full grow flex-col items-center justify-between gap-20">
-      <div className="flex w-full flex-col items-center justify-between gap-2 md:flex-row-reverse">
-        <AuthStatus />
+      <div className="flex w-full flex-col items-center justify-between gap-3 md:flex-row-reverse">
+        <HeaderControls />
         <p className="w-full rounded-md border border-input bg-muted/25 px-6 py-3 text-center md:w-fit">
           Edit{" "}
           <code className="rounded-md bg-muted px-2 py-0.5 font-mono">

@@ -1,9 +1,6 @@
-import {
-  BillingModel,
-  PricingPlanType,
-  PricingPlanWithPrices,
-  RecurringInterval,
-} from "../types";
+import { BillingModel, PricingPlanType, RecurringInterval } from "../types";
+
+import type { PricingPlanWithPrices } from "../types";
 
 export const FREE_PLAN: PricingPlanWithPrices = {
   id: "starter",
@@ -28,7 +25,7 @@ export const FREE_PLAN: PricingPlanWithPrices = {
       currency: "usd",
       recurring: {
         interval: RecurringInterval.MONTH,
-        trialPeriodDays: null,
+        trialDays: null,
       },
       type: BillingModel.RECURRING,
       promotionCode: null,
@@ -39,7 +36,7 @@ export const FREE_PLAN: PricingPlanWithPrices = {
       currency: "usd",
       recurring: {
         interval: RecurringInterval.YEAR,
-        trialPeriodDays: null,
+        trialDays: null,
       },
       type: BillingModel.RECURRING,
       promotionCode: null,

@@ -1,11 +1,9 @@
-import Stripe from "stripe";
+import { BillingModel, PricingPlanType } from "../../../types";
+
 import { toPromotionCode } from "./toCoupon";
-import {
-  BillingModel,
-  PricingPlan,
-  PricingPlanPrice,
-  PricingPlanType,
-} from "../../../types";
+
+import type { PricingPlan, PricingPlanPrice } from "../../../types";
+import type Stripe from "stripe";
 
 export const toPricingPlanType = (
   input: string | undefined,
@@ -51,7 +49,11 @@ export const toPricingPlanPrice = (
     recurring: price.recurring
       ? {
           interval: price.recurring.interval,
-          trialPeriodDays: price.recurring.trial_period_days,
+          trialDays:
+            price.recurring.trial_period_days ??
+            (price.metadata.trial && !isNaN(Number(price.metadata.trial))
+              ? Number(price.metadata.trial)
+              : null),
         }
       : null,
     promotionCode: code ? toPromotionCode(code) : null,
@@ -65,6 +67,6 @@ const toPricingPlanPriceType = (type: Stripe.Price.Type): BillingModel => {
     case "recurring":
       return BillingModel.RECURRING;
     default:
-      throw new Error(`Invalid payment billing model: ${type}`);
+      throw new Error(`Invalid payment billing model: ${type as string}`);
   }
 };

@@ -1,22 +1,13 @@
-import Stripe from "stripe";
-import { stripe } from "../client";
 import { ApiError } from "@turbostarter/shared/utils";
+
 import {
   getCustomerByUserId,
   updateCustomer,
   upsertCustomer,
 } from "../../../api/customer";
+import { stripe } from "../client";
 
-const createBillingPortalSession = async (
-  params: Stripe.BillingPortal.SessionCreateParams,
-) => {
-  try {
-    return await stripe.billingPortal.sessions.create(params);
-  } catch (e) {
-    console.error(e);
-    throw new ApiError(500, "Could not create billing portal session.");
-  }
-};
+import type Stripe from "stripe";
 
 const getStripeCustomerById = async (stripeId: string) => {
   return stripe.customers.retrieve(stripeId);
@@ -32,14 +23,10 @@ const createStripeCustomer = async (uuid: string, email: string) => {
   const customerData = { metadata: { supabaseUUID: uuid }, email: email };
   const newCustomer = await stripe.customers.create(customerData);
 
-  if (!newCustomer) {
-    throw new Error("Stripe customer creation failed.");
-  }
-
   return newCustomer.id;
 };
 
-const createOrRetrieveCustomer = async ({
+export const createOrRetrieveCustomer = async ({
   email,
   uuid,
 }: {
@@ -79,4 +66,15 @@ const createOrRetrieveCustomer = async ({
   });
 
   return stripeIdToInsert;
+};
+
+export const createBillingPortalSession = async (
+  params: Stripe.BillingPortal.SessionCreateParams,
+) => {
+  try {
+    return await stripe.billingPortal.sessions.create(params);
+  } catch (e) {
+    console.error(e);
+    throw new ApiError(500, "Could not create billing portal session.");
+  }
 };

@@ -1,5 +1,5 @@
+import type { Coupon, PromotionCode } from "../../../types";
 import type Stripe from "stripe";
-import { Coupon, PromotionCode } from "../../../types";
 
 export const toCoupon = (coupon: Stripe.Coupon): Coupon => {
   return {

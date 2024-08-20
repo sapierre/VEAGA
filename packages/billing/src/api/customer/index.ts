@@ -1,7 +1,8 @@
 import { eq } from "@turbostarter/db";
-
 import { db } from "@turbostarter/db/client";
-import { InsertCustomer, customers } from "@turbostarter/db/schema";
+import { customers } from "@turbostarter/db/schema";
+
+import type { InsertCustomer } from "@turbostarter/db/schema";
 
 export const getCustomerByUserId = async (userId: string) => {
   const [data] = await db
@@ -9,7 +10,7 @@ export const getCustomerByUserId = async (userId: string) => {
     .from(customers)
     .where(eq(customers.userId, userId));
 
-  return data;
+  return data ?? null;
 };
 
 export const getCustomerByCustomerId = async (customerId: string) => {
@@ -18,7 +19,7 @@ export const getCustomerByCustomerId = async (customerId: string) => {
     .from(customers)
     .where(eq(customers.customerId, customerId));
 
-  return data;
+  return data ?? null;
 };
 
 export const updateCustomer = (

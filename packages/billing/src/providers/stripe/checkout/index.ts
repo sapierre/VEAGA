@@ -1,15 +1,23 @@
-import Stripe from "stripe";
-
 import { ApiError } from "@turbostarter/shared/utils";
 
-import { stripe } from "../client";
 import { getCustomerByCustomerId, updateCustomer } from "../../../api/customer";
+import { config } from "../../../config";
+import { BillingModel } from "../../../types";
+import { stripe } from "../client";
+import {
+  createBillingPortalSession,
+  createOrRetrieveCustomer,
+} from "../customer";
 import {
   toCheckoutBillingStatus,
   toPaymentBillingStatus,
 } from "../mappers/toBillingStatus";
 import { toPricingPlanType } from "../mappers/toPricingPlan";
 import { subscriptionStatusChangeHandler } from "../subscription";
+
+import type { CheckoutInput, GetBillingPortalInput } from "../../../api/schema";
+import type { User } from "@turbostarter/auth";
+import type Stripe from "stripe";
 
 const createCheckoutSession = async (
   params: Stripe.Checkout.SessionCreateParams,
@@ -73,4 +81,84 @@ export const checkoutStatusChangeHandler = async (
   console.log(
     `✅ Checkout status changed for user ${customer.userId} to ${checkoutSession.status}`,
   );
+};
+
+export const checkout = async ({
+  user,
+  price,
+  redirect,
+}: CheckoutInput & { user: User }) => {
+  try {
+    const customer = await createOrRetrieveCustomer({
+      email: user.email ?? "",
+      uuid: user.id,
+    });
+
+    const session = await createCheckoutSession({
+      mode:
+        config.model === BillingModel.RECURRING ? "subscription" : "payment",
+      billing_address_collection: "required",
+      customer,
+      customer_update: {
+        address: "auto",
+      },
+      line_items: [
+        {
+          price: price.id,
+          quantity: 1,
+        },
+      ],
+      success_url: redirect.success,
+      cancel_url: redirect.cancel,
+      ...(price.trialDays
+        ? {
+            subscription_data: {
+              trial_period_days: price.trialDays,
+            },
+          }
+        : {}),
+      ...(price.promotionCode && {
+        discounts: [
+          {
+            promotion_code: price.promotionCode.id,
+          },
+        ],
+      }),
+    });
+
+    return { url: session.url };
+  } catch (e) {
+    console.error(e);
+    if (e instanceof Error) {
+      throw new ApiError(500, e.message);
+    }
+
+    throw new ApiError(500, "An unknown error occurred.");
+  }
+};
+
+export const getBillingPortal = async ({
+  redirectUrl,
+  user,
+}: GetBillingPortalInput & { user: User }) => {
+  try {
+    const customer = await createOrRetrieveCustomer({
+      email: user.email ?? "",
+      uuid: user.id,
+    });
+
+    const { url } = await createBillingPortalSession({
+      customer,
+      return_url: redirectUrl,
+    });
+
+    return { url };
+  } catch (e) {
+    console.error(e);
+    if (e instanceof Error) {
+      throw new ApiError(500, e.message);
+    }
+
+    throw new ApiError(500, "An unknown error occurred.");
+  }
 };

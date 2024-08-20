@@ -1,6 +1,6 @@
-/* eslint-disable no-restricted-properties */
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
+
 import { BillingModel, BillingProvider } from "../types";
 
 const shared = {
