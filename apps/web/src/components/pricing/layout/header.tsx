@@ -8,25 +8,30 @@ import { Tabs, TabsList, TabsTrigger } from "@turbostarter/ui/web";
 import { Discount } from "./discount";
 
 import type {
+  Discount as DiscountType,
   PricingPlanPrice,
   RecurringInterval,
 } from "@turbostarter/billing";
 
 interface PricingHeaderProps {
+  readonly currency: string;
   readonly model: BillingModel;
   readonly intervals: RecurringInterval[];
   readonly activeInterval: RecurringInterval;
   readonly onIntervalChange: (billing: RecurringInterval) => void;
-  readonly priceWithDiscount?: PricingPlanPrice;
+  readonly priceWithDiscount?: PricingPlanPrice & {
+    discount: DiscountType | undefined;
+  };
 }
 
 export const PricingHeader = memo<PricingHeaderProps>(
   ({
+    model,
     activeInterval,
     intervals,
     onIntervalChange,
     priceWithDiscount,
-    model,
+    currency,
   }) => {
     return (
       <header className="flex flex-col items-center justify-center gap-3">
@@ -43,9 +48,10 @@ export const PricingHeader = memo<PricingHeaderProps>(
           {...(priceWithDiscount && {
             priceWithDiscount,
           })}
+          currency={currency}
         />
 
-        {model === BillingModel.RECURRING && (
+        {model === BillingModel.RECURRING && intervals.length > 0 && (
           <Tabs
             className="mt-4 lg:mt-6"
             value={activeInterval}

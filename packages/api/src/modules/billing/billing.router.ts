@@ -1,6 +1,4 @@
 import {
-  getPlans,
-  config,
   checkoutSchema,
   checkout,
   getCustomerByUserId,
@@ -8,17 +6,9 @@ import {
   getBillingPortal,
 } from "@turbostarter/billing/api";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "../../trpc";
+import { createTRPCRouter, protectedProcedure } from "../../trpc";
 
 export const billingRouter = createTRPCRouter({
-  getPlans: publicProcedure.query(async () => ({
-    plans: await getPlans(),
-    config,
-  })),
   checkout: protectedProcedure
     .input(checkoutSchema)
     .mutation(({ ctx, input }) =>

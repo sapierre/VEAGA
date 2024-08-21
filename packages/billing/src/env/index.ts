@@ -1,7 +1,8 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-import { BillingModel, BillingProvider } from "../types";
+import { config } from "../config";
+import { BillingProvider } from "../types";
 
 const shared = {
   skipValidation:
@@ -9,24 +10,32 @@ const shared = {
   runtimeEnv: process.env,
 };
 
-const baseEnv = createEnv({
-  ...shared,
-  server: {
-    BILLING_PROVIDER: z.nativeEnum(BillingProvider),
-    BILLING_MODEL: z.nativeEnum(BillingModel),
-  },
-});
+const getProviderEnv = (provider: BillingProvider) => {
+  if (provider === BillingProvider.LEMON_SQUEEZY) {
+    return {
+      BILLING_PROVIDER: provider,
+      ...createEnv({
+        ...shared,
+        server: {
+          LEMON_SQUEEZY_API_KEY: z.string(),
+          LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
+          LEMON_SQUEEZY_STORE_ID: z.string(),
+        },
+      }),
+    };
+  }
 
-const providersEnv = {
-  [BillingProvider.STRIPE]: createEnv({
-    ...shared,
-    extends: [baseEnv],
-    server: {
-      BILLING_PROVIDER: z.literal(BillingProvider.STRIPE),
-      STRIPE_SECRET_KEY: z.string(),
-      STRIPE_WEBHOOK_SECRET: z.string(),
-    },
-  }),
-} as const;
+  // defaults to stripe
+  return {
+    BILLING_PROVIDER: provider,
+    ...createEnv({
+      ...shared,
+      server: {
+        STRIPE_SECRET_KEY: z.string(),
+        STRIPE_WEBHOOK_SECRET: z.string(),
+      },
+    }),
+  };
+};
 
-export const env = providersEnv[baseEnv.BILLING_PROVIDER];
+export const env = getProviderEnv(config.provider);

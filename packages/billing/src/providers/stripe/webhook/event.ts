@@ -5,5 +5,5 @@ export const constructEvent = (data: {
   sig: string;
   secret: string;
 }) => {
-  return stripe.webhooks.constructEvent(data.payload, data.sig, data.secret);
+  return stripe().webhooks.constructEvent(data.payload, data.sig, data.secret);
 };

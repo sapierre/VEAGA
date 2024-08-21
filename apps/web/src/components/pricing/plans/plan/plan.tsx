@@ -13,20 +13,23 @@ import { usePlan } from "./hooks/use-plan";
 import type { User } from "@turbostarter/auth";
 import type {
   Customer,
-  PricingPlanWithPrices,
+  Discount,
+  PricingPlan,
   RecurringInterval,
 } from "@turbostarter/billing";
 
 interface PlanProps {
-  readonly plan: PricingPlanWithPrices;
+  readonly plan: PricingPlan;
   readonly user: User | null;
   readonly customer: Customer | null;
   readonly interval: RecurringInterval;
   readonly model: BillingModel;
+  readonly currency: string;
+  readonly discounts: Discount[];
 }
 
 export const Plan = memo<PlanProps>(
-  ({ plan, interval, user, customer, model }) => {
+  ({ plan, interval, user, customer, model, currency, discounts }) => {
     const {
       features,
       price,
@@ -35,9 +38,9 @@ export const Plan = memo<PlanProps>(
       handleCheckout,
       handleOpenPortal,
       hasPlan,
-    } = usePlan(plan, model, interval);
+    } = usePlan(plan, { model, interval, discounts });
 
-    if (!price || !features) {
+    if (!price) {
       return null;
     }
 
@@ -62,14 +65,23 @@ export const Plan = memo<PlanProps>(
               {typeof discount?.original.amount === "number" &&
                 discount.percentage > 0 && (
                   <span className="mr-2 text-lg text-muted-foreground line-through md:text-xl">
-                    {formatPrice(discount.original)}
+                    {formatPrice({
+                      amount: discount.original.amount,
+                      currency,
+                    })}
                   </span>
                 )}
               <span className="text-4xl font-bold md:text-5xl">
-                {formatPrice(discount?.discounted ?? price)}
+                {formatPrice({
+                  amount: discount?.discounted.amount ?? price.amount,
+                  currency,
+                })}
               </span>
               <span className="shrink-0 text-lg text-muted-foreground">
-                / {!price.recurring ? "lifetime" : price.recurring.interval}
+                /{" "}
+                {price.type === BillingModel.RECURRING
+                  ? price.interval
+                  : "lifetime"}
               </span>
 
               {typeof discount?.percentage === "number" &&
@@ -83,7 +95,7 @@ export const Plan = memo<PlanProps>(
           </div>
 
           <div className="flex flex-col gap-1">
-            {features.map((feature) => (
+            {features?.map((feature) => (
               <div
                 key={feature.title}
                 className={cn("flex items-center gap-3 py-1", {
@@ -115,7 +127,7 @@ export const Plan = memo<PlanProps>(
           </div>
 
           <div className="flex flex-col gap-2">
-            {price.recurring?.trialDays && !hasPlan(customer) && (
+            {"trialDays" in price && price.trialDays && !hasPlan(customer) && (
               <Button
                 variant="outline"
                 onClick={onPromise(() => handleCheckout(user))}
@@ -124,7 +136,7 @@ export const Plan = memo<PlanProps>(
                 {isPending ? (
                   <Icons.Loader2 className="animate-spin" />
                 ) : (
-                  `Try with ${price.recurring.trialDays}-days trial`
+                  `Try with ${price.trialDays}-days trial`
                 )}
               </Button>
             )}

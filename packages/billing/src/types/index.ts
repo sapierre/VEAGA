@@ -5,7 +5,12 @@ import {
   pricingPlanTypeEnum,
 } from "@turbostarter/db/schema";
 
-import type { billingConfigSchema } from "../config/schema";
+import type {
+  billingConfigSchema,
+  discountSchema,
+  planSchema,
+  priceSchema,
+} from "../config/schema";
 
 const billingStatusEnumSchema = z.enum(billingStatusEnum.enumValues);
 const pricingPlanTypeEnumSchema = z.enum(pricingPlanTypeEnum.enumValues);
@@ -15,6 +20,7 @@ export const PricingPlanType = pricingPlanTypeEnumSchema.enum;
 
 export const BillingProvider = {
   STRIPE: "stripe",
+  LEMON_SQUEEZY: "lemon-squeezy",
 } as const;
 
 export const BillingModel = {
@@ -52,46 +58,8 @@ export type BillingDiscountType =
   (typeof BillingDiscountType)[keyof typeof BillingDiscountType];
 
 export type BillingConfig = z.infer<typeof billingConfigSchema>;
-
-export interface PricingPlan {
-  readonly id: string;
-  readonly order: number;
-  readonly name: string;
-  readonly type: PricingPlanType;
-  readonly badge: string | null;
-  readonly description: string | null;
-  readonly custom: boolean;
-}
-
-export interface PricingPlanPrice {
-  readonly id: string;
-  readonly amount: number;
-  readonly currency: string;
-  readonly recurring: {
-    readonly interval: RecurringInterval;
-    readonly trialDays: number | null;
-  } | null;
-  readonly type: BillingModel;
-  readonly promotionCode: PromotionCode | null;
-}
-
-export type PricingPlanWithPrices = PricingPlan & {
-  readonly prices: PricingPlanPrice[];
-};
-
-export interface Coupon {
-  readonly id: string;
-  readonly amountOff: number | null;
-  readonly percentOff: number | null;
-  readonly currency: string | null;
-}
-
-export interface PromotionCode {
-  readonly id: string;
-  readonly coupon: Coupon;
-  readonly code: string;
-  readonly maxRedemptions: number | null;
-  readonly timesRedeemed: number;
-}
+export type PricingPlan = z.infer<typeof planSchema>;
+export type PricingPlanPrice = z.infer<typeof priceSchema>;
+export type Discount = z.infer<typeof discountSchema>;
 
 export type { SelectCustomer as Customer } from "@turbostarter/db/schema";

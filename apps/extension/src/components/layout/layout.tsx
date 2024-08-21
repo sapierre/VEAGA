@@ -33,6 +33,7 @@ export const Layout = ({
       <Suspense fallback={loadingFallback}>
         <TRPCProvider>
           <div
+            id="root"
             data-theme={config?.color}
             className={cn(
               "flex min-h-screen w-full min-w-[23rem] flex-col items-center justify-center bg-background font-sans text-base text-foreground",
@@ -46,7 +47,7 @@ export const Layout = ({
           >
             <div
               className={cn(
-                "flex w-full max-w-[80rem] grow flex-col items-center justify-between gap-11 p-4",
+                "flex w-full max-w-[80rem] grow flex-col items-center justify-between gap-16 p-4",
                 className,
               )}
             >

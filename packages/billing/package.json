@@ -9,8 +9,8 @@
       "default": "./src/index.ts"
     },
     "./api": {
-      "types": "./dist/api/index.d.ts",
-      "default": "./src/api/index.ts"
+      "types": "./dist/api.d.ts",
+      "default": "./src/api.ts"
     }
   },
   "scripts": {
@@ -31,6 +31,7 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
+    "@lemonsqueezy/lemonsqueezy.js": "3.2.0",
     "@t3-oss/env-core": "0.11.0",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/db": "workspace:*",

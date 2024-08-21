@@ -8,20 +8,23 @@ import type { User } from "@turbostarter/auth";
 import type {
   BillingModel,
   Customer,
-  PricingPlanWithPrices,
+  Discount,
+  PricingPlan,
   RecurringInterval,
 } from "@turbostarter/billing";
 
 interface PlansProps {
-  readonly plans: PricingPlanWithPrices[];
+  readonly plans: PricingPlan[];
+  readonly discounts: Discount[];
   readonly user: User | null;
   readonly customer: Customer | null;
   readonly interval: RecurringInterval;
   readonly model: BillingModel;
+  readonly currency: string;
 }
 
 export const Plans = memo<PlansProps>(
-  ({ plans, interval, model, user, customer }) => {
+  ({ plans, discounts, interval, user, customer, model, currency }) => {
     return (
       <div className="flex w-full flex-wrap items-center justify-center gap-12 md:gap-6 lg:gap-4">
         {plans.map((plan) => (
@@ -29,9 +32,11 @@ export const Plans = memo<PlansProps>(
             key={plan.id}
             plan={plan}
             interval={interval}
+            model={model}
+            currency={currency}
             user={user}
             customer={customer}
-            model={model}
+            discounts={discounts}
           />
         ))}
       </div>

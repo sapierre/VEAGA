@@ -1,9 +1,4 @@
-"use client";
-
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { memo } from "react";
-import { toast } from "sonner";
 
 import { getAvatar, getName } from "@turbostarter/auth";
 import { PricingPlanType } from "@turbostarter/billing";
@@ -18,22 +13,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuPortal,
   Skeleton,
   buttonVariants,
-  DropdownMenuPortal,
 } from "@turbostarter/ui/web";
 
-import { pathsConfig } from "~/config/paths";
-import { logout } from "~/lib/actions";
-import { onPromise } from "~/utils";
+import { Logout } from "./logout";
 
 import type { User } from "@turbostarter/auth";
 import type { Customer } from "@turbostarter/billing";
 
-interface UserNavigationProps {
-  readonly user: User | null;
-  readonly customer: Customer | null;
-}
+import { env } from "~lib/env";
 
 const PLAN_EMOJIS: Record<PricingPlanType, string> = {
   [PricingPlanType.FREE]: "🆓",
@@ -54,8 +44,8 @@ const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
 
 const AnonymousUser = () => {
   return (
-    <Link
-      href={pathsConfig.auth.login}
+    <a
+      href={`${env.PLASMO_PUBLIC_SITE_URL}/auth/login`}
       className={cn(
         buttonVariants({
           variant: "outline",
@@ -66,14 +56,17 @@ const AnonymousUser = () => {
     >
       <Icons.LogIn className="size-4" />
       <div className="sr-only">Log in</div>
-    </Link>
+    </a>
   );
 };
 
+interface UserNavigationProps {
+  readonly user: User | null;
+  readonly customer: Customer | null;
+}
+
 export const UserNavigation = memo<UserNavigationProps>(
   ({ user, customer }) => {
-    const router = useRouter();
-
     if (!user) {
       return <AnonymousUser />;
     }
@@ -92,16 +85,17 @@ export const UserNavigation = memo<UserNavigationProps>(
             </Avatar>
           </button>
         </DropdownMenuTrigger>
-
-        <DropdownMenuPortal>
+        <DropdownMenuPortal container={document.getElementById("root")}>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-2">
                 {name && (
-                  <p className="text-sm font-medium leading-none">{name}</p>
+                  <p className="font-sans text-sm font-medium leading-none">
+                    {name}
+                  </p>
                 )}
                 {user.email && (
-                  <p className="text-xs leading-none text-muted-foreground">
+                  <p className="font-sans text-xs leading-none text-muted-foreground">
                     {user.email}
                   </p>
                 )}
@@ -110,25 +104,8 @@ export const UserNavigation = memo<UserNavigationProps>(
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <button
-                className="w-full"
-                onClick={onPromise(() =>
-                  Promise.resolve(
-                    toast.promise(logout(), {
-                      loading: "Logging out...",
-                      success: () => {
-                        router.replace("/");
-                        router.refresh();
-                        return "Logged out!";
-                      },
-                      error: "Failed to log out!",
-                    }),
-                  ),
-                )}
-              >
-                Log out
-              </button>
+            <DropdownMenuItem className="cursor-pointer">
+              <Logout />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenuPortal>

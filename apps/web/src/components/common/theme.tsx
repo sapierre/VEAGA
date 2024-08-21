@@ -8,6 +8,7 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  PopoverPortal,
 } from "@turbostarter/ui/web";
 
 import {
@@ -50,9 +51,11 @@ export const ThemeControls = () => {
         <PopoverTrigger asChild>
           <ThemeStatus />
         </PopoverTrigger>
-        <PopoverContent align="end" className="z-40 w-[22rem] rounded-lg p-6">
-          <Customizer />
-        </PopoverContent>
+        <PopoverPortal>
+          <PopoverContent align="end" className="z-40 w-[22rem] rounded-lg p-6">
+            <Customizer />
+          </PopoverContent>
+        </PopoverPortal>
       </Popover>
     );
   }

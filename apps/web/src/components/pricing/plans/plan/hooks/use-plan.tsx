@@ -6,7 +6,8 @@ import {
   PricingPlanType,
   calculatePriceDiscount,
   calculateRecurringDiscount,
-  getProductPrice,
+  getPlanPrice,
+  getHighestDiscountForPrice,
 } from "@turbostarter/billing";
 
 import { PLAN_FEATURES } from "~/components/pricing/constants/features";
@@ -17,14 +18,18 @@ import { api } from "~/trpc/react";
 import type { User } from "@turbostarter/auth";
 import type {
   Customer,
-  PricingPlanWithPrices,
+  Discount,
+  PricingPlan,
   RecurringInterval,
 } from "@turbostarter/billing";
 
 export const usePlan = (
-  plan: PricingPlanWithPrices,
-  model: BillingModel,
-  interval: RecurringInterval,
+  plan: PricingPlan,
+  options: {
+    model: BillingModel;
+    interval: RecurringInterval;
+    discounts: Discount[];
+  },
 ) => {
   const { mutateAsync: checkout, isPending: isCheckoutPending } =
     api.billing.checkout.useMutation({
@@ -42,14 +47,21 @@ export const usePlan = (
 
   const router = useRouter();
   const pathname = usePathname();
-  const price = getProductPrice(plan, model, interval);
+
+  const price = getPlanPrice(plan, options.model, options.interval);
 
   const features = plan.type in PLAN_FEATURES ? PLAN_FEATURES[plan.type] : null;
-  const discount = price?.promotionCode
-    ? calculatePriceDiscount(price)
-    : model === BillingModel.RECURRING
-      ? calculateRecurringDiscount(plan, interval)
-      : null;
+
+  const discountForPrice = price
+    ? getHighestDiscountForPrice(price, options.discounts)
+    : null;
+
+  const discount =
+    price && discountForPrice
+      ? calculatePriceDiscount(price, discountForPrice)
+      : options.model === BillingModel.RECURRING
+        ? calculateRecurringDiscount(plan, options.interval)
+        : null;
 
   const handleCheckout = async (user: User | null) => {
     if (!user) {
@@ -64,10 +76,7 @@ export const usePlan = (
 
     const { url } = await checkout({
       price: {
-        ...price,
-        ...(price.recurring?.trialDays && {
-          trialDays: price.recurring.trialDays,
-        }),
+        id: price.id,
       },
       redirect: {
         success: `${publicUrl}${pathsConfig.index}`,

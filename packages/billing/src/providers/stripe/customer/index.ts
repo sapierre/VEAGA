@@ -4,24 +4,24 @@ import {
   getCustomerByUserId,
   updateCustomer,
   upsertCustomer,
-} from "../../../api/customer";
+} from "../../../lib/customer";
 import { stripe } from "../client";
 
 import type Stripe from "stripe";
 
 const getStripeCustomerById = async (stripeId: string) => {
-  return stripe.customers.retrieve(stripeId);
+  return stripe().customers.retrieve(stripeId);
 };
 
 const getStripeCustomerByEmail = async (email: string) => {
-  const customers = await stripe.customers.list({ email: email });
+  const customers = await stripe().customers.list({ email: email });
 
   return customers.data.length > 0 ? customers.data[0] : null;
 };
 
 const createStripeCustomer = async (uuid: string, email: string) => {
   const customerData = { metadata: { supabaseUUID: uuid }, email: email };
-  const newCustomer = await stripe.customers.create(customerData);
+  const newCustomer = await stripe().customers.create(customerData);
 
   return newCustomer.id;
 };
@@ -53,7 +53,7 @@ export const createOrRetrieveCustomer = async ({
         customerId: stripeCustomerId,
       });
       console.warn(
-        `Customer ${uuid} had a different stripeId. Updated to ${stripeCustomerId}.`,
+        `Customer ${uuid} had a different customerId. Updated to ${stripeCustomerId}.`,
       );
     }
 
@@ -72,7 +72,7 @@ export const createBillingPortalSession = async (
   params: Stripe.BillingPortal.SessionCreateParams,
 ) => {
   try {
-    return await stripe.billingPortal.sessions.create(params);
+    return await stripe().billingPortal.sessions.create(params);
   } catch (e) {
     console.error(e);
     throw new ApiError(500, "Could not create billing portal session.");

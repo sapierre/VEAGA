@@ -2,8 +2,9 @@ import { BillingDiscountType, BillingModel } from "../types";
 
 import type {
   PricingPlanPrice,
-  PricingPlanWithPrices,
+  PricingPlan,
   RecurringInterval,
+  Discount,
 } from "../types";
 
 const INTERVAL_MULTIPLIER: Record<RecurringInterval, number> = {
@@ -13,21 +14,22 @@ const INTERVAL_MULTIPLIER: Record<RecurringInterval, number> = {
   year: 1,
 };
 
-export const getProductPrice = (
-  product: PricingPlanWithPrices,
+export const getPlanPrice = (
+  plan: PricingPlan,
   model: BillingModel,
   interval?: RecurringInterval,
 ) => {
   if (model === BillingModel.RECURRING && interval) {
-    return product.prices.find(
-      (price) => price.recurring?.interval === interval,
+    return plan.prices.find(
+      (price) =>
+        price.type === BillingModel.RECURRING && price.interval === interval,
     );
   }
 
-  return product.prices.find((price) => price.type === model);
+  return plan.prices.find((price) => price.type === model);
 };
 
-export const formatPrice = (price: { amount: number; currency?: string }) => {
+export const formatPrice = (price: { amount: number; currency: string }) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: price.currency,
@@ -36,10 +38,12 @@ export const formatPrice = (price: { amount: number; currency?: string }) => {
 };
 
 export const calculateRecurringDiscount = (
-  product: PricingPlanWithPrices,
+  product: PricingPlan,
   interval: RecurringInterval,
 ) => {
-  const recurringPrices = product.prices.filter((price) => price.recurring);
+  const recurringPrices = product.prices.filter(
+    (price) => price.type === BillingModel.RECURRING,
+  );
   const minPrice = recurringPrices.reduce((acc, price) => {
     if (price.amount < (acc?.amount ?? 0)) {
       return price;
@@ -48,7 +52,7 @@ export const calculateRecurringDiscount = (
   }, recurringPrices[0]);
 
   const chosenPrice = recurringPrices.find(
-    (price) => price.recurring?.interval === interval,
+    (price) => "interval" in price && price.interval === interval,
   );
 
   if (!chosenPrice || !minPrice) {
@@ -56,7 +60,8 @@ export const calculateRecurringDiscount = (
   }
 
   const minMultiplierIndex = Object.entries(INTERVAL_MULTIPLIER).findIndex(
-    ([intervalKey]) => intervalKey === minPrice.recurring?.interval,
+    ([intervalKey]) =>
+      "interval" in minPrice && intervalKey === minPrice.interval,
   );
 
   const maxMultiplierIndex = Object.entries(INTERVAL_MULTIPLIER).findIndex(
@@ -86,46 +91,77 @@ export const calculateRecurringDiscount = (
   };
 };
 
-export const calculatePriceDiscount = (price: PricingPlanPrice) => {
+export const calculatePriceDiscount = (
+  price: PricingPlanPrice,
+  discount: Discount,
+) => {
   const amount = price.amount;
-  const amountOff = price.promotionCode?.coupon.amountOff;
-  const percentOff = price.promotionCode?.coupon.percentOff;
 
-  if (amountOff) {
+  if (discount.type === BillingDiscountType.AMOUNT) {
     return {
       original: price,
       discounted: {
         ...price,
-        amount: amount - amountOff,
+        amount: amount - discount.off,
       },
-      percentage: Math.floor((amountOff / amount) * 100),
+      percentage: Math.floor((discount.off / amount) * 100),
       type: BillingDiscountType.AMOUNT,
     };
   }
 
-  if (percentOff) {
-    return {
-      original: price,
-      discounted: {
-        ...price,
-        amount: amount - (amount * percentOff) / 100,
-      },
-      percentage: percentOff,
-      type: BillingDiscountType.PERCENT,
-    };
-  }
-
-  return null;
+  return {
+    original: price,
+    discounted: {
+      ...price,
+      amount: amount - (amount * discount.off) / 100,
+    },
+    percentage: discount.off,
+    type: BillingDiscountType.PERCENT,
+  };
 };
 
-export const getPriceWithHighestDiscount = (plans: PricingPlanWithPrices[]) => {
-  const pricesWithDiscount = plans
-    .flatMap((plan) => plan.prices)
-    .filter((price) => price.promotionCode && price.amount > 0);
+export const getHighestDiscountForPrice = (
+  price: PricingPlanPrice,
+  discounts: Discount[],
+) => {
+  const discountsForPrice = discounts.filter((d) =>
+    d.appliesTo.includes(price.id),
+  );
 
-  const [highestDiscount] = pricesWithDiscount.sort((a, b) => {
-    const discountA = calculatePriceDiscount(a);
-    const discountB = calculatePriceDiscount(b);
+  const [highestDiscount] = discountsForPrice.sort((a, b) => {
+    const discountA = calculatePriceDiscount(price, a);
+    const discountB = calculatePriceDiscount(price, b);
+
+    const amountA = discountA.original.amount - discountA.discounted.amount;
+    const amountB = discountB.original.amount - discountB.discounted.amount;
+
+    return amountB - amountA;
+  });
+
+  return highestDiscount;
+};
+
+export const getPriceWithHighestDiscount = (
+  plans: PricingPlan[],
+  discounts: Discount[],
+) => {
+  const pricesWithDiscounts = plans
+    .flatMap((plan) => plan.prices)
+    .map((price) => ({
+      ...price,
+      discounts: discounts.filter((d) => d.appliesTo.includes(price.id)),
+    }));
+
+  const [priceWithHighestDiscount] = pricesWithDiscounts.sort((a, b) => {
+    const highestDiscountA = getHighestDiscountForPrice(a, discounts);
+    const highestDiscountB = getHighestDiscountForPrice(b, discounts);
+
+    const discountA = highestDiscountA
+      ? calculatePriceDiscount(a, highestDiscountA)
+      : null;
+    const discountB = highestDiscountB
+      ? calculatePriceDiscount(b, highestDiscountB)
+      : null;
 
     const amountA =
       (discountA?.original.amount ?? 0) - (discountA?.discounted.amount ?? 0);
@@ -135,5 +171,12 @@ export const getPriceWithHighestDiscount = (plans: PricingPlanWithPrices[]) => {
     return amountB - amountA;
   });
 
-  return highestDiscount;
+  if (!priceWithHighestDiscount) {
+    return null;
+  }
+
+  return {
+    ...priceWithHighestDiscount,
+    discount: getHighestDiscountForPrice(priceWithHighestDiscount, discounts),
+  };
 };

@@ -9,36 +9,43 @@ import {
 } from "@turbostarter/billing";
 import { Icons } from "@turbostarter/ui";
 
-import type { PricingPlanPrice } from "@turbostarter/billing";
+import type {
+  Discount as DiscountType,
+  PricingPlanPrice,
+} from "@turbostarter/billing";
 
 interface DiscountProps {
-  readonly priceWithDiscount?: PricingPlanPrice;
+  readonly currency: string;
+  readonly priceWithDiscount?: PricingPlanPrice & {
+    discount: DiscountType | undefined;
+  };
 }
 
-export const Discount = memo<DiscountProps>(({ priceWithDiscount }) => {
-  if (!priceWithDiscount) {
-    return null;
-  }
+export const Discount = memo<DiscountProps>(
+  ({ priceWithDiscount, currency }) => {
+    if (!priceWithDiscount?.discount) {
+      return null;
+    }
 
-  const discount = calculatePriceDiscount(priceWithDiscount);
+    const discount = calculatePriceDiscount(
+      priceWithDiscount,
+      priceWithDiscount.discount,
+    );
 
-  return (
-    <p className="sm mt-2 text-center md:text-lg">
-      <Icons.Gift className="mb-1.5 mr-1.5 inline-block h-5 w-5 text-primary" />
-      <span>
-        <span className="font-semibold text-primary">
-          -
-          {`${discount?.type === BillingDiscountType.PERCENT ? discount.percentage + "%" : formatPrice({ amount: (discount?.original.amount ?? 0) - (discount?.discounted.amount ?? 0), currency: discount?.original.currency })}`}{" "}
-          off
-        </span>{" "}
-        for the next {priceWithDiscount.promotionCode?.maxRedemptions} customers
-        (
-        {(priceWithDiscount.promotionCode?.maxRedemptions ?? 0) -
-          (priceWithDiscount.promotionCode?.timesRedeemed ?? 0)}{" "}
-        left)
-      </span>
-    </p>
-  );
-});
+    return (
+      <p className="sm mt-2 text-center md:text-lg">
+        <Icons.Gift className="mb-1.5 mr-1.5 inline-block h-5 w-5 text-primary" />
+        <span className="text-primary">
+          SPECIAL OFFER:{" "}
+          <span className="font-semibold">
+            -
+            {`${discount.type === BillingDiscountType.PERCENT ? discount.percentage + "%" : formatPrice({ amount: discount.original.amount - discount.discounted.amount, currency })}`}{" "}
+            off
+          </span>
+        </span>
+      </p>
+    );
+  },
+);
 
 Discount.displayName = "Discount";

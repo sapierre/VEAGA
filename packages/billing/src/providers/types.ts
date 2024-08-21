@@ -1,10 +1,8 @@
-import type { CheckoutInput, GetBillingPortalInput } from "../api/schema";
-import type { PricingPlanWithPrices } from "../types";
+import type { CheckoutInput, GetBillingPortalInput } from "../lib/schema";
 import type { User } from "@turbostarter/auth";
 
 export interface BillingProviderStrategy {
   webhookHandler: (req: Request) => Promise<Response>;
-  getPlans: () => Promise<PricingPlanWithPrices[]>;
   checkout: (
     input: CheckoutInput & { user: User },
   ) => Promise<{ url: string | null }>;

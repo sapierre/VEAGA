@@ -3,13 +3,6 @@ import { z } from "zod";
 export const checkoutSchema = z.object({
   price: z.object({
     id: z.string(),
-    promotionCode: z
-      .object({
-        id: z.string(),
-      })
-      .nullable()
-      .optional(),
-    trialDays: z.number().optional(),
   }),
   redirect: z.object({
     success: z.string().url(),

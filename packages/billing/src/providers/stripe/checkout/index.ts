@@ -1,8 +1,9 @@
 import { ApiError } from "@turbostarter/shared/utils";
 
-import { getCustomerByCustomerId, updateCustomer } from "../../../api/customer";
 import { config } from "../../../config";
+import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
 import { BillingModel } from "../../../types";
+import { getHighestDiscountForPrice } from "../../../utils";
 import { stripe } from "../client";
 import {
   createBillingPortalSession,
@@ -12,10 +13,9 @@ import {
   toCheckoutBillingStatus,
   toPaymentBillingStatus,
 } from "../mappers/toBillingStatus";
-import { toPricingPlanType } from "../mappers/toPricingPlan";
 import { subscriptionStatusChangeHandler } from "../subscription";
 
-import type { CheckoutInput, GetBillingPortalInput } from "../../../api/schema";
+import type { CheckoutInput, GetBillingPortalInput } from "../../../lib/schema";
 import type { User } from "@turbostarter/auth";
 import type Stripe from "stripe";
 
@@ -23,17 +23,30 @@ const createCheckoutSession = async (
   params: Stripe.Checkout.SessionCreateParams,
 ) => {
   try {
-    return await stripe.checkout.sessions.create(params);
+    return await stripe().checkout.sessions.create(params);
   } catch (e) {
     console.error(e);
     throw new ApiError(500, "Could not create checkout session.");
   }
 };
 
+const getPromotionCode = async (code: string) => {
+  try {
+    const { data } = await stripe().promotionCodes.list({
+      code,
+    });
+
+    return data[0];
+  } catch (e) {
+    console.error(e);
+    throw new ApiError(500, "Could not retrieve promotion code.");
+  }
+};
+
 const getCheckoutSession = async (sessionId: string) => {
   try {
-    return await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ["line_items", "line_items.data.price.product"],
+    return await stripe().checkout.sessions.retrieve(sessionId, {
+      expand: ["line_items", "line_items.data.price"],
     });
   } catch (e) {
     console.error(e);
@@ -65,17 +78,21 @@ export const checkoutStatusChangeHandler = async (
   }
 
   const checkoutSession = await getCheckoutSession(session.id);
+  const priceId = checkoutSession.line_items?.data[0]?.price?.id;
 
-  const product = checkoutSession.line_items?.data[0]?.price
-    ?.product as Stripe.Product;
+  if (!priceId) {
+    throw new ApiError(404, "Price id not found.");
+  }
 
-  const plan = toPricingPlanType(product.metadata.type);
+  const plan = config.plans.find((p) =>
+    p.prices.some((price) => price.id === priceId),
+  );
 
   await updateCustomer(customer.userId, {
     status: checkoutSession.status
       ? toCheckoutBillingStatus(checkoutSession.status)
       : toPaymentBillingStatus(checkoutSession.payment_status),
-    ...(plan && { plan }),
+    ...(plan && { plan: plan.type }),
   });
 
   console.log(
@@ -85,14 +102,25 @@ export const checkoutStatusChangeHandler = async (
 
 export const checkout = async ({
   user,
-  price,
+  price: { id },
   redirect,
 }: CheckoutInput & { user: User }) => {
   try {
+    const price = config.plans
+      .find((plan) => plan.prices.some((p) => p.id === id))
+      ?.prices.find((p) => p.id === id);
+
+    if (!price) {
+      throw new ApiError(404, "Price not found.");
+    }
+
     const customer = await createOrRetrieveCustomer({
       email: user.email ?? "",
       uuid: user.id,
     });
+
+    const discount = getHighestDiscountForPrice(price, config.discounts);
+    const code = await getPromotionCode(discount?.code ?? "");
 
     const session = await createCheckoutSession({
       mode:
@@ -110,17 +138,17 @@ export const checkout = async ({
       ],
       success_url: redirect.success,
       cancel_url: redirect.cancel,
-      ...(price.trialDays
+      ...("trialDays" in price && price.trialDays
         ? {
             subscription_data: {
               trial_period_days: price.trialDays,
             },
           }
         : {}),
-      ...(price.promotionCode && {
+      ...(code && {
         discounts: [
           {
-            promotion_code: price.promotionCode.id,
+            promotion_code: code.id,
           },
         ],
       }),

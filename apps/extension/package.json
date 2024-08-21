@@ -21,6 +21,7 @@
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
     "@turbostarter/api": "workspace:*",
+    "@turbostarter/billing": "workspace:*",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
