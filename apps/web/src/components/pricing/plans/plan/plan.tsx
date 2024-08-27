@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { memo } from "react";
 
 import { BillingModel, formatPrice } from "@turbostarter/billing";
 import { Icons, cn } from "@turbostarter/ui";
 import { Button, Card, Badge, buttonVariants } from "@turbostarter/ui/web";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 import { onPromise } from "~/utils";
 
@@ -62,7 +62,9 @@ export const Plan = memo<PlanProps>(
           <div>
             <span className="text-lg font-bold">{plan.name}</span>
             <p className="relative flex items-end gap-1 py-2">
-              {typeof discount?.original.amount === "number" &&
+              {discount?.original &&
+                "amount" in discount.original &&
+                typeof discount.original.amount === "number" &&
                 discount.percentage > 0 && (
                   <span className="mr-2 text-lg text-muted-foreground line-through md:text-xl">
                     {formatPrice({
@@ -71,25 +73,25 @@ export const Plan = memo<PlanProps>(
                     })}
                   </span>
                 )}
-              <span className="text-4xl font-bold md:text-5xl">
-                {formatPrice({
-                  amount: discount?.discounted.amount ?? price.amount,
-                  currency,
-                })}
+              <span className="text-4xl font-bold tracking-tight md:text-5xl">
+                {price.custom
+                  ? price.label
+                  : formatPrice({
+                      amount:
+                        discount?.discounted && "amount" in discount.discounted
+                          ? discount.discounted.amount
+                          : price.amount,
+                      currency,
+                    })}
               </span>
-              <span className="shrink-0 text-lg text-muted-foreground">
-                /{" "}
-                {price.type === BillingModel.RECURRING
-                  ? price.interval
-                  : "lifetime"}
-              </span>
-
-              {typeof discount?.percentage === "number" &&
-                discount.percentage > 0 && (
-                  <span className="-mt-1 ml-2 inline-block self-start rounded-lg bg-success/15 px-2 py-0.5 text-sm text-success">
-                    -{discount.percentage}%
-                  </span>
-                )}
+              {!price.custom && (
+                <span className="shrink-0 text-lg text-muted-foreground">
+                  /{" "}
+                  {price.type === BillingModel.RECURRING
+                    ? price.interval
+                    : "lifetime"}
+                </span>
+              )}
             </p>
             <span className="text-sm">{plan.description}</span>
           </div>
@@ -140,13 +142,17 @@ export const Plan = memo<PlanProps>(
                 )}
               </Button>
             )}
-            {price.amount === 0 ? (
-              <Link
+            {price.custom ? (
+              <TurboLink href={price.href} className={buttonVariants()}>
+                {hasPlan(customer) ? "Manage plan" : "Get started"}
+              </TurboLink>
+            ) : price.amount === 0 ? (
+              <TurboLink
                 href={user ? pathsConfig.admin.index : pathsConfig.auth.login}
                 className={buttonVariants({ variant: "outline" })}
               >
                 {user ? "Go to dashboard" : "Start for free"}
-              </Link>
+              </TurboLink>
             ) : (
               <Button
                 onClick={onPromise(() =>

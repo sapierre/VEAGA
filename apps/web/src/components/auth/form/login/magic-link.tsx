@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
 import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -22,6 +21,7 @@ import {
 } from "@turbostarter/ui/web";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
+import { TurboLink } from "~/components/common/turbo-link";
 import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
@@ -119,12 +119,12 @@ export const MagicLinkLoginForm = memo(() => {
             <div className="flex items-center justify-center pt-2">
               <div className="text-sm text-muted-foreground">
                 Don&apos;t have an account yet?
-                <Link
+                <TurboLink
                   href="/auth/register"
                   className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
                 >
                   Sign up!
-                </Link>
+                </TurboLink>
               </div>
             </div>
           </form>

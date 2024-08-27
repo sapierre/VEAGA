@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -22,6 +21,7 @@ import {
 } from "@turbostarter/ui/web";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
@@ -88,12 +88,12 @@ export const PasswordLoginForm = memo(() => {
             <FormItem>
               <div className="flex w-full items-center justify-between">
                 <FormLabel>Password</FormLabel>
-                <Link
+                <TurboLink
                   href={pathsConfig.auth.forgotPassword}
                   className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
                 >
                   Forgot password?
-                </Link>
+                </TurboLink>
               </div>
               <FormControl>
                 <Input
@@ -123,12 +123,12 @@ export const PasswordLoginForm = memo(() => {
         <div className="flex items-center justify-center pt-2">
           <div className="text-sm text-muted-foreground">
             Don&apos;t have an account yet?
-            <Link
+            <TurboLink
               href="/auth/register"
               className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
             >
               Sign up!
-            </Link>
+            </TurboLink>
           </div>
         </div>
       </form>

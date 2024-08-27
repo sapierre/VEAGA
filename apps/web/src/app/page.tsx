@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { Icons, Logo } from "@turbostarter/ui";
 import {
   Card,
@@ -9,6 +7,7 @@ import {
 } from "@turbostarter/ui/web";
 
 import { HeaderControls } from "~/components/common/layout/header/controls";
+import { TurboLink } from "~/components/common/turbo-link";
 import { HOME_LINKS } from "~/lib/constants";
 
 const HomePage = () => {
@@ -27,7 +26,7 @@ const HomePage = () => {
       <Logo logoClassName="h-36 animate-pulse" />
       <div className="grid grid-cols-1 items-stretch justify-center gap-3 sm:grid-cols-2 md:grid-cols-3">
         {HOME_LINKS.map((link) => (
-          <Link
+          <TurboLink
             href={link.href}
             className="group w-full cursor-pointer"
             key={link.title}
@@ -43,7 +42,7 @@ const HomePage = () => {
                 </CardDescription>
               </CardHeader>
             </Card>
-          </Link>
+          </TurboLink>
         ))}
       </div>
     </main>

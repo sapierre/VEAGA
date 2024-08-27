@@ -5,16 +5,15 @@ import {
   BillingDiscountType,
 } from "../types";
 
-import type { PricingPlan, Discount } from "../types";
+import type { Discount } from "../types";
 
-export const plans: PricingPlan[] = [
+export const plans = [
   {
     id: "starter",
     name: "Starter",
     description: "Start now. No credit card required",
     type: PricingPlanType.FREE,
     badge: null,
-    custom: true,
     prices: [
       {
         id: "starter-lifetime",
@@ -25,14 +24,12 @@ export const plans: PricingPlan[] = [
         id: "starter-monthly",
         amount: 0,
         interval: RecurringInterval.MONTH,
-        trialDays: null,
         type: BillingModel.RECURRING,
       },
       {
         id: "starter-yearly",
         amount: 0,
         interval: RecurringInterval.YEAR,
-        trialDays: null,
         type: BillingModel.RECURRING,
       },
     ],
@@ -43,7 +40,6 @@ export const plans: PricingPlan[] = [
     description: "Become a power user and gain benefits",
     type: PricingPlanType.PREMIUM,
     badge: "Bestseller",
-    custom: false,
     prices: [
       {
         id: "price_1PpUagFQH4McJDTlHCzOmyT6",
@@ -72,25 +68,28 @@ export const plans: PricingPlan[] = [
     description: "Designed for organizations and big teams",
     type: PricingPlanType.ENTERPRISE,
     badge: null,
-    custom: true,
     prices: [
       {
-        id: "price_1PpZ7qFQH4McJDTlAKYW6UxF",
-        amount: 99900,
+        id: "enterprise-lifetime",
+        label: "Contact us!",
+        href: "/contact",
         type: BillingModel.ONE_TIME,
+        custom: true,
       },
       {
-        id: "price_1PpZ9CFQH4McJDTlPx9Vrurg",
-        amount: 5900,
+        id: "enterprise-monthly",
+        label: "Contact us!",
+        href: "/contact",
         interval: RecurringInterval.MONTH,
-        trialDays: null,
+        custom: true,
         type: BillingModel.RECURRING,
       },
       {
-        id: "price_1PpZ9QFQH4McJDTlTZVUIC8v",
-        amount: 19900,
+        id: "enterprise-yearly",
+        label: "Contact us!",
+        href: "/contact",
         interval: RecurringInterval.YEAR,
-        trialDays: null,
+        custom: true,
         type: BillingModel.RECURRING,
       },
     ],

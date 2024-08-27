@@ -1,6 +1,7 @@
 const AUTH_PREFIX = "/auth";
-const ADMIN_PREFIX = "/admin";
+const BLOG_PREFIX = "/blog";
 const API_PREFIX = "/api";
+const ADMIN_PREFIX = "/admin";
 const WEBHOOKS_PREFIX = "/webhooks";
 
 const pathsConfig = {
@@ -14,7 +15,10 @@ const pathsConfig = {
     error: `${AUTH_PREFIX}/error`,
   },
   admin: {
-    index: `${ADMIN_PREFIX}`,
+    index: ADMIN_PREFIX,
+  },
+  blog: {
+    index: BLOG_PREFIX,
   },
   api: {
     auth: {
@@ -27,4 +31,4 @@ const pathsConfig = {
   },
 } as const;
 
-export { pathsConfig, ADMIN_PREFIX, AUTH_PREFIX, API_PREFIX };
+export { pathsConfig, ADMIN_PREFIX, BLOG_PREFIX, AUTH_PREFIX, API_PREFIX };

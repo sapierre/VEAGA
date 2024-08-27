@@ -13,7 +13,10 @@ import {
   toCheckoutBillingStatus,
   toPaymentBillingStatus,
 } from "../mappers/toBillingStatus";
-import { subscriptionStatusChangeHandler } from "../subscription";
+import {
+  getPromotionCode,
+  subscriptionStatusChangeHandler,
+} from "../subscription";
 
 import type { CheckoutInput, GetBillingPortalInput } from "../../../lib/schema";
 import type { User } from "@turbostarter/auth";
@@ -27,19 +30,6 @@ const createCheckoutSession = async (
   } catch (e) {
     console.error(e);
     throw new ApiError(500, "Could not create checkout session.");
-  }
-};
-
-const getPromotionCode = async (code: string) => {
-  try {
-    const { data } = await stripe().promotionCodes.list({
-      code,
-    });
-
-    return data[0];
-  } catch (e) {
-    console.error(e);
-    throw new ApiError(500, "Could not retrieve promotion code.");
   }
 };
 

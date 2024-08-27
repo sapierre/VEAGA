@@ -1,7 +1,6 @@
-import Link from "next/link";
-
 import { Logo } from "@turbostarter/ui";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 
 import { HeaderControls } from "./controls";
@@ -9,9 +8,9 @@ import { HeaderControls } from "./controls";
 export const Header = () => {
   return (
     <header className="flex w-full items-center justify-between">
-      <Link href={pathsConfig.index}>
+      <TurboLink href={pathsConfig.index}>
         <Logo withText />
-      </Link>
+      </TurboLink>
 
       <HeaderControls />
     </header>

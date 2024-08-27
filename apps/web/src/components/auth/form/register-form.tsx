@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -22,6 +21,7 @@ import {
   Input,
 } from "@turbostarter/ui/web";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 import { register } from "~/lib/actions";
 import { onPromise } from "~/utils";
@@ -79,12 +79,12 @@ export const RegisterForm = memo(() => {
           <p className="text-center">
             You have successfully registered! Now verify your email to continue.
           </p>
-          <Link
+          <TurboLink
             href={pathsConfig.auth.login}
             className="-mt-1 text-sm text-muted-foreground underline hover:no-underline"
           >
             Sign in
-          </Link>
+          </TurboLink>
         </motion.div>
       ) : (
         <Form {...form} key="idle">
@@ -147,12 +147,12 @@ export const RegisterForm = memo(() => {
             <div className="flex items-center justify-center pt-2">
               <div className="text-sm text-muted-foreground">
                 Already have an account?
-                <Link
+                <TurboLink
                   href={pathsConfig.auth.login}
                   className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
                 >
                   Sign in!
-                </Link>
+                </TurboLink>
               </div>
             </div>
           </motion.form>

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect } from "react";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 
 export default function Error({
@@ -28,12 +28,12 @@ export default function Error({
           </code>{" "}
           and save to reload.
         </p>
-        <Link
+        <TurboLink
           href={pathsConfig.index}
           className="mt-6 inline-block text-primary underline hover:no-underline"
         >
           Go back home
-        </Link>
+        </TurboLink>
       </div>
     </main>
   );

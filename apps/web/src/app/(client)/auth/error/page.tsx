@@ -1,8 +1,7 @@
-import Link from "next/link";
-
 import { GENERIC_ERROR_MESSAGE } from "@turbostarter/shared/constants";
 import { Icons } from "@turbostarter/ui";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 
 const AuthError = ({ searchParams }: { searchParams: { code?: string } }) => {
@@ -19,12 +18,12 @@ const AuthError = ({ searchParams }: { searchParams: { code?: string } }) => {
         </code>
       )}
 
-      <Link
+      <TurboLink
         href={pathsConfig.auth.login}
         className="mt-3 text-sm text-muted-foreground underline hover:no-underline"
       >
         Go to login
-      </Link>
+      </TurboLink>
     </div>
   );
 };

@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -21,6 +20,7 @@ import {
   Input,
 } from "@turbostarter/ui/web";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 import { forgotPassword } from "~/lib/actions/auth";
 import { onPromise } from "~/utils";
@@ -69,12 +69,12 @@ export const ForgotPasswordForm = memo(() => {
           <p className="text-center">
             We've sent you an email with a link to reset your password.
           </p>
-          <Link
+          <TurboLink
             href={pathsConfig.auth.login}
             className="-mt-1 text-sm text-muted-foreground underline hover:no-underline"
           >
             Sign in
-          </Link>
+          </TurboLink>
         </motion.div>
       ) : (
         <Form {...form} key="idle">
@@ -116,12 +116,12 @@ export const ForgotPasswordForm = memo(() => {
             </Button>
 
             <div className="flex items-center justify-center pt-2">
-              <Link
+              <TurboLink
                 href={pathsConfig.auth.login}
                 className="pl-2 text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-primary"
               >
                 Back to sign in
-              </Link>
+              </TurboLink>
             </div>
           </motion.form>
         </Form>

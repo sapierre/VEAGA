@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
 import { toast } from "sonner";
@@ -23,6 +22,7 @@ import {
   DropdownMenuPortal,
 } from "@turbostarter/ui/web";
 
+import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 import { logout } from "~/lib/actions";
 import { onPromise } from "~/utils";
@@ -54,7 +54,7 @@ const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
 
 const AnonymousUser = () => {
   return (
-    <Link
+    <TurboLink
       href={pathsConfig.auth.login}
       className={cn(
         buttonVariants({
@@ -66,7 +66,7 @@ const AnonymousUser = () => {
     >
       <Icons.LogIn className="size-4" />
       <div className="sr-only">Log in</div>
-    </Link>
+    </TurboLink>
   );
 };
 

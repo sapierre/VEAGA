@@ -45,7 +45,10 @@ export const calculateRecurringDiscount = (
     (price) => price.type === BillingModel.RECURRING,
   );
   const minPrice = recurringPrices.reduce((acc, price) => {
-    if (price.amount < (acc?.amount ?? 0)) {
+    if (
+      "amount" in price &&
+      price.amount < (acc && "amount" in acc ? acc.amount : 0)
+    ) {
       return price;
     }
     return acc;
@@ -74,11 +77,14 @@ export const calculateRecurringDiscount = (
   );
 
   const minPriceInSameInterval =
-    minPrice.amount *
+    ("amount" in minPrice ? minPrice.amount : 0) *
     multiplersToApply.reduce((acc, multiplier) => acc * multiplier, 1);
 
   const discount = Math.round(
-    (1 - chosenPrice.amount / minPriceInSameInterval) * 100,
+    (1 -
+      ("amount" in chosenPrice ? chosenPrice.amount : 0) /
+        minPriceInSameInterval) *
+      100,
   );
 
   return {
@@ -95,6 +101,10 @@ export const calculatePriceDiscount = (
   price: PricingPlanPrice,
   discount: Discount,
 ) => {
+  if (price.custom) {
+    return null;
+  }
+
   const amount = price.amount;
 
   if (discount.type === BillingDiscountType.AMOUNT) {
@@ -106,7 +116,7 @@ export const calculatePriceDiscount = (
       },
       percentage: Math.floor((discount.off / amount) * 100),
       type: BillingDiscountType.AMOUNT,
-    };
+    } as const;
   }
 
   return {
@@ -117,7 +127,7 @@ export const calculatePriceDiscount = (
     },
     percentage: discount.off,
     type: BillingDiscountType.PERCENT,
-  };
+  } as const;
 };
 
 export const getHighestDiscountForPrice = (
@@ -132,8 +142,10 @@ export const getHighestDiscountForPrice = (
     const discountA = calculatePriceDiscount(price, a);
     const discountB = calculatePriceDiscount(price, b);
 
-    const amountA = discountA.original.amount - discountA.discounted.amount;
-    const amountB = discountB.original.amount - discountB.discounted.amount;
+    const amountA =
+      (discountA?.original.amount ?? 0) - (discountA?.discounted.amount ?? 0);
+    const amountB =
+      (discountB?.original.amount ?? 0) - (discountB?.discounted.amount ?? 0);
 
     return amountB - amountA;
   });

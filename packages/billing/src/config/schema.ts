@@ -15,21 +15,37 @@ export const discountSchema = z.object({
   appliesTo: z.array(z.string()),
 });
 
-const sharedPriceSchema = z.object({
-  id: z.string(),
-  amount: z.number(),
-});
-
-export const priceSchema = z.discriminatedUnion("type", [
-  sharedPriceSchema.extend({
-    type: z.literal(BillingModel.ONE_TIME),
+const customPriceSchema = z.union([
+  z.object({
+    custom: z.literal(true),
+    label: z.string(),
+    href: z.string(),
   }),
-  sharedPriceSchema.extend({
-    type: z.literal(BillingModel.RECURRING),
-    interval: z.nativeEnum(RecurringInterval),
-    trialDays: z.number().nullable().default(null),
+  z.object({
+    custom: z.literal(false).optional().default(false),
+    amount: z.number(),
   }),
 ]);
+
+const sharedPriceSchema = z.intersection(
+  customPriceSchema,
+  z.object({
+    id: z.string(),
+  }),
+);
+
+const priceTypeSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal(BillingModel.ONE_TIME),
+  }),
+  z.object({
+    type: z.literal(BillingModel.RECURRING),
+    interval: z.nativeEnum(RecurringInterval),
+    trialDays: z.number().optional(),
+  }),
+]);
+
+export const priceSchema = z.intersection(sharedPriceSchema, priceTypeSchema);
 
 export const planSchema = z.object({
   id: z.string(),
@@ -37,7 +53,6 @@ export const planSchema = z.object({
   description: z.string(),
   type: z.nativeEnum(PricingPlanType),
   badge: z.string().nullable().default(null),
-  custom: z.boolean().default(false),
   prices: z.array(priceSchema),
 });
 

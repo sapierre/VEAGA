@@ -12,6 +12,7 @@ const config = {
   transpilePackages: [
     "@turbostarter/api",
     "@turbostarter/auth",
+    "@turbostarter/billing",
     "@turbostarter/db",
     "@turbostarter/shared",
     "@turbostarter/ui",

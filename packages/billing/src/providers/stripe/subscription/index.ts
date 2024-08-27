@@ -13,6 +13,19 @@ const getSubscription = async (subscriptionId: string) => {
   >;
 };
 
+export const getPromotionCode = async (code: string) => {
+  try {
+    const { data } = await stripe().promotionCodes.list({
+      code,
+    });
+
+    return data[0];
+  } catch (e) {
+    console.error(e);
+    throw new ApiError(500, "Could not retrieve promotion code.");
+  }
+};
+
 export const subscriptionStatusChangeHandler = async ({
   id,
   customerId,
