@@ -11,6 +11,10 @@
     "./api": {
       "types": "./dist/api.d.ts",
       "default": "./src/api.ts"
+    },
+    "./env": {
+      "types": "./dist/env/index.d.ts",
+      "default": "./src/env/index.ts"
     }
   },
   "scripts": {

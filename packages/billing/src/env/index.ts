@@ -12,27 +12,25 @@ const shared = {
 
 const getProviderEnv = (provider: BillingProvider) => {
   if (provider === BillingProvider.LEMON_SQUEEZY) {
-    return {
-      BILLING_PROVIDER: provider,
-      ...createEnv({
-        ...shared,
-        server: {
-          LEMON_SQUEEZY_API_KEY: z.string(),
-          LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
-          LEMON_SQUEEZY_STORE_ID: z.string(),
-        },
-      }),
-    };
+    return createEnv({
+      ...shared,
+      server: {
+        LEMON_SQUEEZY_API_KEY: z.string(),
+        LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
+        LEMON_SQUEEZY_STORE_ID: z.string(),
+        BILLING_PROVIDER: z.literal(provider).optional().default(provider),
+      },
+    });
   }
 
-  // defaults to stripe
+  /* Defaults to Stripe */
   return {
-    BILLING_PROVIDER: provider,
     ...createEnv({
       ...shared,
       server: {
         STRIPE_SECRET_KEY: z.string(),
         STRIPE_WEBHOOK_SECRET: z.string(),
+        BILLING_PROVIDER: z.literal(provider).optional().default(provider),
       },
     }),
   };

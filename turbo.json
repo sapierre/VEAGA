@@ -54,7 +54,7 @@
     "SUPABASE_URL",
     "PRODUCT_NAME",
     "SITE_TITLE",
-    "SITE_LINK",
+    "SITE_URL",
     "SITE_DESCRIPTION"
   ],
   "globalPassThroughEnv": ["NODE_ENV", "CI", "npm_lifecycle_event"]

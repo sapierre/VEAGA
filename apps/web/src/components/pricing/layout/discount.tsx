@@ -32,6 +32,10 @@ export const Discount = memo<DiscountProps>(
       priceWithDiscount.discount,
     );
 
+    if (!discount) {
+      return null;
+    }
+
     return (
       <p className="sm mt-2 text-center md:text-lg">
         <Icons.Gift className="mb-1.5 mr-1.5 inline-block h-5 w-5 text-primary" />

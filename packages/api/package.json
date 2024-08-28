@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./env": "./src/env/index.ts"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
@@ -13,11 +14,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@t3-oss/env-core": "0.11.0",
+    "@trpc/server": "catalog:",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/billing": "workspace:*",
     "@turbostarter/db": "workspace:*",
     "@turbostarter/shared": "workspace:*",
-    "@trpc/server": "catalog:",
     "superjson": "2.2.1",
     "zod": "catalog:"
   },

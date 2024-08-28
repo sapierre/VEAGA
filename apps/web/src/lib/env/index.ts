@@ -4,10 +4,11 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
+import { env as apiEnv } from "@turbostarter/api/env";
 import { NODE_ENV } from "@turbostarter/shared/constants";
 
 export const env = createEnv({
-  extends: [vercel()],
+  extends: [vercel(), apiEnv],
   shared: {
     NODE_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
   },
@@ -15,9 +16,7 @@ export const env = createEnv({
    * Specify your server-side environment variables schema here.
    * This way you can ensure the app isn't built with invalid env vars.
    */
-  server: {
-    DATABASE_URL: z.string().url(),
-  },
+  server: {},
 
   /**
    * Specify your client-side environment variables schema here.
@@ -32,7 +31,7 @@ export const env = createEnv({
 
     NEXT_PUBLIC_PRODUCT_NAME: z.string(),
     NEXT_PUBLIC_SITE_TITLE: z.string(),
-    NEXT_PUBLIC_SITE_LINK: z.string().url(),
+    NEXT_PUBLIC_SITE_URL: z.string().url(),
     NEXT_PUBLIC_SITE_DESCRIPTION: z.string(),
   },
   /**
@@ -49,11 +48,15 @@ export const env = createEnv({
 
     NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME,
     NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
-    NEXT_PUBLIC_SITE_LINK: process.env.NEXT_PUBLIC_SITE_LINK,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
+  onInvalidAccess(variable) {
+    console.error(`Invalid access to environment variable: ${variable}`);
+    throw new Error(`Invalid access to environment variable: ${variable}`);
+  },
 });
 
 const vercelHost =
@@ -69,6 +72,6 @@ if (!publicUrl) {
   );
 }
 
-// force type inference to string
+/* Force type inference to string */
 const _publicUrl = publicUrl;
 export { _publicUrl as publicUrl };
