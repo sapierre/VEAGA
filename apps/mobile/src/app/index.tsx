@@ -1,20 +1,23 @@
-// "use dom";
+import * as Linking from "expo-linking";
+import { router } from "expo-router";
 
-import { Text, View } from "react-native";
+import Home from "~/components/home/home";
+import "~/styles/globals.css";
 
-// import { Button } from "@turbostarter/ui/web";
-
-const HomePage = () => {
+export default function App() {
   return (
-    // <div>
-    //   <Button>siema</Button>
-
-    //   <h1 className="p-10 text-destructive">Seima</h1>
-    // </div>
-    <View className="bg-background">
-      <Text className="p-10 text-destructive">Hello</Text>
-    </View>
+    <Home
+      navigate={router.navigate}
+      dom={{
+        bounces: false,
+        onShouldStartLoadWithRequest: (event) => {
+          if (event.url.startsWith("http")) {
+            void Linking.openURL(event.url);
+            return false;
+          }
+          return true;
+        },
+      }}
+    />
   );
-};
-
-export default HomePage;
+}

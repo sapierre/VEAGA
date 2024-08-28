@@ -1,16 +1,26 @@
+import * as Application from "expo-application";
 import { Stack } from "expo-router";
+import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import "@turbostarter/ui/globals";
-
+import { Header } from "~/components/common/layout/header";
+import { TABS_PREFIX } from "~/config/paths";
 import "~/styles/globals.css";
 
 const RootLayout = () => {
   return (
     <SafeAreaProvider>
       <Stack>
-        <Stack.Screen name="index" />
+        <Stack.Screen name={TABS_PREFIX} options={{ headerShown: false }} />
+
+        <Stack.Screen
+          name="index"
+          options={{
+            header: () => <Header title={Application.applicationName ?? ""} />,
+          }}
+        />
       </Stack>
+      <StatusBar barStyle="light-content" />
     </SafeAreaProvider>
   );
 };

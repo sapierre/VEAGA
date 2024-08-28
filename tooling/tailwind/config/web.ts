@@ -1,5 +1,3 @@
-import animate from "tailwindcss-animate";
-
 import base from "./base";
 
 import type { Config } from "tailwindcss";
@@ -37,5 +35,4 @@ export default {
       },
     },
   },
-  plugins: [animate],
 } satisfies Config;
