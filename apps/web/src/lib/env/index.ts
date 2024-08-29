@@ -53,10 +53,6 @@ export const env = createEnv({
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
-  onInvalidAccess(variable) {
-    console.error(`Invalid access to environment variable: ${variable}`);
-    throw new Error(`Invalid access to environment variable: ${variable}`);
-  },
 });
 
 const vercelHost =
@@ -64,7 +60,7 @@ const vercelHost =
     ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
     : process.env.NEXT_PUBLIC_VERCEL_URL;
 const vercelUrl = vercelHost ? `https://${vercelHost}` : undefined;
-const publicUrl = process.env.NEXT_PUBLIC_URL ?? vercelUrl;
+const publicUrl = process.env.NEXT_PUBLIC_SITE_URL ?? vercelUrl;
 
 if (!publicUrl) {
   throw new Error(
