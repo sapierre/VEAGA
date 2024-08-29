@@ -2,11 +2,8 @@ import { memo } from "react";
 
 import { getAvatar, getName } from "@turbostarter/auth";
 import { PricingPlanType } from "@turbostarter/billing";
-import { Icons, cn } from "@turbostarter/ui";
+import { cn } from "@turbostarter/ui";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -14,9 +11,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuPortal,
-  Skeleton,
-  buttonVariants,
-} from "@turbostarter/ui/web";
+} from "@turbostarter/ui-web/dropdown-menu";
+
+import { Icons } from "@turbostarter/ui-web/icons";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@turbostarter/ui-web/avatar";
+
+import { buttonVariants } from "@turbostarter/ui-web/button";
+import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
 import { Logout } from "./logout";
 

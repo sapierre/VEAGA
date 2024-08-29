@@ -3,8 +3,8 @@
 import { memo } from "react";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
-import { Icons } from "@turbostarter/ui";
-import { Button } from "@turbostarter/ui/web";
+import { Icons } from "@turbostarter/ui-web/icons";
+import { Button } from "@turbostarter/ui-web/button";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
 import { loginWithOAuth } from "~/lib/actions";

@@ -7,7 +7,7 @@ import {
   formatPrice,
   BillingDiscountType,
 } from "@turbostarter/billing";
-import { Icons } from "@turbostarter/ui";
+import { Icons } from "@turbostarter/ui-web/icons";
 
 import type {
   Discount as DiscountType,

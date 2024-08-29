@@ -15,7 +15,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     resizeMode: "contain",
     backgroundColor: "#1F104A",
   },
-  platforms: ["ios", "android"],
+  platforms: ["ios", "android", "web"],
   updates: {
     fallbackToCacheTimeout: 0,
   },

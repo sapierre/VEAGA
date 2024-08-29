@@ -24,4 +24,4 @@ export const HOME_LINKS = [
     description: `Learn how to use TurboStarter. From installation to deployment.`,
     href: "https://turbostarter.dev/docs",
   },
-];
+] as const;

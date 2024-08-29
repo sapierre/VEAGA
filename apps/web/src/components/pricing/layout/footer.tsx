@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import { BillingProvider } from "@turbostarter/billing";
-import { Icons } from "@turbostarter/ui";
+import { Icons } from "@turbostarter/ui-web/icons";
 
 interface PricingFooterProps {
   readonly provider: BillingProvider;

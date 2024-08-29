@@ -1,5 +1,5 @@
 import { GENERIC_ERROR_MESSAGE } from "@turbostarter/shared/constants";
-import { Icons } from "@turbostarter/ui";
+import { Icons } from "@turbostarter/ui-web/icons";
 
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";

@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface HeaderProps {
@@ -11,11 +11,16 @@ export const Header = ({ title }: HeaderProps) => {
   return (
     <View
       style={{
-        paddingTop: insets.top,
+        paddingTop: insets.top + 5,
       }}
-      className="justify-center bg-primary px-8"
+      className="flex-row items-center justify-start gap-3 bg-primary px-8 pb-5"
     >
-      <Text className="pb-5 pt-1 text-2xl font-semibold text-primary-foreground">
+      {/* {router.canGoBack() && (
+        <Pressable onPress={() => router.back()}>
+          <Icons.ArrowLeft className="text-primary-foreground" size={20} />
+        </Pressable>
+      )} */}
+      <Text className="text-2xl font-semibold text-primary-foreground">
         {title}
       </Text>
     </View>

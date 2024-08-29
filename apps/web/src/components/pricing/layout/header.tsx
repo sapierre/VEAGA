@@ -3,7 +3,7 @@
 import { memo } from "react";
 
 import { BillingModel } from "@turbostarter/billing";
-import { Tabs, TabsList, TabsTrigger } from "@turbostarter/ui/web";
+import { Tabs, TabsList, TabsTrigger } from "@turbostarter/ui-web/tabs";
 
 import { Discount } from "./discount";
 

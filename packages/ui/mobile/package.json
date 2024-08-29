@@ -1,0 +1,50 @@
+{
+  "name": "@turbostarter/ui-mobile",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./icons": {
+      "types": "./dist/src/lib/icons/index.d.ts",
+      "default": "./src/lib/icons/index.ts"
+    },
+    "./primitives/*": {
+      "types": "./dist/src/components/primitives/*.d.ts",
+      "default": "./src/components/primitives/*.tsx"
+    },
+    "./*": {
+      "types": "./dist/src/components/ui/*.d.ts",
+      "default": "./src/components/ui/*.tsx"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "ui:mobile:add": "pnpm dlx @react-native-reusables/cli add && prettier src --write --list-different"
+  },
+  "dependencies": {
+    "@rn-primitives/slot": "1.0.3",
+    "@rn-primitives/types": "1.0.3",
+    "@turbostarter/shared": "workspace:*",
+    "@turbostarter/ui": "workspace:*",
+    "lucide-react-native": "0.436.0",
+    "nativewind": "~4.0.36",
+    "react-native-svg": "15.6.0"
+  },
+  "devDependencies": {
+    "@turbostarter/eslint-config": "workspace:*",
+    "@turbostarter/prettier-config": "workspace:*",
+    "@turbostarter/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "react": "catalog:react18",
+    "react-native-svg-transformer": "1.5.0",
+    "typescript": "catalog:",
+    "zod": "catalog:"
+  },
+  "prettier": "@turbostarter/prettier-config"
+}

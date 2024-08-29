@@ -8,17 +8,18 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { forgotPasswordSchema } from "@turbostarter/shared/validators";
-import { Icons } from "@turbostarter/ui";
+import { Icons } from "@turbostarter/ui-web/icons";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "@turbostarter/ui/web";
+} from "@turbostarter/ui-web/form";
+
+import { Button } from "@turbostarter/ui-web/button";
+import { Input } from "@turbostarter/ui-web/input";
 
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";

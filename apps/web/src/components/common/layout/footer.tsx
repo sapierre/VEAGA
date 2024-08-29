@@ -1,4 +1,4 @@
-import { BuiltWith } from "@turbostarter/ui/web";
+import { BuiltWith } from "@turbostarter/ui-web/built-with";
 
 import { appConfig } from "~/config/app";
 

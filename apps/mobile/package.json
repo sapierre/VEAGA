@@ -23,6 +23,7 @@
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
     "@turbostarter/ui": "workspace:*",
+    "@turbostarter/ui-mobile": "workspace:*",
     "expo": "^52.0.0-canary-20240814-ce0f7d5",
     "expo-application": "6.0.0-canary-20240814-ce0f7d5",
     "expo-constants": "17.0.0-canary-20240814-ce0f7d5",

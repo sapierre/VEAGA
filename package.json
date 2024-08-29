@@ -21,7 +21,9 @@
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "ui:web:add": "turbo run ui:web:add",
+    "ui:mobile:add": "turbo run ui:mobile:add"
   },
   "devDependencies": {
     "@commitlint/cli": "19.4.0",

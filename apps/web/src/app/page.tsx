@@ -1,10 +1,11 @@
-import { Icons, Logo } from "@turbostarter/ui";
+import { Icons } from "@turbostarter/ui-web/icons";
+
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@turbostarter/ui/web";
+} from "@turbostarter/ui-web/card";
 
 import { HeaderControls } from "~/components/common/layout/header/controls";
 import { TurboLink } from "~/components/common/turbo-link";
@@ -23,7 +24,7 @@ const HomePage = () => {
           and save to reload.
         </p>
       </div>
-      <Logo logoClassName="h-36 animate-pulse" />
+      <Icons.Logo className="h-36 animate-pulse text-primary" />
       <div className="grid grid-cols-1 items-stretch justify-center gap-3 sm:grid-cols-2 md:grid-cols-3">
         {HOME_LINKS.map((link) => (
           <TurboLink

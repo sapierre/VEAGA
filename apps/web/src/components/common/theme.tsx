@@ -3,24 +3,24 @@
 import { useTheme } from "next-themes";
 
 import {
-  ThemeCustomizer,
-  ThemeStatus,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverPortal,
-} from "@turbostarter/ui/web";
+} from "@turbostarter/ui-web/popover";
+
+import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
 
 import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
-} from "~/components/common/drawer";
+} from "@turbostarter/ui-web/drawer";
 import { appConfig } from "~/config/app";
 import { useBreakpoint } from "~/lib/hooks/use-media-query";
 import { useThemeConfig } from "~/providers/theme";
 
-import type { ThemeMode } from "@turbostarter/ui";
+import type { ThemeMode } from "../../../../../packages/ui/shared/dist/src";
 
 const Customizer = () => {
   const [config, setConfig] = useThemeConfig();

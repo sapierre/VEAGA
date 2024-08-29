@@ -8,6 +8,25 @@ createJiti(fileURLToPath(import.meta.url))("./src/lib/env");
 const config = {
   reactStrictMode: true,
 
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
+  experimental: {
+    turbo: {
+      rules: {
+        "*.svg": {
+          loaders: ["@svgr/webpack"],
+          as: "*.js",
+        },
+      },
+    },
+  },
+
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [
     "@turbostarter/api",
@@ -16,6 +35,7 @@ const config = {
     "@turbostarter/db",
     "@turbostarter/shared",
     "@turbostarter/ui",
+    "@turbostarter/ui-web",
   ],
 
   /** We already do linting and typechecking as separate tasks in CI */

@@ -35,6 +35,6 @@ export const HOME_LINKS = [
   {
     title: "Docs",
     description: `Learn how to use ${appConfig.name}. From installation to deployment.`,
-    href: "#",
+    href: "https://www.turbostarter.dev/docs",
   },
 ];

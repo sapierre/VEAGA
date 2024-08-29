@@ -1,7 +1,12 @@
 import { Suspense } from "react";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@turbostarter/ui/web";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@turbostarter/ui-web/tabs";
 
 import { MagicLinkLoginForm } from "./magic-link";
 import { PasswordLoginForm } from "./password";

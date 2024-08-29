@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import { Skeleton } from "@turbostarter/ui/web";
+import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
 import { Plan } from "./plan/plan";
 
