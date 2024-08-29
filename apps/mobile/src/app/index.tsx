@@ -1,19 +1,17 @@
+import { Link } from "expo-router";
 import { View, ScrollView, Pressable } from "react-native";
 
-import { Text } from "@turbostarter/ui-mobile/text";
-import { Icons } from "@turbostarter/ui-mobile/icons";
-
 import { BuiltWith } from "@turbostarter/ui-mobile/built-with";
-
-import { HOME_LINKS } from "~/lib/constants/home";
-
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
 } from "@turbostarter/ui-mobile/card";
-import { Link } from "expo-router";
+import { Icons } from "@turbostarter/ui-mobile/icons";
+import { Text } from "@turbostarter/ui-mobile/text";
+
+import { HOME_LINKS } from "~/lib/constants/home";
 
 export default function App() {
   return (

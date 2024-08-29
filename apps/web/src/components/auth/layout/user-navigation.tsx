@@ -6,7 +6,13 @@ import { toast } from "sonner";
 
 import { getAvatar, getName } from "@turbostarter/auth";
 import { PricingPlanType } from "@turbostarter/billing";
-import { Icons } from "@turbostarter/ui-web/icons";
+import { cn } from "@turbostarter/ui";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@turbostarter/ui-web/avatar";
+import { buttonVariants } from "@turbostarter/ui-web/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,15 +22,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuPortal,
 } from "@turbostarter/ui-web/dropdown-menu";
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@turbostarter/ui-web/avatar";
-
+import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
-import { buttonVariants } from "@turbostarter/ui-web/button";
 
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
@@ -33,7 +32,6 @@ import { onPromise } from "~/utils";
 
 import type { User } from "@turbostarter/auth";
 import type { Customer } from "@turbostarter/billing";
-import { cn } from "@turbostarter/ui";
 
 interface UserNavigationProps {
   readonly user: User | null;

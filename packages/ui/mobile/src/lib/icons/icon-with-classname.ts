@@ -1,5 +1,6 @@
-import { LucideIcon } from "lucide-react-native";
 import { cssInterop } from "nativewind";
+
+import type { LucideIcon } from "lucide-react-native";
 
 export function iconWithClassName(
   icon: React.FC<React.SVGProps<SVGElement>> | LucideIcon,

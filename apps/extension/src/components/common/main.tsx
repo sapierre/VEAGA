@@ -1,5 +1,4 @@
 import { cn } from "@turbostarter/ui";
-
 import { Icons } from "@turbostarter/ui-web/icons";
 
 interface MainProps {

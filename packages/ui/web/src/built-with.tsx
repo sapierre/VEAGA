@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { Icons } from "./icons";
-
 import { buttonVariants } from "./button";
+import { Icons } from "./icons";
 
 export const BuiltWith = () => {
   return (

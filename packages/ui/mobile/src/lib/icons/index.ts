@@ -1,9 +1,8 @@
-import * as React from "react";
+import { ArrowRight, ArrowLeft } from "lucide-react-native";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui";
-import { iconWithClassName } from "./icon-with-classname";
 
-import { ArrowRight, ArrowLeft } from "lucide-react-native";
+import { iconWithClassName } from "./icon-with-classname";
 
 iconWithClassName(GlobalIcons.Logo);
 iconWithClassName(GlobalIcons.LogoText);

@@ -3,9 +3,9 @@ import { forwardRef, memo } from "react";
 
 import { THEME_COLOR, THEME_MODE } from "@turbostarter/ui";
 import { cn } from "@turbostarter/ui";
-import { Icons } from "./icons";
 
 import { Button } from "./button";
+import { Icons } from "./icons";
 import { Label } from "./label";
 
 import type { ThemeConfig, ThemeOptions } from "@turbostarter/ui";

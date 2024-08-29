@@ -3,8 +3,8 @@
 import { memo } from "react";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
-import { Icons } from "@turbostarter/ui-web/icons";
 import { Button } from "@turbostarter/ui-web/button";
+import { Icons } from "@turbostarter/ui-web/icons";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
 import { loginWithOAuth } from "~/lib/actions";
@@ -17,10 +17,7 @@ interface SocialProvidersProps {
   readonly providers: SOCIAL_PROVIDER[];
 }
 
-const ICONS: Record<
-  SOCIAL_PROVIDER,
-  (props: SVGProps<SVGSVGElement>) => JSX.Element
-> = {
+const ICONS: Record<SOCIAL_PROVIDER, React.FC<SVGProps<SVGElement>>> = {
   [SOCIAL_PROVIDER.GITHUB]: Icons.Github,
   [SOCIAL_PROVIDER.GOOGLE]: Icons.Google,
 };

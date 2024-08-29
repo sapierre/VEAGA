@@ -3,19 +3,18 @@
 import { useTheme } from "next-themes";
 
 import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+} from "@turbostarter/ui-web/drawer";
+import {
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverPortal,
 } from "@turbostarter/ui-web/popover";
-
 import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
 
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-} from "@turbostarter/ui-web/drawer";
 import { appConfig } from "~/config/app";
 import { useBreakpoint } from "~/lib/hooks/use-media-query";
 import { useThemeConfig } from "~/providers/theme";

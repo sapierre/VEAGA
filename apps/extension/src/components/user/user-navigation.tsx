@@ -4,6 +4,12 @@ import { getAvatar, getName } from "@turbostarter/auth";
 import { PricingPlanType } from "@turbostarter/billing";
 import { cn } from "@turbostarter/ui";
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@turbostarter/ui-web/avatar";
+import { buttonVariants } from "@turbostarter/ui-web/button";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -12,16 +18,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuPortal,
 } from "@turbostarter/ui-web/dropdown-menu";
-
 import { Icons } from "@turbostarter/ui-web/icons";
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@turbostarter/ui-web/avatar";
-
-import { buttonVariants } from "@turbostarter/ui-web/button";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
 import { Logout } from "./logout";

@@ -1,13 +1,11 @@
 import { memo } from "react";
 
 import { BillingModel, formatPrice } from "@turbostarter/billing";
-import { Icons } from "@turbostarter/ui-web/icons";
-import { Button, buttonVariants } from "@turbostarter/ui-web/button";
-
 import { cn } from "@turbostarter/ui";
-
-import { Card } from "@turbostarter/ui-web/card";
 import { Badge } from "@turbostarter/ui-web/badge";
+import { Button, buttonVariants } from "@turbostarter/ui-web/button";
+import { Card } from "@turbostarter/ui-web/card";
+import { Icons } from "@turbostarter/ui-web/icons";
 
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";

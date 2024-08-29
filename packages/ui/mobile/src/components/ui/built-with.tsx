@@ -1,9 +1,9 @@
 import * as React from "react";
+import { Pressable, View, Linking } from "react-native";
 
 import { Icons } from "../../lib/icons";
 
 import { buttonVariants } from "./button";
-import { Pressable, View, Linking } from "react-native";
 import { Text } from "./text";
 
 export const BuiltWith = () => {

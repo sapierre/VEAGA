@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { registerSchema } from "@turbostarter/shared/validators";
-import { Icons } from "@turbostarter/ui-web/icons";
+import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
   FormControl,
@@ -18,8 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@turbostarter/ui-web/form";
-
-import { Button } from "@turbostarter/ui-web/button";
+import { Icons } from "@turbostarter/ui-web/icons";
 import { Input } from "@turbostarter/ui-web/input";
 
 import { TurboLink } from "~/components/common/turbo-link";

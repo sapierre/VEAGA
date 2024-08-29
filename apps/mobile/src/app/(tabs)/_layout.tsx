@@ -1,4 +1,5 @@
 import { Tabs, router } from "expo-router";
+
 import { Header } from "~/components/common/layout/header";
 import { pathsConfig } from "~/config/paths";
 

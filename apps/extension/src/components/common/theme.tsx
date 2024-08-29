@@ -5,8 +5,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@turbostarter/ui-web/popover";
-
 import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
+
 import type { ThemeConfig } from "@turbostarter/ui";
 
 import { appConfig } from "~config/app";

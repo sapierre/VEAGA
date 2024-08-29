@@ -1,5 +1,7 @@
 import { Link } from "expo-router";
 
+import type { router, LinkProps } from "expo-router";
+
 // @ts-expect-error - types are not available yet
 const IS_DOM = typeof ReactNativeWebView !== "undefined";
 
@@ -7,8 +9,8 @@ export const DOMLink = ({
   navigate,
   ...props
 }: {
-  navigate: (typeof import("expo-router").router)["navigate"];
-} & import("expo-router").LinkProps<any>) => {
+  navigate: (typeof router)["navigate"];
+} & LinkProps<string>) => {
   return (
     <Link
       {...props}

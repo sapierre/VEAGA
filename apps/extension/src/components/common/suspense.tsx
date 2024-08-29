@@ -1,6 +1,6 @@
 import { Suspense as ReactSuspense } from "react";
 
-import { Icons } from "@turbostarter/ui";
+import { Icons } from "@turbostarter/ui-web/icons";
 
 import type { ReactElement } from "react";
 

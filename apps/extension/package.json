@@ -44,7 +44,6 @@
     "eslint": "catalog:",
     "postcss": "8.4.33",
     "prettier": "catalog:",
-    "tailwindcss": "3.4.1",
     "typescript": "catalog:"
   },
   "prettier": "@turbostarter/prettier-config",
