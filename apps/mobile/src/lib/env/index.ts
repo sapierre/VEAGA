@@ -6,7 +6,7 @@ import { NODE_ENV } from "@turbostarter/shared/constants";
 
 export const env = createEnv({
   shared: {
-    NODE_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
+    APP_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
   },
   clientPrefix: "EXPO_PUBLIC_",
   client: {

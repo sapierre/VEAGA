@@ -12,7 +12,6 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { HOME_LINKS } from "~/lib/constants/home";
-import { api } from "~/lib/api/trpc";
 
 export default function App() {
   return (

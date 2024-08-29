@@ -1,8 +1,8 @@
 import * as SecureStore from "expo-secure-store";
+import "react-native-url-polyfill/auto";
 
 import { createClient } from "@turbostarter/auth";
 
-import "react-native-url-polyfill/auto";
 import { env } from "~/lib/env";
 
 const ExpoSecureStoreAdapter = {

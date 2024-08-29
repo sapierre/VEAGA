@@ -6,7 +6,7 @@ import type { Config } from "tailwindcss";
 import type { PluginsConfig } from "tailwindcss/types/config";
 
 export default {
-  darkMode: ["class"],
+  darkMode: "class",
   content: ["src/**/*.{ts,tsx}"],
   theme: {
     extend: {

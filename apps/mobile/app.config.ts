@@ -7,15 +7,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: "expo",
   version: "0.1.0",
   orientation: "portrait",
-  icon: "./assets/icon.png",
+  icon: "./assets/images/icon.png",
   userInterfaceStyle: "automatic",
   sdkVersion: "51.0.0",
   splash: {
-    image: "./assets/icon.png",
+    image: "./assets/images/splash.png",
     resizeMode: "contain",
-    backgroundColor: "#1F104A",
+    backgroundColor: "#0D121C",
   },
-  platforms: ["ios", "android", "web"],
+  platforms: ["ios", "android"],
   updates: {
     fallbackToCacheTimeout: 0,
   },
@@ -26,10 +26,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: "your.bundle.identifier",
-    adaptiveIcon: {
-      foregroundImage: "./assets/icon.png",
-      backgroundColor: "#1F104A",
-    },
   },
   extra: {
     eas: {

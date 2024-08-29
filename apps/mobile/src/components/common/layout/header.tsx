@@ -13,7 +13,7 @@ export const Header = ({ title }: HeaderProps) => {
       style={{
         paddingTop: insets.top + 5,
       }}
-      className="flex-row items-center justify-start gap-3 bg-primary px-8 pb-5"
+      className="flex-row items-center justify-center gap-3 bg-primary px-8 pb-4"
     >
       {/* {router.canGoBack() && (
         <Pressable onPress={() => router.back()}>
