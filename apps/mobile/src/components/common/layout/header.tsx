@@ -13,13 +13,8 @@ export const Header = ({ title }: HeaderProps) => {
       style={{
         paddingTop: insets.top + 5,
       }}
-      className="flex-row items-center justify-center gap-3 bg-primary px-8 pb-4"
+      className="h-[6.5rem] flex-row items-center justify-center gap-3 bg-primary px-8"
     >
-      {/* {router.canGoBack() && (
-        <Pressable onPress={() => router.back()}>
-          <Icons.ArrowLeft className="text-primary-foreground" size={20} />
-        </Pressable>
-      )} */}
       <Text className="text-2xl font-semibold text-primary-foreground">
         {title}
       </Text>

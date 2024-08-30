@@ -124,7 +124,7 @@ export const PasswordLoginForm = memo(() => {
           <div className="text-sm text-muted-foreground">
             Don&apos;t have an account yet?
             <TurboLink
-              href="/auth/register"
+              href={pathsConfig.auth.register}
               className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
             >
               Sign up!

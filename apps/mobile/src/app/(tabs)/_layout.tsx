@@ -59,6 +59,7 @@ export default function DashboardLayout() {
       <Tabs.Screen
         name="auth"
         options={{
+          headerShown: false,
           title: "Auth",
           tabBarIcon: ({ focused }) => (
             <Icons.KeyRound

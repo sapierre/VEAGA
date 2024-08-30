@@ -1,9 +1,13 @@
 const TABS_PREFIX = "(tabs)";
+const AUTH_PREFIX = "/auth";
 
 const pathsConfig = {
   index: "/",
   tabs: {
-    auth: `/${TABS_PREFIX}/auth`,
+    auth: {
+      login: `/${TABS_PREFIX}${AUTH_PREFIX}/login`,
+      register: `/${TABS_PREFIX}${AUTH_PREFIX}/register`,
+    },
     billing: `/${TABS_PREFIX}/billing`,
     blog: `/${TABS_PREFIX}/blog`,
   },

@@ -39,17 +39,16 @@ const RootLayoutNav = () => {
     <TRPCProvider>
       <ThemeProvider value={isDarkColorScheme ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider>
-          <Stack>
+          <Stack
+            screenOptions={{
+              header: () => (
+                <Header title={Application.applicationName ?? ""} />
+              ),
+            }}
+          >
             <Stack.Screen name={TABS_PREFIX} options={{ headerShown: false }} />
 
-            <Stack.Screen
-              name="index"
-              options={{
-                header: () => (
-                  <Header title={Application.applicationName ?? ""} />
-                ),
-              }}
-            />
+            <Stack.Screen name="index" />
           </Stack>
           <StatusBar barStyle="light-content" />
         </SafeAreaProvider>

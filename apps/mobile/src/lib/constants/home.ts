@@ -5,7 +5,7 @@ export const HOME_LINKS = [
     title: "Auth",
     description:
       "Authenticate users to your app. Social logins, magic link, email/password and many more.",
-    href: pathsConfig.tabs.auth,
+    href: pathsConfig.tabs.auth.login,
   },
   {
     title: "Billing",
