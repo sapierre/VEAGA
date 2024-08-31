@@ -13,31 +13,27 @@ import { useEffect } from "react";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { useColorScheme } from "@turbostarter/ui-mobile";
-
 import { Header } from "~/components/common/layout/header";
 import { TABS_PREFIX } from "~/config/paths";
 import { TRPCProvider } from "~/lib/api/trpc";
-import { useSetupTheme } from "~/lib/hooks/setup/use-setup-theme";
+import { useTheme } from "~/lib/hooks/use-theme";
 import "~/styles/globals.css";
 import { isAndroid } from "~/utils/device";
 
 void SplashScreen.preventAutoHideAsync();
 
 const RootLayoutNav = () => {
-  const { isDarkColorScheme } = useColorScheme();
+  const { isDark } = useTheme();
 
   if (isAndroid) {
     void NavigationBar.setPositionAsync("absolute");
     void NavigationBar.setBackgroundColorAsync("transparent");
-    void NavigationBar.setButtonStyleAsync(
-      isDarkColorScheme ? "light" : "dark",
-    );
+    void NavigationBar.setButtonStyleAsync(isDark ? "light" : "dark");
   }
 
   return (
     <TRPCProvider>
-      <ThemeProvider value={isDarkColorScheme ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
         <SafeAreaProvider>
           <Stack
             screenOptions={{
@@ -63,10 +59,14 @@ const RootLayout = () => {
     DMSans_400Regular,
   });
 
-  const themeLoaded = useSetupTheme();
+  const { loaded: themeLoaded, setupTheme } = useTheme();
 
   const loaded = fontsLoaded && themeLoaded;
   const error = fontsError;
+
+  useEffect(() => {
+    void setupTheme();
+  }, [setupTheme]);
 
   useEffect(() => {
     if (loaded || error) {

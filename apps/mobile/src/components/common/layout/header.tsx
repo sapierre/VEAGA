@@ -13,9 +13,9 @@ export const Header = ({ title }: HeaderProps) => {
       style={{
         paddingTop: insets.top + 5,
       }}
-      className="h-[6.5rem] flex-row items-center justify-center gap-3 bg-primary px-8"
+      className="flex-row items-center justify-center gap-3 bg-primary px-8"
     >
-      <Text className="text-2xl font-semibold text-primary-foreground">
+      <Text className="h-12 text-2xl font-semibold text-primary-foreground">
         {title}
       </Text>
     </View>

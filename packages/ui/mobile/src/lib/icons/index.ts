@@ -10,6 +10,10 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  Settings,
+  Sun,
+  SunMoon,
+  Moon,
 } from "lucide-react-native";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui";
@@ -31,6 +35,10 @@ iconWithClassName(Loader2);
 iconWithClassName(Check);
 iconWithClassName(ChevronDown);
 iconWithClassName(ChevronUp);
+iconWithClassName(Settings);
+iconWithClassName(Sun);
+iconWithClassName(SunMoon);
+iconWithClassName(Moon);
 
 export const Icons = {
   Logo: GlobalIcons.Logo,
@@ -48,4 +56,8 @@ export const Icons = {
   Check,
   ChevronDown,
   ChevronUp,
+  Settings,
+  Sun,
+  SunMoon,
+  Moon,
 };

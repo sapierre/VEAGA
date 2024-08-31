@@ -1,4 +1,5 @@
 import { Tabs, router } from "expo-router";
+import { cssInterop } from "nativewind";
 
 import { cn } from "@turbostarter/ui";
 import { Icons } from "@turbostarter/ui-mobile/icons";
@@ -23,9 +24,48 @@ const TabBarLabel = ({
   );
 };
 
-export default function DashboardLayout() {
+const TabContainer = ({
+  tabBarClassName,
+  ...props
+}: React.ComponentProps<typeof Tabs> & {
+  tabBarClassName:
+    | {
+        backgroundColor: string;
+      }
+    | string;
+}) => {
   return (
     <Tabs
+      {...props}
+      screenOptions={({ route, navigation }) => ({
+        tabBarStyle: {
+          backgroundColor:
+            typeof tabBarClassName === "string"
+              ? tabBarClassName
+              : tabBarClassName.backgroundColor,
+          paddingTop: 5,
+        },
+        ...(typeof props.screenOptions === "function"
+          ? // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            props.screenOptions({ route, navigation })
+          : props.screenOptions),
+      })}
+    />
+  );
+};
+
+cssInterop(TabContainer, {
+  tabBarClassName: {
+    target: false,
+    nativeStyleToProp: {
+      backgroundColor: "tabBarClassName",
+    },
+  },
+});
+
+export default function DashboardLayout() {
+  return (
+    <TabContainer
       screenOptions={({ route }) => ({
         header: () => (
           <Header
@@ -33,6 +73,7 @@ export default function DashboardLayout() {
           />
         ),
       })}
+      tabBarClassName="bg-muted"
     >
       <Tabs.Screen
         name="home"
@@ -103,11 +144,11 @@ export default function DashboardLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="settings"
         options={{
-          title: "Profile",
+          title: "Settings",
           tabBarIcon: ({ focused }) => (
-            <Icons.UserRound
+            <Icons.Settings
               size={22}
               className={cn("text-muted-foreground", {
                 "text-primary": focused,
@@ -117,6 +158,6 @@ export default function DashboardLayout() {
           tabBarLabel: TabBarLabel,
         }}
       />
-    </Tabs>
+    </TabContainer>
   );
 }
