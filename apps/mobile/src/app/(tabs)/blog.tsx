@@ -1,10 +1,5 @@
-import { router } from "expo-router";
-import { Text, View } from "react-native";
+import { CommingSoon } from "~/components/common/coming-soon";
 
 export default function Blog() {
-  return (
-    <View>
-      <Text>{JSON.stringify(router.canGoBack())} Blog</Text>
-    </View>
-  );
+  return <CommingSoon feature="Blog" />;
 }

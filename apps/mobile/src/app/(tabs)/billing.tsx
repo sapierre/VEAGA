@@ -1,10 +1,5 @@
-import { router } from "expo-router";
-import { Text, View } from "react-native";
+import { CommingSoon } from "~/components/common/coming-soon";
 
 export default function Billing() {
-  return (
-    <View>
-      <Text>{JSON.stringify(router.canGoBack())} billing</Text>
-    </View>
-  );
+  return <CommingSoon feature="Billing" />;
 }
