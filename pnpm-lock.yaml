@@ -286,6 +286,9 @@ importers:
       react-native-webview:
         specifier: 13.8.6
         version: 13.8.6(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))(react@18.3.1)
+      slugify:
+        specifier: 1.6.6
+        version: 1.6.6
       superjson:
         specifier: 2.2.1
         version: 2.2.1

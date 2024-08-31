@@ -9,7 +9,13 @@ export const getName = (user: User) => {
     identity?.user_name ||
     identity?.preferred_username;
 
-  return typeof name === "string" ? name : undefined;
+  const nameFromEmail = user.email?.split("@")[0];
+
+  return typeof name === "string"
+    ? name
+    : nameFromEmail
+      ? nameFromEmail
+      : undefined;
 };
 
 export const getAvatar = (user: User) => {

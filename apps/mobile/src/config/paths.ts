@@ -10,6 +10,7 @@ const pathsConfig = {
     },
     billing: `/${TABS_PREFIX}/billing`,
     blog: `/${TABS_PREFIX}/blog`,
+    settings: `/${TABS_PREFIX}/settings`,
   },
 } as const;
 

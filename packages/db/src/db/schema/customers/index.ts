@@ -22,7 +22,9 @@ export const pricingPlanTypeEnum = pgEnum("plan", [
 
 export const customers = pgTable("customers", {
   userId: uuid("userId")
-    .references(() => usersTable.id)
+    .references(() => usersTable.id, {
+      onDelete: "cascade",
+    })
     .primaryKey(),
   customerId: text("customerId").notNull(),
   status: billingStatusEnum("status"),

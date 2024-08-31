@@ -1,9 +1,12 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
+import slugify from "slugify";
+
+const APP_NAME = "TurboStarter";
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "TurboStarter",
-  slug: "turbostarter",
+  name: APP_NAME,
+  slug: slugify(APP_NAME, { lower: true }),
   scheme: "expo",
   version: "0.1.0",
   orientation: "portrait",

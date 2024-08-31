@@ -2,6 +2,7 @@ import { memo } from "react";
 import { KeyboardAvoidingView, ScrollView, View } from "react-native";
 
 import { LoginForm } from "~/components/auth/form/login/form";
+import { RegisterForm } from "~/components/auth/form/register-form";
 import { SocialProviders } from "~/components/auth/form/social-providers";
 import { AuthDivider } from "~/components/auth/layout/auth-divider";
 import { AuthHeader } from "~/components/auth/layout/auth-header";
@@ -36,7 +37,7 @@ export const Auth = {
   Divider: AuthDivider,
   Providers: SocialProviders,
   Login: LoginForm,
-  //   Register: RegisterForm,
+  Register: RegisterForm,
   //   ForgotPassword: ForgotPasswordForm,
   //   UpdatePassword: UpdatePasswordForm,
 };

@@ -5,49 +5,55 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
-import { passwordLoginSchema } from "@turbostarter/shared/validators";
+import { registerSchema } from "@turbostarter/shared/validators";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
   FormField,
-  FormInput,
   FormItem,
+  FormInput,
 } from "@turbostarter/ui-mobile/form";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
-import { api } from "~/lib/api/trpc";
 import { auth } from "~/lib/auth";
 
-import type { PasswordLoginData } from "@turbostarter/shared/validators";
+import type { RegisterData } from "@turbostarter/shared/validators";
 
-export const PasswordLoginForm = memo(() => {
-  const utils = api.useUtils();
+export const RegisterForm = memo(() => {
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: PasswordLoginData) => auth().signInWithPassword(data),
-    onSettled: async (data) => {
+    mutationFn: (data: RegisterData) => auth().signUp(data),
+    onSettled: (data) => {
       const error = data?.error;
 
       if (error) {
         return Alert.alert("Something went wrong!", error.message);
       }
 
-      await utils.user.get.invalidate();
-      return router.navigate(pathsConfig.tabs.settings);
+      Alert.alert(
+        "Success!",
+        "You have successfully registered! Check your email to verify your account.",
+        [
+          {
+            text: "OK",
+            onPress: () => router.navigate(pathsConfig.tabs.auth.login),
+          },
+        ],
+      );
     },
   });
 
-  const form = useForm<PasswordLoginData>({
-    resolver: zodResolver(passwordLoginSchema),
+  const form = useForm<RegisterData>({
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = (data: PasswordLoginData) => {
+  const onSubmit = (data: RegisterData) => {
     mutate(data);
   };
 
   return (
-    <Form {...form}>
+    <Form {...form} key="idle">
       <View className="gap-6">
         <FormField
           control={form.control}
@@ -88,20 +94,20 @@ export const PasswordLoginForm = memo(() => {
           {isPending ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
-            <Text>Sign in</Text>
+            <Text>Sign up</Text>
           )}
         </Button>
 
         <View className="items-center justify-center pt-2">
           <View className="flex-row">
             <Text className="text-sm text-muted-foreground">
-              Don&apos;t have an account yet?
+              Already have an account?
             </Text>
             <Link
-              href={pathsConfig.tabs.auth.register}
+              href={pathsConfig.tabs.auth.login}
               className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
             >
-              Sign up!
+              Sign in!
             </Link>
           </View>
         </View>
@@ -110,4 +116,4 @@ export const PasswordLoginForm = memo(() => {
   );
 });
 
-PasswordLoginForm.displayName = "PasswordLoginForm";
+RegisterForm.displayName = "RegisterForm";

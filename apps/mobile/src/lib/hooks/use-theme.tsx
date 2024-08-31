@@ -21,8 +21,8 @@ export const useTheme = () => {
     }
 
     if (!storedTheme) {
-      await AsyncStorage.setItem("theme", colorScheme);
-      setTheme(colorScheme);
+      await AsyncStorage.setItem("theme", THEME_MODE.SYSTEM);
+      setTheme(THEME_MODE.SYSTEM);
       setLoaded(true);
       return;
     }
