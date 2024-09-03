@@ -122,7 +122,7 @@ importers:
         version: link:../../packages/ui/web
       plasmo:
         specifier: 0.89.1
-        version: 0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.33)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
+        version: 0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -163,9 +163,6 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.9.0(jiti@1.21.6)
-      postcss:
-        specifier: 8.4.33
-        version: 8.4.33
       prettier:
         specifier: 'catalog:'
         version: 3.3.3
@@ -178,6 +175,12 @@ importers:
       '@bacons/text-decoder':
         specifier: ^0.0.0
         version: 0.0.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))
+      '@expo-google-fonts/dm-mono':
+        specifier: 0.2.3
+        version: 0.2.3
+      '@expo-google-fonts/dm-sans':
+        specifier: 0.2.3
+        version: 0.2.3
       '@expo/metro-config':
         specifier: ^0.18.8
         version: 0.18.11
@@ -232,6 +235,9 @@ importers:
       expo-linking:
         specifier: ~6.3.1
         version: 6.3.1(expo@51.0.31(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      expo-navigation-bar:
+        specifier: ~3.0.7
+        version: 3.0.7(expo@51.0.31(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       expo-router:
         specifier: ~3.5.17
         version: 3.5.23(imtb5hi2cvppqshebz3jfgjbz4)
@@ -644,12 +650,6 @@ importers:
 
   packages/ui/mobile:
     dependencies:
-      '@expo-google-fonts/dm-mono':
-        specifier: 0.2.3
-        version: 0.2.3
-      '@expo-google-fonts/dm-sans':
-        specifier: 0.2.3
-        version: 0.2.3
       '@react-native-async-storage/async-storage':
         specifier: 1.23.1
         version: 1.23.1(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))
@@ -659,15 +659,6 @@ importers:
       '@turbostarter/ui':
         specifier: workspace:*
         version: link:../shared
-      expo-font:
-        specifier: ~12.0.9
-        version: 12.0.9(expo@51.0.31(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
-      expo-navigation-bar:
-        specifier: ~3.0.7
-        version: 3.0.7(expo@51.0.31(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
-      expo-splash-screen:
-        specifier: ~0.27.5
-        version: 0.27.5(expo-modules-autolinking@1.11.2)(expo@51.0.31(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       lucide-react-native:
         specifier: 0.436.0
         version: 0.436.0(react-native-svg@15.6.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))(react@18.3.1))(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))(react@18.3.1)
@@ -677,9 +668,6 @@ importers:
       react-native-svg:
         specifier: 15.6.0
         version: 15.6.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))(react@18.3.1)
-      react-native-url-polyfill:
-        specifier: 2.0.0
-        version: 2.0.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))
       zustand:
         specifier: 4.5.4
         version: 4.5.4(@types/react@18.3.3)(react@18.3.1)
@@ -831,7 +819,7 @@ importers:
         version: 7.35.0(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-e56f4ae3-20240830(eslint@9.9.0(jiti@1.21.6))
+        version: 5.1.0-rc-4f604941-20240830(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.0.8
         version: 2.0.12(eslint@9.9.0(jiti@1.21.6))
@@ -5700,8 +5688,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-e56f4ae3-20240830:
-    resolution: {integrity: sha512-w+VTy81b3KCQYWhe2Ux/kVqhiyqieaWbHfPlSwU8sKLeHOPl2LPlCn1wWRJE7KMb5/bkrOtAyWrwhlasqUsePA==}
+  eslint-plugin-react-hooks@5.1.0-rc-4f604941-20240830:
+    resolution: {integrity: sha512-7IHBSzlQL498kfaPzQWV1t8dR/v3QTbXtG2x2bVjl5YOLpmf+I045NU78HMX7wAOaepWjsOwF591Q/O+nr3CJQ==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -8088,10 +8076,6 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.4.33:
-    resolution: {integrity: sha512-Kkpbhhdjw2qQs2O2DGX+8m5OVqEcbB9HRBvuYM9pgrjEFUg30A9LmXNlTAUj4S9kgtGyrMbTzVjH7E+s5Re2yg==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.4.41:
     resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -8396,11 +8380,6 @@ packages:
     resolution: {integrity: sha512-TUtR+h+yi1ODsd8FHdom1TpjfWOmnaK5pri5rnSBXnMqpzq8o2zZfonHTjPX+nS3wb/Pu2XsoARgYaHNjVWXhQ==}
     peerDependencies:
       react: '*'
-      react-native: '*'
-
-  react-native-url-polyfill@2.0.0:
-    resolution: {integrity: sha512-My330Do7/DvKnEvwQc0WdcBnFPploYKp9CYlefDXzIdEaA+PAhDYllkvGeEroEzvc4Kzzj2O4yVdz8v6fjRvhA==}
-    peerDependencies:
       react-native: '*'
 
   react-native-web@0.19.12:
@@ -11755,14 +11734,14 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/config-default@2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.33)(terser@5.31.5)(typescript@5.2.2)':
+  '@parcel/config-default@2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)':
     dependencies:
       '@parcel/bundler-default': 2.9.3(@parcel/core@2.9.3)
       '@parcel/compressor-raw': 2.9.3(@parcel/core@2.9.3)
       '@parcel/core': 2.9.3
       '@parcel/namer-default': 2.9.3(@parcel/core@2.9.3)
       '@parcel/optimizer-css': 2.9.3(@parcel/core@2.9.3)
-      '@parcel/optimizer-htmlnano': 2.9.3(@parcel/core@2.9.3)(postcss@8.4.33)(terser@5.31.5)(typescript@5.2.2)
+      '@parcel/optimizer-htmlnano': 2.9.3(@parcel/core@2.9.3)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)
       '@parcel/optimizer-image': 2.9.3(@parcel/core@2.9.3)
       '@parcel/optimizer-svgo': 2.9.3(@parcel/core@2.9.3)
       '@parcel/optimizer-swc': 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)
@@ -11936,10 +11915,10 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/optimizer-htmlnano@2.9.3(@parcel/core@2.9.3)(postcss@8.4.33)(terser@5.31.5)(typescript@5.2.2)':
+  '@parcel/optimizer-htmlnano@2.9.3(@parcel/core@2.9.3)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)':
     dependencies:
       '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
-      htmlnano: 2.1.1(postcss@8.4.33)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2)
+      htmlnano: 2.1.1(postcss@8.4.41)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -12451,10 +12430,10 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@plasmohq/parcel-config@0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.33)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)':
+  '@plasmohq/parcel-config@0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)':
     dependencies:
       '@parcel/compressor-raw': 2.9.3(@parcel/core@2.9.3)
-      '@parcel/config-default': 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.33)(terser@5.31.5)(typescript@5.2.2)
+      '@parcel/config-default': 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)
       '@parcel/core': 2.9.3
       '@parcel/optimizer-data-url': 2.9.3(@parcel/core@2.9.3)
       '@parcel/reporter-bundle-buddy': 2.9.3(@parcel/core@2.9.3)
@@ -12481,7 +12460,7 @@ snapshots:
       '@plasmohq/parcel-optimizer-es': 0.4.0(@swc/helpers@0.5.5)
       '@plasmohq/parcel-packager': 0.6.14
       '@plasmohq/parcel-resolver': 0.14.0
-      '@plasmohq/parcel-resolver-post': 0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.33)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
+      '@plasmohq/parcel-resolver-post': 0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
       '@plasmohq/parcel-runtime': 0.25.0
       '@plasmohq/parcel-transformer-inject-env': 0.2.11
       '@plasmohq/parcel-transformer-inline-css': 0.3.11
@@ -12601,14 +12580,14 @@ snapshots:
       '@parcel/utils': 2.9.3
       nullthrows: 1.1.1
 
-  '@plasmohq/parcel-resolver-post@0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.33)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))':
+  '@plasmohq/parcel-resolver-post@0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))':
     dependencies:
       '@parcel/core': 2.9.3
       '@parcel/hash': 2.9.3
       '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
       '@parcel/types': 2.9.3(@parcel/core@2.9.3)
       '@parcel/utils': 2.9.3
-      tsup: 7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.33)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
+      tsup: 7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
       - '@swc/core'
@@ -15885,7 +15864,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-e56f4ae3-20240830(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-4f604941-20240830(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
@@ -16727,13 +16706,13 @@ snapshots:
     dependencies:
       lru-cache: 6.0.0
 
-  htmlnano@2.1.1(postcss@8.4.33)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2):
+  htmlnano@2.1.1(postcss@8.4.41)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.2.2)
       posthtml: 0.16.6
       timsort: 0.3.0
     optionalDependencies:
-      postcss: 8.4.33
+      postcss: 8.4.41
       svgo: 2.8.0
       terser: 5.31.5
     transitivePeerDependencies:
@@ -18446,7 +18425,7 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  plasmo@0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.33)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
+  plasmo@0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
     dependencies:
       '@expo/spawn-async': 1.7.2
       '@parcel/core': 2.9.3
@@ -18454,7 +18433,7 @@ snapshots:
       '@parcel/package-manager': 2.9.3(@parcel/core@2.9.3)
       '@parcel/watcher': 2.2.0
       '@plasmohq/init': 0.7.0
-      '@plasmohq/parcel-config': 0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.33)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
+      '@plasmohq/parcel-config': 0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
       '@plasmohq/parcel-core': 0.1.8
       buffer: 6.0.3
       chalk: 5.3.0
@@ -18559,12 +18538,12 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.41
 
-  postcss-load-config@4.0.2(postcss@8.4.33)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
+  postcss-load-config@4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
-      postcss: 8.4.33
+      postcss: 8.4.41
       ts-node: 10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)
 
   postcss-load-config@4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10)(@types/node@22.2.0)(typescript@5.5.4)):
@@ -18593,12 +18572,6 @@ snapshots:
   postcss-value-parser@4.2.0: {}
 
   postcss@8.4.31:
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
-
-  postcss@8.4.33:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.1
@@ -18891,11 +18864,6 @@ snapshots:
       react: 18.3.1
       react-native: 0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4)
       warn-once: 0.1.1
-
-  react-native-url-polyfill@2.0.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4)):
-    dependencies:
-      react-native: 0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4)
-      whatwg-url-without-unicode: 8.0.0-3
 
   react-native-web@0.19.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -19976,7 +19944,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.33)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2):
+  tsup@7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.18.20)
       cac: 6.7.14
@@ -19986,7 +19954,7 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.33)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
+      postcss-load-config: 4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
       resolve-from: 5.0.0
       rollup: 3.29.4
       source-map: 0.8.0-beta.0
@@ -19994,7 +19962,7 @@ snapshots:
       tree-kill: 1.2.2
     optionalDependencies:
       '@swc/core': 1.7.10(@swc/helpers@0.5.5)
-      postcss: 8.4.33
+      postcss: 8.4.41
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color

@@ -12,6 +12,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@turbostarter/prettier-config",
   "dependencies": {
     "@plasmohq/messaging": "0.6.2",
     "@plasmohq/storage": "1.11.0",
@@ -21,8 +22,8 @@
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
     "@turbostarter/api": "workspace:*",
-    "@turbostarter/billing": "workspace:*",
     "@turbostarter/auth": "workspace:*",
+    "@turbostarter/billing": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
     "@turbostarter/ui-web": "workspace:*",
@@ -42,11 +43,9 @@
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
     "eslint": "catalog:",
-    "postcss": "8.4.33",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@turbostarter/prettier-config",
   "manifest": {
     "name": "__MSG_extensionName__",
     "default_locale": "en",

@@ -37,7 +37,7 @@ jobs:
         run: pnpm run format
 
       - name: 🛻 Lint
-        run: pnpm run lint
+        run: pnpm run lint && pnpm run lint:ws
 
       - name: 🧪 Typecheck
         run: pnpm run typecheck

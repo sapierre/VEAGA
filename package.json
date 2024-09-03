@@ -21,6 +21,8 @@
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
+    "lint:ws": "pnpm dlx sherif@latest",
+    "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
     "ui:web:add": "turbo run ui:web:add",
     "ui:mobile:add": "turbo run ui:mobile:add"
@@ -38,7 +40,7 @@
     "typescript": "5.4.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "packageManager": "pnpm@9.6.0",
   "prettier": "@turbostarter/prettier-config"
