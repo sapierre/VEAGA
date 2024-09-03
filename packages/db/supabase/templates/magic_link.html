@@ -2,7 +2,8 @@
 
 <p>Follow this link to login:</p>
 <p>
-  <a href="{{ .SiteURL }}/api/?token_hash={{ .TokenHash }}&type=magiclink"
+  <a
+    href="{{ .SiteURL }}/api/auth/confirm/?token_hash={{ .TokenHash }}&type=magiclink"
     >Log In</a
   >
 </p>

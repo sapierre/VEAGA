@@ -5,6 +5,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
+import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { passwordLoginSchema } from "@turbostarter/shared/validators";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
@@ -12,34 +13,34 @@ import {
   FormField,
   FormInput,
   FormItem,
+  FormLabel,
 } from "@turbostarter/ui-mobile/form";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
+import { login } from "~/lib/actions/auth";
 import { api } from "~/lib/api/trpc";
-import { auth } from "~/lib/auth";
 
 import type { PasswordLoginData } from "@turbostarter/shared/validators";
 
 export const PasswordLoginForm = memo(() => {
+  const form = useForm<PasswordLoginData>({
+    resolver: zodResolver(passwordLoginSchema),
+  });
+
   const utils = api.useUtils();
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: PasswordLoginData) => auth().signInWithPassword(data),
-    onSettled: async (data) => {
-      const error = data?.error;
-
-      if (error) {
-        return Alert.alert("Something went wrong!", error.message);
-      }
-
+    mutationFn: (data: PasswordLoginData) =>
+      login({ data, option: AUTH_PROVIDER.PASSWORD }),
+    onSuccess: async () => {
+      form.reset();
       await utils.user.get.invalidate();
       return router.navigate(pathsConfig.tabs.settings);
     },
-  });
-
-  const form = useForm<PasswordLoginData>({
-    resolver: zodResolver(passwordLoginSchema),
+    onError: (error) => {
+      return Alert.alert("Something went wrong!", error.message);
+    },
   });
 
   const onSubmit = (data: PasswordLoginData) => {
@@ -69,12 +70,17 @@ export const PasswordLoginForm = memo(() => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormInput
-                label="Password"
-                secureTextEntry
-                autoComplete="password"
-                {...field}
-              />
+              <View className="flex-row items-center justify-between">
+                <FormLabel nativeID="password">Password</FormLabel>
+
+                <Link
+                  href={pathsConfig.tabs.auth.updatePassword}
+                  className="text-muted-foreground underline"
+                >
+                  Forgot password?
+                </Link>
+              </View>
+              <FormInput secureTextEntry autoComplete="password" {...field} />
             </FormItem>
           )}
         />

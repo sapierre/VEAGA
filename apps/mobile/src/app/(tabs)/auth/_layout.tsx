@@ -18,6 +18,20 @@ export default function AuthLayout() {
           header: () => <Header title="Register" />,
         }}
       />
+
+      <Stack.Screen
+        name="password/forgot"
+        options={{
+          header: () => <Header title="Forgot Password" />,
+        }}
+      />
+
+      <Stack.Screen
+        name="password/update"
+        options={{
+          header: () => <Header title="Update Password" />,
+        }}
+      />
     </Stack>
   );
 }

@@ -7,6 +7,8 @@ const pathsConfig = {
     auth: {
       login: `/${TABS_PREFIX}${AUTH_PREFIX}/login`,
       register: `/${TABS_PREFIX}${AUTH_PREFIX}/register`,
+      forgotPassword: `/${TABS_PREFIX}${AUTH_PREFIX}/password/forgot`,
+      updatePassword: `/${TABS_PREFIX}${AUTH_PREFIX}/password/update`,
     },
     billing: `/${TABS_PREFIX}/billing`,
     blog: `/${TABS_PREFIX}/blog`,

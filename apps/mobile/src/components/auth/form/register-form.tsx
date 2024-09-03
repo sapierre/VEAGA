@@ -17,20 +17,19 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
-import { auth } from "~/lib/auth";
+import { register } from "~/lib/actions/auth";
 
 import type { RegisterData } from "@turbostarter/shared/validators";
 
 export const RegisterForm = memo(() => {
+  const form = useForm<RegisterData>({
+    resolver: zodResolver(registerSchema),
+  });
+
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: RegisterData) => auth().signUp(data),
-    onSettled: (data) => {
-      const error = data?.error;
-
-      if (error) {
-        return Alert.alert("Something went wrong!", error.message);
-      }
-
+    mutationFn: (data: RegisterData) => register(data),
+    onSuccess: () => {
+      form.reset();
       Alert.alert(
         "Success!",
         "You have successfully registered! Check your email to verify your account.",
@@ -42,10 +41,9 @@ export const RegisterForm = memo(() => {
         ],
       );
     },
-  });
-
-  const form = useForm<RegisterData>({
-    resolver: zodResolver(registerSchema),
+    onError: (error) => {
+      Alert.alert("Something went wrong!", error.message);
+    },
   });
 
   const onSubmit = (data: RegisterData) => {

@@ -5,23 +5,18 @@ import { Card, CardContent } from "@turbostarter/ui-mobile/card";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
+import { logout } from "~/lib/actions/auth";
 import { api } from "~/lib/api/trpc";
-import { auth } from "~/lib/auth";
 
 export const Logout = () => {
   const utils = api.useUtils();
   const { data: user, isLoading } = api.user.get.useQuery();
 
   const { mutate } = useMutation({
-    mutationFn: () => auth().signOut(),
-    onSettled: async (data) => {
-      const error = data?.error;
-
-      if (error) {
-        return Alert.alert("Something went wrong!", error.message);
-      }
-
-      await utils.user.get.invalidate();
+    mutationFn: logout,
+    onSuccess: () => utils.user.get.invalidate(),
+    onError: (error) => {
+      return Alert.alert("Something went wrong!", error.message);
     },
   });
 

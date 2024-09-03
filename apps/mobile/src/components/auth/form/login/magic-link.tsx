@@ -1,9 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
+import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { magicLinkLoginSchema } from "@turbostarter/shared/validators";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
@@ -12,9 +14,11 @@ import {
   FormInput,
   FormItem,
 } from "@turbostarter/ui-mobile/form";
+import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
+import { login } from "~/lib/actions/auth";
 
 import type { MagicLinkLoginData } from "@turbostarter/shared/validators";
 
@@ -23,20 +27,25 @@ export const MagicLinkLoginForm = memo(() => {
     resolver: zodResolver(magicLinkLoginSchema),
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: MagicLinkLoginData) =>
+      login({ data, option: AUTH_PROVIDER.MAGIC_LINK }),
+    onSuccess: () => {
+      form.reset();
+      Alert.alert(
+        "Magic link sent!",
+        "Please check your email to login with the magic link.",
+      );
+      // await utils.user.get.invalidate();
+      // return router.navigate(pathsConfig.tabs.settings);
+    },
+    onError: (error) => {
+      return Alert.alert("Something went wrong!", error.message);
+    },
+  });
+
   const onSubmit = (data: MagicLinkLoginData) => {
-    console.log(data);
-    // setProvider(AUTH_PROVIDER.MAGIC_LINK);
-    // setStatus("pending");
-    // const loadingToast = toast.loading("Sending link...");
-    // const { error } = await login({ data, option: AUTH_PROVIDER.MAGIC_LINK });
-    // if (error) {
-    //   setStatus("error");
-    //   return toast.error(`${error}!`, { id: loadingToast });
-    // }
-    // toast.success("Success! Now check your inbox!", {
-    //   id: loadingToast,
-    // });
-    // setStatus("success");
+    mutate(data);
   };
 
   return (
@@ -61,8 +70,13 @@ export const MagicLinkLoginForm = memo(() => {
           className="w-full"
           size="lg"
           onPress={form.handleSubmit(onSubmit)}
+          disabled={isPending}
         >
-          <Text>Send magic link</Text>
+          {isPending ? (
+            <Icons.Loader2 className="animate-spin text-primary-foreground" />
+          ) : (
+            <Text>Send magic link</Text>
+          )}
         </Button>
 
         <View className="items-center justify-center pt-2">
