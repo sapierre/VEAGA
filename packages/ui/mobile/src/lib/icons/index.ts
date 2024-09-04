@@ -14,6 +14,7 @@ import {
   Sun,
   SunMoon,
   Moon,
+  CircleX,
 } from "lucide-react-native";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui";
@@ -39,6 +40,7 @@ iconWithClassName(Settings);
 iconWithClassName(Sun);
 iconWithClassName(SunMoon);
 iconWithClassName(Moon);
+iconWithClassName(CircleX);
 
 export const Icons = {
   Logo: GlobalIcons.Logo,
@@ -60,4 +62,5 @@ export const Icons = {
   Sun,
   SunMoon,
   Moon,
+  CircleX,
 };

@@ -6,8 +6,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { passwordLoginSchema } from "@turbostarter/shared/validators";
+import { AUTH_PROVIDER, passwordLoginSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -26,7 +25,7 @@ import { pathsConfig } from "~/config/paths";
 import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
-import type { PasswordLoginData } from "@turbostarter/shared/validators";
+import type { PasswordLoginData } from "@turbostarter/auth";
 
 export const PasswordLoginForm = memo(() => {
   const searchParams = useSearchParams();

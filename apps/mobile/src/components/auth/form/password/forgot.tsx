@@ -3,9 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import { Link } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
-import { forgotPasswordSchema } from "@turbostarter/shared/validators";
+import { forgotPasswordSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -17,17 +17,31 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
-// import { forgotPassword } from "~/lib/actions/auth";
+import { forgotPassword } from "~/lib/actions/auth";
 
-import type { ForgotPasswordData } from "@turbostarter/shared/validators";
+import type { ForgotPasswordData } from "@turbostarter/auth";
 
 export const ForgotPasswordForm = memo(() => {
-  const { mutate, isPending } = useMutation({});
+  const { mutate, isPending } = useMutation({
+    mutationFn: forgotPassword,
+    onSuccess: () => {
+      Alert.alert(
+        "Reset link sent!",
+        "Please check your email to reset your password.",
+      );
+      form.reset();
+    },
+    onError: (error) => {
+      Alert.alert("Something went wrong!", error.message);
+    },
+  });
   const form = useForm<ForgotPasswordData>({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = async (data: ForgotPasswordData) => {};
+  const onSubmit = (data: ForgotPasswordData) => {
+    mutate(data);
+  };
 
   return (
     <Form {...form}>

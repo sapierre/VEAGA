@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { passwordLoginSchema } from "@turbostarter/shared/validators";
+import { passwordLoginSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -22,7 +22,7 @@ import { pathsConfig } from "~/config/paths";
 import { login } from "~/lib/actions/auth";
 import { api } from "~/lib/api/trpc";
 
-import type { PasswordLoginData } from "@turbostarter/shared/validators";
+import type { PasswordLoginData } from "@turbostarter/auth";
 
 export const PasswordLoginForm = memo(() => {
   const form = useForm<PasswordLoginData>({
@@ -34,9 +34,9 @@ export const PasswordLoginForm = memo(() => {
     mutationFn: (data: PasswordLoginData) =>
       login({ data, option: AUTH_PROVIDER.PASSWORD }),
     onSuccess: async () => {
-      form.reset();
       await utils.user.get.invalidate();
-      return router.navigate(pathsConfig.tabs.settings);
+      router.navigate(pathsConfig.tabs.settings);
+      form.reset();
     },
     onError: (error) => {
       return Alert.alert("Something went wrong!", error.message);
@@ -74,7 +74,7 @@ export const PasswordLoginForm = memo(() => {
                 <FormLabel nativeID="password">Password</FormLabel>
 
                 <Link
-                  href={pathsConfig.tabs.auth.updatePassword}
+                  href={pathsConfig.tabs.auth.forgotPassword}
                   className="text-muted-foreground underline"
                 >
                   Forgot password?

@@ -43,7 +43,8 @@ const TabContainer = ({
             typeof tabBarClassName === "string"
               ? tabBarClassName
               : tabBarClassName.backgroundColor,
-          paddingTop: 5,
+          paddingTop: 6,
+          borderTopWidth: 0,
         },
         ...(typeof props.screenOptions === "function"
           ? // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

@@ -22,6 +22,13 @@ config.resolver.unstable_enablePackageExports = true;
 // https://github.com/nativewind/nativewind/issues/734
 config.resolver.disableHierarchicalLookup = true;
 
+// https://github.com/pmndrs/zustand/discussions/1967
+config.resolver.unstable_conditionNames = [
+  "browser",
+  "require",
+  "react-native",
+];
+
 const { transformer, resolver } = config;
 
 config.transformer = {

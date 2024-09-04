@@ -7,7 +7,7 @@ import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { forgotPasswordSchema } from "@turbostarter/shared/validators";
+import { forgotPasswordSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -25,7 +25,7 @@ import { pathsConfig } from "~/config/paths";
 import { forgotPassword } from "~/lib/actions/auth";
 import { onPromise } from "~/utils";
 
-import type { ForgotPasswordData } from "@turbostarter/shared/validators";
+import type { ForgotPasswordData } from "@turbostarter/auth";
 
 type Status = "pending" | "success" | "error" | "idle";
 

@@ -20,6 +20,13 @@ export default function AuthLayout() {
       />
 
       <Stack.Screen
+        name="error"
+        options={{
+          header: () => <Header title="Oops!" />,
+        }}
+      />
+
+      <Stack.Screen
         name="password/forgot"
         options={{
           header: () => <Header title="Forgot Password" />,

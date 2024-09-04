@@ -1,6 +1,15 @@
+import { router } from "expo-router";
+
 import { Auth } from "~/components/auth/auth";
+import { pathsConfig } from "~/config/paths";
+import { useAuthDeepLink } from "~/lib/hooks/use-auth-deep-link";
 
 const ForgotPassword = () => {
+  useAuthDeepLink({
+    onSuccess: () => router.replace(pathsConfig.tabs.auth.updatePassword),
+    path: pathsConfig.tabs.auth.forgotPassword,
+  });
+
   return (
     <>
       <Auth.Layout>

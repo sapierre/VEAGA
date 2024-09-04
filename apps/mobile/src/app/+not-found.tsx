@@ -19,6 +19,7 @@ export default function NotFound() {
         </Text>
         <Link
           href={pathsConfig.index}
+          replace
           className="mt-6 inline-block text-primary underline hover:no-underline"
         >
           Go back home

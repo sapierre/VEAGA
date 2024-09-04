@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { magicLinkLoginSchema } from "@turbostarter/shared/validators";
+import { magicLinkLoginSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -20,7 +20,7 @@ import { Text } from "@turbostarter/ui-mobile/text";
 import { pathsConfig } from "~/config/paths";
 import { login } from "~/lib/actions/auth";
 
-import type { MagicLinkLoginData } from "@turbostarter/shared/validators";
+import type { MagicLinkLoginData } from "@turbostarter/auth";
 
 export const MagicLinkLoginForm = memo(() => {
   const form = useForm<MagicLinkLoginData>({
@@ -31,16 +31,14 @@ export const MagicLinkLoginForm = memo(() => {
     mutationFn: (data: MagicLinkLoginData) =>
       login({ data, option: AUTH_PROVIDER.MAGIC_LINK }),
     onSuccess: () => {
-      form.reset();
       Alert.alert(
         "Magic link sent!",
         "Please check your email to login with the magic link.",
       );
-      // await utils.user.get.invalidate();
-      // return router.navigate(pathsConfig.tabs.settings);
+      form.reset();
     },
     onError: (error) => {
-      return Alert.alert("Something went wrong!", error.message);
+      Alert.alert("Something went wrong!", error.message);
     },
   });
 

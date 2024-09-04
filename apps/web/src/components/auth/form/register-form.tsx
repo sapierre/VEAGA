@@ -7,8 +7,7 @@ import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { registerSchema } from "@turbostarter/shared/validators";
+import { AUTH_PROVIDER, registerSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -28,7 +27,7 @@ import { onPromise } from "~/utils";
 
 import { useAuthFormStore } from "./store";
 
-import type { RegisterData } from "@turbostarter/shared/validators";
+import type { RegisterData } from "@turbostarter/auth";
 
 type RegisterStatus = "pending" | "success" | "error" | "idle";
 

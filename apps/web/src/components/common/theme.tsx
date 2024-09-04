@@ -19,7 +19,7 @@ import { appConfig } from "~/config/app";
 import { useBreakpoint } from "~/lib/hooks/use-media-query";
 import { useThemeConfig } from "~/providers/theme";
 
-import type { ThemeMode } from "../../../../../packages/ui/shared/dist/src";
+import type { ThemeMode } from "@turbostarter/ui";
 
 const Customizer = () => {
   const [config, setConfig] = useThemeConfig();

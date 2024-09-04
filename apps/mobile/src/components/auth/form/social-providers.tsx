@@ -1,10 +1,17 @@
+import { useMutation } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { memo } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
+
+import { Spinner } from "~/components/common/spinner";
+import { pathsConfig } from "~/config/paths";
+import { loginWithOAuth } from "~/lib/actions/auth";
+import { api } from "~/lib/api/trpc";
 
 import type { SVGProps } from "react";
 
@@ -22,7 +29,7 @@ const SocialProvider = ({
   onClick,
 }: {
   provider: SOCIAL_PROVIDER;
-  onClick: () => Promise<void>;
+  onClick: () => void;
 }) => {
   const Icon = ICONS[provider];
 
@@ -45,18 +52,33 @@ const SocialProvider = ({
 };
 
 export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
+  const utils = api.useUtils();
+  const { mutate, isPending } = useMutation({
+    mutationFn: loginWithOAuth,
+    onSuccess: async (session) => {
+      if (session) {
+        await utils.user.get.invalidate();
+        router.navigate(pathsConfig.tabs.settings);
+      }
+    },
+    onError: (error) => {
+      return Alert.alert("Something went wrong!", error.message);
+    },
+  });
+
   return (
-    <View className="flex w-full flex-col items-stretch justify-center gap-2">
-      {Object.values(providers).map((provider) => (
-        <SocialProvider
-          key={provider}
-          provider={provider}
-          onClick={() => {
-            return Promise.resolve();
-          }}
-        />
-      ))}
-    </View>
+    <>
+      <View className="flex w-full flex-col items-stretch justify-center gap-2">
+        {Object.values(providers).map((provider) => (
+          <SocialProvider
+            key={provider}
+            provider={provider}
+            onClick={() => mutate(provider)}
+          />
+        ))}
+      </View>
+      {isPending && <Spinner />}
+    </>
   );
 });
 

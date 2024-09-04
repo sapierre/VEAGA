@@ -7,7 +7,7 @@ import { memo, useEffect } from "react";
 
 import { appConfig } from "~/config/app";
 
-import type { ThemeConfig } from "../../../../packages/ui/shared/dist/src";
+import type { ThemeConfig } from "@turbostarter/ui";
 
 const configAtom = atomWithStorage<Omit<ThemeConfig, "mode">>(
   "config",

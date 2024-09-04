@@ -9,7 +9,8 @@ import type {
   MagicLinkLoginData,
   PasswordLoginData,
   RegisterData,
-} from "@turbostarter/shared/validators";
+  UpdatePasswordData,
+} from "@turbostarter/auth";
 import type { LoginOption } from "~/lib/constants";
 
 type LoginPayload =
@@ -32,7 +33,7 @@ export const login = async ({ data, option }: LoginPayload) => {
   const { error } = await auth().signInWithOtp({
     ...data,
     options: {
-      shouldCreateUser: false,
+      emailRedirectTo: `${location.origin}${pathsConfig.auth.login}`,
     },
   });
 
@@ -52,6 +53,9 @@ export const register = async (input: RegisterData) => {
   const { error } = await auth().signUp({
     email: input.email,
     password: input.password,
+    options: {
+      emailRedirectTo: `${location.origin}${pathsConfig.auth.login}`,
+    },
   });
 
   return { error: error?.message ?? null };
@@ -62,7 +66,15 @@ export const logout = async () => {
 };
 
 export const forgotPassword = async (input: ForgotPasswordData) => {
-  const { error } = await auth().resetPasswordForEmail(input.email);
+  const { error } = await auth().resetPasswordForEmail(input.email, {
+    redirectTo: `${location.origin}${pathsConfig.auth.updatePassword}`,
+  });
+
+  return { error: error?.message ?? null };
+};
+
+export const updatePassword = async (input: UpdatePasswordData) => {
+  const { error } = await auth().updateUser(input);
 
   return { error: error?.message ?? null };
 };

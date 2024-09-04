@@ -4,11 +4,12 @@ import { isAuthApiError } from "@turbostarter/auth";
 
 import { pathsConfig } from "~/config/paths";
 import { auth } from "~/lib/auth/server";
+import { publicUrl } from "~/lib/env";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/";
+  const redirectTo = searchParams.get("next") ?? publicUrl;
 
   if (code) {
     try {
@@ -30,5 +31,5 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.redirect(`${origin}${next}`);
+  return NextResponse.redirect(redirectTo);
 }

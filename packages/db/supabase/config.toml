@@ -24,7 +24,7 @@ jwt_expiry = 86400 # 24 hours
 enable_refresh_token_rotation = true
 refresh_token_reuse_interval = 10
 enable_signup = true
-additional_redirect_urls = ["http://localhost:54321/auth/v1/callback"]
+additional_redirect_urls = ["http://localhost:54321/auth/v1/callback", "turbostarter://**"]
 
 [auth.email]
 enable_signup = true

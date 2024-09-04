@@ -1,34 +1,64 @@
 {
-  "id": "61a595ca-8466-4bd4-9b61-8a40de209cd1",
+  "id": "16f7537a-8f17-47b3-bd02-73c9b20e9bd3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "auth.users": {
+      "name": "users",
+      "schema": "auth",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.customers": {
       "name": "customers",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "uuid",
+        "customerId": {
+          "name": "customerId",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "created_at": {
-          "name": "created_at",
+        "status": {
+          "name": "status",
+          "type": "status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plan": {
+          "name": "plan",
+          "type": "plan",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updated_at": {
-          "name": "updated_at",
+        "updatedAt": {
+          "name": "updatedAt",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
@@ -36,14 +66,14 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "customers_user_id_users_id_fk": {
-          "name": "customers_user_id_users_id_fk",
+        "customers_userId_users_id_fk": {
+          "name": "customers_userId_users_id_fk",
           "tableFrom": "customers",
           "tableTo": "users",
           "schemaTo": "auth",
-          "columnsFrom": ["user_id"],
+          "columnsFrom": ["userId"],
           "columnsTo": ["id"],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -51,7 +81,27 @@
       "uniqueConstraints": {}
     }
   },
-  "enums": {},
+  "enums": {
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "ACTIVE",
+        "CANCELED",
+        "INCOMPLETE",
+        "INCOMPLETE_EXPIRED",
+        "PAST_DUE",
+        "PAUSED",
+        "TRIALING",
+        "UNPAID"
+      ]
+    },
+    "public.plan": {
+      "name": "plan",
+      "schema": "public",
+      "values": ["FREE", "PREMIUM", "ENTERPRISE"]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "_meta": {

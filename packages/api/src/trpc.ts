@@ -50,7 +50,6 @@ export const createTRPCContext = async (opts: {
   console.log(">>> tRPC Request from", source, "by", user.data.user?.email);
 
   return {
-    auth: opts.auth,
     user: user.data.user,
     db,
   };

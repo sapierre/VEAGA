@@ -4,6 +4,16 @@ import createJiti from "jiti";
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
 createJiti(fileURLToPath(import.meta.url))("./src/lib/env");
 
+const INTERNAL_PACKAGES = [
+  "@turbostarter/api",
+  "@turbostarter/auth",
+  "@turbostarter/billing",
+  "@turbostarter/db",
+  "@turbostarter/shared",
+  "@turbostarter/ui",
+  "@turbostarter/ui-web",
+];
+
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -28,15 +38,7 @@ const config = {
   },
 
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: [
-    "@turbostarter/api",
-    "@turbostarter/auth",
-    "@turbostarter/billing",
-    "@turbostarter/db",
-    "@turbostarter/shared",
-    "@turbostarter/ui",
-    "@turbostarter/ui-web",
-  ],
+  transpilePackages: INTERNAL_PACKAGES,
 
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },

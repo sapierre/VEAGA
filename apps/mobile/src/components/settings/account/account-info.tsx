@@ -49,11 +49,9 @@ export const AccountInfo = () => {
       {data ? (
         <Text className="text-xl font-semibold">{getName(data)}</Text>
       ) : (
-        <Link
-          href={pathsConfig.tabs.auth.login}
-          className="text-xl font-semibold"
-        >
-          Login <Icons.ArrowRight size={16} className="text-foreground" />
+        <Link href={pathsConfig.tabs.auth.login}>
+          <Text className="text-xl font-semibold">Login</Text>{" "}
+          <Icons.ArrowRight size={16} className="text-foreground" />
         </Link>
       )}
       <Text className="text-muted-foreground">

@@ -6,8 +6,7 @@ import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
-import { magicLinkLoginSchema } from "@turbostarter/shared/validators";
+import { AUTH_PROVIDER, magicLinkLoginSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -25,7 +24,7 @@ import { TurboLink } from "~/components/common/turbo-link";
 import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
-import type { MagicLinkLoginData } from "@turbostarter/shared/validators";
+import type { MagicLinkLoginData } from "@turbostarter/auth";
 
 type LoginStatus = "pending" | "success" | "error" | "idle";
 

@@ -2,11 +2,12 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
-import { updatePasswordSchema } from "@turbostarter/shared/validators";
+import { updatePasswordSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -17,15 +18,26 @@ import {
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
-import type { UpdatePasswordData } from "@turbostarter/shared/validators";
+import { pathsConfig } from "~/config/paths";
+import { updatePassword } from "~/lib/actions/auth";
+
+import type { UpdatePasswordData } from "@turbostarter/auth";
 
 export const UpdatePasswordForm = memo(() => {
-  const { mutate, isPending } = useMutation({});
+  const { mutate, isPending } = useMutation({
+    mutationFn: updatePassword,
+    onSuccess: () => router.replace(pathsConfig.tabs.auth.login),
+    onError: (error) => {
+      Alert.alert("Something went wrong!", error.message);
+    },
+  });
   const form = useForm<UpdatePasswordData>({
     resolver: zodResolver(updatePasswordSchema),
   });
 
-  const onSubmit = async (data: UpdatePasswordData) => {};
+  const onSubmit = (data: UpdatePasswordData) => {
+    mutate(data);
+  };
 
   return (
     <Form {...form}>

@@ -5,7 +5,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
-import { registerSchema } from "@turbostarter/shared/validators";
+import { registerSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -19,7 +19,7 @@ import { Text } from "@turbostarter/ui-mobile/text";
 import { pathsConfig } from "~/config/paths";
 import { register } from "~/lib/actions/auth";
 
-import type { RegisterData } from "@turbostarter/shared/validators";
+import type { RegisterData } from "@turbostarter/auth";
 
 export const RegisterForm = memo(() => {
   const form = useForm<RegisterData>({
@@ -29,14 +29,16 @@ export const RegisterForm = memo(() => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: RegisterData) => register(data),
     onSuccess: () => {
-      form.reset();
       Alert.alert(
         "Success!",
         "You have successfully registered! Check your email to verify your account.",
         [
           {
             text: "OK",
-            onPress: () => router.navigate(pathsConfig.tabs.auth.login),
+            onPress: () => {
+              router.navigate(pathsConfig.tabs.auth.login);
+              form.reset();
+            },
           },
         ],
       );

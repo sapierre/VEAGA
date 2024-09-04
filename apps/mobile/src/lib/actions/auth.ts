@@ -4,17 +4,18 @@ import * as WebBrowser from "expo-web-browser";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 
+import { pathsConfig } from "~/config/paths";
 import { auth } from "~/lib/auth";
 
-import type { SOCIAL_PROVIDER } from "@turbostarter/auth";
 import type {
+  SOCIAL_PROVIDER,
+  ForgotPasswordData,
   MagicLinkLoginData,
   PasswordLoginData,
   RegisterData,
-} from "@turbostarter/shared/validators";
+  UpdatePasswordData,
+} from "@turbostarter/auth";
 import type { LoginOption } from "~/lib/constants";
-
-const redirectTo = makeRedirectUri();
 
 type LoginPayload =
   | {
@@ -37,7 +38,10 @@ export const login = async ({ data, option }: LoginPayload) => {
     return;
   }
 
-  console.log(redirectTo);
+  const redirectTo = makeRedirectUri({
+    path: pathsConfig.tabs.auth.login,
+  });
+
   const { error } = await auth().signInWithOtp({
     ...data,
     options: {
@@ -51,9 +55,16 @@ export const login = async ({ data, option }: LoginPayload) => {
 };
 
 export const register = async (input: RegisterData) => {
+  const redirectTo = makeRedirectUri({
+    path: pathsConfig.tabs.auth.login,
+  });
+
   const { error } = await auth().signUp({
     email: input.email,
     password: input.password,
+    options: {
+      emailRedirectTo: redirectTo,
+    },
   });
 
   if (error) {
@@ -72,8 +83,8 @@ export const logout = async () => {
 export const createSessionFromUrl = async (url: string) => {
   const { params, errorCode } = QueryParams.getQueryParams(url);
 
-  if (errorCode) {
-    throw new Error(errorCode);
+  if (errorCode ?? params.error) {
+    throw new Error(errorCode ?? params.error);
   }
 
   const { access_token, refresh_token } = params;
@@ -95,6 +106,8 @@ export const createSessionFromUrl = async (url: string) => {
 };
 
 export const loginWithOAuth = async (provider: SOCIAL_PROVIDER) => {
+  const redirectTo = makeRedirectUri();
+
   const { data, error } = await auth().signInWithOAuth({
     provider,
     options: {
@@ -103,7 +116,6 @@ export const loginWithOAuth = async (provider: SOCIAL_PROVIDER) => {
     },
   });
 
-  console.log(data);
   if (error) {
     throw error;
   }
@@ -112,6 +124,28 @@ export const loginWithOAuth = async (provider: SOCIAL_PROVIDER) => {
 
   if (res.type === "success") {
     const { url } = res;
-    await createSessionFromUrl(url);
+    return createSessionFromUrl(url);
+  }
+};
+
+export const forgotPassword = async (input: ForgotPasswordData) => {
+  const redirectTo = makeRedirectUri({
+    path: pathsConfig.tabs.auth.forgotPassword,
+  });
+
+  const { error } = await auth().resetPasswordForEmail(input.email, {
+    redirectTo,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const updatePassword = async (input: UpdatePasswordData) => {
+  const { error } = await auth().updateUser(input);
+
+  if (error) {
+    throw new Error(error.message);
   }
 };

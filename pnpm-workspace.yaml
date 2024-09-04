@@ -1,8 +1,8 @@
 packages:
-  - apps/*
-  - packages/*
-  - packages/ui/*
-  - tooling/*
+  - "apps/*"
+  - "packages/*"
+  - "packages/ui/*"
+  - "tooling/*"
 
 catalog:
   "@tanstack/react-query": ^5.51.9

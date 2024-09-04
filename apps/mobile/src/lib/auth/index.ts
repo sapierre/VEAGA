@@ -22,8 +22,7 @@ export const auth = () =>
         storage: ExpoSecureStoreAdapter,
         autoRefreshToken: true,
         persistSession: true,
-        detectSessionInUrl: true,
-        flowType: "pkce",
+        detectSessionInUrl: false,
       },
     },
   );

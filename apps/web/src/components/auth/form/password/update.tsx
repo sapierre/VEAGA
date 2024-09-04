@@ -7,7 +7,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { updatePasswordSchema } from "@turbostarter/shared/validators";
+import { updatePasswordSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -21,10 +21,10 @@ import { Icons } from "@turbostarter/ui-web/icons";
 import { Input } from "@turbostarter/ui-web/input";
 
 import { pathsConfig } from "~/config/paths";
-import { updateUser } from "~/lib/actions";
+import { updatePassword } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
-import type { UpdatePasswordData } from "@turbostarter/shared/validators";
+import type { UpdatePasswordData } from "@turbostarter/auth";
 
 export const UpdatePasswordForm = memo(() => {
   const router = useRouter();
@@ -34,10 +34,10 @@ export const UpdatePasswordForm = memo(() => {
 
   const onSubmit = async (data: UpdatePasswordData) => {
     const loadingToast = toast.loading("Updating password...");
-    const { success, message } = await updateUser(data);
+    const { error } = await updatePassword(data);
 
-    if (!success) {
-      return toast.error(message, { id: loadingToast });
+    if (error) {
+      return toast.error(error, { id: loadingToast });
     }
 
     toast.success("Success! Now you can login with your new password!", {
