@@ -8,8 +8,8 @@ import { useState } from "react";
 import { NODE_ENV } from "@turbostarter/shared/constants";
 
 import { env } from "~/lib/env";
-import { getUrl } from "~/trpc/shared";
 
+import { getUrl } from "./shared";
 import { createQueryClient, transformer } from "./shared";
 
 import type { QueryClient } from "@tanstack/react-query";

@@ -4,12 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
-    },
     "./*": {
-      "types": "./dist/src/*.d.ts",
+      "types": "./dist/*.d.ts",
       "default": "./src/*.tsx"
     }
   },

@@ -9,28 +9,28 @@ export const HOME_LINKS = [
     href: pathsConfig.auth.login,
   },
   {
+    title: "AI",
+    description:
+      "Integrate AI into your app. Image recognition, chatbots, and more.",
+    href: "#",
+  },
+  {
     title: "Billing",
     description:
       "Receive payments from your users using configured providers - Stripe or LemonSqueezy.",
-    href: pathsConfig.pricing,
+    href: pathsConfig.marketing.pricing,
   },
   {
     title: "Blog",
     description:
       "Manage your blog with ease with built-in integration. Supports MDX and content collections.",
-    href: pathsConfig.blog.index,
+    href: pathsConfig.marketing.blog.index,
   },
   {
     title: "Themes",
     description:
       "Change the look and feel of your app. Light, dark, or custom themes.",
     href: "",
-  },
-  {
-    title: "Analytics",
-    description:
-      "Track user behavior, page views, and more. Integrate with multiple providers.",
-    href: "#",
   },
   {
     title: "Docs",

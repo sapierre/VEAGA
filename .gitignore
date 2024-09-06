@@ -60,3 +60,6 @@ dist/
 
 # extension keys
 apps/extension/keys.json
+
+# content collections
+.content-collections

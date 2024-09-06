@@ -3,11 +3,22 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 import baseConfig from "@turbostarter/tailwind-config/web";
 
+import { createPreset } from "fumadocs-ui/tailwind-plugin";
+
 export default {
   // We need to append the path to the UI package to the content array so that
   // those classes are included correctly.
-  content: [...baseConfig.content, "../../packages/ui/**/*.{ts,tsx}"],
-  presets: [baseConfig],
+  content: [
+    ...baseConfig.content,
+    "../../packages/ui/**/*.{ts,tsx}",
+    "../../node_modules/fumadocs-ui/dist/**/*.js",
+  ],
+  presets: [
+    baseConfig,
+    createPreset({
+      cssPrefix: "fd",
+    }),
+  ],
   theme: {
     extend: {
       fontFamily: {

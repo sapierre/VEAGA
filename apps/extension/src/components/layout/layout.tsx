@@ -1,7 +1,6 @@
 import { useStorage } from "@plasmohq/storage/hook";
 
 import { THEME_MODE, cn } from "@turbostarter/ui";
-import "@turbostarter/ui/globals";
 
 import type { ThemeConfig } from "@turbostarter/ui";
 

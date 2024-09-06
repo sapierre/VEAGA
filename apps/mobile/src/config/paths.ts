@@ -12,7 +12,7 @@ const pathsConfig = {
       error: `/${TABS_PREFIX}${AUTH_PREFIX}/error`,
     },
     billing: `/${TABS_PREFIX}/billing`,
-    blog: `/${TABS_PREFIX}/blog`,
+    ai: `/${TABS_PREFIX}/ai`,
     settings: `/${TABS_PREFIX}/settings`,
   },
 } as const;

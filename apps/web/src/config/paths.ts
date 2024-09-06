@@ -1,12 +1,24 @@
 const AUTH_PREFIX = "/auth";
 const BLOG_PREFIX = "/blog";
-const API_PREFIX = "/api";
 const ADMIN_PREFIX = "/admin";
+const LEGAL_PREFIX = "/legal";
+
+const API_PREFIX = "/api";
 const WEBHOOKS_PREFIX = "/webhooks";
 
 const pathsConfig = {
   index: "/",
-  pricing: "/pricing",
+  marketing: {
+    pricing: "/pricing",
+    blog: {
+      index: BLOG_PREFIX,
+    },
+    legal: {
+      terms: `${LEGAL_PREFIX}/terms-and-conditions`,
+      privacy: `${LEGAL_PREFIX}/privacy-policy`,
+      cookies: `${LEGAL_PREFIX}/cookie-policy`,
+    },
+  },
   auth: {
     login: `${AUTH_PREFIX}/login`,
     register: `${AUTH_PREFIX}/register`,
@@ -16,9 +28,6 @@ const pathsConfig = {
   },
   admin: {
     index: ADMIN_PREFIX,
-  },
-  blog: {
-    index: BLOG_PREFIX,
   },
   api: {
     auth: {
@@ -31,4 +40,11 @@ const pathsConfig = {
   },
 } as const;
 
-export { pathsConfig, ADMIN_PREFIX, BLOG_PREFIX, AUTH_PREFIX, API_PREFIX };
+export {
+  pathsConfig,
+  ADMIN_PREFIX,
+  BLOG_PREFIX,
+  AUTH_PREFIX,
+  API_PREFIX,
+  LEGAL_PREFIX,
+};

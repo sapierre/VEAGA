@@ -8,6 +8,7 @@ const INTERNAL_PACKAGES = [
   "@turbostarter/api",
   "@turbostarter/auth",
   "@turbostarter/billing",
+  "@turbostarter/cms",
   "@turbostarter/db",
   "@turbostarter/shared",
   "@turbostarter/ui",
