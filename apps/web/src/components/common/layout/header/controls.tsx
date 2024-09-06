@@ -5,7 +5,7 @@ import {
   UserNavigationSkeleton,
 } from "~/components/auth/layout/user-navigation";
 import { ThemeControls } from "~/components/common/theme";
-import { api } from "~/trpc/server";
+import { api } from "~/lib/api/server";
 
 export const HeaderControls = () => {
   return (

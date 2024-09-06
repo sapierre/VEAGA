@@ -4,8 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./env": "./src/env/index.ts"
+    ".": {
+      "default": "./src/index.ts",
+      "types": "./dist/index.d.ts"
+    },
+    "./env": {
+      "default": "./src/env/index.ts",
+      "types": "./dist/env/index.d.ts"
+    }
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",

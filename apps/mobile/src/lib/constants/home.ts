@@ -8,16 +8,16 @@ export const HOME_LINKS = [
     href: pathsConfig.tabs.auth.login,
   },
   {
+    title: "AI",
+    description:
+      "Integrate AI into your app. Image recognition, chatbots, and more.",
+    href: pathsConfig.tabs.ai,
+  },
+  {
     title: "Billing",
     description:
       "Receive payments from your users using configured providers - Stripe or LemonSqueezy.",
     href: pathsConfig.tabs.billing,
-  },
-  {
-    title: "Blog",
-    description:
-      "Manage your blog with ease with built-in integration. Supports MDX and content collections.",
-    href: pathsConfig.tabs.blog,
   },
   {
     title: "Docs",

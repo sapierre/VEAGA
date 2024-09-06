@@ -115,9 +115,9 @@ export default function DashboardLayout() {
         }}
       />
       <Tabs.Screen
-        name="blog"
+        name="ai"
         options={{
-          title: "Blog",
+          title: "AI",
           tabBarIcon: ({ focused }) => (
             <Icons.Newspaper
               size={22}

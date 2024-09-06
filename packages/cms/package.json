@@ -1,29 +1,34 @@
 {
-  "name": "@turbostarter/shared",
+  "name": "@turbostarter/cms",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    "./*": {
-      "default": "./src/*/index.ts",
-      "types": "./dist/*/index.d.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "content-collections build",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsc",
+    "dev": "concurrently \"content-collections watch\" \"tsc\"",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "zod": "catalog:"
+    "@content-collections/core": "0.6.4",
+    "@fumadocs/content-collections": "1.1.4",
+    "@turbostarter/shared": "workspace:*",
+    "slugify": "1.6.6"
   },
   "devDependencies": {
+    "@content-collections/cli": "0.1.2",
     "@turbostarter/eslint-config": "workspace:*",
     "@turbostarter/prettier-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
+    "concurrently": "8.2.2",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

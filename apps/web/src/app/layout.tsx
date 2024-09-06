@@ -1,7 +1,5 @@
 import { DM_Mono, DM_Sans } from "next/font/google";
 
-import "@turbostarter/ui/globals";
-
 import { Footer } from "~/components/common/layout/footer";
 import { TailwindIndicator } from "~/components/common/tailwind-indicator";
 import { Toaster } from "~/components/common/toast";

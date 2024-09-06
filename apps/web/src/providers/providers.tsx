@@ -1,6 +1,7 @@
+import { RootProvider } from "fumadocs-ui/provider";
 import { memo } from "react";
 
-import { TRPCReactProvider } from "~/trpc/react";
+import { TRPCReactProvider } from "~/lib/api/react";
 
 import { ThemeProvider } from "./theme";
 
@@ -11,7 +12,9 @@ interface ProvidersProps {
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (
     <TRPCReactProvider>
-      <ThemeProvider>{children}</ThemeProvider>
+      <RootProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </RootProvider>
     </TRPCReactProvider>
   );
 });

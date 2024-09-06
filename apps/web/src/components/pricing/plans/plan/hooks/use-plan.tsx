@@ -12,8 +12,8 @@ import {
 
 import { PLAN_FEATURES } from "~/components/pricing/constants/features";
 import { pathsConfig } from "~/config/paths";
+import { api } from "~/lib/api/react";
 import { publicUrl } from "~/lib/env";
-import { api } from "~/trpc/react";
 
 import type { User } from "@turbostarter/auth";
 import type {
@@ -66,7 +66,7 @@ export const usePlan = (
   const handleCheckout = async (user: User | null) => {
     if (!user) {
       return router.push(
-        `${pathsConfig.auth.login}?redirectTo=${pathsConfig.pricing}`,
+        `${pathsConfig.auth.login}?redirectTo=${pathsConfig.marketing.pricing}`,
       );
     }
 
@@ -95,7 +95,7 @@ export const usePlan = (
   const handleOpenPortal = async (user: User | null) => {
     if (!user) {
       return router.push(
-        `${pathsConfig.auth.login}?redirectTo=${pathsConfig.pricing}`,
+        `${pathsConfig.auth.login}?redirectTo=${pathsConfig.marketing.pricing}`,
       );
     }
 

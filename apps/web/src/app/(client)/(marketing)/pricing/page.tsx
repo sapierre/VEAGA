@@ -1,6 +1,6 @@
 import { Pricing } from "~/components/pricing/pricing";
+import { api } from "~/lib/api/server";
 import { getMetadata } from "~/lib/metadata";
-import { api } from "~/trpc/server";
 
 export const metadata = getMetadata({
   title: "Pricing",

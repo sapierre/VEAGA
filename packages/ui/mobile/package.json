@@ -5,19 +5,19 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
+      "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
     },
     "./icons": {
-      "types": "./dist/src/lib/icons/index.d.ts",
+      "types": "./dist/lib/icons/index.d.ts",
       "default": "./src/lib/icons/index.ts"
     },
     "./primitives/*": {
-      "types": "./dist/src/components/primitives/*.d.ts",
+      "types": "./dist/components/primitives/*.d.ts",
       "default": "./src/components/primitives/*.tsx"
     },
     "./*": {
-      "types": "./dist/src/components/ui/*.d.ts",
+      "types": "./dist/components/ui/*.d.ts",
       "default": "./src/components/ui/*.tsx"
     }
   },

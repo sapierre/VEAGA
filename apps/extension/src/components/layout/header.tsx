@@ -39,7 +39,9 @@ const User = () => {
 
   const user = session?.session?.user ?? null;
   const { data: customer, isLoading: isCustomerLoading } =
-    api.billing.getCustomer.useQuery();
+    api.billing.getCustomer.useQuery(undefined, {
+      enabled: !!user,
+    });
 
   if (isSessionLoading || isCustomerLoading) {
     return <UserNavigationSkeleton />;

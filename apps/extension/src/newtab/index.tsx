@@ -1,5 +1,3 @@
-import "@turbostarter/ui/globals";
-
 import { Main } from "~components/common/main";
 import { Layout } from "~components/layout/layout";
 import "~styles/globals.css";

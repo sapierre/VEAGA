@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./globals": "./src/styles/variables.css",
+    "./globals.css": "./src/styles/variables.css",
     ".": {
-      "types": "./dist/src/index.d.ts",
+      "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
     }
   },

@@ -1,8 +1,7 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
-import slugify from "slugify";
 
 const APP_NAME = "TurboStarter";
-const SLUG = slugify(APP_NAME, { lower: true });
+const SLUG = "turbostarter";
 
 const SPLASH = {
   image: "./assets/images/splash/light.png",
@@ -41,7 +40,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   extra: {
     eas: {
-      projectId: "",
+      projectId: "a7958179-7450-4e6f-8791-da222215909e",
     },
   },
   experiments: {
