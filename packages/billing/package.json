@@ -40,6 +40,6 @@
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/db": "workspace:*",
     "@turbostarter/shared": "workspace:*",
-    "stripe": "16.8.0"
+    "stripe": "16.10.0"
   }
 }

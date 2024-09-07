@@ -579,8 +579,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       stripe:
-        specifier: 16.8.0
-        version: 16.8.0
+        specifier: 16.10.0
+        version: 16.10.0
     devDependencies:
       '@turbostarter/eslint-config':
         specifier: workspace:*
@@ -10148,8 +10148,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  stripe@16.8.0:
-    resolution: {integrity: sha512-6rOIcGOkxcc29jvhEyOYmpPFilekOBV+7vpemAoIAfbtCRW1yxzdDGM0/0vyekHglLL+wqGpP5ldrhO3dJ2JEQ==}
+  stripe@16.10.0:
+    resolution: {integrity: sha512-H0qeSCkZVvk4fVchUbg0rNNviwOyw3Rsr9X6MKe84ajBeMz4ogEOZykaUcb/n0GSdvWlXAtbnB1gxl3xOlH+ZA==}
     engines: {node: '>=12.*'}
 
   strnum@1.0.5:
@@ -22524,7 +22524,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  stripe@16.8.0:
+  stripe@16.10.0:
     dependencies:
       '@types/node': 20.14.9
       qs: 6.13.0
