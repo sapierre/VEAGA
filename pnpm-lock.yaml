@@ -67,8 +67,8 @@ importers:
         specifier: 7.4.2
         version: 7.4.2
       husky:
-        specifier: ^9.1.4
-        version: 9.1.4
+        specifier: ^9.1.5
+        version: 9.1.5
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -1352,12 +1352,6 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/plugin-transform-async-generator-functions@7.25.0':
-    resolution: {integrity: sha512-uaIi2FdqzjpAMvVqvB51S42oC2JEVgh0LDsGfZVDysWE8LrJtQC2jvKmOqEYThKyB7bDEb7BP1GYWDm7tABA0Q==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
   '@babel/plugin-transform-async-generator-functions@7.25.4':
     resolution: {integrity: sha512-jz8cV2XDDTqjKPwVPJBIjORVEmSGYhdRa8e5k5+vN+uwcjSrSxUaebBRa4ko1jqNF2uxyg8G6XYk30Jv285xzg==}
     engines: {node: '>=6.9.0'}
@@ -1378,12 +1372,6 @@ packages:
 
   '@babel/plugin-transform-block-scoping@7.25.0':
     resolution: {integrity: sha512-yBQjYoOjXlFv9nlXb3f1casSHOZkWr29NX+zChVanLg5Nc157CrbEX9D7hxxtTpuFy7Q0YzmmWfJxzvps4kXrQ==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
-  '@babel/plugin-transform-class-properties@7.24.7':
-    resolution: {integrity: sha512-vKbfawVYayKcSeSR5YYzzyXvsDFWU2mD8U5TFeXtbCPLFUqe7GyCgvO6XDHzje862ODrOwy6WCPmKeWHbCFJ4w==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -7295,8 +7283,8 @@ packages:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
 
-  husky@9.1.4:
-    resolution: {integrity: sha512-bho94YyReb4JV7LYWRWxZ/xr6TtOTt8cMfmQ39MQYJ7f/YE268s3GdghGwi+y4zAeqewE5zYLvuhV0M0ijsDEA==}
+  husky@9.1.5:
+    resolution: {integrity: sha512-rowAVRUBfI0b4+niA4SJMhfQwc107VLkBUgEYYAOQAbqDCnra1nYh83hF/MDmhYs9t9n1E3DuKOrs2LYNC+0Ag==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -11535,16 +11523,6 @@ snapshots:
       '@babel/core': 7.25.2
       '@babel/helper-plugin-utils': 7.24.8
 
-  '@babel/plugin-transform-async-generator-functions@7.25.0(@babel/core@7.25.2)':
-    dependencies:
-      '@babel/core': 7.25.2
-      '@babel/helper-plugin-utils': 7.24.8
-      '@babel/helper-remap-async-to-generator': 7.25.0(@babel/core@7.25.2)
-      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.25.2)
-      '@babel/traverse': 7.25.3
-    transitivePeerDependencies:
-      - supports-color
-
   '@babel/plugin-transform-async-generator-functions@7.25.4(@babel/core@7.25.2)':
     dependencies:
       '@babel/core': 7.25.2
@@ -11573,14 +11551,6 @@ snapshots:
     dependencies:
       '@babel/core': 7.25.2
       '@babel/helper-plugin-utils': 7.24.8
-
-  '@babel/plugin-transform-class-properties@7.24.7(@babel/core@7.25.2)':
-    dependencies:
-      '@babel/core': 7.25.2
-      '@babel/helper-create-class-features-plugin': 7.25.0(@babel/core@7.25.2)
-      '@babel/helper-plugin-utils': 7.24.8
-    transitivePeerDependencies:
-      - supports-color
 
   '@babel/plugin-transform-class-properties@7.25.4(@babel/core@7.25.2)':
     dependencies:
@@ -12988,10 +12958,10 @@ snapshots:
   '@ianvs/prettier-plugin-sort-imports@4.3.1(@vue/compiler-sfc@3.3.4)(prettier@3.3.3)':
     dependencies:
       '@babel/core': 7.25.2
-      '@babel/generator': 7.25.0
-      '@babel/parser': 7.25.3
-      '@babel/traverse': 7.25.3
-      '@babel/types': 7.25.2
+      '@babel/generator': 7.25.6
+      '@babel/parser': 7.25.6
+      '@babel/traverse': 7.25.6
+      '@babel/types': 7.25.6
       prettier: 3.3.3
       semver: 7.6.3
     optionalDependencies:
@@ -15300,11 +15270,11 @@ snapshots:
       '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.25.2)
       '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.25.2)
       '@babel/plugin-transform-arrow-functions': 7.24.7(@babel/core@7.25.2)
-      '@babel/plugin-transform-async-generator-functions': 7.25.0(@babel/core@7.25.2)
+      '@babel/plugin-transform-async-generator-functions': 7.25.4(@babel/core@7.25.2)
       '@babel/plugin-transform-async-to-generator': 7.24.7(@babel/core@7.25.2)
       '@babel/plugin-transform-block-scoping': 7.25.0(@babel/core@7.25.2)
-      '@babel/plugin-transform-class-properties': 7.24.7(@babel/core@7.25.2)
-      '@babel/plugin-transform-classes': 7.25.0(@babel/core@7.25.2)
+      '@babel/plugin-transform-class-properties': 7.25.4(@babel/core@7.25.2)
+      '@babel/plugin-transform-classes': 7.25.4(@babel/core@7.25.2)
       '@babel/plugin-transform-computed-properties': 7.24.7(@babel/core@7.25.2)
       '@babel/plugin-transform-destructuring': 7.24.8(@babel/core@7.25.2)
       '@babel/plugin-transform-flow-strip-types': 7.25.2(@babel/core@7.25.2)
@@ -15320,7 +15290,7 @@ snapshots:
       '@babel/plugin-transform-optional-catch-binding': 7.24.7(@babel/core@7.25.2)
       '@babel/plugin-transform-optional-chaining': 7.24.8(@babel/core@7.25.2)
       '@babel/plugin-transform-parameters': 7.24.7(@babel/core@7.25.2)
-      '@babel/plugin-transform-private-methods': 7.24.7(@babel/core@7.25.2)
+      '@babel/plugin-transform-private-methods': 7.25.4(@babel/core@7.25.2)
       '@babel/plugin-transform-private-property-in-object': 7.24.7(@babel/core@7.25.2)
       '@babel/plugin-transform-react-display-name': 7.24.7(@babel/core@7.25.2)
       '@babel/plugin-transform-react-jsx': 7.25.2(@babel/core@7.25.2)
@@ -15356,7 +15326,7 @@ snapshots:
 
   '@react-native/codegen@0.75.2(@babel/preset-env@7.25.4(@babel/core@7.25.2))':
     dependencies:
-      '@babel/parser': 7.25.3
+      '@babel/parser': 7.25.6
       '@babel/preset-env': 7.25.4(@babel/core@7.25.2)
       glob: 7.2.3
       hermes-parser: 0.22.0
@@ -19096,7 +19066,7 @@ snapshots:
 
   human-signals@5.0.0: {}
 
-  husky@9.1.4: {}
+  husky@9.1.5: {}
 
   hyphenate-style-name@1.1.0: {}
 
