@@ -15,7 +15,7 @@
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
     "@plasmohq/messaging": "0.6.2",
-    "@plasmohq/storage": "1.11.0",
+    "@plasmohq/storage": "1.12.0",
     "@t3-oss/env-core": "0.11.0",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
@@ -38,7 +38,7 @@
     "@turbostarter/prettier-config": "workspace:*",
     "@turbostarter/tailwind-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
-    "@types/chrome": "0.0.258",
+    "@types/chrome": "0.0.270",
     "@types/node": "20.14.9",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",

@@ -28,7 +28,7 @@
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
     "@supabase/ssr": "0.4.1",
-    "@supabase/supabase-js": "2.45.1",
+    "@supabase/supabase-js": "2.45.3",
     "zod": "catalog:"
   }
 }

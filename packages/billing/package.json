@@ -35,11 +35,11 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@lemonsqueezy/lemonsqueezy.js": "3.2.0",
+    "@lemonsqueezy/lemonsqueezy.js": "3.3.0",
     "@t3-oss/env-core": "0.11.0",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/db": "workspace:*",
     "@turbostarter/shared": "workspace:*",
-    "stripe": "16.8.0"
+    "stripe": "16.10.0"
   }
 }
