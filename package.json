@@ -35,7 +35,7 @@
     "@turbostarter/prettier-config": "workspace:*",
     "dotenv-cli": "7.4.2",
     "husky": "^9.1.4",
-    "prettier": "3.2.5",
+    "prettier": "3.3.3",
     "turbo": "2.0.12",
     "typescript": "5.5.4"
   },
