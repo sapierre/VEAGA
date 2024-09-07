@@ -15,7 +15,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "0.5.4",
     "@hookform/resolvers": "3.9.0",
-    "@t3-oss/env-nextjs": "0.10.1",
+    "@t3-oss/env-nextjs": "0.11.1",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
