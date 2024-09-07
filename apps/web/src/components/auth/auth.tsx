@@ -17,7 +17,7 @@ const AuthLayout = memo<AuthLayoutProps>(({ children }) => {
     <div className="grow">
       <div className="flex flex-1 flex-col justify-start lg:flex-none">
         <div className="mx-auto w-full max-w-sm lg:w-96">
-          <div className="flex flex-col gap-6">{children}</div>
+          <main className="flex flex-col gap-6">{children}</main>
         </div>
       </div>
     </div>

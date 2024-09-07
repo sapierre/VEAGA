@@ -26,7 +26,7 @@ interface PlansProps {
 export const Plans = memo<PlansProps>(
   ({ plans, discounts, interval, user, customer, model, currency }) => {
     return (
-      <div className="flex w-full flex-wrap items-center justify-center gap-12 md:gap-6 lg:gap-4">
+      <main className="flex w-full flex-wrap items-center justify-center gap-12 md:gap-6 lg:gap-4">
         {plans.map((plan) => (
           <Plan
             key={plan.id}
@@ -39,7 +39,7 @@ export const Plans = memo<PlansProps>(
             discounts={discounts}
           />
         ))}
-      </div>
+      </main>
     );
   },
 );
