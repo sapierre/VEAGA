@@ -360,7 +360,7 @@ importers:
         version: 0.5.4
       "@hookform/resolvers":
         specifier: 3.9.0
-        version: 3.9.0(react-hook-form@7.52.2(react@18.3.1))
+        version: 3.9.0(react-hook-form@7.53.0(react@18.3.1))
       '@t3-oss/env-nextjs':
         specifier: 0.11.1
         version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
@@ -428,8 +428,8 @@ importers:
         specifier: catalog:react18
         version: 18.3.1(react@18.3.1)
       react-hook-form:
-        specifier: 7.52.2
-        version: 7.52.2(react@18.3.1)
+        specifier: 7.53.0
+        version: 7.53.0(react@18.3.1)
       sonner:
         specifier: 1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -851,8 +851,8 @@ importers:
         specifier: catalog:react18
         version: 18.3.1
       react-hook-form:
-        specifier: 7.52.2
-        version: 7.52.2(react@18.3.1)
+        specifier: 7.53.0
+        version: 7.53.0(react@18.3.1)
       typescript:
         specifier: "catalog:"
         version: 5.5.4
@@ -14377,12 +14377,9 @@ packages:
     peerDependencies:
       react: ">=17.0.0"
 
-  react-hook-form@7.52.2:
-    resolution:
-      {
-        integrity: sha512-pqfPEbERnxxiNMPd0bzmt1tuaPcVccywFDpyk2uV5xCIBphHV5T8SVnX9/o3kplPE1zzKt77+YIoq+EMwJp56A==,
-      }
-    engines: { node: ">=18.0.0" }
+  react-hook-form@7.53.0:
+    resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
 
@@ -19116,9 +19113,9 @@ snapshots:
     dependencies:
       "@hapi/hoek": 9.3.0
 
-  "@hookform/resolvers@3.9.0(react-hook-form@7.52.2(react@18.3.1))":
+  '@hookform/resolvers@3.9.0(react-hook-form@7.53.0(react@18.3.1))':
     dependencies:
-      react-hook-form: 7.52.2(react@18.3.1)
+      react-hook-form: 7.53.0(react@18.3.1)
 
   "@humanwhocodes/module-importer@1.0.1": {}
 
@@ -27536,7 +27533,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  react-hook-form@7.52.2(react@18.3.1):
+  react-hook-form@7.53.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
