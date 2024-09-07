@@ -121,7 +121,7 @@ importers:
         version: link:../../packages/ui/web
       plasmo:
         specifier: 0.89.1
-        version: 0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
+        version: 0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -469,7 +469,7 @@ importers:
         version: 18.3.0
       autoprefixer:
         specifier: 10.4.20
-        version: 10.4.20(postcss@8.4.41)
+        version: 10.4.20(postcss@8.4.45)
       eslint:
         specifier: "catalog:"
         version: 9.9.0(jiti@1.21.6)
@@ -933,8 +933,8 @@ importers:
         specifier: 0.5.15
         version: 0.5.15(tailwindcss@3.4.10(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4)))
       postcss:
-        specifier: ^8.4.39
-        version: 8.4.41
+        specifier: ^8.4.45
+        version: 8.4.45
       tailwindcss:
         specifier: 3.4.10
         version: 3.4.10(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4))
@@ -14042,6 +14042,10 @@ packages:
       }
     engines: { node: ^10 || ^12 || >=14 }
 
+  postcss@8.4.45:
+    resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
+    engines: {node: ^10 || ^12 || >=14}
+
   postgres@3.4.4:
     resolution:
       {
@@ -19446,39 +19450,39 @@ snapshots:
     transitivePeerDependencies:
       - "@parcel/core"
 
-  "@parcel/config-default@2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)":
+  '@parcel/config-default@2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.45)(terser@5.31.5)(typescript@5.2.2)':
     dependencies:
-      "@parcel/bundler-default": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/compressor-raw": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/core": 2.9.3
-      "@parcel/namer-default": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/optimizer-css": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/optimizer-htmlnano": 2.9.3(@parcel/core@2.9.3)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)
-      "@parcel/optimizer-image": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/optimizer-svgo": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/optimizer-swc": 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)
-      "@parcel/packager-css": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/packager-html": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/packager-js": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/packager-raw": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/packager-svg": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/reporter-dev-server": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/resolver-default": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/runtime-browser-hmr": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/runtime-js": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/runtime-react-refresh": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/runtime-service-worker": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-babel": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-css": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-html": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-image": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-js": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-json": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-postcss": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-posthtml": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-raw": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-react-refresh-wrap": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-svg": 2.9.3(@parcel/core@2.9.3)
+      '@parcel/bundler-default': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/compressor-raw': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/core': 2.9.3
+      '@parcel/namer-default': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/optimizer-css': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/optimizer-htmlnano': 2.9.3(@parcel/core@2.9.3)(postcss@8.4.45)(terser@5.31.5)(typescript@5.2.2)
+      '@parcel/optimizer-image': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/optimizer-svgo': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/optimizer-swc': 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)
+      '@parcel/packager-css': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/packager-html': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/packager-js': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/packager-raw': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/packager-svg': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/reporter-dev-server': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/resolver-default': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/runtime-browser-hmr': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/runtime-js': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/runtime-react-refresh': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/runtime-service-worker': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-babel': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-css': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-html': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-image': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-js': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-json': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-postcss': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-posthtml': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-raw': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-react-refresh-wrap': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-svg': 2.9.3(@parcel/core@2.9.3)
     transitivePeerDependencies:
       - "@swc/helpers"
       - cssnano
@@ -19627,10 +19631,10 @@ snapshots:
     transitivePeerDependencies:
       - "@parcel/core"
 
-  "@parcel/optimizer-htmlnano@2.9.3(@parcel/core@2.9.3)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)":
+  '@parcel/optimizer-htmlnano@2.9.3(@parcel/core@2.9.3)(postcss@8.4.45)(terser@5.31.5)(typescript@5.2.2)':
     dependencies:
-      "@parcel/plugin": 2.9.3(@parcel/core@2.9.3)
-      htmlnano: 2.1.1(postcss@8.4.41)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2)
+      '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
+      htmlnano: 2.1.1(postcss@8.4.45)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -20198,43 +20202,43 @@ snapshots:
     transitivePeerDependencies:
       - "@parcel/core"
 
-  "@plasmohq/parcel-config@0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)":
+  '@plasmohq/parcel-config@0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)':
     dependencies:
-      "@parcel/compressor-raw": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/config-default": 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.41)(terser@5.31.5)(typescript@5.2.2)
-      "@parcel/core": 2.9.3
-      "@parcel/optimizer-data-url": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/reporter-bundle-buddy": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/resolver-default": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/runtime-js": 2.8.3(@parcel/core@2.9.3)
-      "@parcel/runtime-service-worker": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/source-map": 2.1.1
-      "@parcel/transformer-babel": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-css": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-graphql": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-inline-string": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-js": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-less": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-postcss": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-raw": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-react-refresh-wrap": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-sass": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-svg-react": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/transformer-worklet": 2.9.3(@parcel/core@2.9.3)
-      "@plasmohq/parcel-bundler": 0.5.5
-      "@plasmohq/parcel-compressor-utf8": 0.1.0(@parcel/core@2.9.3)
-      "@plasmohq/parcel-namer-manifest": 0.3.12
-      "@plasmohq/parcel-optimizer-encapsulate": 0.0.7
-      "@plasmohq/parcel-optimizer-es": 0.4.0(@swc/helpers@0.5.5)
-      "@plasmohq/parcel-packager": 0.6.14
-      "@plasmohq/parcel-resolver": 0.14.0
-      "@plasmohq/parcel-resolver-post": 0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
-      "@plasmohq/parcel-runtime": 0.25.0
-      "@plasmohq/parcel-transformer-inject-env": 0.2.11
-      "@plasmohq/parcel-transformer-inline-css": 0.3.11
-      "@plasmohq/parcel-transformer-manifest": 0.19.0
-      "@plasmohq/parcel-transformer-svelte": 0.6.0
-      "@plasmohq/parcel-transformer-vue": 0.5.0(handlebars@4.7.8)(lodash@4.17.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@parcel/compressor-raw': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/config-default': 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.45)(terser@5.31.5)(typescript@5.2.2)
+      '@parcel/core': 2.9.3
+      '@parcel/optimizer-data-url': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/reporter-bundle-buddy': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/resolver-default': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/runtime-js': 2.8.3(@parcel/core@2.9.3)
+      '@parcel/runtime-service-worker': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/source-map': 2.1.1
+      '@parcel/transformer-babel': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-css': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-graphql': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-inline-string': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-js': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-less': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-postcss': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-raw': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-react-refresh-wrap': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-sass': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-svg-react': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/transformer-worklet': 2.9.3(@parcel/core@2.9.3)
+      '@plasmohq/parcel-bundler': 0.5.5
+      '@plasmohq/parcel-compressor-utf8': 0.1.0(@parcel/core@2.9.3)
+      '@plasmohq/parcel-namer-manifest': 0.3.12
+      '@plasmohq/parcel-optimizer-encapsulate': 0.0.7
+      '@plasmohq/parcel-optimizer-es': 0.4.0(@swc/helpers@0.5.5)
+      '@plasmohq/parcel-packager': 0.6.14
+      '@plasmohq/parcel-resolver': 0.14.0
+      '@plasmohq/parcel-resolver-post': 0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
+      '@plasmohq/parcel-runtime': 0.25.0
+      '@plasmohq/parcel-transformer-inject-env': 0.2.11
+      '@plasmohq/parcel-transformer-inline-css': 0.3.11
+      '@plasmohq/parcel-transformer-manifest': 0.19.0
+      '@plasmohq/parcel-transformer-svelte': 0.6.0
+      '@plasmohq/parcel-transformer-vue': 0.5.0(handlebars@4.7.8)(lodash@4.17.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - "@swc/core"
       - "@swc/helpers"
@@ -20348,14 +20352,14 @@ snapshots:
       "@parcel/utils": 2.9.3
       nullthrows: 1.1.1
 
-  "@plasmohq/parcel-resolver-post@0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))":
+  '@plasmohq/parcel-resolver-post@0.4.4(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))':
     dependencies:
-      "@parcel/core": 2.9.3
-      "@parcel/hash": 2.9.3
-      "@parcel/plugin": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/types": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/utils": 2.9.3
-      tsup: 7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
+      '@parcel/core': 2.9.3
+      '@parcel/hash': 2.9.3
+      '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/types': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/utils': 2.9.3
+      tsup: 7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
       - "@swc/core"
@@ -22323,7 +22327,7 @@ snapshots:
       "@vue/shared": 3.3.4
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.41
+      postcss: 8.4.45
       source-map-js: 1.2.0
 
   "@vue/compiler-ssr@3.3.4":
@@ -22602,14 +22606,14 @@ snapshots:
 
   at-least-node@1.0.0: {}
 
-  autoprefixer@10.4.20(postcss@8.4.41):
+  autoprefixer@10.4.20(postcss@8.4.45):
     dependencies:
       browserslist: 4.23.3
       caniuse-lite: 1.0.30001651
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
-      postcss: 8.4.41
+      postcss: 8.4.45
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -24957,13 +24961,13 @@ snapshots:
     dependencies:
       lru-cache: 6.0.0
 
-  htmlnano@2.1.1(postcss@8.4.41)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2):
+  htmlnano@2.1.1(postcss@8.4.45)(svgo@2.8.0)(terser@5.31.5)(typescript@5.2.2):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.2.2)
       posthtml: 0.16.6
       timsort: 0.3.0
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       svgo: 2.8.0
       terser: 5.31.5
     transitivePeerDependencies:
@@ -27203,16 +27207,16 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  plasmo@0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
+  plasmo@0.89.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
     dependencies:
-      "@expo/spawn-async": 1.7.2
-      "@parcel/core": 2.9.3
-      "@parcel/fs": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/package-manager": 2.9.3(@parcel/core@2.9.3)
-      "@parcel/watcher": 2.2.0
-      "@plasmohq/init": 0.7.0
-      "@plasmohq/parcel-config": 0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.41)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
-      "@plasmohq/parcel-core": 0.1.8
+      '@expo/spawn-async': 1.7.2
+      '@parcel/core': 2.9.3
+      '@parcel/fs': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/package-manager': 2.9.3(@parcel/core@2.9.3)
+      '@parcel/watcher': 2.2.0
+      '@plasmohq/init': 0.7.0
+      '@plasmohq/parcel-config': 0.41.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2)
+      '@plasmohq/parcel-core': 0.1.8
       buffer: 6.0.3
       chalk: 5.3.0
       change-case: 5.1.2
@@ -27306,37 +27310,37 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-import@15.1.0(postcss@8.4.41):
+  postcss-import@15.1.0(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.4.41):
+  postcss-js@4.0.1(postcss@8.4.45):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.41
+      postcss: 8.4.45
 
-  postcss-load-config@4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
+  postcss-load-config@4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       ts-node: 10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4)
 
-  postcss-load-config@4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4)):
+  postcss-load-config@4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       ts-node: 10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4)
 
-  postcss-nested@6.2.0(postcss@8.4.41):
+  postcss-nested@6.2.0(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       postcss-selector-parser: 6.1.2
 
   postcss-selector-parser@6.0.10:
@@ -27358,6 +27362,12 @@ snapshots:
       source-map-js: 1.2.0
 
   postcss@8.4.41:
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.0.1
+      source-map-js: 1.2.0
+
+  postcss@8.4.45:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.1
@@ -28640,11 +28650,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.1
-      postcss: 8.4.41
-      postcss-import: 15.1.0(postcss@8.4.41)
-      postcss-js: 4.0.1(postcss@8.4.41)
-      postcss-load-config: 4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4))
-      postcss-nested: 6.2.0(postcss@8.4.41)
+      postcss: 8.4.45
+      postcss-import: 15.1.0(postcss@8.4.45)
+      postcss-js: 4.0.1(postcss@8.4.45)
+      postcss-load-config: 4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4))
+      postcss-nested: 6.2.0(postcss@8.4.45)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -28876,7 +28886,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2):
+  tsup@7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))(typescript@5.2.2):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.18.20)
       cac: 6.7.14
@@ -28886,15 +28896,15 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.41)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
+      postcss-load-config: 4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.14.9)(typescript@5.5.4))
       resolve-from: 5.0.0
       rollup: 3.29.4
       source-map: 0.8.0-beta.0
       sucrase: 3.35.0
       tree-kill: 1.2.2
     optionalDependencies:
-      "@swc/core": 1.7.10(@swc/helpers@0.5.5)
-      postcss: 8.4.41
+      '@swc/core': 1.7.10(@swc/helpers@0.5.5)
+      postcss: 8.4.45
       typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
