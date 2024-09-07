@@ -20,7 +20,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@t3-oss/env-core": "0.11.0",
+    "@t3-oss/env-core": "0.11.1",
     "@trpc/server": "catalog:",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/billing": "workspace:*",

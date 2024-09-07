@@ -86,11 +86,11 @@ importers:
       "@plasmohq/storage":
         specifier: 1.12.0
         version: 1.12.0(react@18.3.1)
-      "@t3-oss/env-core":
-        specifier: 0.11.0
-        version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
-      "@tanstack/react-query":
-        specifier: "catalog:"
+      '@t3-oss/env-core':
+        specifier: 0.11.1
+        version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
+      '@tanstack/react-query':
+        specifier: 'catalog:'
         version: 5.51.23(react@18.3.1)
       "@trpc/client":
         specifier: "catalog:"
@@ -185,15 +185,15 @@ importers:
         version: 0.18.11
       "@react-native-async-storage/async-storage":
         specifier: 2.0.0
-        version: 2.0.0(react-native@0.75.2(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)(typescript@5.5.4))
-      "@shopify/flash-list":
-        specifier: 1.7.1
-        version: 1.7.1(@babel/runtime@7.25.0)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)
-      "@t3-oss/env-core":
-        specifier: 0.11.0
-        version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
-      "@tanstack/react-query":
-        specifier: "catalog:"
+        version: 2.0.0(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))
+      '@shopify/flash-list':
+        specifier: 1.6.4
+        version: 1.6.4(@babel/runtime@7.25.6)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)
+      '@t3-oss/env-core':
+        specifier: 0.11.1
+        version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
+      '@tanstack/react-query':
+        specifier: 'catalog:'
         version: 5.51.23(react@18.3.1)
       "@trpc/client":
         specifier: "catalog:"
@@ -485,11 +485,11 @@ importers:
 
   packages/api:
     dependencies:
-      "@t3-oss/env-core":
-        specifier: 0.11.0
-        version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
-      "@trpc/server":
-        specifier: "catalog:"
+      '@t3-oss/env-core':
+        specifier: 0.11.1
+        version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
+      '@trpc/server':
+        specifier: 'catalog:'
         version: 11.0.0-rc.477
       "@turbostarter/auth":
         specifier: workspace:*
@@ -565,10 +565,10 @@ importers:
       "@lemonsqueezy/lemonsqueezy.js":
         specifier: 3.3.0
         version: 3.3.0
-      "@t3-oss/env-core":
-        specifier: 0.11.0
-        version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
-      "@turbostarter/auth":
+      '@t3-oss/env-core':
+        specifier: 0.11.1
+        version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
+      '@turbostarter/auth':
         specifier: workspace:*
         version: link:../auth
       "@turbostarter/db":
@@ -642,9 +642,9 @@ importers:
 
   packages/db:
     dependencies:
-      "@t3-oss/env-core":
-        specifier: 0.11.0
-        version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
+      '@t3-oss/env-core':
+        specifier: 0.11.1
+        version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
       drizzle-orm:
         specifier: 0.33.0
         version: 0.33.0(@types/react@18.3.3)(postgres@3.4.4)(react@18.3.1)
@@ -6265,8 +6265,8 @@ packages:
       }
     engines: { node: ">=14.16" }
 
-  '@t3-oss/env-core@0.11.0':
-    resolution: {integrity: sha512-PSalC5bG0a7XbyoLydiQdAnx3gICX6IQNctvh+TyLrdFxsxgocdj9Ui7sd061UlBzi+z4aIGjnem1kZx9QtUgQ==}
+  '@t3-oss/env-core@0.11.1':
+    resolution: {integrity: sha512-MaxOwEoG1ntCFoKJsS7nqwgcxLW1SJw238AJwfJeaz3P/8GtkxXZsPPolsz1AdYvUTbe3XvqZ/VCdfjt+3zmKw==}
     peerDependencies:
       typescript: ">=5.0.0"
       zod: ^3.0.0
@@ -21943,7 +21943,13 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@t3-oss/env-core@0.11.0(typescript@5.5.4)(zod@3.23.8)':
+  '@t3-oss/env-core@0.10.1(typescript@5.5.4)(zod@3.23.8)':
+    dependencies:
+      zod: 3.23.8
+    optionalDependencies:
+      typescript: 5.5.4
+
+  '@t3-oss/env-core@0.11.1(typescript@5.5.4)(zod@3.23.8)':
     dependencies:
       zod: 3.23.8
     optionalDependencies:
