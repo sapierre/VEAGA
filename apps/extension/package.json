@@ -16,7 +16,7 @@
   "dependencies": {
     "@plasmohq/messaging": "0.6.2",
     "@plasmohq/storage": "1.12.0",
-    "@t3-oss/env-core": "0.11.0",
+    "@t3-oss/env-core": "0.11.1",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
@@ -39,7 +39,7 @@
     "@turbostarter/tailwind-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
     "@types/chrome": "0.0.270",
-    "@types/node": "20.14.9",
+    "@types/node": "20.16.5",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
     "eslint": "catalog:",
