@@ -531,10 +531,10 @@ importers:
 
   packages/auth:
     dependencies:
-      "@supabase/ssr":
-        specifier: 0.4.1
-        version: 0.4.1(@supabase/supabase-js@2.45.3)
-      "@supabase/supabase-js":
+      '@supabase/ssr':
+        specifier: 0.5.1
+        version: 0.5.1(@supabase/supabase-js@2.45.3)
+      '@supabase/supabase-js':
         specifier: 2.45.3
         version: 2.45.3
       zod:
@@ -5693,19 +5693,8 @@ packages:
       }
     engines: { node: ">=14.15" }
 
-  "@rollup/rollup-linux-x64-gnu@4.20.0":
-    resolution:
-      {
-        integrity: sha512-y+eoL2I3iphUg9tN9GB6ku1FA8kOfmF4oUEWhztDJ4KXJy1agk/9+pejOuZkNFhRwHAOxMsBPLbXPd6mJiCwew==,
-      }
-    cpu: [x64]
-    os: [linux]
-
-  "@segment/loosely-validate-event@2.0.0":
-    resolution:
-      {
-        integrity: sha512-ZMCSfztDBqwotkl848ODgVcAmN4OItEWDCkshcKz0/W6gGSQayuuCtWV/MlodFivAZD793d6UgANd6wCXUfrIw==,
-      }
+  '@segment/loosely-validate-event@2.0.0':
+    resolution: {integrity: sha512-ZMCSfztDBqwotkl848ODgVcAmN4OItEWDCkshcKz0/W6gGSQayuuCtWV/MlodFivAZD793d6UgANd6wCXUfrIw==}
 
   "@shikijs/core@1.16.2":
     resolution:
@@ -5815,11 +5804,8 @@ packages:
         integrity: sha512-qyCQaNg90HmJstsvr2aJNxK2zgoKh9ZZA8oqb7UT2LCh3mj9zpa3Iwu167AuyNxsxrUE8eEJ2yH6wLCij4EApA==,
       }
 
-  "@supabase/ssr@0.4.1":
-    resolution:
-      {
-        integrity: sha512-000i7y4ITXjXU0T1JytZYU33VbUNklX9YN47hCweaLKsTBAEigJJJCeq3G+/IiwEggBt58Vu0KQ3UGXON7OmDQ==,
-      }
+  '@supabase/ssr@0.5.1':
+    resolution: {integrity: sha512-+G94H/GZG0nErZ3FQV9yJmsC5Rj7dmcfCAwOt37hxeR1La+QTl8cE9whzYwPUrTJjMLGNXoO+1BMvVxwBAbz4g==}
     peerDependencies:
       "@supabase/supabase-js": ^2.43.4
 
@@ -21593,10 +21579,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  "@rollup/rollup-linux-x64-gnu@4.20.0":
-    optional: true
-
-  "@segment/loosely-validate-event@2.0.0":
+  '@segment/loosely-validate-event@2.0.0':
     dependencies:
       component-type: 1.2.2
       join-component: 1.1.0
@@ -21675,12 +21658,10 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  "@supabase/ssr@0.4.1(@supabase/supabase-js@2.45.3)":
+  '@supabase/ssr@0.5.1(@supabase/supabase-js@2.45.3)':
     dependencies:
       "@supabase/supabase-js": 2.45.3
       cookie: 0.6.0
-    optionalDependencies:
-      "@rollup/rollup-linux-x64-gnu": 4.20.0
 
   "@supabase/storage-js@2.7.0":
     dependencies:
