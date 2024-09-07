@@ -39,7 +39,7 @@
     "@turbostarter/tailwind-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
     "@types/chrome": "0.0.270",
-    "@types/node": "20.14.9",
+    "@types/node": "20.16.5",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
     "eslint": "catalog:",
