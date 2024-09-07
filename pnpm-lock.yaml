@@ -680,8 +680,8 @@ importers:
         specifier: "catalog:"
         version: 3.3.3
       supabase:
-        specifier: 1.188.4
-        version: 1.188.4
+        specifier: 1.191.3
+        version: 1.191.3
       typescript:
         specifier: "catalog:"
         version: 5.5.4
@@ -15796,12 +15796,9 @@ packages:
         integrity: sha512-Mu7R0g4ig9TUuGSxJavny5Rv0egCEtpZRNMrZaYS1vxkiIxGiGUwoezU3LazIQ+KE04hTrTfNPgxU5gzi7F5Pw==,
       }
 
-  supabase@1.188.4:
-    resolution:
-      {
-        integrity: sha512-ntOhjrBlnMdacbcmGmuv7Q2JuH6oeukc5iCHFtjZxQRmE583p02HdsALEq7KdITEMjFJOvjM4xJ5/32HAYuRQQ==,
-      }
-    engines: { npm: ">=8" }
+  supabase@1.191.3:
+    resolution: {integrity: sha512-5tIG7mPc5lZ9QRbkZssyHiOsx42qGFaVqclauXv+1fJAkZnfA28d0pzEDvfs33+w8YTReO5nNaWAgyzkWQQwfA==}
+    engines: {npm: '>=8'}
     hasBin: true
 
   superjson@2.2.1:
@@ -28603,7 +28600,7 @@ snapshots:
 
   sudo-prompt@9.2.1: {}
 
-  supabase@1.188.4:
+  supabase@1.191.3:
     dependencies:
       bin-links: 4.0.4
       https-proxy-agent: 7.0.5
