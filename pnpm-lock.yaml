@@ -182,14 +182,14 @@ importers:
         specifier: 0.2.3
         version: 0.2.3
       '@expo/metro-config':
-        specifier: ^0.18.8
+        specifier: ^0.18.11
         version: 0.18.11
       '@react-native-async-storage/async-storage':
         specifier: 2.0.0
         version: 2.0.0(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))
       '@shopify/flash-list':
-        specifier: 1.6.4
-        version: 1.6.4(@babel/runtime@7.25.6)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)
+        specifier: 1.7.1
+        version: 1.7.1(@babel/runtime@7.25.6)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)
       '@t3-oss/env-core':
         specifier: 0.11.1
         version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
@@ -224,7 +224,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui/mobile
       expo:
-        specifier: ~51.0.17
+        specifier: ~51.0.32
         version: 51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))
       expo-application:
         specifier: ~5.9.1
@@ -251,8 +251,8 @@ importers:
         specifier: ~3.0.7
         version: 3.0.7(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
       expo-router:
-        specifier: ~3.5.17
-        version: 3.5.23(z5ltt63xw3hji5grq7yaud6sqa)
+        specifier: ~3.5.23
+        version: 3.5.23(kyjubt6hm77f6sl64tagoinn6u)
       expo-secure-store:
         specifier: ^13.0.2
         version: 13.0.2(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2)))
@@ -405,8 +405,8 @@ importers:
         specifier: 1.11.13
         version: 1.11.13
       framer-motion:
-        specifier: 11.5.4
-        version: 11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 11.3.24
+        version: 11.3.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       fumadocs-ui:
         specifier: 13.4.7
         version: 13.4.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.8(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -618,7 +618,7 @@ importers:
     devDependencies:
       '@content-collections/cli':
         specifier: 0.1.3
-        version: 0.1.3(@content-collections/core@0.6.4(typescript@5.5.4))
+        version: 0.1.3(@content-collections/core@0.7.0(typescript@5.5.4))
       '@turbostarter/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
@@ -870,11 +870,11 @@ importers:
         specifier: ^14.2.8
         version: 14.2.8
       eslint-plugin-import:
-        specifier: ^2.30.0
+        specifier: ^2.29.1
         version: 2.30.0(@typescript-eslint/parser@8.4.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-jsx-a11y:
-        specifier: ^6.9.0
-        version: 6.9.0(eslint@9.9.0(jiti@1.21.6))
+        specifier: ^6.10.0
+        version: 6.10.0(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react:
         specifier: ^7.35.2
         version: 7.35.2(eslint@9.9.0(jiti@1.21.6))
@@ -4358,8 +4358,8 @@ packages:
   '@shikijs/vscode-textmate@9.2.0':
     resolution: {integrity: sha512-5FinaOp6Vdh/dl4/yaOTh0ZeKch+rYS8DUb38V3GMKYVkdqzxw53lViRKUYkVILRiVQT7dcPC7VvAKOR73zVtQ==}
 
-  '@shopify/flash-list@1.6.4':
-    resolution: {integrity: sha512-M2momcnY7swsvmpHIFDVbdOaFw4aQocJXA/lFP0Gpz+alQjFylqVKvszxl4atYO2SNbjxlb2L6hEP9WEcAknGQ==}
+  '@shopify/flash-list@1.7.1':
+    resolution: {integrity: sha512-sUYl7h8ydJutufA26E42Hj7cLvaBTpkMIyNJiFrxUspkcANb6jnFiLt9rEwAuDjvGk/C0lHau+WyT6ZOxqVPwg==}
     peerDependencies:
       '@babel/runtime': '*'
       react: '*'
@@ -5270,17 +5270,15 @@ packages:
     engines: {node: '>= 0.4'}
 
   axe-core@4.10.0:
-    resolution:
-      {
-        integrity: sha512-Mr2ZakwQ7XUAjp7pAwQWRhhK8mQQ6JAaNWSjmjxil0R8BPioMtQsTLOolGYkji1rcL++3dCqZA3zWqpT+9Ew6g==,
-      }
-    engines: { node: ">=4" }
-
-  axobject-query@3.1.1:
-    resolution: {integrity: sha512-goKlv8DZrK9hUh975fnHzhNIO4jUnFCfv/dszV5VwUGDFjI6vQ2VwoyjYjYNEbBE8AH87TduWP5uyDR1D+Iteg==}
+    resolution: {integrity: sha512-Mr2ZakwQ7XUAjp7pAwQWRhhK8mQQ6JAaNWSjmjxil0R8BPioMtQsTLOolGYkji1rcL++3dCqZA3zWqpT+9Ew6g==}
+    engines: {node: '>=4'}
 
   axobject-query@3.2.4:
     resolution: {integrity: sha512-aPTElBrbifBU1krmZxGZOlBkslORe7Ll7+BDnI50Wy4LgOt69luMgevkDfTq1O/ZgprooPCtWpjCwKSZw/iZ4A==}
+    engines: {node: '>= 0.4'}
+
+  axobject-query@4.1.0:
+    resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
     engines: {node: '>= 0.4'}
 
   b4a@1.6.6:
@@ -5939,9 +5937,6 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
 
-  dayjs@1.11.12:
-    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
-
   dayjs@1.11.13:
     resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
@@ -6439,11 +6434,11 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-jsx-a11y@6.9.0:
-    resolution: {integrity: sha512-nOFOCaJG2pYqORjK19lqPqxMO/JpvdCZdPtNdxY3kvom3jTvkAbOvQvD8wuD0G8BYR0IGAGYDlzqWJOh/ybn2g==}
+  eslint-plugin-jsx-a11y@6.10.0:
+    resolution: {integrity: sha512-ySOHvXX8eSN6zz8Bywacm7CvGNhUtdjvqfQDVe6020TUK34Cywkw7m0KsCCk1Qtm9G1FayfTN1/7mMYnYO2Bhg==}
     engines: {node: '>=4.0'}
     peerDependencies:
-      eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
+      eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
   eslint-plugin-react-hooks@5.1.0-rc-a03254bc-20240905:
     resolution: {integrity: sha512-MAQG2WZjBdVBz2mpyWz2l7piMjBoHrSaPiWAQqyJuwbmRRy5YHdVW/jkLXQcKWoct+U02AojaWh+EGKfsL1fgA==}
@@ -6879,8 +6874,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@11.5.4:
-    resolution: {integrity: sha512-E+tb3/G6SO69POkdJT+3EpdMuhmtCh9EWuK4I1DnIC23L7tFPrl8vxP+LSovwaw6uUr73rUbpb4FgK011wbRJQ==}
+  framer-motion@11.3.24:
+    resolution: {integrity: sha512-kl0YI7HwAtyV0VOAWuU/rXoOS8+z5qSkMN6rZS+a9oe6fIha6SC3vjJN6u/hBpvjrg5MQNdSnqnjYxm0WYTX9g==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -7423,10 +7418,6 @@ packages:
 
   is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
-    engines: {node: '>= 0.4'}
-
-  is-core-module@2.15.0:
-    resolution: {integrity: sha512-Dd+Lb2/zvk9SKy1TGCt1wFJFo/MWBPMX5x7KcvLajWTGuomczdQX61PvY5yK6SVACwpoexWo81IfFyoKY2QnTA==}
     engines: {node: '>= 0.4'}
 
   is-core-module@2.15.1:
@@ -9584,8 +9575,8 @@ packages:
     resolution: {integrity: sha512-hjMmLaUXAm1hIuTqOdeYObMslq/q+Xff6QE3Y2P+uoHAg2nmVlLBps2hzh1UJDdMtDTMXOFewK6ky51JQIeECg==}
     engines: {node: '>= 4'}
 
-  recyclerlistview@4.2.0:
-    resolution: {integrity: sha512-uuBCi0c+ggqHKwrzPX4Z/mJOzsBbjZEAwGGmlwpD/sD7raXixdAbdJ6BTcAmuWG50Cg4ru9p12M94Njwhr/27A==}
+  recyclerlistview@4.2.1:
+    resolution: {integrity: sha512-NtVYjofwgUCt1rEsTp6jHQg/47TWjnO92TU2kTVgJ9wsc/ely4HnizHHa+f/dI7qaw4+zcSogElrLjhMltN2/g==}
     peerDependencies:
       react: '>= 15.2.1'
       react-native: '>= 0.30.0'
@@ -10437,9 +10428,6 @@ packages:
 
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-
-  tslib@2.4.0:
-    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
@@ -11863,7 +11851,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.25.2
       '@babel/helper-annotate-as-pure': 7.24.7
-      '@babel/helper-create-class-features-plugin': 7.25.4(@babel/core@7.25.2)
+      '@babel/helper-create-class-features-plugin': 7.25.0(@babel/core@7.25.2)
       '@babel/helper-plugin-utils': 7.24.8
       '@babel/helper-skip-transparent-expression-wrappers': 7.24.7
       '@babel/plugin-syntax-typescript': 7.24.7(@babel/core@7.25.2)
@@ -12244,10 +12232,10 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.0
       chalk: 5.3.0
 
-  '@content-collections/cli@0.1.3(@content-collections/core@0.6.4(typescript@5.5.4))':
+  '@content-collections/cli@0.1.3(@content-collections/core@0.7.0(typescript@5.5.4))':
     dependencies:
-      '@content-collections/core': 0.6.4(typescript@5.5.4)
-      '@content-collections/integrations': 0.2.0(@content-collections/core@0.6.4(typescript@5.5.4))
+      '@content-collections/core': 0.7.0(typescript@5.5.4)
+      '@content-collections/integrations': 0.2.0(@content-collections/core@0.7.0(typescript@5.5.4))
       clerc: 0.44.0
 
   '@content-collections/core@0.7.0(typescript@5.5.4)':
@@ -12266,7 +12254,7 @@ snapshots:
       yaml: 2.5.0
       zod: 3.23.8
 
-  '@content-collections/integrations@0.2.0(@content-collections/core@0.6.4(typescript@5.5.4))':
+  '@content-collections/integrations@0.2.0(@content-collections/core@0.7.0(typescript@5.5.4))':
     dependencies:
       '@content-collections/core': 0.7.0(typescript@5.5.4)
 
@@ -15268,7 +15256,7 @@ snapshots:
 
   '@react-native/codegen@0.74.87(@babel/preset-env@7.25.4(@babel/core@7.25.2))':
     dependencies:
-      '@babel/parser': 7.25.3
+      '@babel/parser': 7.25.6
       '@babel/preset-env': 7.25.4(@babel/core@7.25.2)
       glob: 7.2.3
       hermes-parser: 0.19.1
@@ -15602,13 +15590,13 @@ snapshots:
 
   '@shikijs/vscode-textmate@9.2.0': {}
 
-  '@shopify/flash-list@1.6.4(@babel/runtime@7.25.6)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)':
+  '@shopify/flash-list@1.7.1(@babel/runtime@7.25.6)(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.25.6
       react: 18.3.1
       react-native: 0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1)
-      recyclerlistview: 4.2.0(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)
-      tslib: 2.4.0
+      recyclerlistview: 4.2.1(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1)
+      tslib: 2.6.3
 
   '@sideway/address@4.1.5':
     dependencies:
@@ -16610,11 +16598,9 @@ snapshots:
 
   axe-core@4.10.0: {}
 
-  axobject-query@3.1.1:
-    dependencies:
-      deep-equal: 2.2.3
-
   axobject-query@3.2.4: {}
+
+  axobject-query@4.1.0: {}
 
   b4a@1.6.6: {}
 
@@ -17367,8 +17353,6 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.25.6
 
-  dayjs@1.11.12: {}
-
   dayjs@1.11.13: {}
 
   debug@2.6.9:
@@ -17911,14 +17895,14 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jsx-a11y@6.9.0(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-jsx-a11y@6.10.0(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       aria-query: 5.1.3
       array-includes: 3.1.8
       array.prototype.flatmap: 1.3.2
       ast-types-flow: 0.0.8
       axe-core: 4.10.0
-      axobject-query: 3.1.1
+      axobject-query: 4.1.0
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
       es-iterator-helpers: 1.0.19
@@ -18508,7 +18492,7 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@11.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.3.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.6.3
     optionalDependencies:
@@ -19189,10 +19173,6 @@ snapshots:
 
   is-callable@1.2.7: {}
 
-  is-core-module@2.15.0:
-    dependencies:
-      hasown: 2.0.2
-
   is-core-module@2.15.1:
     dependencies:
       hasown: 2.0.2
@@ -19827,7 +19807,7 @@ snapshots:
   logkitty@0.7.1:
     dependencies:
       ansi-fragments: 0.2.1
-      dayjs: 1.11.12
+      dayjs: 1.11.13
       yargs: 15.4.1
 
   longest-streak@3.1.0: {}
@@ -20198,8 +20178,8 @@ snapshots:
 
   metro-source-map@0.80.10:
     dependencies:
-      '@babel/traverse': 7.25.3
-      '@babel/types': 7.25.2
+      '@babel/traverse': 7.25.6
+      '@babel/types': 7.25.6
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
       metro-symbolicate: 0.80.10
@@ -21903,7 +21883,7 @@ snapshots:
       source-map: 0.6.1
       tslib: 2.6.3
 
-  recyclerlistview@4.2.0(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1):
+  recyclerlistview@4.2.1(react-native@0.74.5(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.3)(react@18.3.1))(react@18.3.1):
     dependencies:
       lodash.debounce: 4.0.8
       prop-types: 15.8.1
@@ -22068,7 +22048,7 @@ snapshots:
 
   resolve@1.22.8:
     dependencies:
-      is-core-module: 2.15.0
+      is-core-module: 2.15.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
@@ -22078,7 +22058,7 @@ snapshots:
 
   resolve@2.0.0-next.5:
     dependencies:
-      is-core-module: 2.15.0
+      is-core-module: 2.15.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
@@ -22934,8 +22914,6 @@ snapshots:
       strip-bom: 3.0.0
 
   tslib@1.14.1: {}
-
-  tslib@2.4.0: {}
 
   tslib@2.6.3: {}
 

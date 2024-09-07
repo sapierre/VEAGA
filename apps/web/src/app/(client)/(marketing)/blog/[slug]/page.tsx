@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 
 import { Mdx } from "~/components/common/mdx";
-import { generateParams, getPage, getPages } from "~/lib/content/blog";
+import { getPage, getPages } from "~/lib/content/blog";
 import { getMetadata } from "~/lib/metadata";
 
 import type { TableOfContents } from "fumadocs-core/server";
 
-export default function Page({ params }: { params: { slug?: string } }) {
+export default function Page({ params }: { params: { slug: string } }) {
   const page = getPage([params.slug]);
 
   if (!page) {
@@ -31,7 +31,7 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug?: string } }) {
+export function generateMetadata({ params }: { params: { slug: string } }) {
   const page = getPage([params.slug]);
 
   if (!page) {
