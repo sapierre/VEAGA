@@ -10,7 +10,8 @@
     }
   },
   "scripts": {
-    "build": "content-collections build",
+    "build": "tsc",
+    "build:content": "content-collections build",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "concurrently \"content-collections watch\" \"tsc\"",
     "format": "prettier --check . --ignore-path ../../.gitignore",

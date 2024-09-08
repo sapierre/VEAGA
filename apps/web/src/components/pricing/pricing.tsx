@@ -43,7 +43,7 @@ export const Pricing = memo<PricingProps>(({ user, customer }) => {
   );
 
   return (
-    <div className="mt-4 flex w-full flex-col items-center justify-start gap-14 pb-16 lg:gap-24 lg:pb-28">
+    <div className="flex w-full flex-col items-center justify-start gap-14 lg:gap-24">
       <PricingHeader
         currency={config.currency}
         model={config.model}

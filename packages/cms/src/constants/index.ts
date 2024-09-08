@@ -2,6 +2,7 @@ import type { z } from "zod";
 
 export const COLLECTION_TYPE = {
   LEGAL: "legal",
+  BLOG: "blog",
 } as const;
 
 export type CollectionType =

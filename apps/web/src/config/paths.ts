@@ -12,6 +12,7 @@ const pathsConfig = {
     pricing: "/pricing",
     blog: {
       index: BLOG_PREFIX,
+      post: (slug: string) => `${BLOG_PREFIX}/${slug}`,
     },
     legal: {
       terms: `${LEGAL_PREFIX}/terms-and-conditions`,

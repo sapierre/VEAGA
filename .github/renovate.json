@@ -10,6 +10,8 @@
   "updateInternalDeps": true,
   "rangeStrategy": "bump",
   "automerge": true,
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
   "npm": {
     "fileMatch": ["(^|/)package\\.json$", "(^|/)package\\.json\\.hbs$"]
   }

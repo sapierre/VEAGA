@@ -24,7 +24,7 @@ const HomePage = () => {
         </p>
       </div>
       <Icons.Logo className="h-36 animate-pulse text-primary" />
-      <div className="grid grid-cols-1 items-stretch justify-center gap-3 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid grid-cols-1 items-stretch justify-center gap-3 sm:grid-cols-2 md:-mb-4 md:grid-cols-3 lg:-mb-14">
         {HOME_LINKS.map((link) => (
           <TurboLink
             href={link.href}

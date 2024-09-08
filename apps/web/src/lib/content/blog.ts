@@ -3,9 +3,9 @@ import { loader } from "fumadocs-core/source";
 
 import { content } from "@turbostarter/cms";
 
-import { LEGAL_PREFIX } from "~/config/paths";
+import { BLOG_PREFIX } from "~/config/paths";
 
 export const { getPage, getPages, generateParams, pageTree } = loader({
-  baseUrl: LEGAL_PREFIX,
-  source: createMDXSource(content.legal.all, content.legal.meta),
+  baseUrl: BLOG_PREFIX,
+  source: createMDXSource(content.blog.all, content.blog.meta),
 });
