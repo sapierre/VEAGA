@@ -39,10 +39,7 @@ export const Mdx = memo<MdxProps>(({ data }) => {
         </DocsTitle>
         <div className="flex flex-wrap items-center gap-3">
           {data.publishedAt && (
-            <time
-              dateTime={data.publishedAt.toISOString()}
-              className="text-muted-foreground"
-            >
+            <time className="text-muted-foreground">
               {dayjs(data.publishedAt).format("MMMM D, YYYY")}
             </time>
           )}

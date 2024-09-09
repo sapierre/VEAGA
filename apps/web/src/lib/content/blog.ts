@@ -7,5 +7,5 @@ import { BLOG_PREFIX } from "~/config/paths";
 
 export const { getPage, getPages, generateParams, pageTree } = loader({
   baseUrl: BLOG_PREFIX,
-  source: createMDXSource(content.blog.all, content.blog.meta),
+  source: createMDXSource(content.blog, []),
 });

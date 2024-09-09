@@ -56,10 +56,7 @@ const BlogPage = () => {
                   {post.data.title}
                 </CardTitle>
                 <div className="flex flex-wrap items-center gap-3">
-                  <time
-                    dateTime={post.data.publishedAt.toISOString()}
-                    className="text-muted-foreground"
-                  >
+                  <time className="text-muted-foreground">
                     {dayjs(post.data.publishedAt).format("MMMM D, YYYY")}
                   </time>
 

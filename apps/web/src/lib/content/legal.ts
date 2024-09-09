@@ -7,5 +7,5 @@ import { LEGAL_PREFIX } from "~/config/paths";
 
 export const { getPage, getPages, generateParams, pageTree } = loader({
   baseUrl: LEGAL_PREFIX,
-  source: createMDXSource(content.legal.all, content.legal.meta),
+  source: createMDXSource(content.legal, []),
 });

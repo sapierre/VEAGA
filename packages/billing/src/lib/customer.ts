@@ -28,7 +28,6 @@ export const updateCustomer = (
 ) => {
   return db.update(customers).set(data).where(eq(customers.userId, userId));
 };
-
 export const upsertCustomer = (data: InsertCustomer) => {
   return db.insert(customers).values(data).onConflictDoUpdate({
     target: customers.userId,

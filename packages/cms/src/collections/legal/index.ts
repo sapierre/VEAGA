@@ -2,9 +2,7 @@ import { defineCollection } from "@content-collections/core";
 import { transformMDX } from "@fumadocs/content-collections/configuration";
 import slugify from "slugify";
 
-import { createMetaSchema } from "../../constants";
-
-const content = defineCollection({
+export const legal = defineCollection({
   name: "legal",
   directory: "src/collections/legal/content",
   include: "**/*.mdx",
@@ -21,13 +19,3 @@ const content = defineCollection({
     };
   },
 });
-
-const meta = defineCollection({
-  name: "legalMeta",
-  directory: "src/collections/legal/content",
-  include: "**/meta.json",
-  parser: "json",
-  schema: createMetaSchema,
-});
-
-export const legal = [content, meta];

@@ -6,11 +6,7 @@ import { getMetadata } from "~/lib/metadata";
 
 import type { TableOfContents } from "fumadocs-core/server";
 
-export default function Page({ params }: { params: { slug?: string } }) {
-  if (!params.slug) {
-    notFound();
-  }
-
+export default function Page({ params }: { params: { slug: string } }) {
   const page = getPage([params.slug]);
 
   if (!page) {
@@ -35,11 +31,7 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug?: string } }) {
-  if (!params.slug) {
-    return notFound();
-  }
-
+export function generateMetadata({ params }: { params: { slug: string } }) {
   const page = getPage([params.slug]);
 
   if (!page) {
