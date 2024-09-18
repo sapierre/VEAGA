@@ -16,15 +16,6 @@ jobs:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
 
-      - name: 🔥 Run tests
-        uses: convictional/trigger-workflow-and-wait@v1.6.5
-        with:
-          owner: turbostarter
-          repo: main
-          github_token: ${{ secrets.CI_ACCESS_TOKEN }}
-          workflow_file_name: tests.yml
-          ref: ${{ github.ref }}
-
       - name: 🔨 Setup
         uses: ./tooling/github/setup
         with:

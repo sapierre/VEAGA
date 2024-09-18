@@ -4,6 +4,5 @@ import { webhookHandler } from "./webhook";
 export const stripeStrategy = () => ({
   webhookHandler,
   checkout,
-  // getPlans,
   getBillingPortal,
 });

@@ -1,5 +1,11 @@
 import { DMMono_400Regular } from "@expo-google-fonts/dm-mono";
-import { DMSans_400Regular, useFonts } from "@expo-google-fonts/dm-sans";
+import {
+  DMSans_400Regular,
+  DMSans_500Medium,
+  DMSans_400Regular_Italic,
+  DMSans_700Bold,
+  useFonts,
+} from "@expo-google-fonts/dm-sans";
 import {
   DarkTheme,
   DefaultTheme,
@@ -57,6 +63,9 @@ const RootLayout = () => {
   const [fontsLoaded, fontsError] = useFonts({
     DMMono_400Regular,
     DMSans_400Regular,
+    DMSans_500Medium,
+    DMSans_400Regular_Italic,
+    DMSans_700Bold,
   });
 
   const { loaded: themeLoaded, setupTheme } = useTheme();

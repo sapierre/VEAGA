@@ -7,7 +7,12 @@ import { LEMON_SQUEEZY_SIGNATURE_HEADER, relevantEvents } from "./constants";
 import { validateSignature } from "./signing";
 import { webhookHasData, webhookHasMeta } from "./type-guards";
 
-export const webhookHandler = async (req: Request) => {
+import type { WebhookCallbacks } from "../../types";
+
+export const webhookHandler = async (
+  req: Request,
+  callbacks?: WebhookCallbacks,
+) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
     return new Response("Unsupported billing provider!", { status: 400 });
   }
@@ -41,13 +46,25 @@ export const webhookHandler = async (req: Request) => {
       try {
         switch (type) {
           case "subscription_created":
+            await callbacks?.onSubscriptionCreated?.(data.data.id);
+            void subscriptionStatusChangeHandler({
+              id: data.data.id,
+            });
+            break;
           case "subscription_updated":
+            await callbacks?.onSubscriptionUpdated?.(data.data.id);
+            void subscriptionStatusChangeHandler({
+              id: data.data.id,
+            });
+            break;
           case "subscription_expired":
+            await callbacks?.onSubscriptionDeleted?.(data.data.id);
             void subscriptionStatusChangeHandler({
               id: data.data.id,
             });
             break;
           case "order_created":
+            await callbacks?.onCheckoutSessionCompleted?.(data.data.id);
             void checkoutStatusChangeHandler({
               id: data.data.id,
             });

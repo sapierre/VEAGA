@@ -15,6 +15,9 @@ export default {
     extend: {
       fontFamily: {
         sans: ["DMSans_400Regular"],
+        "sans-medium": ["DMSans_500Medium"],
+        "sans-bold": ["DMSans_700Bold"],
+        "sans-italic": ["DMSans_400Regular_Italic"],
         mono: ["DMMono_400Regular"],
       },
       borderWidth: {

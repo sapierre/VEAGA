@@ -14,6 +14,7 @@ import {
   Sun,
   SunMoon,
   Moon,
+  WandSparkles,
   CircleX,
 } from "lucide-react-native";
 
@@ -41,6 +42,7 @@ iconWithClassName(Sun);
 iconWithClassName(SunMoon);
 iconWithClassName(Moon);
 iconWithClassName(CircleX);
+iconWithClassName(WandSparkles);
 
 export const Icons = {
   Logo: GlobalIcons.Logo,
@@ -63,4 +65,5 @@ export const Icons = {
   SunMoon,
   Moon,
   CircleX,
+  WandSparkles,
 };

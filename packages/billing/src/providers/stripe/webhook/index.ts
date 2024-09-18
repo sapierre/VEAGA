@@ -6,9 +6,13 @@ import { subscriptionStatusChangeHandler } from "../subscription";
 import { STRIPE_SIGNATURE_HEADER, relevantEvents } from "./constants";
 import { constructEvent } from "./event";
 
+import type { WebhookCallbacks } from "../../types";
 import type Stripe from "stripe";
 
-export const webhookHandler = async (req: Request) => {
+export const webhookHandler = async (
+  req: Request,
+  callbacks?: WebhookCallbacks,
+) => {
   if (env.BILLING_PROVIDER !== BillingProvider.STRIPE) {
     return new Response("Unsupported billing provider!", { status: 400 });
   }
@@ -40,17 +44,32 @@ export const webhookHandler = async (req: Request) => {
 
   if (relevantEvents.has(event.type)) {
     console.log(`🔔  Relevant event: ${event.type}`);
+
     try {
       switch (event.type) {
         case "customer.subscription.created":
+          await callbacks?.onSubscriptionCreated?.(event.data.object.id);
+          void subscriptionStatusChangeHandler({
+            id: event.data.object.id,
+            customerId: event.data.object.customer as string,
+          });
+          break;
         case "customer.subscription.updated":
+          await callbacks?.onSubscriptionUpdated?.(event.data.object.id);
+          void subscriptionStatusChangeHandler({
+            id: event.data.object.id,
+            customerId: event.data.object.customer as string,
+          });
+          break;
         case "customer.subscription.deleted":
+          await callbacks?.onSubscriptionDeleted?.(event.data.object.id);
           void subscriptionStatusChangeHandler({
             id: event.data.object.id,
             customerId: event.data.object.customer as string,
           });
           break;
         case "checkout.session.completed":
+          await callbacks?.onCheckoutSessionCompleted?.(event.data.object.id);
           void checkoutStatusChangeHandler(event.data.object);
           break;
         default:

@@ -1,6 +1,7 @@
 import { Tabs, router } from "expo-router";
 import { cssInterop } from "nativewind";
 
+import { capitalize } from "@turbostarter/shared/utils";
 import { cn } from "@turbostarter/ui";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
@@ -68,11 +69,7 @@ export default function DashboardLayout() {
   return (
     <TabContainer
       screenOptions={({ route }) => ({
-        header: () => (
-          <Header
-            title={route.name.slice(0, 1).toUpperCase() + route.name.slice(1)}
-          />
-        ),
+        header: () => <Header title={capitalize(route.name)} />,
       })}
       tabBarClassName="bg-muted"
     >
@@ -119,7 +116,7 @@ export default function DashboardLayout() {
         options={{
           title: "AI",
           tabBarIcon: ({ focused }) => (
-            <Icons.Newspaper
+            <Icons.WandSparkles
               size={22}
               className={cn("text-muted-foreground", {
                 "text-primary": focused,
