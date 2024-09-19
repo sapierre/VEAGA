@@ -21,12 +21,13 @@ import {
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
+import { env } from "~/lib/env";
+
 import { Logout } from "./logout";
 
 import type { User } from "@turbostarter/auth";
 import type { Customer } from "@turbostarter/billing";
 
-import { env } from "~lib/env";
 
 const PLAN_EMOJIS: Record<PricingPlanType, string> = {
   [PricingPlanType.FREE]: "🆓",

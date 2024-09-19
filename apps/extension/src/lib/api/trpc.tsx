@@ -6,10 +6,11 @@ import superjson from "superjson";
 
 import { NODE_ENV } from "@turbostarter/shared/constants";
 
-import type { AppRouter } from "@turbostarter/api";
 
-import { auth } from "~lib/auth";
-import { env } from "~lib/env";
+import { auth } from "~/lib/auth";
+import { env } from "~/lib/env";
+
+import type { AppRouter } from "@turbostarter/api";
 
 export const api = createTRPCReact<AppRouter>();
 export { type RouterInputs, type RouterOutputs } from "@turbostarter/api";

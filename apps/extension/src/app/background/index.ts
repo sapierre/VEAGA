@@ -1,4 +1,4 @@
-import { setupStorage } from "~lib/storage";
+import { setupStorage } from "~/lib/storage";
 
 const main = async () => {
   await setupStorage();

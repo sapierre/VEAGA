@@ -6,10 +6,13 @@ import { hairlineWidth } from "nativewind/theme";
 import baseConfig from "@turbostarter/tailwind-config/mobile";
 
 export default {
-  // We need to append the path to the UI package to the content array so that
+  // We need to append the path to the UI packages to the content array so that
   // those classes are included correctly.
   darkMode: "class",
-  content: [...baseConfig.content, "../../packages/ui/**/*.{ts,tsx}"],
+  content: [
+    ...baseConfig.content,
+    "../../packages/ui/{shared,mobile}/src/**/*.{ts,tsx}",
+  ],
   presets: [baseConfig, nativewind],
   theme: {
     extend: {

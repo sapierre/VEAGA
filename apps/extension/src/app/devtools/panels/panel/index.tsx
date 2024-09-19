@@ -1,12 +1,12 @@
 import { createRoot } from "react-dom/client";
 
-import { Main } from "~components/common/main";
-import { Layout } from "~components/layout/layout";
+import { Main } from "~/components/common/main";
+import { Layout } from "~/components/layout/layout";
 
-const Sidebar = () => {
+const Panel = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/devtools/panels/sidebar" />
+      <Main filename="src/app/devtools/panels/panel" />
     </Layout>
   );
 };
@@ -14,4 +14,4 @@ const Sidebar = () => {
 const element = document.getElementById("root");
 
 const root = element ? createRoot(element) : null;
-root?.render(<Sidebar />);
+root?.render(<Panel />);

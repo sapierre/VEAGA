@@ -1,10 +1,12 @@
 import sidebarHTML from "url:./panels/sidebar/index.html";
-import panelIcon from "url:../../assets/icon.png";
+
+import { Main } from "~/components/common/main";
+import { Layout } from "~/components/layout/layout";
+
+import panelIcon from "url:../../../assets/icon.png";
 
 import panelHTML from "./panels/panel/index.html";
 
-import { Main } from "~components/common/main";
-import { Layout } from "~components/layout/layout";
 
 chrome.devtools.panels.create(
   chrome.i18n.getMessage("extensionName"),
@@ -23,7 +25,7 @@ chrome.devtools.panels.elements.createSidebarPane(
 const Devtools = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/devtools" />
+      <Main filename="src/app/devtools" />
     </Layout>
   );
 };

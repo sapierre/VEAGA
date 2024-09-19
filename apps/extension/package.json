@@ -5,12 +5,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "plasmo build --zip",
-    "clean": "git clean -xdf .cache .next .turbo node_modules",
-    "dev": "plasmo dev",
+    "build": "pnpm with-app-dir plasmo build --zip",
+    "clean": "git clean -xdf .cache .plasmo .turbo node_modules",
+    "dev": "pnpm with-app-dir plasmo dev",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "with-app-dir": "sh -c '[[ \"$@\" == *--src-path* ]] || set -- \"$@\" --src-path=src/app; \"$@\"' --"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {

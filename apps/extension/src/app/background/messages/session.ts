@@ -1,8 +1,9 @@
+import { auth } from "~/lib/auth";
+import { env } from "~/lib/env";
+
 import type { PlasmoMessaging } from "@plasmohq/messaging";
 import type { Session } from "@turbostarter/auth";
 
-import { auth } from "~lib/auth";
-import { env } from "~lib/env";
 
 const ENCODING_PREFIX = "base64-";
 

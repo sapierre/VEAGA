@@ -1,6 +1,6 @@
 import { Storage } from "@plasmohq/storage";
 
-import { appConfig } from "~config/app";
+import { appConfig } from "~/config/app";
 
 const storage = new Storage();
 

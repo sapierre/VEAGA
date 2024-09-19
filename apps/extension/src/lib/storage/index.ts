@@ -1,4 +1,4 @@
-import { THEME_STORAGE_KEY, setupThemeStorage } from "~lib/storage/theme";
+import { THEME_STORAGE_KEY, setupThemeStorage } from "~/lib/storage/theme";
 
 export * from "./theme";
 

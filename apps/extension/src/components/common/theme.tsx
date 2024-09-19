@@ -7,10 +7,11 @@ import {
 } from "@turbostarter/ui-web/popover";
 import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
 
-import type { ThemeConfig } from "@turbostarter/ui";
 
-import { appConfig } from "~config/app";
-import { STORAGE_KEY } from "~lib/storage";
+import { appConfig } from "~/config/app";
+import { STORAGE_KEY } from "~/lib/storage";
+
+import type { ThemeConfig } from "@turbostarter/ui";
 
 const Customizer = () => {
   const [config, setConfig] = useStorage<ThemeConfig>(STORAGE_KEY.THEME);

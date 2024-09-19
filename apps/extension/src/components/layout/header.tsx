@@ -1,15 +1,16 @@
 import { sendToBackground } from "@plasmohq/messaging";
 import { useQuery } from "@tanstack/react-query";
 
-import type { Session } from "@turbostarter/auth";
 
-import { SESSION_MESSAGE_TYPE } from "~background/messages/session";
-import { ThemeControls } from "~components/common/theme";
+import { SESSION_MESSAGE_TYPE } from "~/app/background/messages/session";
+import { ThemeControls } from "~/components/common/theme";
 import {
   UserNavigation,
   UserNavigationSkeleton,
-} from "~components/user/user-navigation";
-import { api } from "~lib/api/trpc";
+} from "~/components/user/user-navigation";
+import { api } from "~/lib/api/trpc";
+
+import type { Session } from "@turbostarter/auth";
 
 export const Header = () => {
   return (

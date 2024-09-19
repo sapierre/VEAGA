@@ -2,7 +2,7 @@ import { sendToBackground } from "@plasmohq/messaging";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { forwardRef } from "react";
 
-import { SESSION_MESSAGE_TYPE } from "~background/messages/session";
+import { SESSION_MESSAGE_TYPE } from "~/app/background/messages/session";
 
 export const Logout = forwardRef<HTMLButtonElement>((_, ref) => {
   const queryClient = useQueryClient();

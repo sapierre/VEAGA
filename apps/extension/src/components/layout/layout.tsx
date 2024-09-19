@@ -2,15 +2,15 @@ import { useStorage } from "@plasmohq/storage/hook";
 
 import { THEME_MODE, cn } from "@turbostarter/ui";
 
-import type { ThemeConfig } from "@turbostarter/ui";
+import { ErrorBoundary } from "~/components/common/error-boundary";
+import { Suspense } from "~/components/common/suspense";
+import { Footer } from "~/components/layout/footer";
+import { Header } from "~/components/layout/header";
+import { TRPCProvider } from "~/lib/api/trpc";
+import { STORAGE_KEY } from "~/lib/storage";
+import "~/styles/globals.css";
 
-import { ErrorBoundary } from "~components/common/error-boundary";
-import { Suspense } from "~components/common/suspense";
-import { Footer } from "~components/layout/footer";
-import { Header } from "~components/layout/header";
-import { TRPCProvider } from "~lib/api/trpc";
-import { STORAGE_KEY } from "~lib/storage";
-import "~styles/globals.css";
+import type { ThemeConfig } from "@turbostarter/ui";
 
 interface LayoutProps {
   readonly children: React.ReactElement;
