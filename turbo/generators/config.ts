@@ -3,9 +3,9 @@ import type { PlopTypes } from "@turbo/gen";
 
 interface PackageJson {
   name: string;
-  scripts: Record;
-  dependencies: Record;
-  devDependencies: Record;
+  scripts: Record<string, string>;
+  dependencies: Record<string, string>;
+  devDependencies: Record<string, string>;
 }
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
@@ -76,12 +76,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       },
       async (answers) => {
         /**
-         * Install deps and format everything
+         * Install dependencies and format everything
          */
         if ("name" in answers && typeof answers.name === "string") {
-          // execSync("pnpm dlx sherif@latest --fix", {
-          //   stdio: "inherit",
-          // });
+          execSync("pnpm dlx sherif@latest --fix", {
+            stdio: "inherit",
+          });
           execSync("pnpm i", { stdio: "inherit" });
           execSync(
             `pnpm prettier --write packages/${answers.name}/** --list-different`,

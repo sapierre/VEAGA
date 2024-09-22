@@ -5,12 +5,12 @@
   "type": "module",
   "exports": {
     ".": {
-      "default": "./src/index.ts",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
     },
     "./env": {
-      "default": "./src/env/index.ts",
-      "types": "./dist/env/index.d.ts"
+      "types": "./dist/env/index.d.ts",
+      "default": "./src/env/index.ts"
     }
   },
   "scripts": {

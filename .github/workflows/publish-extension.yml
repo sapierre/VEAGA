@@ -34,14 +34,21 @@ jobs:
       - name: 📦 Build
         run: pnpm build:extension
 
-      - name: 🗃️ Archive artifact
+      - name: 🗃️ Archive Chrome artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.sha }}
+          name: chrome-${{ github.sha }}
           path: apps/extension/build/chrome-mv3-prod
+
+      - name: 🗃️ Archive Firefox artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-${{ github.sha }}
+          path: apps/extension/build/firefox-mv3-prod
 
       - name: 💨 Publish!
         uses: PlasmoHQ/bpp@v3
         with:
-          artifact: apps/extension/build/chrome-mv3-prod.zip
+          chrome-file: apps/extension/build/chrome-mv3-prod.zip
+          firefox-file: apps/extension/build/firefox-mv3-prod.zip
           keys: ${{ secrets.EXTENSION_SUBMIT_KEYS }}
