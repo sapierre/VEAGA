@@ -4,7 +4,9 @@
     "lib": ["es2022", "dom", "dom.iterable"],
     "jsx": "preserve",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      // needed only for content scripts ui
+      "~app/*": ["./src/app/*"]
     },
     "baseUrl": "."
   },

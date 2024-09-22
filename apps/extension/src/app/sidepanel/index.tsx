@@ -4,7 +4,7 @@ import { Layout } from "~/components/layout/layout";
 const SidePanel = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/app/sidepanel" />
+      <Main filename="app/sidepanel" />
     </Layout>
   );
 };

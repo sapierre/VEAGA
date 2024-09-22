@@ -6,7 +6,7 @@ import { Layout } from "~/components/layout/layout";
 const Sidebar = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/app/devtools/panels/sidebar" />
+      <Main filename="app/devtools/panels/sidebar" />
     </Layout>
   );
 };

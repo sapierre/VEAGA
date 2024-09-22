@@ -23,7 +23,7 @@ export const Main = ({ className, filename }: MainProps) => {
         and save to reload.
       </p>
       <a
-        href="https://turbostarter.dev"
+        href="https://turbostarter.dev/docs/extension"
         target="_blank"
         rel="noopener noreferrer"
         className="cursor-pointer text-sm text-primary underline hover:no-underline"

@@ -1,12 +1,12 @@
 import { Main } from "~/components/common/main";
 import { Layout } from "~/components/layout/layout";
 
-const Options = () => {
+const Tabs = () => {
   return (
     <Layout className="p-8">
-      <Main filename="app/options" />
+      <Main filename="app/tabs" />
     </Layout>
   );
 };
 
-export default Options;
+export default Tabs;

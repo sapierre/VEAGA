@@ -22,6 +22,6 @@ export const HOME_LINKS = [
   {
     title: "Docs",
     description: `Learn how to use TurboStarter. From installation to deployment.`,
-    href: "https://turbostarter.dev/docs",
+    href: "https://turbostarter.dev/docs/mobile",
   },
 ] as const;

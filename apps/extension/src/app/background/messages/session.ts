@@ -4,7 +4,6 @@ import { env } from "~/lib/env";
 import type { PlasmoMessaging } from "@plasmohq/messaging";
 import type { Session } from "@turbostarter/auth";
 
-
 const ENCODING_PREFIX = "base64-";
 
 export const SESSION_MESSAGE_TYPE = {

@@ -5,7 +5,7 @@ import "~/styles/globals.css";
 const NewTab = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/app/newtab" />
+      <Main filename="app/newtab" />
     </Layout>
   );
 };

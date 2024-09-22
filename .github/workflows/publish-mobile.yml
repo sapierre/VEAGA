@@ -7,11 +7,15 @@ env:
   NODE_VERSION: 20.x
 
 jobs:
-  web:
+  tests:
+    name: 🧪 Tests
+    uses: ./.github/workflows/tests.yml
+
+  publish:
     name: 🚀 Publish mobile
     runs-on: ubuntu-latest
     environment: Production
-
+    needs: [tests]
     steps:
       - name: ✅ Checkout code
         uses: actions/checkout@v4

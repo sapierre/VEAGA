@@ -28,7 +28,6 @@ import { Logout } from "./logout";
 import type { User } from "@turbostarter/auth";
 import type { Customer } from "@turbostarter/billing";
 
-
 const PLAN_EMOJIS: Record<PricingPlanType, string> = {
   [PricingPlanType.FREE]: "🆓",
   [PricingPlanType.PREMIUM]: "🔐",
@@ -57,6 +56,7 @@ const AnonymousUser = () => {
         }),
         "rounded-full",
       )}
+      target="_blank"
     >
       <Icons.LogIn className="size-4" />
       <div className="sr-only">Log in</div>

@@ -4,7 +4,7 @@ import { Layout } from "~/components/layout/layout";
 const Popup = () => {
   return (
     <Layout>
-      <Main className="w-[23rem] px-4" filename="src/app/popup" />
+      <Main className="w-[23rem] px-4" filename="app/popup" />
     </Layout>
   );
 };

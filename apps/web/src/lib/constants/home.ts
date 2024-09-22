@@ -30,11 +30,11 @@ export const HOME_LINKS = [
     title: "Themes",
     description:
       "Change the look and feel of your app. Light, dark, or custom themes.",
-    href: "",
+    href: "https://www.turbostarter.dev/docs/web/customization/styling",
   },
   {
     title: "Docs",
     description: `Learn how to use ${appConfig.name}. From installation to deployment.`,
-    href: "https://www.turbostarter.dev/docs",
+    href: "https://www.turbostarter.dev/docs/web",
   },
 ];

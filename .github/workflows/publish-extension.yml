@@ -7,10 +7,20 @@ env:
   NODE_VERSION: 20.x
 
 jobs:
-  web:
+  tests:
+    name: 🧪 Tests
+    uses: ./.github/workflows/tests.yml
+
+  publish:
     name: 🚀 Publish extension
     runs-on: ubuntu-latest
     environment: Production
+    needs: [tests]
+    env:
+      PLASMO_PUBLIC_SITE_URL: ${{ secrets.SITE_URL }}
+      PLASMO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      PLASMO_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      PLASMO_PUBLIC_AUTH_COOKIE_NAME: ${{ secrets.AUTH_COOKIE_NAME }}
 
     steps:
       - name: ✅ Checkout code

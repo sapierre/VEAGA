@@ -7,10 +7,15 @@ env:
   NODE_VERSION: 20.x
 
 jobs:
-  web:
+  tests:
+    name: 🧪 Tests
+    uses: ./.github/workflows/tests.yml
+
+  publish:
     name: 🚀 Publish web
     runs-on: ubuntu-latest
     environment: Production
+    needs: [tests]
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

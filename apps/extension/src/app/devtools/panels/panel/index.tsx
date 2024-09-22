@@ -6,7 +6,7 @@ import { Layout } from "~/components/layout/layout";
 const Panel = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/app/devtools/panels/panel" />
+      <Main filename="app/devtools/panels/panel" />
     </Layout>
   );
 };

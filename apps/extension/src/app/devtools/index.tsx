@@ -7,7 +7,6 @@ import panelIcon from "url:../../../assets/icon.png";
 
 import panelHTML from "./panels/panel/index.html";
 
-
 chrome.devtools.panels.create(
   chrome.i18n.getMessage("extensionName"),
   panelIcon,
@@ -25,7 +24,7 @@ chrome.devtools.panels.elements.createSidebarPane(
 const Devtools = () => {
   return (
     <Layout className="p-8">
-      <Main filename="src/app/devtools" />
+      <Main filename="app/devtools" />
     </Layout>
   );
 };

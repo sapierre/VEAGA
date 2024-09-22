@@ -1,7 +1,6 @@
 import { sendToBackground } from "@plasmohq/messaging";
 import { useQuery } from "@tanstack/react-query";
 
-
 import { SESSION_MESSAGE_TYPE } from "~/app/background/messages/session";
 import { ThemeControls } from "~/components/common/theme";
 import {
