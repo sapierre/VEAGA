@@ -10,7 +10,7 @@
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "dev": "pnpm with-env turbo dev",
-    "db:setup": "turbo db:setup",
+    "db:setup": "pnpm with-env turbo db:setup",
     "db:stop": "turbo db:stop",
     "db:start": "turbo db:start",
     "db:generate": "pnpm with-env turbo db:generate",

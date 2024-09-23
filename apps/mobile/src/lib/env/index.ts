@@ -28,6 +28,7 @@ export const env = createEnv({
     EXPO_PUBLIC_SITE_URL: process.env.EXPO_PUBLIC_SITE_URL,
   },
   skipValidation:
-    !!process.env.CI || process.env.npm_lifecycle_event === "lint",
+    !!process.env.SKIP_ENV_VALIDATION ||
+    process.env.npm_lifecycle_event === "lint",
   emptyStringAsUndefined: true,
 });

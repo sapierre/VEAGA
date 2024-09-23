@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
@@ -23,6 +22,7 @@ export const env = createEnv({
       process.env.PLASMO_PUBLIC_SUPABASE_ANON_KEY,
   },
   skipValidation:
-    !!process.env.CI || process.env.npm_lifecycle_event === "lint",
+    !!process.env.SKIP_ENV_VALIDATION ||
+    process.env.npm_lifecycle_event === "lint",
   emptyStringAsUndefined: true,
 });

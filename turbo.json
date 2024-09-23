@@ -7,6 +7,7 @@
       "outputs": [
         ".cache/tsbuildinfo.json",
         "dist/**",
+        "build/**",
         ".expo/**",
         ".output/**",
         ".vercel/output/**"
@@ -28,20 +29,30 @@
       "cache": false,
       "persistent": false
     },
-    "db:setup": {
-      "cache": false
-    },
     "db:start": {
       "cache": false
     },
     "db:stop": {
       "cache": false
     },
-    "db:migrate": {},
-    "db:generate": {},
-    "db:push": {},
+    "db:setup": {
+      "cache": false
+    },
+    "db:migrate": {
+      "cache": false
+    },
+    "db:generate": {
+      "cache": false,
+      "interactive": true
+    },
+    "db:push": {
+      "cache": false
+    },
     "db:check": {},
-    "db:studio": {},
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
     "clean": {
       "cache": false
     },
@@ -66,5 +77,9 @@
     "SITE_URL",
     "SITE_DESCRIPTION"
   ],
-  "globalPassThroughEnv": ["NODE_ENV", "CI", "npm_lifecycle_event"]
+  "globalPassThroughEnv": [
+    "NODE_ENV",
+    "SKIP_ENV_VALIDATION",
+    "npm_lifecycle_event"
+  ]
 }

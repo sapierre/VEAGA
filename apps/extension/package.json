@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "build:chrome": "pnpm with-app-dir plasmo build --zip",
-    "build:firefox": "pnpm with-app-dir plasmo build --target=firefox-mv3 --zip",
+    "build:firefox": "pnpm with-app-dir plasmo build --target=firefox-mv2 --zip",
     "clean": "git clean -xdf .cache .plasmo .turbo node_modules",
     "dev:chrome": "pnpm with-app-dir plasmo dev",
-    "dev:firefox": "pnpm with-app-dir plasmo dev --target=firefox-mv3",
+    "dev:firefox": "pnpm with-app-dir plasmo dev --target=firefox-mv2",
     "dev": "pnpm dev:chrome",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
