@@ -26,8 +26,16 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
 
-    NEXT_PUBLIC_AUTH_PASSWORD: z.coerce.boolean().optional(),
-    NEXT_PUBLIC_AUTH_MAGIC_LINK: z.coerce.boolean().optional(),
+    NEXT_PUBLIC_AUTH_PASSWORD: z
+      .enum(["true", "false"])
+      .optional()
+      .default("true")
+      .transform((value) => value === "true"),
+    NEXT_PUBLIC_AUTH_MAGIC_LINK: z
+      .enum(["true", "false"])
+      .optional()
+      .default("false")
+      .transform((value) => value === "true"),
 
     NEXT_PUBLIC_PRODUCT_NAME: z.string(),
     NEXT_PUBLIC_SITE_TITLE: z.string(),
@@ -43,8 +51,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 
-    NEXT_PUBLIC_AUTH_PASSWORD: !!process.env.NEXT_PUBLIC_AUTH_PASSWORD,
-    NEXT_PUBLIC_AUTH_MAGIC_LINK: !!process.env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
+    NEXT_PUBLIC_AUTH_PASSWORD: process.env.NEXT_PUBLIC_AUTH_PASSWORD,
+    NEXT_PUBLIC_AUTH_MAGIC_LINK: process.env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
 
     NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME,
     NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
