@@ -122,7 +122,7 @@ importers:
         version: link:../../packages/ui/web
       plasmo:
         specifier: 0.89.2
-        version: 0.89.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))
+        version: 0.89.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -152,8 +152,8 @@ importers:
         specifier: 0.0.270
         version: 0.0.270
       '@types/node':
-        specifier: 20.16.5
-        version: 20.16.5
+        specifier: 20.16.10
+        version: 20.16.10
       '@types/react':
         specifier: catalog:react18
         version: 18.3.3
@@ -460,8 +460,8 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
-        specifier: 20.16.5
-        version: 20.16.5
+        specifier: 20.16.10
+        version: 20.16.10
       '@types/react':
         specifier: catalog:react18
         version: 18.3.3
@@ -880,7 +880,7 @@ importers:
         version: 7.35.2(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-a99d8e8d-20240916(eslint@9.9.0(jiti@1.21.6))
+        version: 5.1.0-rc-2d16326d-20240930(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.1.1
         version: 2.1.1(eslint@9.9.0(jiti@1.21.6))
@@ -4875,8 +4875,8 @@ packages:
   '@types/node@18.19.44':
     resolution: {integrity: sha512-ZsbGerYg72WMXUIE9fYxtvfzLEuq6q8mKERdWFnqTmOvudMxnz+CBNRoOwJ2kNpFOncrKjT1hZwxjlFgQ9qvQA==}
 
-  '@types/node@20.16.5':
-    resolution: {integrity: sha512-VwYCweNo3ERajwy0IUlqqcyZ8/A7Zwa9ZP3MnENWcB11AejO+tLy3pu850goUW2FC/IJMdZUfKpX/yxL1gymCA==}
+  '@types/node@20.16.10':
+    resolution: {integrity: sha512-vQUKgWTjEIRFCvK6CyriPH3MZYiYlNy0fKiEYHWbcoWLEgs4opurGGKlebrTLqdSMIbXImH6XExNiIyNUv3WpA==}
 
   '@types/node@22.2.0':
     resolution: {integrity: sha512-bm6EG6/pCpkxDf/0gDNDdtDILMOHgaQBVOJGdwsqClnxA3xL6jtMv76rLBc006RVMWbmaf0xbmom4Z/5o2nRkQ==}
@@ -6449,8 +6449,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-hooks@5.1.0-rc-a99d8e8d-20240916:
-    resolution: {integrity: sha512-8sJ7eyk9p+Ph7hde05UPm0FGp1TCcEqPQ0EndQpxHrpo3O4PEq178dWmtVs9Ys9ym3+zNijv3b/SryF65R5SJQ==}
+  eslint-plugin-react-hooks@5.1.0-rc-2d16326d-20240930:
+    resolution: {integrity: sha512-uk17GGL2En9oNfyYndAc1po4i6Mwb+pyn2HthgO+tpZqBCacB34Zh++IBG6f0hwiDc2ZHgBBq+cWF0Du3p9+5w==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -12965,14 +12965,14 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       jest-mock: 29.7.0
 
   '@jest/fake-timers@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -12985,7 +12985,7 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       '@types/yargs': 15.0.19
       chalk: 4.1.2
 
@@ -12994,7 +12994,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -13989,7 +13989,7 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@plasmohq/parcel-config@0.41.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))(typescript@5.2.2)':
+  '@plasmohq/parcel-config@0.41.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))(typescript@5.2.2)':
     dependencies:
       '@parcel/compressor-raw': 2.9.3(@parcel/core@2.9.3)
       '@parcel/config-default': 2.9.3(@parcel/core@2.9.3)(@swc/helpers@0.5.5)(postcss@8.4.45)(terser@5.31.5)(typescript@5.2.2)
@@ -14019,7 +14019,7 @@ snapshots:
       '@plasmohq/parcel-optimizer-es': 0.4.1(@swc/helpers@0.5.5)
       '@plasmohq/parcel-packager': 0.6.15
       '@plasmohq/parcel-resolver': 0.14.1
-      '@plasmohq/parcel-resolver-post': 0.4.5(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))
+      '@plasmohq/parcel-resolver-post': 0.4.5(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))
       '@plasmohq/parcel-runtime': 0.25.1
       '@plasmohq/parcel-transformer-inject-env': 0.2.12
       '@plasmohq/parcel-transformer-inline-css': 0.3.11
@@ -14139,14 +14139,14 @@ snapshots:
       '@parcel/utils': 2.9.3
       nullthrows: 1.1.1
 
-  '@plasmohq/parcel-resolver-post@0.4.5(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))':
+  '@plasmohq/parcel-resolver-post@0.4.5(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))':
     dependencies:
       '@parcel/core': 2.9.3
       '@parcel/hash': 2.9.3
       '@parcel/plugin': 2.9.3(@parcel/core@2.9.3)
       '@parcel/types': 2.9.3(@parcel/core@2.9.3)
       '@parcel/utils': 2.9.3
-      tsup: 7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))(typescript@5.2.2)
+      tsup: 7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
       - '@swc/core'
@@ -16089,7 +16089,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
 
   '@types/cookie@0.6.0': {}
 
@@ -16112,7 +16112,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
 
   '@types/hammerjs@2.0.45': {}
 
@@ -16155,13 +16155,13 @@ snapshots:
 
   '@types/node-forge@1.3.11':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
 
   '@types/node@18.19.44':
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@20.16.5':
+  '@types/node@20.16.10':
     dependencies:
       undici-types: 6.19.8
 
@@ -16192,7 +16192,7 @@ snapshots:
 
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
 
   '@types/tinycolor2@1.4.6': {}
 
@@ -16204,7 +16204,7 @@ snapshots:
 
   '@types/ws@8.5.12':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -16987,7 +16987,7 @@ snapshots:
 
   chrome-launcher@0.15.2:
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -16998,7 +16998,7 @@ snapshots:
 
   chromium-edge-launcher@0.2.0:
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -17958,7 +17958,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-a99d8e8d-20240916(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-2d16326d-20240930(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
@@ -19407,7 +19407,7 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -19428,13 +19428,13 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       jest-util: 29.7.0
 
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -19451,7 +19451,7 @@ snapshots:
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -21227,7 +21227,7 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  plasmo@0.89.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4)):
+  plasmo@0.89.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4)):
     dependencies:
       '@expo/spawn-async': 1.7.2
       '@parcel/core': 2.9.3
@@ -21235,7 +21235,7 @@ snapshots:
       '@parcel/package-manager': 2.9.3(@parcel/core@2.9.3)
       '@parcel/watcher': 2.2.0
       '@plasmohq/init': 0.7.0
-      '@plasmohq/parcel-config': 0.41.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))(typescript@5.2.2)
+      '@plasmohq/parcel-config': 0.41.1(@swc/core@1.7.10(@swc/helpers@0.5.5))(@swc/helpers@0.5.5)(handlebars@4.7.8)(lodash@4.17.21)(postcss@8.4.45)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(terser@5.31.5)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))(typescript@5.2.2)
       '@plasmohq/parcel-core': 0.1.9
       buffer: 6.0.3
       chalk: 5.3.0
@@ -21342,13 +21342,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.45
 
-  postcss-load-config@4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4)):
+  postcss-load-config@4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
       postcss: 8.4.45
-      ts-node: 10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4)
+      ts-node: 10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4)
 
   postcss-load-config@4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@22.2.0)(typescript@5.5.4)):
     dependencies:
@@ -22575,7 +22575,7 @@ snapshots:
 
   stripe@16.10.0:
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       qs: 6.13.0
 
   strnum@1.0.5: {}
@@ -22915,14 +22915,14 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4):
+  ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       acorn: 8.12.1
       acorn-walk: 8.3.3
       arg: 4.1.3
@@ -22969,7 +22969,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))(typescript@5.2.2):
+  tsup@7.2.0(@swc/core@1.7.10(@swc/helpers@0.5.5))(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))(typescript@5.2.2):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.18.20)
       cac: 6.7.14
@@ -22979,7 +22979,7 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.5)(typescript@5.5.4))
+      postcss-load-config: 4.0.2(postcss@8.4.45)(ts-node@10.9.2(@swc/core@1.7.10(@swc/helpers@0.5.5))(@types/node@20.16.10)(typescript@5.5.4))
       resolve-from: 5.0.0
       rollup: 3.29.4
       source-map: 0.8.0-beta.0
