@@ -31,18 +31,6 @@ enable_signup = true
 double_confirm_changes = true
 enable_confirmations = true
 
-[auth.email.template.confirmation]
-subject = "Confirm email"
-content_path = "./supabase/templates/confirmation.html"
-
-[auth.email.template.recovery]
-subject = "Reset password"
-content_path = "./supabase/templates/recovery.html"
-
-[auth.email.template.magic_link]
-subject = "Your link to login"
-content_path = "./supabase/templates/magic_link.html"
-
 [auth.external.google]
 enabled = true
 client_id = "env(GOOGLE_CLIENT_ID)"
@@ -55,8 +43,16 @@ client_id = "env(GITHUB_CLIENT_ID)"
 secret = "env(GITHUB_CLIENT_SECRET)"
 redirect_uri = "http://localhost:54321/auth/v1/callback"
 
-[inbucket]
+[auth.hook.send_email]
 enabled = true
+uri = "http://host.docker.internal:3000/api/webhooks/auth/email"
+secrets = "env(SEND_EMAIL_HOOK_SECRET)"
+
+[analytics]
+enabled = true
+
+[inbucket]
+enabled = false
 
 [realtime]
 enabled = false
@@ -64,5 +60,3 @@ enabled = false
 [storage]
 enabled = false
 
-[analytics]
-enabled = false

@@ -21,8 +21,7 @@ const Customizer = () => {
 
   return (
     <ThemeCustomizer
-      options={appConfig.theme.options}
-      defaultConfig={appConfig.theme.default}
+      defaultConfig={appConfig.theme}
       config={config}
       onChange={(config) => setConfig(config)}
     />

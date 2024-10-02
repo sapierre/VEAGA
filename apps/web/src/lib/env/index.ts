@@ -5,10 +5,12 @@ import { vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
 import { env as apiEnv } from "@turbostarter/api/env";
+import { env as authEnv } from "@turbostarter/auth/env";
 import { NODE_ENV } from "@turbostarter/shared/constants";
+import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 export const env = createEnv({
-  extends: [vercel(), apiEnv],
+  extends: [vercel(), apiEnv, authEnv],
   shared: {
     NODE_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
   },
@@ -41,6 +43,14 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_TITLE: z.string(),
     NEXT_PUBLIC_SITE_URL: z.string().url(),
     NEXT_PUBLIC_SITE_DESCRIPTION: z.string(),
+    NEXT_PUBLIC_THEME_MODE: z
+      .nativeEnum(ThemeMode)
+      .optional()
+      .default(ThemeMode.SYSTEM),
+    NEXT_PUBLIC_THEME_COLOR: z
+      .nativeEnum(ThemeColor)
+      .optional()
+      .default(ThemeColor.ORANGE),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -58,9 +68,12 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+    NEXT_PUBLIC_THEME_MODE: process.env.NEXT_PUBLIC_THEME_MODE,
+    NEXT_PUBLIC_THEME_COLOR: process.env.NEXT_PUBLIC_THEME_COLOR,
   },
   skipValidation:
-    !!process.env.SKIP_ENV_VALIDATION ||
+    (!!process.env.SKIP_ENV_VALIDATION &&
+      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
     process.env.npm_lifecycle_event === "lint",
   emptyStringAsUndefined: true,
 });

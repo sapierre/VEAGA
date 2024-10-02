@@ -32,10 +32,11 @@
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:check": "drizzle-kit check",
+    "db:status": "supabase status",
     "db:studio": "drizzle-kit studio",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",
@@ -45,7 +46,7 @@
     "drizzle-kit": "0.24.2",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "supabase": "1.191.3",
+    "supabase": "1.200.3",
     "typescript": "catalog:"
   },
   "prettier": "@turbostarter/prettier-config",

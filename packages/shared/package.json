@@ -15,15 +15,17 @@
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "lodash": "4.17.21",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",
     "@turbostarter/prettier-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
+    "@types/lodash": "4.17.9",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

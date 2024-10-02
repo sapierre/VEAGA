@@ -12,30 +12,30 @@ const shared = {
   emptyStringAsUndefined: true,
 } as const;
 
-const getProviderEnv = (provider: BillingProvider) => {
-  if (provider === BillingProvider.LEMON_SQUEEZY) {
-    return createEnv({
-      ...shared,
-      server: {
-        LEMON_SQUEEZY_API_KEY: z.string(),
-        LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
-        LEMON_SQUEEZY_STORE_ID: z.string(),
-        BILLING_PROVIDER: z.literal(provider).optional().default(provider),
-      },
-    });
+const getBillingEnv = (provider: BillingProvider) => {
+  switch (provider) {
+    case BillingProvider.LEMON_SQUEEZY:
+      return createEnv({
+        ...shared,
+        server: {
+          LEMON_SQUEEZY_API_KEY: z.string(),
+          LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
+          LEMON_SQUEEZY_STORE_ID: z.string(),
+          BILLING_PROVIDER: z.literal(provider).optional().default(provider),
+        },
+      });
+    case BillingProvider.STRIPE:
+      return createEnv({
+        ...shared,
+        server: {
+          STRIPE_SECRET_KEY: z.string(),
+          STRIPE_WEBHOOK_SECRET: z.string(),
+          BILLING_PROVIDER: z.literal(provider).optional().default(provider),
+        },
+      });
+    default:
+      throw new Error(`Unsupported billing provider!`);
   }
-
-  /* Defaults to Stripe */
-  return {
-    ...createEnv({
-      ...shared,
-      server: {
-        STRIPE_SECRET_KEY: z.string(),
-        STRIPE_WEBHOOK_SECRET: z.string(),
-        BILLING_PROVIDER: z.literal(provider).optional().default(provider),
-      },
-    }),
-  };
 };
 
-export const env = getProviderEnv(config.provider);
+export const env = getBillingEnv(config.provider);

@@ -1,10 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { THEME_MODE } from "@turbostarter/ui";
+import { ThemeMode } from "@turbostarter/ui";
 import { useColorScheme } from "@turbostarter/ui-mobile";
 
-import type { ThemeMode } from "@turbostarter/ui";
+import { appConfig } from "~/config/app";
 
 export const useTheme = () => {
   const { colorScheme, setColorScheme } = useColorScheme();
@@ -14,21 +14,21 @@ export const useTheme = () => {
   const setupTheme = useCallback(async () => {
     const storedTheme = await AsyncStorage.getItem("theme");
 
-    if (storedTheme === THEME_MODE.SYSTEM) {
+    if (storedTheme === ThemeMode.SYSTEM) {
       setTheme(storedTheme);
       setLoaded(true);
       return;
     }
 
     if (!storedTheme) {
-      await AsyncStorage.setItem("theme", THEME_MODE.SYSTEM);
-      setTheme(THEME_MODE.SYSTEM);
+      await AsyncStorage.setItem("theme", appConfig.theme.mode);
+      setTheme(appConfig.theme.mode);
       setLoaded(true);
       return;
     }
 
     const colorTheme =
-      storedTheme === THEME_MODE.DARK ? THEME_MODE.DARK : THEME_MODE.LIGHT;
+      storedTheme === ThemeMode.DARK ? ThemeMode.DARK : ThemeMode.LIGHT;
 
     if (colorTheme !== colorScheme) {
       setColorScheme(colorTheme);
@@ -48,9 +48,15 @@ export const useTheme = () => {
     [setColorScheme],
   );
 
+  useEffect(() => {
+    setTheme(colorScheme);
+  }, [colorScheme]);
+
   const isDark =
-    theme === THEME_MODE.DARK ||
-    (theme === THEME_MODE.SYSTEM && colorScheme === THEME_MODE.DARK);
+    theme === ThemeMode.DARK ||
+    (theme === ThemeMode.SYSTEM && colorScheme === ThemeMode.DARK);
+
+  const resolvedTheme = isDark ? ThemeMode.DARK : ThemeMode.LIGHT;
 
   return {
     setupTheme,
@@ -58,5 +64,6 @@ export const useTheme = () => {
     loaded,
     theme,
     isDark,
+    resolvedTheme,
   };
 };

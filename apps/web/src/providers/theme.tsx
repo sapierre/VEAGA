@@ -11,7 +11,7 @@ import type { ThemeConfig } from "@turbostarter/ui";
 
 const configAtom = atomWithStorage<Omit<ThemeConfig, "mode">>(
   "config",
-  appConfig.theme.default,
+  appConfig.theme,
 );
 
 export function useThemeConfig() {
@@ -26,7 +26,7 @@ const ThemeConfigProvider = () => {
   const [themeConfig] = useThemeConfig();
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", themeConfig.color);
+    document.body.setAttribute("data-theme", themeConfig.color);
   }, [themeConfig.color]);
 
   return null;
@@ -36,7 +36,7 @@ export const ThemeProvider = memo<ThemeProviderProps>(({ children }) => {
   return (
     <NextThemeProvider
       attribute="class"
-      defaultTheme={appConfig.theme.default.mode}
+      defaultTheme={appConfig.theme.mode}
       enableSystem
       disableTransitionOnChange
     >

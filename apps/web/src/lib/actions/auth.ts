@@ -44,7 +44,7 @@ export const loginWithOAuth = (provider: SOCIAL_PROVIDER) => {
   return auth().signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${location.origin}${pathsConfig.api.auth.callback}`,
+      redirectTo: `${location.origin}${pathsConfig.api.webhooks.auth.callback}`,
     },
   });
 };

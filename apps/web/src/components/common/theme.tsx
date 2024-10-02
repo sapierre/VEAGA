@@ -27,11 +27,10 @@ const Customizer = () => {
 
   return (
     <ThemeCustomizer
-      options={appConfig.theme.options}
-      defaultConfig={appConfig.theme.default}
+      defaultConfig={appConfig.theme}
       config={{
         ...config,
-        mode: (mode as ThemeMode | undefined) ?? appConfig.theme.default.mode,
+        mode: (mode as ThemeMode | undefined) ?? appConfig.theme.mode,
       }}
       onChange={({ mode, ...config }) => {
         setMode(mode);

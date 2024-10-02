@@ -1,0 +1,70 @@
+export const ThemeMode = {
+  SYSTEM: "system",
+  LIGHT: "light",
+  DARK: "dark",
+} as const;
+
+export const ThemeColor = {
+  ORANGE: "orange",
+  ROSE: "rose",
+  RED: "red",
+  YELLOW: "yellow",
+  GRAY: "gray",
+  STONE: "stone",
+  GREEN: "green",
+  BLUE: "blue",
+  VIOLET: "violet",
+} as const;
+
+export const DEFAULT_BREAKPOINTS = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  "2xl": 1536,
+} as const;
+
+export type ThemeColor = (typeof ThemeColor)[keyof typeof ThemeColor];
+export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode];
+
+export interface ThemeConfig {
+  mode: ThemeMode;
+  color: ThemeColor;
+}
+
+// HSL color variable
+export type ColorVariable = readonly [number, number, number];
+
+interface ThemeColorsVariables {
+  background: ColorVariable;
+  foreground: ColorVariable;
+  card: ColorVariable;
+  "card-foreground": ColorVariable;
+  popover: ColorVariable;
+  "popover-foreground": ColorVariable;
+  primary: ColorVariable;
+  "primary-foreground": ColorVariable;
+  secondary: ColorVariable;
+  "secondary-foreground": ColorVariable;
+  muted: ColorVariable;
+  "muted-foreground": ColorVariable;
+  accent: ColorVariable;
+  "accent-foreground": ColorVariable;
+  success: ColorVariable;
+  "success-foreground": ColorVariable;
+  destructive: ColorVariable;
+  "destructive-foreground": ColorVariable;
+  border: ColorVariable;
+  input: ColorVariable;
+  ring: ColorVariable;
+  "chart-1": ColorVariable;
+  "chart-2": ColorVariable;
+  "chart-3": ColorVariable;
+  "chart-4": ColorVariable;
+  "chart-5": ColorVariable;
+}
+
+export interface ThemeColors {
+  light: ThemeColorsVariables;
+  dark: ThemeColorsVariables;
+}

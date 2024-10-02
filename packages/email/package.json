@@ -1,0 +1,46 @@
+{
+  "name": "@turbostarter/email",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./api": {
+      "types": "./dist/api.d.ts",
+      "default": "./src/api.ts"
+    },
+    "./env": {
+      "types": "./dist/env/index.d.ts",
+      "default": "./src/env/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "email dev --port 3005 --dir src/templates",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@turbostarter/eslint-config": "workspace:*",
+    "@turbostarter/prettier-config": "workspace:*",
+    "@turbostarter/shared": "workspace:*",
+    "@turbostarter/tsconfig": "workspace:*",
+    "@types/nodemailer": "6.4.16",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@turbostarter/prettier-config",
+  "dependencies": {
+    "@react-email/components": "^0.0.25",
+    "@turbostarter/ui": "workspace:*",
+    "nodemailer": "6.9.15",
+    "react-email": "^3.0.1",
+    "zod": "catalog:"
+  }
+}

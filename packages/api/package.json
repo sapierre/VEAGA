@@ -25,6 +25,7 @@
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/billing": "workspace:*",
     "@turbostarter/db": "workspace:*",
+    "@turbostarter/email": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "superjson": "2.2.1",
     "zod": "catalog:"

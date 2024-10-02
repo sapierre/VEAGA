@@ -15,7 +15,7 @@ import {
   CheckIcon,
 } from "lucide-react";
 
-import { Icons as GlobalIcons } from "@turbostarter/ui";
+import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
 
 export const Icons = {
   ...GlobalIcons,

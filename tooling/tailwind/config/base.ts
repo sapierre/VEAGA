@@ -1,3 +1,5 @@
+import variables from "@mertasan/tailwindcss-variables";
+import colorVariable from "@mertasan/tailwindcss-variables/colorVariable";
 import containerQueries from "@tailwindcss/container-queries";
 import typography from "@tailwindcss/typography";
 import animate from "tailwindcss-animate";
@@ -6,53 +8,62 @@ import type { Config } from "tailwindcss";
 import type { PluginsConfig } from "tailwindcss/types/config";
 
 export default {
-  darkMode: "class",
+  darkMode: ["class", ".dark"],
   content: ["src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: colorVariable("--colors-border", true),
+        input: colorVariable("--colors-input", true),
+        ring: colorVariable("--colors-ring", true),
+        background: colorVariable("--colors-background", true),
+        foreground: colorVariable("--colors-foreground", true),
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: colorVariable("--colors-primary", true),
+          foreground: colorVariable("--colors-primary-foreground", true),
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: colorVariable("--colors-secondary", true),
+          foreground: colorVariable("--colors-secondary-foreground", true),
         },
         success: {
-          DEFAULT: "hsl(var(--success))",
-          foreground: "hsl(var(--success-foreground))",
+          DEFAULT: colorVariable("--colors-success", true),
+          foreground: colorVariable("--colors-success-foreground", true),
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: colorVariable("--colors-destructive", true),
+          foreground: colorVariable("--colors-destructive-foreground", true),
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: colorVariable("--colors-muted", true),
+          foreground: colorVariable("--colors-muted-foreground", true),
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: colorVariable("--colors-accent", true),
+          foreground: colorVariable("--colors-accent-foreground", true),
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: colorVariable("--colors-popover", true),
+          foreground: colorVariable("--colors-popover-foreground", true),
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: colorVariable("--colors-card", true),
+          foreground: colorVariable("--colors-card-foreground", true),
         },
       },
       borderColor: {
-        DEFAULT: "hsl(var(--border))",
+        DEFAULT: colorVariable("--colors-border", true),
       },
     },
   },
-  plugins: [animate, containerQueries, typography] as Partial<PluginsConfig>,
+  plugins: [
+    animate,
+    containerQueries,
+    typography,
+    variables({
+      colorVariables: true,
+      forceRGB: true,
+      darkToRoot: false,
+    }),
+  ] as Partial<PluginsConfig>,
 } satisfies Config;

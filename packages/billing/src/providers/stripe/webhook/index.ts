@@ -1,3 +1,5 @@
+import { handleApiError } from "@turbostarter/shared/utils";
+
 import { env } from "../../../env";
 import { BillingProvider } from "../../../types";
 import { checkoutStatusChangeHandler } from "../checkout";
@@ -76,15 +78,17 @@ export const webhookHandler = async (
           throw new Error("Unhandled relevant event!");
       }
     } catch (error) {
-      console.log(error);
-      return new Response("Webhook handler failed. View your function logs.", {
-        status: 400,
-      });
+      return handleApiError(error);
     }
   } else {
     return new Response(`Unsupported event type: ${event.type}`, {
       status: 400,
     });
   }
-  return new Response(JSON.stringify({ received: true }));
+  return new Response(JSON.stringify({ received: true }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };

@@ -1,4 +1,3 @@
-import { isAuthApiError } from "@supabase/supabase-js";
 import { z } from "zod";
 
 import type {
@@ -8,7 +7,6 @@ import type {
 } from "@supabase/ssr";
 import type {
   SupabaseClientOptions as SupabaseClientOptionsType,
-  EmailOtpType,
   User,
   AuthApiError,
   Session,
@@ -65,11 +63,10 @@ export type {
   AuthClientOptions,
   AuthBrowserClientOptions,
   AuthServerClientOptions,
-  EmailOtpType,
   User,
   AuthConfig,
   AuthApiError,
   Session,
 };
 
-export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER, isAuthApiError };
+export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER };

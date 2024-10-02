@@ -1,14 +1,8 @@
-import { THEME_COLOR, THEME_MODE } from "@turbostarter/ui";
+import { env } from "~/lib/env";
 
 export const appConfig = {
   theme: {
-    options: {
-      modes: Object.values(THEME_MODE),
-      colors: Object.values(THEME_COLOR),
-    },
-    default: {
-      mode: THEME_MODE.SYSTEM,
-      color: THEME_COLOR.ORANGE,
-    },
+    mode: env.PLASMO_PUBLIC_THEME_MODE,
+    color: env.PLASMO_PUBLIC_THEME_COLOR,
   },
 } as const;

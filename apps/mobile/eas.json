@@ -9,6 +9,12 @@
       "pnpm": "9.6.0",
       "ios": {
         "resourceClass": "m-medium"
+      },
+      "env": {
+        "EXPO_PUBLIC_AUTH_PASSWORD": "true",
+        "EXPO_PUBLIC_AUTH_MAGIC_LINK": "false",
+        "EXPO_PUBLIC_THEME_MODE": "system",
+        "EXPO_PUBLIC_THEME_COLOR": "orange"
       }
     },
     // Development profile used for local development
@@ -20,9 +26,7 @@
         "APP_ENV": "development",
         "EXPO_PUBLIC_SITE_URL": "",
         "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "",
-        "EXPO_PUBLIC_AUTH_PASSWORD": "true",
-        "EXPO_PUBLIC_AUTH_MAGIC_LINK": "true"
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
       }
     },
     // Needed for iOS, as you can't reuse `development` profile there for simulator
@@ -37,9 +41,7 @@
         "APP_ENV": "development",
         "EXPO_PUBLIC_SITE_URL": "",
         "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "",
-        "EXPO_PUBLIC_AUTH_PASSWORD": "true",
-        "EXPO_PUBLIC_AUTH_MAGIC_LINK": "true"
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
       }
     },
     // Preview profile used for EAS preview builds in test environment
@@ -53,9 +55,7 @@
         "APP_ENV": "test",
         "EXPO_PUBLIC_SITE_URL": "",
         "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "",
-        "EXPO_PUBLIC_AUTH_PASSWORD": "true",
-        "EXPO_PUBLIC_AUTH_MAGIC_LINK": "true"
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
       }
     },
     // Production profile used for EAS production builds to be submitted to the stores
@@ -66,9 +66,7 @@
         "APP_ENV": "production",
         "EXPO_PUBLIC_SITE_URL": "",
         "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "",
-        "EXPO_PUBLIC_AUTH_PASSWORD": "true",
-        "EXPO_PUBLIC_AUTH_MAGIC_LINK": "true"
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
       }
     }
   },

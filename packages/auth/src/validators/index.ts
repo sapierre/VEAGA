@@ -18,6 +18,17 @@ const passwordSchema = z.object({
     ),
 });
 
+const sendEmailHookSchema = z.object({
+  user: z.object({
+    email: z.string().email(),
+  }),
+  email_data: z.object({
+    token_hash: z.string(),
+    redirect_to: z.string().optional(),
+    email_action_type: z.enum(["signup", "magiclink", "recovery"]),
+  }),
+});
+
 const registerSchema = emailSchema.merge(passwordSchema);
 const passwordLoginSchema = emailSchema.merge(passwordSchema);
 const magicLinkLoginSchema = emailSchema;
@@ -29,6 +40,7 @@ type MagicLinkLoginData = z.infer<typeof magicLinkLoginSchema>;
 type RegisterData = z.infer<typeof registerSchema>;
 type ForgotPasswordData = z.infer<typeof forgotPasswordSchema>;
 type UpdatePasswordData = z.infer<typeof updatePasswordSchema>;
+type SendEmailHookData = z.infer<typeof sendEmailHookSchema>;
 
 export {
   registerSchema,
@@ -36,6 +48,7 @@ export {
   magicLinkLoginSchema,
   forgotPasswordSchema,
   updatePasswordSchema,
+  sendEmailHookSchema,
 };
 
 export type {
@@ -44,4 +57,5 @@ export type {
   RegisterData,
   ForgotPasswordData,
   UpdatePasswordData,
+  SendEmailHookData,
 };

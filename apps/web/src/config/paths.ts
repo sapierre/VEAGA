@@ -31,12 +31,13 @@ const pathsConfig = {
     index: ADMIN_PREFIX,
   },
   api: {
-    auth: {
-      callback: `${API_PREFIX}${AUTH_PREFIX}/callback`,
-      confirm: `${API_PREFIX}${AUTH_PREFIX}/confirm`,
-    },
     webhooks: {
       billing: `${API_PREFIX}${WEBHOOKS_PREFIX}/billing`,
+      auth: {
+        callback: `${API_PREFIX}${AUTH_PREFIX}/callback`,
+        confirm: `${API_PREFIX}${AUTH_PREFIX}/confirm`,
+        email: `${API_PREFIX}${AUTH_PREFIX}/email`,
+      },
     },
   },
 } as const;

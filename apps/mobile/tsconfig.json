@@ -1,5 +1,5 @@
 {
-  "extends": ["@turbostarter/tsconfig/base.json"],
+  "extends": "@turbostarter/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

@@ -7,7 +7,8 @@ export const env = createEnv({
     DATABASE_URL: z.string().url(),
   },
   skipValidation:
-    !!process.env.SKIP_ENV_VALIDATION ||
+    (!!process.env.SKIP_ENV_VALIDATION &&
+      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
     process.env.npm_lifecycle_event === "lint",
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

@@ -1,26 +1,25 @@
 import * as React from "react";
 import { forwardRef, memo } from "react";
 
-import { THEME_COLOR, THEME_MODE } from "@turbostarter/ui";
+import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 import { cn } from "@turbostarter/ui";
 
 import { Button } from "./button";
 import { Icons } from "./icons";
 import { Label } from "./label";
 
-import type { ThemeConfig, ThemeOptions } from "@turbostarter/ui";
+import type { ThemeConfig } from "@turbostarter/ui";
 
 interface ThemeCustomizerProps {
   readonly config: ThemeConfig;
   readonly defaultConfig?: ThemeConfig;
   readonly onChange: (config: ThemeConfig) => void;
-  readonly options: ThemeOptions;
 }
 
 const MODE_ICONS = {
-  [THEME_MODE.LIGHT]: Icons.Sun,
-  [THEME_MODE.DARK]: Icons.Moon,
-  [THEME_MODE.SYSTEM]: Icons.SunMoon,
+  [ThemeMode.LIGHT]: Icons.Sun,
+  [ThemeMode.DARK]: Icons.Moon,
+  [ThemeMode.SYSTEM]: Icons.SunMoon,
 } as const;
 
 export const ThemeStatus = forwardRef<HTMLButtonElement>((props, ref) => {
@@ -37,7 +36,7 @@ export const ThemeStatus = forwardRef<HTMLButtonElement>((props, ref) => {
 });
 
 export const ThemeCustomizer = memo<ThemeCustomizerProps>(
-  ({ config, defaultConfig, onChange, options }) => {
+  ({ config, defaultConfig, onChange }) => {
     return (
       <>
         <div className="flex items-start">
@@ -67,8 +66,8 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
           <div className="w-full space-y-1.5">
             <Label className="text-xs">Color</Label>
             <div className="flex flex-wrap gap-2">
-              {options.colors
-                .filter((color) => Object.values(THEME_COLOR).includes(color))
+              {Object.values(ThemeColor)
+                .filter((color) => Object.values(ThemeColor).includes(color))
                 .map((color) => {
                   const isActive = config.color === color;
 
@@ -88,11 +87,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                         className={cn(
                           "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full border border-white bg-primary",
                         )}
-                      >
-                        {isActive && (
-                          <Icons.Check className="size-3 text-white" />
-                        )}
-                      </span>
+                      ></span>
                       {color}
                     </Button>
                   );
@@ -102,13 +97,13 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
           <div className="w-full space-y-1.5">
             <Label className="text-xs">Mode</Label>
             <div className="flex flex-wrap gap-2">
-              {options.modes.map((mode) => {
+              {Object.values(ThemeMode).map((mode) => {
                 const isActive = config.mode === mode;
                 const Icon = MODE_ICONS[mode];
 
                 return (
                   <Button
-                    variant={"outline"}
+                    variant="outline"
                     size="sm"
                     onClick={() => onChange({ ...config, mode })}
                     className={cn(

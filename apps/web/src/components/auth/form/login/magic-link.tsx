@@ -20,7 +20,6 @@ import { Icons } from "@turbostarter/ui-web/icons";
 import { Input } from "@turbostarter/ui-web/input";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
-import { TurboLink } from "~/components/common/turbo-link";
 import { login } from "~/lib/actions";
 import { onPromise } from "~/utils";
 
@@ -114,18 +113,6 @@ export const MagicLinkLoginForm = memo(() => {
                 "Send magic link"
               )}
             </Button>
-
-            <div className="flex items-center justify-center pt-2">
-              <div className="text-sm text-muted-foreground">
-                Don&apos;t have an account yet?
-                <TurboLink
-                  href="/auth/register"
-                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-                >
-                  Sign up!
-                </TurboLink>
-              </div>
-            </div>
           </form>
         </Form>
       )}

@@ -8,9 +8,25 @@
       "env": [
         "STRIPE_SECRET_KEY",
         "STRIPE_WEBHOOK_SECRET",
+
         "LEMON_SQUEEZY_API_KEY",
         "LEMON_SQUEEZY_SIGNING_SECRET",
-        "LEMON_SQUEEZY_STORE_ID"
+        "LEMON_SQUEEZY_STORE_ID",
+
+        "SEND_EMAIL_HOOK_SECRET",
+
+        "RESEND_API_KEY",
+
+        "SENDGRID_API_KEY",
+
+        "PLUNK_API_KEY",
+
+        "POSTMARK_API_KEY",
+
+        "NODEMAILER_USER",
+        "NODEMAILER_PASSWORD",
+        "NODEMAILER_HOST",
+        "NODEMAILER_PORT"
       ]
     },
     "dev": {

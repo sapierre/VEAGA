@@ -1,6 +1,6 @@
 import { useStorage } from "@plasmohq/storage/hook";
 
-import { THEME_MODE, cn } from "@turbostarter/ui";
+import { ThemeMode, cn } from "@turbostarter/ui";
 
 import { ErrorBoundary } from "~/components/common/error-boundary";
 import { Suspense } from "~/components/common/suspense";
@@ -33,26 +33,30 @@ export const Layout = ({
         <TRPCProvider>
           <div
             id="root"
-            data-theme={config?.color}
             className={cn(
-              "flex min-h-screen w-full min-w-[23rem] flex-col items-center justify-center bg-background font-sans text-base text-foreground",
+              "flex min-h-screen w-full min-w-[23rem] flex-col items-center justify-center font-sans text-base",
               {
                 dark:
-                  config?.mode === THEME_MODE.DARK ||
-                  (config?.mode === THEME_MODE.SYSTEM &&
+                  config?.mode === ThemeMode.DARK ||
+                  (config?.mode === ThemeMode.SYSTEM &&
                     window.matchMedia("(prefers-color-scheme: dark)").matches),
               },
             )}
           >
             <div
-              className={cn(
-                "flex w-full max-w-[80rem] grow flex-col items-center justify-between gap-16 p-4",
-                className,
-              )}
+              className="flex-1 bg-background text-foreground"
+              data-theme={config?.color}
             >
-              <Header />
-              {children}
-              <Footer />
+              <div
+                className={cn(
+                  "flex w-full max-w-[80rem] grow flex-col items-center justify-between gap-16 p-4",
+                  className,
+                )}
+              >
+                <Header />
+                {children}
+                <Footer />
+              </div>
             </div>
           </div>
         </TRPCProvider>

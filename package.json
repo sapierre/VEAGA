@@ -17,6 +17,7 @@
     "db:push": "pnpm with-env turbo db:push",
     "db:migrate": "pnpm with-env turbo db:migrate",
     "db:check": "pnpm with-env turbo db:check",
+    "db:status": "pnpm with-env turbo db:status",
     "db:studio": "pnpm with-env turbo db:studio",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
@@ -38,7 +39,7 @@
     "dotenv-cli": "7.4.2",
     "husky": "^9.1.5",
     "prettier": "3.3.3",
-    "turbo": "2.1.1",
+    "turbo": "2.1.2",
     "typescript": "5.5.4"
   },
   "engines": {

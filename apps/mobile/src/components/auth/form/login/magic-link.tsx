@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { Link } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
@@ -17,7 +16,6 @@ import {
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
-import { pathsConfig } from "~/config/paths";
 import { login } from "~/lib/actions/auth";
 
 import type { MagicLinkLoginData } from "@turbostarter/auth";
@@ -76,20 +74,6 @@ export const MagicLinkLoginForm = memo(() => {
             <Text>Send magic link</Text>
           )}
         </Button>
-
-        <View className="items-center justify-center pt-2">
-          <View className="flex-row">
-            <Text className="text-sm text-muted-foreground">
-              Don&apos;t have an account yet?
-            </Text>
-            <Link
-              href={pathsConfig.tabs.auth.register}
-              className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
-            >
-              Sign up!
-            </Link>
-          </View>
-        </View>
       </View>
     </Form>
   );
