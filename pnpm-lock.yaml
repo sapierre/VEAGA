@@ -622,11 +622,11 @@ importers:
   packages/cms:
     dependencies:
       '@content-collections/core':
-        specifier: 0.7.0
-        version: 0.7.0(typescript@5.5.4)
+        specifier: 0.7.2
+        version: 0.7.2(typescript@5.5.4)
       '@fumadocs/content-collections':
         specifier: 1.1.4
-        version: 1.1.4(@content-collections/core@0.7.0(typescript@5.5.4))(@content-collections/mdx@0.1.4(@content-collections/core@0.7.0(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(fumadocs-core@13.4.7(@types/react@18.3.3)(next@14.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 1.1.4(@content-collections/core@0.7.2(typescript@5.5.4))(@content-collections/mdx@0.1.4(@content-collections/core@0.7.2(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(fumadocs-core@13.4.7(@types/react@18.3.3)(next@14.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@turbostarter/shared':
         specifier: workspace:*
         version: link:../shared
@@ -636,7 +636,7 @@ importers:
     devDependencies:
       '@content-collections/cli':
         specifier: 0.1.5
-        version: 0.1.5(@content-collections/core@0.7.0(typescript@5.5.4))
+        version: 0.1.5(@content-collections/core@0.7.2(typescript@5.5.4))
       '@turbostarter/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
@@ -947,7 +947,7 @@ importers:
         version: 7.35.2(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-2d16326d-20240930(eslint@9.9.0(jiti@1.21.6))
+        version: 5.1.0-rc-d8c90fa4-20241001(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.1.1
         version: 2.1.1(eslint@9.9.0(jiti@1.21.6))
@@ -1966,8 +1966,8 @@ packages:
     peerDependencies:
       '@content-collections/core': 0.x
 
-  '@content-collections/core@0.7.0':
-    resolution: {integrity: sha512-S1YQ5WSNiQtmf8tPhRAzqEmst4fPCMGE5iCt04gBkuAJM3EZdIRbV06eQsyJAiRNk2/L7Bqz3VIKdYSgdk84zg==}
+  '@content-collections/core@0.7.2':
+    resolution: {integrity: sha512-jOpQV6etstGF477CoMXdh4Cwl4fEbgZhty/WKxPsP3akx1LE4Ds8w89WZVsy8pttnR6KC4psrjCtlwa9WNS+rg==}
     peerDependencies:
       typescript: ^5.0.2
 
@@ -5890,12 +5890,6 @@ packages:
     peerDependencies:
       esbuild: '>=0.17'
 
-  bundle-require@5.0.0:
-    resolution: {integrity: sha512-GuziW3fSSmopcx4KRymQEJVbZUfqlCqcq7dvs6TYwKRZiegK/2buMxQTPs6MGlNv50wms1699qYO54R8XfRX4w==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    peerDependencies:
-      esbuild: '>=0.18'
-
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
     engines: {node: '>=10.16.0'}
@@ -6927,8 +6921,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-hooks@5.1.0-rc-2d16326d-20240930:
-    resolution: {integrity: sha512-uk17GGL2En9oNfyYndAc1po4i6Mwb+pyn2HthgO+tpZqBCacB34Zh++IBG6f0hwiDc2ZHgBBq+cWF0Du3p9+5w==}
+  eslint-plugin-react-hooks@5.1.0-rc-d8c90fa4-20241001:
+    resolution: {integrity: sha512-QXbrGKwGhYTsC7Ss6cjPx9TN5rU7BiRtxStLIEJ9IVlTANKnJ62IXOpvHtTVx/Tlcv4MIU1vZo8bNXFsRMUBwA==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -12891,16 +12885,15 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.0
       chalk: 5.3.0
 
-  '@content-collections/cli@0.1.5(@content-collections/core@0.7.0(typescript@5.5.4))':
+  '@content-collections/cli@0.1.5(@content-collections/core@0.7.2(typescript@5.5.4))':
     dependencies:
-      '@content-collections/core': 0.7.0(typescript@5.5.4)
-      '@content-collections/integrations': 0.2.1(@content-collections/core@0.7.0(typescript@5.5.4))
+      '@content-collections/core': 0.7.2(typescript@5.5.4)
+      '@content-collections/integrations': 0.2.1(@content-collections/core@0.7.2(typescript@5.5.4))
       clerc: 0.44.0
 
-  '@content-collections/core@0.7.0(typescript@5.5.4)':
+  '@content-collections/core@0.7.2(typescript@5.5.4)':
     dependencies:
       '@parcel/watcher': 2.4.1
-      bundle-require: 5.0.0(esbuild@0.21.5)
       camelcase: 8.0.0
       esbuild: 0.21.5
       gray-matter: 4.0.3
@@ -12913,13 +12906,13 @@ snapshots:
       yaml: 2.5.0
       zod: 3.23.8
 
-  '@content-collections/integrations@0.2.1(@content-collections/core@0.7.0(typescript@5.5.4))':
+  '@content-collections/integrations@0.2.1(@content-collections/core@0.7.2(typescript@5.5.4))':
     dependencies:
-      '@content-collections/core': 0.7.0(typescript@5.5.4)
+      '@content-collections/core': 0.7.2(typescript@5.5.4)
 
-  '@content-collections/mdx@0.1.4(@content-collections/core@0.7.0(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@content-collections/mdx@0.1.4(@content-collections/core@0.7.2(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@content-collections/core': 0.7.0(typescript@5.5.4)
+      '@content-collections/core': 0.7.2(typescript@5.5.4)
       esbuild: 0.21.5
       mdx-bundler: 10.0.3(esbuild@0.21.5)
       react: 18.3.1
@@ -13602,10 +13595,10 @@ snapshots:
     dependencies:
       tslib: 2.6.3
 
-  '@fumadocs/content-collections@1.1.4(@content-collections/core@0.7.0(typescript@5.5.4))(@content-collections/mdx@0.1.4(@content-collections/core@0.7.0(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(fumadocs-core@13.4.7(@types/react@18.3.3)(next@14.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@fumadocs/content-collections@1.1.4(@content-collections/core@0.7.2(typescript@5.5.4))(@content-collections/mdx@0.1.4(@content-collections/core@0.7.2(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(fumadocs-core@13.4.7(@types/react@18.3.3)(next@14.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
-      '@content-collections/core': 0.7.0(typescript@5.5.4)
-      '@content-collections/mdx': 0.1.4(@content-collections/core@0.7.0(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@content-collections/core': 0.7.2(typescript@5.5.4)
+      '@content-collections/mdx': 0.1.4(@content-collections/core@0.7.2(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       fumadocs-core: 13.4.7(@types/react@18.3.3)(next@14.2.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@graphql-typed-document-node/core@3.2.0(graphql@15.8.0)':
@@ -17716,11 +17709,6 @@ snapshots:
       esbuild: 0.18.20
       load-tsconfig: 0.2.5
 
-  bundle-require@5.0.0(esbuild@0.21.5):
-    dependencies:
-      esbuild: 0.21.5
-      load-tsconfig: 0.2.5
-
   busboy@1.6.0:
     dependencies:
       streamsearch: 1.1.0
@@ -18900,7 +18888,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-2d16326d-20240930(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-d8c90fa4-20241001(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
