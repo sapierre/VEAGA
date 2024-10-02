@@ -37,7 +37,7 @@
     "@turbostarter/ui": "workspace:*",
     "lucide-react-native": "0.439.0",
     "nativewind": "~4.1.10",
-    "react-native-svg": "15.2.0",
+    "react-native-svg": "15.7.1",
     "zustand": "4.5.5"
   },
   "devDependencies": {
