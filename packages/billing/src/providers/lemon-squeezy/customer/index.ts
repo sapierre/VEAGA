@@ -7,9 +7,9 @@ import {
 import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
 import { ApiError } from "@turbostarter/shared/utils";
 
-import { getCustomerByUserId } from "../../../api";
 import { env } from "../../../env";
 import { updateCustomer, upsertCustomer } from "../../../lib/customer";
+import { getCustomerByUserId } from "../../../server";
 import { BillingProvider } from "../../../types";
 
 const getLemonSqueezyCustomerById = async (customerId: string) => {

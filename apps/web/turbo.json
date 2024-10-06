@@ -6,6 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "next-env.d.ts"],
       "env": [
+        "BILLING_MODEL",
+        "BILLING_PROVIDER",
+
         "STRIPE_SECRET_KEY",
         "STRIPE_WEBHOOK_SECRET",
 
@@ -14,6 +17,10 @@
         "LEMON_SQUEEZY_STORE_ID",
 
         "SEND_EMAIL_HOOK_SECRET",
+
+        "EMAIL_PROVIDER",
+        "EMAIL_FROM",
+        "EMAIL_THEME",
 
         "RESEND_API_KEY",
 

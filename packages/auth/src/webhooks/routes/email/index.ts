@@ -1,7 +1,7 @@
 import { Webhook } from "standardwebhooks";
 
 import { EmailTemplate } from "@turbostarter/email";
-import { sendEmail } from "@turbostarter/email/api";
+import { sendEmail } from "@turbostarter/email/server";
 import { handleApiError } from "@turbostarter/shared/utils";
 
 import { env } from "../../../env";

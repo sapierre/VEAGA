@@ -1,1 +1,1 @@
-export { webhookHandler as POST } from "@turbostarter/billing/api";
+export { webhookHandler as POST } from "@turbostarter/billing/server";

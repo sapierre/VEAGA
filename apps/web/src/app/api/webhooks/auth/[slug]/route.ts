@@ -1,4 +1,4 @@
-import { webhookHandler } from "@turbostarter/auth/api";
+import { webhookHandler } from "@turbostarter/auth/server";
 
 import { pathsConfig } from "~/config/paths";
 import { auth } from "~/lib/auth/server";

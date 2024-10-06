@@ -10,19 +10,19 @@ import {
 } from "@turbostarter/billing";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
-import { PricingFooter } from "./layout/footer";
 import { PricingHeader } from "./layout/header";
 import { Plans, PlansSkeleton } from "./plans/plans";
 
 import type { User } from "@turbostarter/auth";
-import type { Customer } from "@turbostarter/billing";
+import type { BillingModel, Customer } from "@turbostarter/billing";
 
 interface PricingProps {
   readonly user: User | null;
   readonly customer: Customer | null;
+  readonly model: BillingModel;
 }
 
-export const Pricing = memo<PricingProps>(({ user, customer }) => {
+export const Pricing = memo<PricingProps>(({ user, customer, model }) => {
   const intervals = [
     ...new Set(
       config.plans.flatMap((plan) =>
@@ -46,7 +46,7 @@ export const Pricing = memo<PricingProps>(({ user, customer }) => {
     <div className="flex w-full flex-col items-center justify-start gap-14 lg:gap-24">
       <PricingHeader
         currency={config.currency}
-        model={config.model}
+        model={model}
         intervals={intervals}
         activeInterval={activeInterval}
         onIntervalChange={setActiveInterval}
@@ -55,14 +55,12 @@ export const Pricing = memo<PricingProps>(({ user, customer }) => {
       <Plans
         plans={config.plans}
         interval={activeInterval}
-        model={config.model}
+        model={model}
         currency={config.currency}
         discounts={config.discounts}
         user={user}
         customer={customer}
       />
-
-      <PricingFooter provider={config.provider} />
     </div>
   );
 });

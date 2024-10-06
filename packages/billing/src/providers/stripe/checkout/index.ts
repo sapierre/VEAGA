@@ -1,6 +1,7 @@
 import { ApiError } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
+import { env } from "../../../env";
 import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
 import { BillingModel } from "../../../types";
 import { getHighestDiscountForPrice } from "../../../utils";
@@ -114,7 +115,9 @@ export const checkout = async ({
 
     const session = await createCheckoutSession({
       mode:
-        config.model === BillingModel.RECURRING ? "subscription" : "payment",
+        env.BILLING_MODEL === BillingModel.RECURRING
+          ? "subscription"
+          : "payment",
       billing_address_collection: "required",
       customer,
       customer_update: {

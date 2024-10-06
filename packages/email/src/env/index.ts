@@ -1,7 +1,8 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-import { config } from "../config";
+import { ThemeColor } from "@turbostarter/ui";
+
 import { EmailProvider } from "../types";
 
 const shared = {
@@ -13,11 +14,27 @@ const shared = {
   emptyStringAsUndefined: true,
 } as const;
 
+const EMAIL_PROVIDER = z
+  .nativeEnum(EmailProvider)
+  .optional()
+  .default(EmailProvider.RESEND)
+  /* eslint-disable-next-line turbo/no-undeclared-env-vars */
+  .parse(process.env.EMAIL_PROVIDER);
+
+const configEnv = createEnv({
+  ...shared,
+  server: {
+    EMAIL_FROM: z.string().email(),
+    EMAIL_THEME: z.nativeEnum(ThemeColor).optional().default(ThemeColor.ORANGE),
+  },
+});
+
 const getEmailEnv = (provider: EmailProvider) => {
   switch (provider) {
     case EmailProvider.RESEND:
       return createEnv({
         ...shared,
+        extends: [configEnv],
         server: {
           RESEND_API_KEY: z.string(),
           EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
@@ -26,6 +43,7 @@ const getEmailEnv = (provider: EmailProvider) => {
     case EmailProvider.PLUNK:
       return createEnv({
         ...shared,
+        extends: [configEnv],
         server: {
           PLUNK_API_KEY: z.string(),
           EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
@@ -34,6 +52,7 @@ const getEmailEnv = (provider: EmailProvider) => {
     case EmailProvider.POSTMARK:
       return createEnv({
         ...shared,
+        extends: [configEnv],
         server: {
           POSTMARK_API_KEY: z.string(),
           EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
@@ -42,6 +61,7 @@ const getEmailEnv = (provider: EmailProvider) => {
     case EmailProvider.NODEMAILER:
       return createEnv({
         ...shared,
+        extends: [configEnv],
         server: {
           NODEMAILER_HOST: z.string(),
           NODEMAILER_PORT: z.coerce.number(),
@@ -53,6 +73,7 @@ const getEmailEnv = (provider: EmailProvider) => {
     case EmailProvider.SENDGRID:
       return createEnv({
         ...shared,
+        extends: [configEnv],
         server: {
           SENDGRID_API_KEY: z.string(),
           EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
@@ -63,4 +84,4 @@ const getEmailEnv = (provider: EmailProvider) => {
   }
 };
 
-export const env = getEmailEnv(config.provider);
+export const env = getEmailEnv(EMAIL_PROVIDER);

@@ -1,6 +1,3 @@
-import type { emailConfigSchema } from "../config/schema";
-import type { z } from "zod";
-
 export const EmailProvider = {
   RESEND: "resend",
   PLUNK: "plunk",
@@ -10,7 +7,5 @@ export const EmailProvider = {
 } as const;
 
 export type EmailProvider = (typeof EmailProvider)[keyof typeof EmailProvider];
-
-export type EmailConfig = z.infer<typeof emailConfigSchema>;
 
 export * from "./templates";

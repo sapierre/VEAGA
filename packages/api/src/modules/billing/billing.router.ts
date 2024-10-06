@@ -4,7 +4,7 @@ import {
   getCustomerByUserId,
   getBillingPortalSchema,
   getBillingPortal,
-} from "@turbostarter/billing/api";
+} from "@turbostarter/billing/server";
 
 import { createTRPCRouter, protectedProcedure } from "../../trpc";
 

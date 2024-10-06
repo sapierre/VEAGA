@@ -1,10 +1,9 @@
-import { config } from "../../config";
 import { env } from "../../env";
 import { EmailProvider } from "../../types";
 
 import type { EmailProviderStrategy } from "../types";
 
-const { from } = config;
+const from = env.EMAIL_FROM;
 
 const send: EmailProviderStrategy["send"] = async ({
   to,

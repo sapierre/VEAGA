@@ -1,10 +1,8 @@
-import { config } from "./config";
+import { env } from "./env";
 import { strategies } from "./providers";
 import { getTemplate } from "./templates";
 
 import type { EmailTemplate, EmailVariables } from "./types";
-
-const { provider } = config;
 
 const sendEmail = async <T extends EmailTemplate>({
   to,
@@ -15,7 +13,7 @@ const sendEmail = async <T extends EmailTemplate>({
   template: T;
   variables: EmailVariables[T];
 }) => {
-  const strategy = strategies[provider];
+  const strategy = strategies[env.EMAIL_PROVIDER];
   const { html, text, subject } = await getTemplate({
     id: template,
     variables,

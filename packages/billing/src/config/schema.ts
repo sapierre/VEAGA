@@ -3,7 +3,6 @@ import { z } from "zod";
 import {
   BillingDiscountType,
   BillingModel,
-  BillingProvider,
   PricingPlanType,
   RecurringInterval,
 } from "../types";
@@ -57,11 +56,6 @@ export const planSchema = z.object({
 });
 
 export const billingConfigSchema = z.object({
-  provider: z
-    .nativeEnum(BillingProvider)
-    .optional()
-    .default(BillingProvider.STRIPE),
-  model: z.nativeEnum(BillingModel).optional().default(BillingModel.RECURRING),
   currency: z.string().optional().default("usd"),
   plans: z.array(planSchema),
   discounts: z.array(discountSchema).optional().default([]),

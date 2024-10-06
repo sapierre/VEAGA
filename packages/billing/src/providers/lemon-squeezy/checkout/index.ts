@@ -7,16 +7,16 @@ import {
 import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
 import { ApiError } from "@turbostarter/shared/utils";
 
-import { getCustomerByUserId } from "../../../api";
 import { config } from "../../../config";
 import { env } from "../../../env";
 import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
+import { getCustomerByUserId } from "../../../server";
 import { BillingProvider } from "../../../types";
 import { getHighestDiscountForPrice } from "../../../utils";
 import { createOrRetrieveCustomer } from "../customer";
 import { toCheckoutBillingStatus } from "../mappers/toBillingStatus";
 
-import type { CheckoutInput, GetBillingPortalInput } from "../../../api";
+import type { CheckoutInput, GetBillingPortalInput } from "../../../server";
 import type { User } from "@turbostarter/auth";
 
 export const checkout = async ({
