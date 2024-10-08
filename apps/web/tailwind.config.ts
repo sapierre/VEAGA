@@ -3,8 +3,6 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 import baseConfig from "@turbostarter/tailwind-config/web";
 
-import { createPreset } from "fumadocs-ui/tailwind-plugin";
-
 import { themes } from "@turbostarter/ui";
 import { hslToRgb, mapValues, transform } from "@turbostarter/shared/utils";
 
@@ -14,9 +12,8 @@ export default {
   content: [
     ...baseConfig.content,
     "../../packages/ui/{shared,web}/src/**/*.{ts,tsx}",
-    "../../node_modules/fumadocs-ui/dist/**/*.js",
   ],
-  presets: [baseConfig, createPreset()],
+  presets: [baseConfig],
   theme: {
     extend: {
       fontFamily: {

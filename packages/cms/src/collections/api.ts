@@ -1,7 +1,4 @@
-import { allBlogs, allLegals } from "../../.content-collections/generated";
-import { COLLECTION_TYPE } from "../constants";
+import { blog } from "./blog";
+import { legal } from "./legal";
 
-export const content = {
-  [COLLECTION_TYPE.LEGAL]: allLegals,
-  [COLLECTION_TYPE.BLOG]: allBlogs,
-} as const;
+export const collections = [legal, blog];

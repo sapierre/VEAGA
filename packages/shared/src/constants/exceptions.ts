@@ -1,4 +1,4 @@
-export const HTTP_STATUS_CODE = {
+export const HttpStatusCode = {
   CONTINUE: 100,
   SWITCHING_PROTOCOLS: 101,
   PROCESSING: 102,
@@ -62,7 +62,7 @@ export const HTTP_STATUS_CODE = {
   NETWORK_AUTHENTICATION_REQUIRED: 511,
 } as const;
 
-export type HTTP_STATUS_CODE =
-  (typeof HTTP_STATUS_CODE)[keyof typeof HTTP_STATUS_CODE];
+export type HttpStatusCode =
+  (typeof HttpStatusCode)[keyof typeof HttpStatusCode];
 
 export const GENERIC_ERROR_MESSAGE = "Something went wrong. Please try again.";

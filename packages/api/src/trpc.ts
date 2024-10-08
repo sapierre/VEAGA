@@ -12,7 +12,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@turbostarter/db/client";
-import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { ApiError } from "@turbostarter/shared/utils";
 
 import type { AuthClient } from "@turbostarter/auth";
@@ -133,7 +133,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.user?.id) {
     throw new ApiError(
-      HTTP_STATUS_CODE.UNAUTHORIZED,
+      HttpStatusCode.UNAUTHORIZED,
       "You need to be logged in to access this feature!",
     );
   }

@@ -4,7 +4,7 @@ import {
   listCustomers,
 } from "@lemonsqueezy/lemonsqueezy.js";
 
-import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { ApiError } from "@turbostarter/shared/utils";
 
 import { env } from "../../../env";
@@ -29,7 +29,7 @@ const getLemonSqueezyCustomerByEmail = async (email: string) => {
 const createLemonSqueezyCustomer = async (email: string) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
     throw new ApiError(
-      HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       "Invalid billing provider!",
     );
   }

@@ -4,7 +4,7 @@ import {
   getOrder,
 } from "@lemonsqueezy/lemonsqueezy.js";
 
-import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { ApiError } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
@@ -26,7 +26,7 @@ export const checkout = async ({
 }: CheckoutInput & { user: User }) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
     throw new ApiError(
-      HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       "Invalid billing provider!",
     );
   }
@@ -39,7 +39,7 @@ export const checkout = async ({
     const price = plan?.prices.find((p) => p.id === id);
 
     if (!price || !plan) {
-      throw new ApiError(HTTP_STATUS_CODE.NOT_FOUND, "Price not found.");
+      throw new ApiError(HttpStatusCode.NOT_FOUND, "Price not found.");
     }
 
     const customer = await createOrRetrieveCustomer({
@@ -82,7 +82,7 @@ export const getBillingPortal = async ({
 }: GetBillingPortalInput & { user: User }) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
     throw new ApiError(
-      HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
       "Invalid billing provider!",
     );
   }
@@ -119,7 +119,7 @@ export const checkoutStatusChangeHandler = async ({ id }: { id: string }) => {
   const order = data?.data;
 
   if (!order) {
-    throw new ApiError(HTTP_STATUS_CODE.NOT_FOUND, "Order not found.");
+    throw new ApiError(HttpStatusCode.NOT_FOUND, "Order not found.");
   }
 
   const customer = await getCustomerByCustomerId(
@@ -127,7 +127,7 @@ export const checkoutStatusChangeHandler = async ({ id }: { id: string }) => {
   );
 
   if (!customer) {
-    throw new ApiError(HTTP_STATUS_CODE.NOT_FOUND, "Customer not found.");
+    throw new ApiError(HttpStatusCode.NOT_FOUND, "Customer not found.");
   }
 
   const priceId = order.attributes.first_order_item.variant_id.toString();

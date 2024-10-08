@@ -2,12 +2,12 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-import { NODE_ENV } from "@turbostarter/shared/constants";
+import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 export const env = createEnv({
   shared: {
-    APP_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
+    APP_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },
   clientPrefix: "EXPO_PUBLIC_",
   client: {

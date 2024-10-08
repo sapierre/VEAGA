@@ -1,45 +1,45 @@
 import { notFound } from "next/navigation";
 
+import { getContentItemBySlug, getContentItems } from "@turbostarter/cms";
+import { CollectionType } from "@turbostarter/cms";
+
 import { Mdx } from "~/components/common/mdx";
-import { getPage, getPages } from "~/lib/content/blog";
+import { BLOG_PREFIX } from "~/config/paths";
 import { getMetadata } from "~/lib/metadata";
 
-import type { TableOfContents } from "fumadocs-core/server";
-
 export default function Page({ params }: { params: { slug: string } }) {
-  const page = getPage([params.slug]);
+  const item = getContentItemBySlug({
+    collection: CollectionType.BLOG,
+    slug: params.slug,
+  });
 
-  if (!page) {
-    notFound();
+  if (!item) {
+    return notFound();
   }
 
-  return (
-    <Mdx
-      data={{
-        ...page.data,
-        toc: page.data.toc as TableOfContents,
-      }}
-    />
-  );
+  return <Mdx data={item} base={BLOG_PREFIX} />;
 }
 
 export function generateStaticParams() {
-  const pages = getPages();
-
-  return pages.map((page) => ({
-    slug: page.data.slug,
-  }));
+  return getContentItems({ collection: CollectionType.BLOG }).items.map(
+    (post) => ({
+      slug: post.slug,
+    }),
+  );
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  const page = getPage([params.slug]);
+  const item = getContentItemBySlug({
+    collection: CollectionType.BLOG,
+    slug: params.slug,
+  });
 
-  if (!page) {
+  if (!item) {
     return notFound();
   }
 
   return getMetadata({
-    title: page.data.title,
-    description: page.data.description,
+    title: item.title,
+    description: item.description,
   });
 }

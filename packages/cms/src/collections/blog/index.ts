@@ -1,6 +1,11 @@
 import { defineCollection } from "@content-collections/core";
-import { transformMDX } from "@fumadocs/content-collections/configuration";
+import { compileMDX } from "@content-collections/mdx";
+import rehypeShiki from "@shikijs/rehype";
+import readingTime from "reading-time";
 import slugify from "slugify";
+
+import { ContentStatus, ContentTag } from "../../types";
+import { getLastModifiedAt } from "../../utils";
 
 export const blog = defineCollection({
   name: "blog",
@@ -11,14 +16,35 @@ export const blog = defineCollection({
     description: z.string(),
     thumbnail: z.string(),
     publishedAt: z.coerce.date(),
-    tags: z.array(z.string()),
+    tags: z.array(z.nativeEnum(ContentTag)),
+    status: z.nativeEnum(ContentStatus),
   }),
-  transform: async (doc, context) => {
-    const mdx = await transformMDX(doc, context);
+  transform: async (document, context) => {
+    const mdx = await compileMDX(context, document, {
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            /* see https://shiki.matsu.io/themes for available themes */
+            theme: "one-dark-pro",
+          },
+        ],
+      ],
+    });
+
+    const lastModifiedAt = await context.cache(
+      document._meta.filePath,
+      getLastModifiedAt,
+    );
+
+    const timeToRead = readingTime(document.content).text;
 
     return {
-      ...mdx,
-      slug: slugify(doc.title, { lower: true }),
+      ...document,
+      mdx,
+      lastModifiedAt,
+      timeToRead,
+      slug: slugify(document.title, { lower: true }),
     };
   },
 });

@@ -1,6 +1,6 @@
 import { isAuthApiError } from "@supabase/supabase-js";
 
-import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
 
 import type { WebhookRoute } from "../types";
 
@@ -19,7 +19,7 @@ export const callbackRoute: WebhookRoute = async ({
 
       if (error) {
         return new Response(null, {
-          status: HTTP_STATUS_CODE.FOUND,
+          status: HttpStatusCode.FOUND,
           headers: {
             Location: `${origin}${errorPath}?code=${error.code}`,
           },
@@ -28,7 +28,7 @@ export const callbackRoute: WebhookRoute = async ({
     } catch (error) {
       if (isAuthApiError(error)) {
         return new Response(null, {
-          status: HTTP_STATUS_CODE.FOUND,
+          status: HttpStatusCode.FOUND,
           headers: {
             Location: `${origin}${errorPath}?code=${error.code}`,
           },
@@ -36,7 +36,7 @@ export const callbackRoute: WebhookRoute = async ({
       }
 
       return new Response(null, {
-        status: HTTP_STATUS_CODE.FOUND,
+        status: HttpStatusCode.FOUND,
         headers: {
           Location: `${origin}${errorPath}`,
         },
@@ -45,7 +45,7 @@ export const callbackRoute: WebhookRoute = async ({
   }
 
   return new Response(null, {
-    status: HTTP_STATUS_CODE.FOUND,
+    status: HttpStatusCode.FOUND,
     headers: {
       Location: redirectTo,
     },

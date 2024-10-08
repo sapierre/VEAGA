@@ -6,13 +6,13 @@ import { z } from "zod";
 
 import { env as apiEnv } from "@turbostarter/api/env";
 import { env as authEnv } from "@turbostarter/auth/env";
-import { NODE_ENV } from "@turbostarter/shared/constants";
+import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 export const env = createEnv({
   extends: [vercel(), apiEnv, authEnv],
   shared: {
-    NODE_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
+    NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },
   /**
    * Specify your server-side environment variables schema here.

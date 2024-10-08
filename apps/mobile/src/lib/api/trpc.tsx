@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import { useState } from "react";
 import superjson from "superjson";
 
-import { NODE_ENV } from "@turbostarter/shared/constants";
+import { NodeEnv } from "@turbostarter/shared/constants";
 
 import { auth } from "~/lib/auth";
 import { env } from "~/lib/env";
@@ -57,7 +57,7 @@ export const TRPCProvider = (props: { children: React.ReactNode }) => {
         }),
         loggerLink({
           enabled: (opts) =>
-            process.env.NODE_ENV === NODE_ENV.DEVELOPMENT ||
+            process.env.NODE_ENV === NodeEnv.DEVELOPMENT ||
             (opts.direction === "down" && opts.result instanceof Error),
           colorMode: "ansi",
         }),

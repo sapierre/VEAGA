@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 
+import { useBreakpoint } from "@turbostarter/ui-web";
 import {
   Drawer,
   DrawerTrigger,
@@ -16,7 +17,6 @@ import {
 import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
 
 import { appConfig } from "~/config/app";
-import { useBreakpoint } from "~/lib/hooks/use-media-query";
 import { useThemeConfig } from "~/providers/theme";
 
 import type { ThemeMode } from "@turbostarter/ui";

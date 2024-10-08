@@ -1,12 +1,12 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-import { NODE_ENV } from "@turbostarter/shared/constants";
+import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 export const env = createEnv({
   shared: {
-    NODE_ENV: z.nativeEnum(NODE_ENV).default(NODE_ENV.DEVELOPMENT),
+    NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },
   clientPrefix: "PLASMO_PUBLIC_",
   client: {

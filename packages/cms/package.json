@@ -20,12 +20,14 @@
   },
   "dependencies": {
     "@content-collections/core": "0.7.2",
-    "@fumadocs/content-collections": "1.1.4",
     "@turbostarter/shared": "workspace:*",
+    "reading-time": "1.5.0",
     "slugify": "1.6.6"
   },
   "devDependencies": {
     "@content-collections/cli": "0.1.5",
+    "@content-collections/mdx": "0.1.6",
+    "@shikijs/rehype": "1.21.1",
     "@turbostarter/eslint-config": "workspace:*",
     "@turbostarter/prettier-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",

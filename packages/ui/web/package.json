@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    },
     "./*": {
       "types": "./dist/components/*.d.ts",
       "default": "./src/components/*.tsx"

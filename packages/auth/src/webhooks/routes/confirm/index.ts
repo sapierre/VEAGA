@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODE } from "@turbostarter/shared/constants";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
 
 import type { WebhookRoute } from "../types";
 import type { EmailOtpType } from "@supabase/supabase-js";
@@ -15,7 +15,7 @@ export const confirmRoute: WebhookRoute = async ({
 
   if (!token_hash || !type) {
     return new Response(null, {
-      status: HTTP_STATUS_CODE.FOUND,
+      status: HttpStatusCode.FOUND,
       headers: {
         Location: redirectTo,
       },
@@ -31,7 +31,7 @@ export const confirmRoute: WebhookRoute = async ({
     const redirectBaseUrl = new URL(redirectTo);
 
     return new Response(null, {
-      status: HTTP_STATUS_CODE.FOUND,
+      status: HttpStatusCode.FOUND,
       headers: {
         Location: `${redirectBaseUrl.protocol}//${redirectBaseUrl.host}${errorPath}?code=${error?.code}`,
       },
@@ -39,7 +39,7 @@ export const confirmRoute: WebhookRoute = async ({
   }
 
   return new Response(null, {
-    status: HTTP_STATUS_CODE.FOUND,
+    status: HttpStatusCode.FOUND,
     headers: {
       Location: `${redirectTo}?access_token=${data.session.access_token}&refresh_token=${data.session.refresh_token}`,
     },

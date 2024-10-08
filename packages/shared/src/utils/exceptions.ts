@@ -1,15 +1,15 @@
-import { GENERIC_ERROR_MESSAGE, HTTP_STATUS_CODE } from "../constants";
+import { GENERIC_ERROR_MESSAGE, HttpStatusCode } from "../constants";
 
-const isHttpStatus = (status: number): status is HTTP_STATUS_CODE =>
-  Object.values<number>(HTTP_STATUS_CODE).includes(status);
+const isHttpStatus = (status: number): status is HttpStatusCode =>
+  Object.values<number>(HttpStatusCode).includes(status);
 
 export class ApiError extends Error {
-  status: HTTP_STATUS_CODE;
+  status: HttpStatusCode;
   constructor(status: number, message: string) {
     super(message);
     this.status = isHttpStatus(status)
       ? status
-      : HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
+      : HttpStatusCode.INTERNAL_SERVER_ERROR;
   }
 }
 
@@ -26,7 +26,7 @@ const getStatusCode = (e: unknown) => {
     return Number(e.status);
   }
 
-  return HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
+  return HttpStatusCode.INTERNAL_SERVER_ERROR;
 };
 
 export const handleApiError = (e: unknown) => {
