@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import { TRPCReactProvider } from "~/lib/api/react";
 
+import { AnalyticsProvider } from "./analytics";
 import { ThemeProvider } from "./theme";
 
 interface ProvidersProps {
@@ -11,7 +12,9 @@ interface ProvidersProps {
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (
     <TRPCReactProvider>
-      <ThemeProvider>{children}</ThemeProvider>
+      <AnalyticsProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </AnalyticsProvider>
     </TRPCReactProvider>
   );
 });

@@ -5,7 +5,8 @@ import { BillingModel, BillingProvider } from "../types";
 
 const shared = {
   skipValidation:
-    !!process.env.SKIP_ENV_VALIDATION ||
+    (!!process.env.SKIP_ENV_VALIDATION &&
+      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
     process.env.npm_lifecycle_event === "lint",
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

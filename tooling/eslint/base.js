@@ -1,6 +1,7 @@
 /// <reference types="./types.d.ts" />
 
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
@@ -17,7 +18,7 @@ export const restrictEnvAccess = tseslint.config({
         object: "process",
         property: "env",
         message:
-          "Use `import { env } from '@/env'` instead to ensure validated types.",
+          "Use `import { env } from '~/env'` instead to ensure validated types.",
       },
     ],
     "no-restricted-imports": [
@@ -26,7 +27,7 @@ export const restrictEnvAccess = tseslint.config({
         name: "process",
         importNames: ["env"],
         message:
-          "Use `import { env } from '@/env'` instead to ensure validated types.",
+          "Use `import { env } from '~/env'` instead to ensure validated types.",
       },
     ],
   },
@@ -34,7 +35,12 @@ export const restrictEnvAccess = tseslint.config({
 
 export default tseslint.config(
   // Ignore files not tracked by VCS and any config files
-  includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
+  includeIgnoreFile(
+    path.resolve(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../../.gitignore",
+    ),
+  ),
   { ignores: ["**/*.config.*"] },
   {
     files: ["**/*.js", "**/*.ts", "**/*.tsx"],

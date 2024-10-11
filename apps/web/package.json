@@ -20,6 +20,7 @@
     "@trpc/client": "catalog:",
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
+    "@turbostarter/analytics-web": "workspace:*",
     "@turbostarter/api": "workspace:*",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/billing": "workspace:*",

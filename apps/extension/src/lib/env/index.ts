@@ -1,10 +1,12 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
+import { env as analyticsEnv } from "@turbostarter/analytics-extension/env";
 import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 export const env = createEnv({
+  extends: [analyticsEnv],
   shared: {
     NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },

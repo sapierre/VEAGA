@@ -5,6 +5,7 @@ import createJiti from "jiti";
 createJiti(fileURLToPath(import.meta.url))("./src/lib/env");
 
 const INTERNAL_PACKAGES = [
+  "@turbostarter/analytics-web",
   "@turbostarter/api",
   "@turbostarter/auth",
   "@turbostarter/billing",

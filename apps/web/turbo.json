@@ -33,7 +33,10 @@
         "NODEMAILER_USER",
         "NODEMAILER_PASSWORD",
         "NODEMAILER_HOST",
-        "NODEMAILER_PORT"
+        "NODEMAILER_PORT",
+
+        "OPEN_PANEL_SECRET",
+        "GOOGLE_ANALYTICS_SECRET"
       ]
     },
     "dev": {

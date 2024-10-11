@@ -4,13 +4,14 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
+import { env as analyticsEnv } from "@turbostarter/analytics-web/env";
 import { env as apiEnv } from "@turbostarter/api/env";
 import { env as authEnv } from "@turbostarter/auth/env";
 import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 export const env = createEnv({
-  extends: [vercel(), apiEnv, authEnv],
+  extends: [vercel(), apiEnv, authEnv, analyticsEnv],
   shared: {
     NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },

@@ -104,6 +104,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                 return (
                   <Button
                     variant="outline"
+                    key={mode}
                     size="sm"
                     onClick={() => onChange({ ...config, mode })}
                     className={cn(

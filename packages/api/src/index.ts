@@ -4,8 +4,6 @@ import { createCallerFactory, createTRPCContext } from "./trpc";
 import type { AppRouter } from "./router";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 
-// export * from "./types";
-
 /**
  * Create a server-side caller for the tRPC API
  * @example
