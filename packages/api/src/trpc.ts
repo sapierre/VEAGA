@@ -73,6 +73,9 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       },
     };
   },
+  experimental: {
+    iterablesAndDeferreds: true,
+  },
 });
 
 /**

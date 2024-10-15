@@ -13,6 +13,11 @@ import {
   Gift,
   X,
   CheckIcon,
+  ArrowUp,
+  Globe2,
+  GraduationCap,
+  Atom,
+  Brain,
 } from "lucide-react";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -33,4 +38,9 @@ export const Icons = {
   CheckIcon,
   Gift,
   X,
+  ArrowUp,
+  Globe2,
+  GraduationCap,
+  Atom,
+  Brain,
 };

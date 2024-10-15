@@ -71,7 +71,7 @@ export default function DashboardLayout() {
       screenOptions={({ route }) => ({
         header: () => <Header title={capitalize(route.name)} />,
       })}
-      tabBarClassName="bg-muted"
+      tabBarClassName="bg-background"
     >
       <Tabs.Screen
         name="home"
@@ -123,6 +123,7 @@ export default function DashboardLayout() {
               })}
             />
           ),
+          header: () => <Header title="AI" />,
           tabBarLabel: TabBarLabel,
         }}
       />

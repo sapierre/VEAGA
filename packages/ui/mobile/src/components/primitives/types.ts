@@ -28,6 +28,8 @@ interface Insets {
   right?: number;
 }
 
+type CustomEvent<T> = Event & { detail: T };
+
 type PointerDownOutsideEvent = CustomEvent<{ originalEvent: PointerEvent }>;
 type FocusOutsideEvent = CustomEvent<{ originalEvent: FocusEvent }>;
 

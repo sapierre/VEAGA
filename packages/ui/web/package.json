@@ -20,7 +20,7 @@
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "ui:web:add": "pnpm dlx shadcn@latest add \"https://magicui.design/r/flip-text\" && prettier src --write --list-different"
+    "ui:web:add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.0",
@@ -29,6 +29,7 @@
     "@radix-ui/react-dropdown-menu": "2.1.1",
     "@radix-ui/react-label": "2.1.0",
     "@radix-ui/react-popover": "1.1.1",
+    "@radix-ui/react-scroll-area": "1.2.0",
     "@radix-ui/react-slot": "1.1.0",
     "@radix-ui/react-switch": "1.1.0",
     "@radix-ui/react-tabs": "1.1.0",

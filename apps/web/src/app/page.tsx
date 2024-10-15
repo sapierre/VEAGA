@@ -8,7 +8,45 @@ import { Icons } from "@turbostarter/ui-web/icons";
 
 import { HeaderControls } from "~/components/common/layout/header/controls";
 import { TurboLink } from "~/components/common/turbo-link";
-import { HOME_LINKS } from "~/lib/constants";
+import { pathsConfig } from "~/config/paths";
+
+const LINKS = [
+  {
+    title: "Auth",
+    description:
+      "Authenticate users to your app. Social logins, magic link, email/password and many more.",
+    href: pathsConfig.auth.login,
+  },
+  {
+    title: "AI",
+    description:
+      "Integrate AI into your app. Image recognition, chatbots, and more.",
+    href: pathsConfig.ai,
+  },
+  {
+    title: "Billing",
+    description:
+      "Receive payments from your users using configured providers - Stripe or LemonSqueezy.",
+    href: pathsConfig.marketing.pricing,
+  },
+  {
+    title: "Blog",
+    description:
+      "Manage your blog with ease with built-in integration. Supports MDX and content collections.",
+    href: pathsConfig.marketing.blog.index,
+  },
+  {
+    title: "Themes",
+    description:
+      "Change the look and feel of your app. Light, dark, or custom themes.",
+    href: "https://www.turbostarter.dev/docs/web/customization/styling",
+  },
+  {
+    title: "Docs",
+    description: `Learn how to use TurboStarter. From installation to deployment.`,
+    href: "https://www.turbostarter.dev/docs/web",
+  },
+];
 
 const HomePage = () => {
   return (
@@ -25,7 +63,7 @@ const HomePage = () => {
       </div>
       <Icons.Logo className="h-36 animate-pulse text-primary" />
       <div className="grid grid-cols-1 items-stretch justify-center gap-3 sm:grid-cols-2 md:-mb-4 md:grid-cols-3 lg:-mb-14">
-        {HOME_LINKS.map((link) => (
+        {LINKS.map((link) => (
           <TurboLink
             href={link.href}
             className="group w-full cursor-pointer"

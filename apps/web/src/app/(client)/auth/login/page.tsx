@@ -1,9 +1,9 @@
 import { Auth } from "~/components/auth/auth";
+import { LOGIN_OPTIONS } from "~/components/auth/form/login/constants";
 import { authConfig } from "~/config/auth";
-import { LOGIN_OPTIONS } from "~/lib/constants";
 import { getMetadata } from "~/lib/metadata";
 
-import type { LoginOption } from "~/lib/constants";
+import type { LoginOption } from "~/components/auth/form/login/constants";
 
 export const metadata = getMetadata({
   title: "Login",

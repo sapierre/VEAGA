@@ -8,6 +8,7 @@ const WEBHOOKS_PREFIX = "/webhooks";
 
 const pathsConfig = {
   index: "/",
+  ai: "/ai",
   marketing: {
     pricing: "/pricing",
     blog: {

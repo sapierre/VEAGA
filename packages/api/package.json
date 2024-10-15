@@ -20,6 +20,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/openai": "0.0.66",
     "@t3-oss/env-core": "0.11.1",
     "@trpc/server": "catalog:",
     "@turbostarter/auth": "workspace:*",
@@ -27,6 +28,7 @@
     "@turbostarter/db": "workspace:*",
     "@turbostarter/email": "workspace:*",
     "@turbostarter/shared": "workspace:*",
+    "ai": "3.4.9",
     "superjson": "2.2.1",
     "zod": "catalog:"
   },

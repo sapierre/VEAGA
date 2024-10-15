@@ -12,7 +12,7 @@ import { Text } from "@turbostarter/ui-mobile/text";
 import { MagicLinkLoginForm } from "./magic-link";
 import { PasswordLoginForm } from "./password";
 
-import type { LoginOption } from "~/lib/constants";
+import type { LoginOption } from "./constants";
 
 const LOGIN_OPTIONS_DETAILS = {
   [AUTH_PROVIDER.PASSWORD]: {

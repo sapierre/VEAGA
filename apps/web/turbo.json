@@ -36,7 +36,13 @@
         "NODEMAILER_PORT",
 
         "OPEN_PANEL_SECRET",
-        "GOOGLE_ANALYTICS_SECRET"
+        "GOOGLE_ANALYTICS_SECRET",
+
+        "OPENAI_API_KEY",
+        "ANTHROPIC_API_KEY",
+        "GOOGLE_GENERATIVE_AI_API_KEY",
+        "MISTRAL_API_KEY",
+        "PERPLEXITY_API_KEY"
       ]
     },
     "dev": {

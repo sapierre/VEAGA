@@ -17,6 +17,11 @@ import {
   WandSparkles,
   CircleX,
   Undo2,
+  ArrowUp,
+  Globe2,
+  GraduationCap,
+  Atom,
+  Brain,
 } from "lucide-react-native";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -45,6 +50,11 @@ iconWithClassName(Moon);
 iconWithClassName(CircleX);
 iconWithClassName(WandSparkles);
 iconWithClassName(Undo2);
+iconWithClassName(ArrowUp);
+iconWithClassName(Globe2);
+iconWithClassName(GraduationCap);
+iconWithClassName(Atom);
+iconWithClassName(Brain);
 
 export const Icons = {
   Logo: GlobalIcons.Logo,
@@ -69,4 +79,9 @@ export const Icons = {
   CircleX,
   WandSparkles,
   Undo2,
+  ArrowUp,
+  Globe2,
+  GraduationCap,
+  Atom,
+  Brain,
 };

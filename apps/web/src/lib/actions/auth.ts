@@ -11,7 +11,7 @@ import type {
   RegisterData,
   UpdatePasswordData,
 } from "@turbostarter/auth";
-import type { LoginOption } from "~/lib/constants";
+import type { LoginOption } from "~/components/auth/form/login/constants";
 
 type LoginPayload =
   | {

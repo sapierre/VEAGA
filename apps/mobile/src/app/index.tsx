@@ -11,7 +11,33 @@ import {
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
-import { HOME_LINKS } from "~/lib/constants/home";
+import { pathsConfig } from "~/config/paths";
+
+const LINKS = [
+  {
+    title: "Auth",
+    description:
+      "Authenticate users to your app. Social logins, magic link, email/password and many more.",
+    href: pathsConfig.tabs.auth.login,
+  },
+  {
+    title: "AI",
+    description:
+      "Integrate AI into your app. Image recognition, chatbots, and more.",
+    href: pathsConfig.tabs.ai,
+  },
+  {
+    title: "Billing",
+    description:
+      "Receive payments from your users using configured providers - Stripe or LemonSqueezy.",
+    href: pathsConfig.tabs.billing,
+  },
+  {
+    title: "Docs",
+    description: `Learn how to use TurboStarter. From installation to deployment.`,
+    href: "https://turbostarter.dev/docs/mobile",
+  },
+] as const;
 
 export default function App() {
   return (
@@ -32,7 +58,7 @@ export default function App() {
       </View>
 
       <View className="gap-3">
-        {HOME_LINKS.map((link) => (
+        {LINKS.map((link) => (
           <Link href={link.href} key={link.title} asChild>
             <Pressable>
               <Card>
