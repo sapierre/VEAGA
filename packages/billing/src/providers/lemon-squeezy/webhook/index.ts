@@ -29,7 +29,7 @@ export const webhookHandler = async (
 
     validateSignature(sig, env.LEMON_SQUEEZY_SIGNING_SECRET, body);
 
-    const data = JSON.parse(body) as unknown;
+    const data = JSON.parse(body);
 
     if (!webhookHasMeta(data)) {
       return new Response("Invalid webhook data.", { status: 400 });

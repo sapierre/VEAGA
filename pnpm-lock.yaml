@@ -57,6 +57,9 @@ importers:
       '@commitlint/types':
         specifier: 19.0.3
         version: 19.0.3
+      '@total-typescript/ts-reset':
+        specifier: 0.6.1
+        version: 0.6.1
       '@turbo/gen':
         specifier: 2.1.1
         version: 2.1.1(@swc/core@1.7.10(@swc/helpers@0.5.13))(@types/node@22.2.0)(typescript@5.5.4)
@@ -1094,7 +1097,7 @@ importers:
         version: 7.35.2(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-45804af1-20241021(eslint@9.9.0(jiti@1.21.6))
+        version: 5.1.0-rc-5c56b873-20241107(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.1.1
         version: 2.1.1(eslint@9.9.0(jiti@1.21.6))
@@ -5385,6 +5388,9 @@ packages:
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
+  '@total-typescript/ts-reset@0.6.1':
+    resolution: {integrity: sha512-cka47fVSo6lfQDIATYqb/vO1nvFfbPw7uWLayIXIhGETj0wcOOlrlkobOMDNQOFr9QOafegUPq13V2+6vtD7yg==}
+
   '@trpc/client@11.0.0-rc.477':
     resolution: {integrity: sha512-Ah/Er3vxTm2bIEUcIrike7Z/8Yc+DkFveU2ZHQQ0+zY7yxs931438+4OEJuY/Xl/0p5OTDeZTm6HBuZ1REFiyA==}
     peerDependencies:
@@ -7182,8 +7188,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-hooks@5.1.0-rc-45804af1-20241021:
-    resolution: {integrity: sha512-q8MQ4OQ0TYmKT6eS2ZObxmA+OvUrd27MN72zU5b3ib7Q+1I78C9aUzy1GelM8ttgkEkwSxE+qDBgV+K84tjt+Q==}
+  eslint-plugin-react-hooks@5.1.0-rc-5c56b873-20241107:
+    resolution: {integrity: sha512-lnmAUpbMdH1tvor/oju3CZ4oB/nG/+iSkv3tOA6OenLyODxQujH1p1X6vW9XdI9M8bCAI0JDVGdjTmjCp3hxEA==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -17154,6 +17160,8 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
+  '@total-typescript/ts-reset@0.6.1': {}
+
   '@trpc/client@11.0.0-rc.477(@trpc/server@11.0.0-rc.477)':
     dependencies:
       '@trpc/server': 11.0.0-rc.477
@@ -19248,7 +19256,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-45804af1-20241021(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-5c56b873-20241107(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
