@@ -1,5 +1,5 @@
 {
-  "name": "@turbostarter/api",
+  "name": "@turbostarter/storage",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -11,27 +11,19 @@
     "./env": {
       "types": "./dist/env/index.d.ts",
       "default": "./src/env/index.ts"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./src/server.ts"
     }
   },
   "scripts": {
+    "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@ai-sdk/openai": "0.0.66",
-    "@t3-oss/env-core": "0.11.1",
-    "@trpc/server": "catalog:",
-    "@turbostarter/auth": "workspace:*",
-    "@turbostarter/billing": "workspace:*",
-    "@turbostarter/db": "workspace:*",
-    "@turbostarter/email": "workspace:*",
-    "@turbostarter/shared": "workspace:*",
-    "@turbostarter/storage": "workspace:*",
-    "ai": "3.4.9",
-    "superjson": "2.2.1",
-    "zod": "catalog:"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",
@@ -41,5 +33,9 @@
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@turbostarter/prettier-config"
+  "prettier": "@turbostarter/prettier-config",
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.688.0",
+    "@aws-sdk/s3-request-presigner": "3.688.0"
+  }
 }

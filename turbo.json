@@ -61,14 +61,6 @@
     },
     "//#clean": {
       "cache": false
-    },
-    "ui:web:add": {
-      "cache": false,
-      "interactive": true
-    },
-    "ui:mobile:add": {
-      "cache": false,
-      "interactive": true
     }
   },
   "globalEnv": [

@@ -51,12 +51,12 @@ secrets = "env(SEND_EMAIL_HOOK_SECRET)"
 [analytics]
 enabled = true
 
+[storage]
+enabled = true
+
 [inbucket]
 enabled = false
 
 [realtime]
-enabled = false
-
-[storage]
 enabled = false
 

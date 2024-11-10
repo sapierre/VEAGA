@@ -28,7 +28,7 @@
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "ui:mobile:add": "pnpm dlx @react-native-reusables/cli add && prettier src --write --list-different"
+    "ui:add": "pnpm dlx @react-native-reusables/cli add && prettier src --write --list-different"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {

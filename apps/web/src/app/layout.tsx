@@ -3,6 +3,7 @@ import { DM_Mono, DM_Sans } from "next/font/google";
 import { Footer } from "~/components/common/layout/footer";
 import { TailwindIndicator } from "~/components/common/tailwind-indicator";
 import { Toaster } from "~/components/common/toast";
+import { appConfig } from "~/config/app";
 import { DEFAULT_VIEWPORT, DEFAULT_METADATA } from "~/lib/metadata";
 import { Providers } from "~/providers/providers";
 import "~/styles/globals.css";
@@ -33,6 +34,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={`${sans.variable} ${mono.variable}`}
+      data-theme={appConfig.theme.color}
     >
       <body className="flex min-h-screen flex-col items-center justify-center bg-background font-sans text-foreground antialiased">
         <Providers>

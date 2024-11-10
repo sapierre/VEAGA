@@ -20,7 +20,7 @@
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "ui:web:add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
+    "ui:add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.0",
