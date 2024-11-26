@@ -1,23 +1,30 @@
-When purchasing an item from TurboStarter, you are actually access to the codebase and the license to use that code for your projects. In order to understand our license, please read the following details.
+By purchasing an item (license), Bartosz Zagrodzki (TurboStarter) grants you an ongoing, non-exclusive license to **use** the download files. The license grants permission to one Licensee to access and use the download files. Bartosz Zagrodzki (TurboStarter) retains ownership of the download files but grants the usage on the following terms and conditions.
+
+### Definitions
+
+- **Licensee** is the individual or entity that has purchased the license to use the codebase.
+- **Download files** are the files that are downloaded from the TurboStarter repository.
+- **End Product** is any artifact produced that incorporates the download files or derivatives of the download files.
+- **End User** is a user of an End Product.
+
+---
+
+### Permissible Actions:
+
+- Use the download files to create unlimited End Products.
+- Use the download files to create End Products where the End Product is sold to End Users.
+- Use the download files to create End Products that are open source and freely available to End Users following review and approval by Bartosz Zagrodzki (TurboStarter).
+
+### Prohibited Actions:
+
+- Use the download files to create a product that sells the download files itself
+- Redistribute the download files without the permission of the original author of TurboStarter
+- Share your license for using the download files with any other individuals or companies
+
+In simple terms, use TurboStarter for anything you like except for projects that compete with TurboStarter and would have a negative impact on our product
+
+---
+
+### Questions
 
 **If you have any further questions or are unsure about the how the license fits your case, please contact us via [hello@turbostarter.dev](mailto:hello@turbostarter.dev).**
-
-1.  TurboStarter retains ownership of the codebase but grants the usage on the following terms and conditions.
-2.  The License grants you, an ongoing, non-exclusive, worldwide license to make use of the code to create an end product.
-3.  You are licensed to use the codebase to create multiple end products for yourself or for multiple clients, and the end product may or may not be sold. Resellers and freelancers are allowed to purchase on their client's behalf and charge for their services.
-
----
-
-## Things you are allowed to do with the codebase:
-
-- You are allowed to create multiple end products of the codebase
-- You are allowed to sell any number of end products using the codebase
-- You are allowed to use the codebase for public repositories under fair code license but only with the permission of the original author of TurboStarter. This means the modified code can be used by others but not for commercial use.
-
----
-
-## Things you are not allowed to do with the codebase:
-
-- You are not allowed to create a product that sells the codebase itself
-- You are not allowed to redistribute the codebase without the permission of the original author
-- You are not allowed to share your license with any other individuals or companies

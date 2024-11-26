@@ -24,7 +24,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: "./assets/images/icon.png",
   userInterfaceStyle: "automatic",
   assetBundlePatterns: ["**/*"],
-  sdkVersion: "51.0.0",
   platforms: ["ios", "android"],
   updates: {
     fallbackToCacheTimeout: 0,
@@ -49,12 +48,26 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     "expo-router",
+    "expo-font",
+    "expo-secure-store",
     [
       "expo-tracking-transparency",
       {
         /* 🍎 Describe why you need access to the user's data */
         userTrackingPermission:
           "This identifier will be used to deliver personalized ads to you.",
+      },
+    ],
+    [
+      "expo-build-properties",
+      /* 💡 Enabling "New Architecture" for React Native */
+      {
+        android: {
+          newArchEnabled: true,
+        },
+        ios: {
+          newArchEnabled: true,
+        },
       },
     ],
   ],
