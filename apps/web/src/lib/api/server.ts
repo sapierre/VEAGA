@@ -15,11 +15,11 @@ import type { AppRouter } from "@turbostarter/api";
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(async () => {
-  const heads = new Headers(headers());
+  const heads = new Headers(await headers());
   heads.set("x-trpc-source", "web-server");
 
   return createTRPCContext({
-    auth: auth(),
+    auth: await auth(),
     headers: heads,
   });
 });

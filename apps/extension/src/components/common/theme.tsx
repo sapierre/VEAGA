@@ -1,5 +1,3 @@
-import { useStorage } from "@plasmohq/storage/hook";
-
 import {
   Popover,
   PopoverContent,
@@ -8,22 +6,16 @@ import {
 import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
 
 import { appConfig } from "~/config/app";
-import { STORAGE_KEY } from "~/lib/storage";
-
-import type { ThemeConfig } from "@turbostarter/ui";
+import { StorageKey, useStorage } from "~/lib/storage";
 
 const Customizer = () => {
-  const [config, setConfig] = useStorage<ThemeConfig>(STORAGE_KEY.THEME);
-
-  if (!config) {
-    return null;
-  }
+  const { data, set } = useStorage(StorageKey.THEME);
 
   return (
     <ThemeCustomizer
       defaultConfig={appConfig.theme}
-      config={config}
-      onChange={(config) => setConfig(config)}
+      config={data}
+      onChange={(config) => set(config)}
     />
   );
 };

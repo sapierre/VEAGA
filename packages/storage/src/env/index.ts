@@ -12,15 +12,16 @@ const shared = {
   emptyStringAsUndefined: true,
 } as const;
 
-const STORAGE_PROVIDER = z
+export const provider = z
   .nativeEnum(StorageProvider)
   .optional()
   .default(StorageProvider.S3)
   /* eslint-disable-next-line turbo/no-undeclared-env-vars */
   .parse(process.env.STORAGE_PROVIDER);
 
-const getStorageEnv = (provider: StorageProvider) => {
+const getStorageEnv = () => {
   switch (provider) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     case StorageProvider.S3:
       return createEnv({
         ...shared,
@@ -29,7 +30,10 @@ const getStorageEnv = (provider: StorageProvider) => {
           S3_ENDPOINT: z.string(),
           S3_ACCESS_KEY_ID: z.string(),
           S3_SECRET_ACCESS_KEY: z.string(),
-          STORAGE_PROVIDER: z.literal(provider).optional().default(provider),
+          STORAGE_PROVIDER: z
+            .literal(StorageProvider.S3)
+            .optional()
+            .default(StorageProvider.S3),
         },
       });
     default:
@@ -37,4 +41,4 @@ const getStorageEnv = (provider: StorageProvider) => {
   }
 };
 
-export const env = getStorageEnv(STORAGE_PROVIDER);
+export const env = getStorageEnv();

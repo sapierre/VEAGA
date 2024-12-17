@@ -13,7 +13,7 @@ import {
 import { PLAN_FEATURES } from "~/components/pricing/constants/features";
 import { pathsConfig } from "~/config/paths";
 import { api } from "~/lib/api/react";
-import { publicUrl } from "~/lib/env";
+import { env } from "~/lib/env";
 
 import type { User } from "@turbostarter/auth";
 import type {
@@ -79,8 +79,8 @@ export const usePlan = (
         id: price.id,
       },
       redirect: {
-        success: `${publicUrl}${pathsConfig.index}`,
-        cancel: `${publicUrl}${pathname}`,
+        success: `${env.NEXT_PUBLIC_SITE_URL}${pathsConfig.index}`,
+        cancel: `${env.NEXT_PUBLIC_SITE_URL}${pathname}`,
       },
     });
 
@@ -100,7 +100,7 @@ export const usePlan = (
     }
 
     const { url } = await getPortal({
-      redirectUrl: `${publicUrl}${pathname}`,
+      redirectUrl: `${env.NEXT_PUBLIC_SITE_URL}${pathname}`,
     });
 
     return router.push(url);

@@ -14,7 +14,7 @@ const shared = {
   emptyStringAsUndefined: true,
 } as const;
 
-const EMAIL_PROVIDER = z
+export const provider = z
   .nativeEnum(EmailProvider)
   .optional()
   .default(EmailProvider.RESEND)
@@ -29,7 +29,7 @@ const configEnv = createEnv({
   },
 });
 
-const getEmailEnv = (provider: EmailProvider) => {
+const getEmailEnv = () => {
   switch (provider) {
     case EmailProvider.RESEND:
       return createEnv({
@@ -37,7 +37,10 @@ const getEmailEnv = (provider: EmailProvider) => {
         extends: [configEnv],
         server: {
           RESEND_API_KEY: z.string(),
-          EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
+          EMAIL_PROVIDER: z
+            .literal(EmailProvider.RESEND)
+            .optional()
+            .default(EmailProvider.RESEND),
         },
       });
     case EmailProvider.PLUNK:
@@ -46,7 +49,10 @@ const getEmailEnv = (provider: EmailProvider) => {
         extends: [configEnv],
         server: {
           PLUNK_API_KEY: z.string(),
-          EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
+          EMAIL_PROVIDER: z
+            .literal(EmailProvider.PLUNK)
+            .optional()
+            .default(EmailProvider.PLUNK),
         },
       });
     case EmailProvider.POSTMARK:
@@ -55,7 +61,10 @@ const getEmailEnv = (provider: EmailProvider) => {
         extends: [configEnv],
         server: {
           POSTMARK_API_KEY: z.string(),
-          EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
+          EMAIL_PROVIDER: z
+            .literal(EmailProvider.POSTMARK)
+            .optional()
+            .default(EmailProvider.POSTMARK),
         },
       });
     case EmailProvider.NODEMAILER:
@@ -67,7 +76,10 @@ const getEmailEnv = (provider: EmailProvider) => {
           NODEMAILER_PORT: z.coerce.number(),
           NODEMAILER_USER: z.string(),
           NODEMAILER_PASSWORD: z.string(),
-          EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
+          EMAIL_PROVIDER: z
+            .literal(EmailProvider.NODEMAILER)
+            .optional()
+            .default(EmailProvider.NODEMAILER),
         },
       });
     case EmailProvider.SENDGRID:
@@ -76,7 +88,10 @@ const getEmailEnv = (provider: EmailProvider) => {
         extends: [configEnv],
         server: {
           SENDGRID_API_KEY: z.string(),
-          EMAIL_PROVIDER: z.literal(provider).optional().default(provider),
+          EMAIL_PROVIDER: z
+            .literal(EmailProvider.SENDGRID)
+            .optional()
+            .default(EmailProvider.SENDGRID),
         },
       });
     default:
@@ -84,4 +99,4 @@ const getEmailEnv = (provider: EmailProvider) => {
   }
 };
 
-export const env = getEmailEnv(EMAIL_PROVIDER);
+export const env = getEmailEnv();

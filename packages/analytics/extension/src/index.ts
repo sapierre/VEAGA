@@ -1,4 +1,4 @@
-import { env } from "./env";
+import { provider } from "./env";
 import { strategies } from "./providers";
 
-export const { track } = strategies[env.PLASMO_PUBLIC_ANALYTICS_PROVIDER];
+export const { track } = strategies[provider];

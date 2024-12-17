@@ -1,6 +1,6 @@
-import { env } from "./env";
+import { provider } from "./env";
 import { strategies } from "./providers";
 
-export const { getUploadUrl } = strategies[env.STORAGE_PROVIDER];
+export const { getUploadUrl } = strategies[provider];
 
 export * from "./lib/schema";

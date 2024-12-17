@@ -27,10 +27,15 @@ export const metadata = getMetadata({
   description: "News and updates about the platform",
 });
 
-const BlogPage = ({ searchParams }: { searchParams: { tag?: ContentTag } }) => {
+const BlogPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: ContentTag }>;
+}) => {
+  const tag = (await searchParams).tag;
   const { items } = getContentItems({
     collection: CollectionType.BLOG,
-    tags: searchParams.tag ? [searchParams.tag] : [],
+    tags: tag ? [tag] : [],
     sortBy: "publishedAt",
     sortOrder: SortOrder.DESCENDING,
     status: ContentStatus.PUBLISHED,

@@ -38,7 +38,7 @@ const TabContainer = ({
   return (
     <Tabs
       {...props}
-      screenOptions={({ route, navigation }) => ({
+      screenOptions={(screenProps) => ({
         tabBarStyle: {
           backgroundColor:
             typeof tabBarClassName === "string"
@@ -48,8 +48,7 @@ const TabContainer = ({
           borderTopWidth: 0,
         },
         ...(typeof props.screenOptions === "function"
-          ? // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            props.screenOptions({ route, navigation })
+          ? props.screenOptions(screenProps)
           : props.screenOptions),
       })}
     />

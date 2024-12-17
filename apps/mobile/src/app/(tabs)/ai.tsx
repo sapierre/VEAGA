@@ -18,8 +18,6 @@ import { Text } from "@turbostarter/ui-mobile/text";
 
 import { api } from "~/lib/api/trpc";
 
-import type { CoreMessage } from "ai";
-
 const EXAMPLES = [
   {
     icon: Icons.Globe2,
@@ -46,7 +44,7 @@ const promptSchema = z.object({
 export default function AI() {
   const [isThinking, setIsThinking] = useState(false);
   const [messages, setMessages] = useState<
-    { role: CoreMessage["role"]; content: string }[]
+    { role: "user" | "assistant"; content: string }[]
   >([]);
 
   const { mutate, isPending } = api.ai.chat.useMutation({

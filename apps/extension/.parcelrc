@@ -1,8 +1,0 @@
-{
-  "extends": "@plasmohq/parcel-config",
-  "transformers": {
-    "*.svg": [
-      "@parcel/transformer-svg-react"
-    ]
-  }
-}

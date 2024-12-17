@@ -1,5 +1,5 @@
 import { Main } from "~/components/common/main";
-import { Layout } from "~/components/layout/layout";
+import { Layout, render } from "~/components/layout/layout";
 
 const Tabs = () => {
   return (
@@ -9,4 +9,4 @@ const Tabs = () => {
   );
 };
 
-export default Tabs;
+render("root", <Tabs />);

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { track } from "@turbostarter/analytics-extension";
 
 import { Main } from "~/components/common/main";
-import { Layout } from "~/components/layout/layout";
+import { Layout, render } from "~/components/layout/layout";
 
 const Popup = () => {
   useEffect(() => {
@@ -17,4 +17,4 @@ const Popup = () => {
   );
 };
 
-export default Popup;
+render("root", <Popup />);

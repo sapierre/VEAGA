@@ -4,8 +4,8 @@ import { createServerClient } from "@turbostarter/auth";
 
 import { env } from "~/lib/env";
 
-export const auth = () => {
-  const cookieStore = cookies();
+export const auth = async () => {
+  const cookieStore = await cookies();
   return createServerClient(
     {
       url: env.NEXT_PUBLIC_SUPABASE_URL,

@@ -1,20 +1,14 @@
-import { sendToBackground } from "@plasmohq/messaging";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { forwardRef } from "react";
 
-import { SESSION_MESSAGE_TYPE } from "~/app/background/messages/session";
+import { Message, sendMessage } from "~/lib/messaging";
 
 export const Logout = forwardRef<HTMLButtonElement>((_, ref) => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: () =>
-      sendToBackground({
-        name: "session",
-        body: { type: SESSION_MESSAGE_TYPE.DELETE },
-      }),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ["session"] });
-    },
+    mutationFn: () => sendMessage(Message.SESSION_DELETE, undefined),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: [Message.SESSION_GET] }),
   });
 
   return (

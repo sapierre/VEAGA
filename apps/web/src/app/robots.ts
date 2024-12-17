@@ -1,4 +1,4 @@
-import { publicUrl } from "~/lib/env";
+import { env } from "~/lib/env";
 
 import type { MetadataRoute } from "next";
 
@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: publicUrl + "/sitemap.xml",
+    sitemap: env.NEXT_PUBLIC_SITE_URL + "/sitemap.xml",
   };
 }

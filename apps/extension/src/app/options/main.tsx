@@ -1,5 +1,5 @@
 import { Main } from "~/components/common/main";
-import { Layout } from "~/components/layout/layout";
+import { Layout, render } from "~/components/layout/layout";
 
 const Options = () => {
   return (
@@ -9,4 +9,4 @@ const Options = () => {
   );
 };
 
-export default Options;
+render("root", <Options />);

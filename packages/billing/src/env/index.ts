@@ -3,6 +3,13 @@ import { z } from "zod";
 
 import { BillingModel, BillingProvider } from "../types";
 
+export const provider = z
+  .nativeEnum(BillingProvider)
+  .optional()
+  .default(BillingProvider.STRIPE)
+  /* eslint-disable-next-line turbo/no-undeclared-env-vars */
+  .parse(process.env.BILLING_PROVIDER);
+
 const shared = {
   skipValidation:
     (!!process.env.SKIP_ENV_VALIDATION &&
@@ -11,13 +18,6 @@ const shared = {
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
 } as const;
-
-const BILLING_PROVIDER = z
-  .nativeEnum(BillingProvider)
-  .optional()
-  .default(BillingProvider.STRIPE)
-  /* eslint-disable-next-line turbo/no-undeclared-env-vars */
-  .parse(process.env.BILLING_PROVIDER);
 
 const configEnv = createEnv({
   ...shared,
@@ -29,7 +29,7 @@ const configEnv = createEnv({
   },
 });
 
-const getBillingEnv = (provider: BillingProvider) => {
+const getBillingEnv = () => {
   switch (provider) {
     case BillingProvider.LEMON_SQUEEZY:
       return createEnv({
@@ -39,7 +39,10 @@ const getBillingEnv = (provider: BillingProvider) => {
           LEMON_SQUEEZY_API_KEY: z.string(),
           LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
           LEMON_SQUEEZY_STORE_ID: z.string(),
-          BILLING_PROVIDER: z.literal(provider).optional().default(provider),
+          BILLING_PROVIDER: z
+            .literal(BillingProvider.LEMON_SQUEEZY)
+            .optional()
+            .default(BillingProvider.LEMON_SQUEEZY),
         },
       });
     case BillingProvider.STRIPE:
@@ -49,7 +52,10 @@ const getBillingEnv = (provider: BillingProvider) => {
         server: {
           STRIPE_SECRET_KEY: z.string(),
           STRIPE_WEBHOOK_SECRET: z.string(),
-          BILLING_PROVIDER: z.literal(provider).optional().default(provider),
+          BILLING_PROVIDER: z
+            .literal(BillingProvider.STRIPE)
+            .optional()
+            .default(BillingProvider.STRIPE),
         },
       });
     default:
@@ -57,4 +63,4 @@ const getBillingEnv = (provider: BillingProvider) => {
   }
 };
 
-export const env = getBillingEnv(BILLING_PROVIDER);
+export const env = getBillingEnv();

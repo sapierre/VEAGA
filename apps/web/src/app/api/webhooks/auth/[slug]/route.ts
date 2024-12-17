@@ -4,16 +4,16 @@ import { pathsConfig } from "~/config/paths";
 import { auth } from "~/lib/auth/server";
 
 interface AuthWebhookParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-const handler = (request: Request, { params }: AuthWebhookParams) =>
+const handler = async (request: Request, { params }: AuthWebhookParams) =>
   webhookHandler({
     request,
-    client: auth(),
-    type: params.slug,
+    client: await auth(),
+    type: (await params).slug,
     errorPath: pathsConfig.auth.error,
   });
 

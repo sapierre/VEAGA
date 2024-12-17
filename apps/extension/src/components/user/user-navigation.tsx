@@ -48,7 +48,7 @@ const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
 const AnonymousUser = () => {
   return (
     <a
-      href={`${env.PLASMO_PUBLIC_SITE_URL}/auth/login`}
+      href={`${env.VITE_SITE_URL}/auth/login`}
       className={cn(
         buttonVariants({
           variant: "outline",
@@ -89,7 +89,7 @@ export const UserNavigation = memo<UserNavigationProps>(
             </Avatar>
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuPortal container={document.getElementById("root")}>
+        <DropdownMenuPortal container={document.querySelector("[data-theme]")}>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-2">

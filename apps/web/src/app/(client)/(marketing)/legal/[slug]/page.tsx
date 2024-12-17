@@ -11,15 +11,15 @@ import { LEGAL_PREFIX } from "~/config/paths";
 import { getMetadata } from "~/lib/metadata";
 
 interface PageParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function Page({ params }: PageParams) {
+export default async function Page({ params }: PageParams) {
   const item = getContentItemBySlug({
     collection: CollectionType.LEGAL,
-    slug: params.slug,
+    slug: (await params).slug,
   });
 
   if (!item) {
@@ -37,10 +37,10 @@ export function generateStaticParams() {
   );
 }
 
-export function generateMetadata({ params }: PageParams) {
+export async function generateMetadata({ params }: PageParams) {
   const item = getContentItemBySlug({
     collection: CollectionType.LEGAL,
-    slug: params.slug,
+    slug: (await params).slug,
   });
 
   if (!item) {

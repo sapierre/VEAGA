@@ -10,14 +10,14 @@ export const aiRouter = createTRPCRouter({
       z.object({
         messages: z.array(
           z.object({
-            role: z.enum(["user", "system", "tool", "assistant"]),
+            role: z.enum(["user", "system", "data", "assistant"]),
             content: z.string(),
           }),
         ),
       }),
     )
     .mutation(async function* ({ input }) {
-      const result = await streamText({
+      const result = streamText({
         model: openai("gpt-4o"),
         messages: convertToCoreMessages(input.messages),
       });

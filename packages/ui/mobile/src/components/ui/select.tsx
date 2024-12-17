@@ -16,7 +16,7 @@ const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  React.ComponentRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
@@ -28,7 +28,7 @@ const SelectTrigger = React.forwardRef<
     )}
     {...props}
   >
-    <>{children}</>
+    {children as React.ReactNode}
     <Icons.ChevronDown
       size={16}
       aria-hidden={true}

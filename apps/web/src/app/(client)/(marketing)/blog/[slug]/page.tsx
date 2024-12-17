@@ -7,10 +7,14 @@ import { Mdx } from "~/components/common/mdx";
 import { BLOG_PREFIX } from "~/config/paths";
 import { getMetadata } from "~/lib/metadata";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const item = getContentItemBySlug({
     collection: CollectionType.BLOG,
-    slug: params.slug,
+    slug: (await params).slug,
   });
 
   if (!item) {
@@ -28,10 +32,14 @@ export function generateStaticParams() {
   );
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const item = getContentItemBySlug({
     collection: CollectionType.BLOG,
-    slug: params.slug,
+    slug: (await params).slug,
   });
 
   if (!item) {

@@ -1,6 +1,5 @@
 import { Main } from "~/components/common/main";
-import { Layout } from "~/components/layout/layout";
-import "~/styles/globals.css";
+import { Layout, render } from "~/components/layout/layout";
 
 const NewTab = () => {
   return (
@@ -10,4 +9,4 @@ const NewTab = () => {
   );
 };
 
-export default NewTab;
+render("root", <NewTab />);

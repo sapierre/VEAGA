@@ -4,7 +4,7 @@ interface PlanFeature {
   readonly id: string;
   readonly available: boolean;
   readonly title: string;
-  readonly addon?: JSX.Element;
+  readonly addon?: React.ReactNode;
 }
 
 export const PLAN_FEATURES: Record<PricingPlanType, PlanFeature[]> = {

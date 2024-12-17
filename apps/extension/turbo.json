@@ -4,13 +4,13 @@
   "tasks": {
     "build:chrome": {
       "dependsOn": ["^build"],
-      "outputs": ["build/chrome-mv3-prod.zip", "build/chrome-mv3-prod/**"],
-      "env": ["PLASMO_PUBLIC_*"]
+      "outputs": ["build/**/*"],
+      "env": ["VITE_*"]
     },
     "build:firefox": {
       "dependsOn": ["^build"],
-      "outputs": ["build/firefox-mv3-prod.zip", "build/firefox-mv3-prod/**"],
-      "env": ["PLASMO_PUBLIC_*"]
+      "outputs": ["build/**/*"],
+      "env": ["VITE_*"]
     },
     "build": {
       "dependsOn": ["build:chrome", "build:firefox"]

@@ -35,9 +35,9 @@ const pathsConfig = {
     webhooks: {
       billing: `${API_PREFIX}${WEBHOOKS_PREFIX}/billing`,
       auth: {
-        callback: `${API_PREFIX}${AUTH_PREFIX}/callback`,
-        confirm: `${API_PREFIX}${AUTH_PREFIX}/confirm`,
-        email: `${API_PREFIX}${AUTH_PREFIX}/email`,
+        callback: `${API_PREFIX}${WEBHOOKS_PREFIX}/${AUTH_PREFIX}/callback`,
+        confirm: `${API_PREFIX}${WEBHOOKS_PREFIX}${AUTH_PREFIX}/confirm`,
+        email: `${API_PREFIX}${WEBHOOKS_PREFIX}${AUTH_PREFIX}/email`,
       },
     },
   },

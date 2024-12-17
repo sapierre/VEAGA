@@ -5,21 +5,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:chrome": "pnpm with-app-dir plasmo build --zip",
-    "build:firefox": "pnpm with-app-dir plasmo build --target=firefox-mv2 --zip",
-    "clean": "git clean -xdf .cache .plasmo .turbo node_modules",
-    "dev:chrome": "pnpm with-app-dir plasmo dev",
-    "dev:firefox": "pnpm with-app-dir plasmo dev --target=firefox-mv2",
+    "build:chrome": "wxt zip",
+    "build:firefox": "wxt -b firefox zip",
+    "clean": "git clean -xdf build .cache .wxt .turbo node_modules",
+    "dev:chrome": "wxt",
+    "dev:firefox": "wxt -b firefox",
     "dev": "pnpm dev:chrome",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "with-app-dir": "sh -c '[[ \"$@\" == *--src-path* ]] || set -- \"$@\" --src-path=src/app; \"$@\"' --"
+    "postinstall": "wxt prepare"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@plasmohq/messaging": "0.6.2",
-    "@plasmohq/storage": "1.12.0",
     "@t3-oss/env-core": "0.11.1",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
@@ -32,10 +30,11 @@
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
     "@turbostarter/ui-web": "workspace:*",
-    "plasmo": "0.89.4",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "@webext-core/messaging": "2.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "superjson": "2.2.1",
+    "vite-plugin-svgr": "4.3.0",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -45,28 +44,13 @@
     "@turbostarter/tsconfig": "workspace:*",
     "@types/chrome": "0.0.270",
     "@types/node": "20.16.10",
-    "@types/react": "catalog:react18",
-    "@types/react-dom": "catalog:react18",
+    "@types/react": "catalog:react19",
+    "@types/react-dom": "catalog:react19",
+    "@wxt-dev/auto-icons": "1.0.2",
+    "@wxt-dev/module-react": "1.1.2",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
-  },
-  "manifest": {
-    "name": "__MSG_extensionName__",
-    "default_locale": "en",
-    "host_permissions": [
-      "<all_urls>"
-    ],
-    "permissions": [
-      "storage",
-      "sidePanel",
-      "scripting",
-      "cookies"
-    ],
-    "browser_specific_settings": {
-      "gecko": {
-        "id": "extension@turbostarter.dev"
-      }
-    }
+    "typescript": "catalog:",
+    "wxt": "0.19.22"
   }
 }

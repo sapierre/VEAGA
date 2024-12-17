@@ -1,12 +1,12 @@
 import { DM_Mono, DM_Sans } from "next/font/google";
 
+import "~/assets/styles/globals.css";
 import { Footer } from "~/components/common/layout/footer";
 import { TailwindIndicator } from "~/components/common/tailwind-indicator";
 import { Toaster } from "~/components/common/toast";
 import { appConfig } from "~/config/app";
 import { DEFAULT_VIEWPORT, DEFAULT_METADATA } from "~/lib/metadata";
 import { Providers } from "~/providers/providers";
-import "~/styles/globals.css";
 
 const sans = DM_Sans({
   subsets: ["latin"],

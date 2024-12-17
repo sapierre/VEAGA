@@ -12,11 +12,11 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
 
+import "~/assets/styles/globals.css";
 import { Header } from "~/components/common/layout/header";
 import { TABS_PREFIX } from "~/config/paths";
 import { useTheme } from "~/lib/hooks/use-theme";
 import { Providers } from "~/providers/providers";
-import "~/styles/globals.css";
 
 void SplashScreen.preventAutoHideAsync();
 

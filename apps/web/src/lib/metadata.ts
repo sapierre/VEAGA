@@ -1,4 +1,4 @@
-import { env, publicUrl } from "~/lib/env";
+import { env } from "~/lib/env";
 
 import type { Metadata, Viewport } from "next";
 
@@ -41,7 +41,7 @@ export const getMetadata = (
   description,
   openGraph: {
     title,
-    url: url ? url : canonical ? canonical : publicUrl,
+    url: url ? url : canonical ? canonical : env.NEXT_PUBLIC_SITE_URL,
     description,
     siteName: env.NEXT_PUBLIC_PRODUCT_NAME,
     type,
@@ -64,7 +64,9 @@ export const DEFAULT_METADATA: Metadata = {
     template: SITE_NAME_TEMPLATE,
     default: env.NEXT_PUBLIC_PRODUCT_NAME,
   },
-  metadataBase: new URL(publicUrl),
+  metadataBase: env.NEXT_PUBLIC_SITE_URL
+    ? new URL(env.NEXT_PUBLIC_SITE_URL)
+    : null,
 };
 
 export const DEFAULT_VIEWPORT: Viewport = {

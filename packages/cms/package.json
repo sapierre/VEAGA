@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@content-collections/cli": "0.1.5",
-    "@content-collections/mdx": "0.1.6",
+    "@content-collections/mdx": "0.2.0",
     "@shikijs/rehype": "1.21.1",
     "@turbostarter/eslint-config": "workspace:*",
     "@turbostarter/prettier-config": "workspace:*",

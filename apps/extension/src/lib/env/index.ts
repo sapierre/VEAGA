@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
@@ -10,33 +12,32 @@ export const env = createEnv({
   shared: {
     NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },
-  clientPrefix: "PLASMO_PUBLIC_",
+  clientPrefix: "VITE_",
   client: {
-    PLASMO_PUBLIC_AUTH_COOKIE_NAME: z.string(),
-    PLASMO_PUBLIC_SITE_URL: z.string().url(),
-    PLASMO_PUBLIC_SUPABASE_URL: z.string().url(),
-    PLASMO_PUBLIC_SUPABASE_ANON_KEY: z.string(),
-    PLASMO_PUBLIC_THEME_MODE: z
+    VITE_AUTH_COOKIE_NAME: z.string(),
+    VITE_SITE_URL: z.string().url(),
+    VITE_SUPABASE_URL: z.string().url(),
+    VITE_SUPABASE_ANON_KEY: z.string(),
+    VITE_THEME_MODE: z
       .nativeEnum(ThemeMode)
       .optional()
       .default(ThemeMode.SYSTEM),
-    PLASMO_PUBLIC_THEME_COLOR: z
+    VITE_THEME_COLOR: z
       .nativeEnum(ThemeColor)
       .optional()
       .default(ThemeColor.ORANGE),
   },
   runtimeEnv: {
-    PLASMO_PUBLIC_AUTH_COOKIE_NAME: process.env.PLASMO_PUBLIC_AUTH_COOKIE_NAME,
-    PLASMO_PUBLIC_SITE_URL: process.env.PLASMO_PUBLIC_SITE_URL,
-    PLASMO_PUBLIC_SUPABASE_URL: process.env.PLASMO_PUBLIC_SUPABASE_URL,
-    PLASMO_PUBLIC_SUPABASE_ANON_KEY:
-      process.env.PLASMO_PUBLIC_SUPABASE_ANON_KEY,
-    PLASMO_PUBLIC_THEME_MODE: process.env.PLASMO_PUBLIC_THEME_MODE,
-    PLASMO_PUBLIC_THEME_COLOR: process.env.PLASMO_PUBLIC_THEME_COLOR,
+    VITE_AUTH_COOKIE_NAME: import.meta.env.VITE_AUTH_COOKIE_NAME,
+    VITE_SITE_URL: import.meta.env.VITE_SITE_URL,
+    VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+    VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
+    VITE_THEME_MODE: import.meta.env.VITE_THEME_MODE,
+    VITE_THEME_COLOR: import.meta.env.VITE_THEME_COLOR,
   },
   skipValidation:
-    (!!process.env.SKIP_ENV_VALIDATION &&
-      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
-    process.env.npm_lifecycle_event === "lint",
+    (!!import.meta.env.SKIP_ENV_VALIDATION &&
+      ["1", "true"].includes(import.meta.env.SKIP_ENV_VALIDATION)) ||
+    import.meta.env.npm_lifecycle_event === "lint",
   emptyStringAsUndefined: true,
 });

@@ -21,7 +21,6 @@ import { Textarea } from "@turbostarter/ui-web/textarea";
 
 import { api } from "~/lib/api/react";
 
-import type { CoreMessage } from "ai";
 import type { KeyboardEvent } from "react";
 
 const EXAMPLES = [
@@ -50,7 +49,7 @@ const promptSchema = z.object({
 const AI = () => {
   const [isThinking, setIsThinking] = useState(false);
   const [messages, setMessages] = useState<
-    { role: CoreMessage["role"]; content: string }[]
+    { role: "user" | "assistant"; content: string }[]
   >([]);
   const { mutate, isPending } = api.ai.chat.useMutation({
     onMutate: () => {

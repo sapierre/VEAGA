@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable turbo/no-undeclared-env-vars */
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
@@ -13,40 +15,35 @@ const shared = {
   clientPrefix: "EXPO_PUBLIC_",
 } as const;
 
-const { EXPO_PUBLIC_ANALYTICS_PROVIDER } = createEnv({
-  ...shared,
-  client: {
-    EXPO_PUBLIC_ANALYTICS_PROVIDER: z
-      .nativeEnum(AnalyticsProvider)
-      .optional()
-      .default(AnalyticsProvider.GOOGLE_ANALYTICS),
-  },
-  runtimeEnv: {
-    EXPO_PUBLIC_ANALYTICS_PROVIDER: process.env.EXPO_PUBLIC_ANALYTICS_PROVIDER,
-  },
-});
+export const provider = z
+  .nativeEnum(AnalyticsProvider)
+  .optional()
+  .default(AnalyticsProvider.GOOGLE_ANALYTICS)
+  .parse(process.env.EXPO_PUBLIC_ANALYTICS_PROVIDER);
 
 const getAnalyticsEnv = () => {
-  switch (EXPO_PUBLIC_ANALYTICS_PROVIDER) {
+  switch (provider) {
     case AnalyticsProvider.GOOGLE_ANALYTICS:
       return {
-        EXPO_PUBLIC_ANALYTICS_PROVIDER,
+        EXPO_PUBLIC_ANALYTICS_PROVIDER: provider,
       };
     case AnalyticsProvider.POSTHOG:
-      return {
-        ...createEnv({
-          ...shared,
-          client: {
-            EXPO_PUBLIC_POSTHOG_KEY: z.string(),
-            EXPO_PUBLIC_POSTHOG_HOST: z.string(),
-          },
-          runtimeEnv: {
-            EXPO_PUBLIC_POSTHOG_KEY: process.env.EXPO_PUBLIC_POSTHOG_KEY,
-            EXPO_PUBLIC_POSTHOG_HOST: process.env.EXPO_PUBLIC_POSTHOG_HOST,
-          },
-        }),
-        EXPO_PUBLIC_ANALYTICS_PROVIDER,
-      };
+      return createEnv({
+        ...shared,
+        client: {
+          EXPO_PUBLIC_POSTHOG_KEY: z.string(),
+          EXPO_PUBLIC_POSTHOG_HOST: z.string(),
+          EXPO_PUBLIC_ANALYTICS_PROVIDER: z
+            .literal(AnalyticsProvider.POSTHOG)
+            .optional()
+            .default(AnalyticsProvider.POSTHOG),
+        },
+        runtimeEnv: {
+          EXPO_PUBLIC_POSTHOG_KEY: process.env.EXPO_PUBLIC_POSTHOG_KEY,
+          EXPO_PUBLIC_POSTHOG_HOST: process.env.EXPO_PUBLIC_POSTHOG_HOST,
+          EXPO_PUBLIC_ANALYTICS_PROVIDER: provider,
+        },
+      });
     default:
       throw new Error(`Unsupported analytics provider!`);
   }

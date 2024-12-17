@@ -1,0 +1,23 @@
+diff --git a/package.json b/package.json
+index 1f61311654abb9d06dff33281a6024b5b6484429..ba0d1adfa277b4b3f8fbedbf027e9d7372826772 100644
+--- a/package.json
++++ b/package.json
+@@ -22,18 +22,6 @@
+   "main": "./lib/commonjs/index.js",
+   "module": "./lib/module/index.js",
+   "types": "./lib/typescript/commonjs/src/index.d.ts",
+-  "exports": {
+-    ".": {
+-      "import": {
+-        "types": "./lib/typescript/module/src/index.d.ts",
+-        "default": "./lib/module/index.js"
+-      },
+-      "require": {
+-        "types": "./lib/typescript/commonjs/src/index.d.ts",
+-        "default": "./lib/commonjs/index.js"
+-      }
+-    }
+-  },
+   "files": [
+     "src",
+     "lib",

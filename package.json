@@ -4,9 +4,9 @@
   "scripts": {
     "prepare": "husky",
     "build": "pnpm with-env turbo build",
-    "build:web": "pnpm with-env turbo build --filter=web",
-    "build:mobile": "pnpm with-env turbo build --filter=mobile",
-    "build:extension": "pnpm with-env turbo build --filter=extension",
+    "build:web": "turbo build --filter=web",
+    "build:mobile": "turbo build --filter=mobile",
+    "build:extension": "turbo build --filter=extension",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "dev": "pnpm with-env turbo dev",
@@ -38,12 +38,18 @@
     "dotenv-cli": "7.4.2",
     "husky": "^9.1.5",
     "prettier": "3.3.3",
-    "turbo": "2.3.2",
-    "typescript": "5.5.4"
+    "turbo": "2.3.3",
+    "typescript": "5.7.2"
   },
   "engines": {
     "node": ">=20.17.0"
   },
   "packageManager": "pnpm@9.9.0",
-  "prettier": "@turbostarter/prettier-config"
+  "prettier": "@turbostarter/prettier-config",
+  "pnpm": {
+    "patchedDependencies": {
+      "@react-navigation/bottom-tabs": "patches/@react-navigation__bottom-tabs.patch",
+      "@react-navigation/native": "patches/@react-navigation__native.patch"
+    }
+  }
 }

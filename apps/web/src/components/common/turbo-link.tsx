@@ -3,9 +3,15 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import type { ComponentPropsWithRef } from "react";
+import type { LinkProps } from "next/link";
+import type { AnchorHTMLAttributes } from "react";
 
-export const TurboLink = (props: ComponentPropsWithRef<typeof Link>) => {
+type TurboLinkProps = LinkProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> & {
+    children?: React.ReactNode;
+  };
+
+export const TurboLink = (props: TurboLinkProps) => {
   const router = useRouter();
   const strHref = typeof props.href === "string" ? props.href : props.href.href;
 
@@ -35,6 +41,8 @@ export const TurboLink = (props: ComponentPropsWithRef<typeof Link>) => {
         conditionalPrefetch();
         return props.onFocus?.(e);
       }}
-    />
+    >
+      {props.children}
+    </Link>
   );
 };

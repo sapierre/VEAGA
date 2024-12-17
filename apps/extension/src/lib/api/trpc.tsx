@@ -18,7 +18,7 @@ export const api = createTRPCReact<AppRouter>();
 export { type RouterInputs, type RouterOutputs } from "@turbostarter/api";
 
 const getBaseUrl = () => {
-  return env.PLASMO_PUBLIC_SITE_URL;
+  return env.VITE_SITE_URL;
 };
 
 export const TRPCProvider = (props: { children: React.ReactNode }) => {

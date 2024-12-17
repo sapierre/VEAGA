@@ -1,16 +1,15 @@
-import { useStorage } from "@plasmohq/storage/hook";
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
 
 import { ThemeMode, cn } from "@turbostarter/ui";
 
+import "~/assets/styles/globals.css";
 import { ErrorBoundary } from "~/components/common/error-boundary";
 import { Suspense } from "~/components/common/suspense";
 import { Footer } from "~/components/layout/footer";
 import { Header } from "~/components/layout/header";
 import { TRPCProvider } from "~/lib/api/trpc";
-import { STORAGE_KEY } from "~/lib/storage";
-import "~/styles/globals.css";
-
-import type { ThemeConfig } from "@turbostarter/ui";
+import { StorageKey, useStorage } from "~/lib/storage";
 
 interface LayoutProps {
   readonly children: React.ReactElement;
@@ -25,27 +24,26 @@ export const Layout = ({
   errorFallback,
   className,
 }: LayoutProps) => {
-  const [config] = useStorage<ThemeConfig>(STORAGE_KEY.THEME);
+  const { data } = useStorage(StorageKey.THEME);
 
   return (
     <ErrorBoundary fallback={errorFallback}>
       <Suspense fallback={loadingFallback}>
         <TRPCProvider>
           <div
-            id="root"
             className={cn(
-              "flex min-h-screen w-full min-w-[23rem] flex-col items-center justify-center font-sans text-base",
+              "flex min-h-screen w-full min-w-[23rem] flex-col font-sans text-base",
               {
                 dark:
-                  config?.mode === ThemeMode.DARK ||
-                  (config?.mode === ThemeMode.SYSTEM &&
+                  data.mode === ThemeMode.DARK ||
+                  (data.mode === ThemeMode.SYSTEM &&
                     window.matchMedia("(prefers-color-scheme: dark)").matches),
               },
             )}
           >
             <div
-              className="flex-1 bg-background text-foreground"
-              data-theme={config?.color}
+              className="flex w-full grow justify-center bg-background text-foreground"
+              data-theme={data.color}
             >
               <div
                 className={cn(
@@ -63,4 +61,11 @@ export const Layout = ({
       </Suspense>
     </ErrorBoundary>
   );
+};
+
+export const render = (id: string, element: React.ReactElement) => {
+  const container = document.getElementById(id);
+  if (container) {
+    ReactDOM.createRoot(container).render(<StrictMode>{element}</StrictMode>);
+  }
 };

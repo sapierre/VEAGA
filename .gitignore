@@ -24,8 +24,9 @@ apps/mobile/.gitignore
 apps/mobile/ios
 apps/mobile/android
 
-# plasmo
-.plasmo
+# wxt
+.wxt
+web-ext.config.ts
 
 # production
 build
@@ -57,9 +58,6 @@ dist/
 
 # turbo
 .turbo
-
-# extension keys
-apps/extension/keys.json
 
 # content collections
 .content-collections

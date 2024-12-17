@@ -1,11 +1,11 @@
 import { CollectionType, getContentItems } from "@turbostarter/cms";
 
 import { pathsConfig } from "~/config/paths";
-import { publicUrl } from "~/lib/env";
+import { env } from "~/lib/env";
 
 import type { MetadataRoute } from "next";
 
-const url = (path: string) => new URL(path, publicUrl).toString();
+const url = (path: string) => `${env.NEXT_PUBLIC_SITE_URL}/${path}`;
 
 export default function sitemap(): Promise<MetadataRoute.Sitemap> {
   return Promise.resolve([

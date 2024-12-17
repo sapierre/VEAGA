@@ -1,21 +1,17 @@
+import { Buffer } from "buffer";
+import { browser } from "wxt/browser";
+
 import { auth } from "~/lib/auth";
 import { env } from "~/lib/env";
+import { Message } from "~/lib/messaging";
+import { onMessage } from "~/lib/messaging";
 
-import type { PlasmoMessaging } from "@plasmohq/messaging";
 import type { Session } from "@turbostarter/auth";
 
 const ENCODING_PREFIX = "base64-";
 
-export const SESSION_MESSAGE_TYPE = {
-  GET: "session:get",
-  DELETE: "session:delete",
-} as const;
-
-type SessionMessageType =
-  (typeof SESSION_MESSAGE_TYPE)[keyof typeof SESSION_MESSAGE_TYPE];
-
 const getCookie = async (url: string, name: string) => {
-  const cookie = await chrome.cookies.get({
+  const cookie = await browser.cookies.get({
     url,
     name,
   });
@@ -28,7 +24,7 @@ const getCookie = async (url: string, name: string) => {
   let i = 0;
 
   while (true) {
-    const cookie = await chrome.cookies.get({
+    const cookie = await browser.cookies.get({
       url,
       name: `${name}.${i}`,
     });
@@ -48,12 +44,11 @@ const deleteCookie = async (url: string, name: string) => {
     let i = 0;
 
     while (true) {
-      const deleted = await chrome.cookies.remove({
+      const deleted = await browser.cookies.remove({
         url,
         name: `${name}.${i}`,
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!deleted) {
         break;
       }
@@ -61,7 +56,7 @@ const deleteCookie = async (url: string, name: string) => {
       i++;
     }
 
-    return chrome.cookies.remove({
+    return browser.cookies.remove({
       url,
       name,
     });
@@ -81,11 +76,11 @@ const parseSession = (cookie: string) => {
   return JSON.parse(cookie) as Session | null;
 };
 
-const getSession = async () => {
+export const getSession = async () => {
   try {
     const cookie = await getCookie(
-      env.PLASMO_PUBLIC_SITE_URL,
-      env.PLASMO_PUBLIC_AUTH_COOKIE_NAME,
+      env.VITE_SITE_URL,
+      env.VITE_AUTH_COOKIE_NAME,
     );
 
     if (!cookie) {
@@ -105,37 +100,7 @@ const getSession = async () => {
   }
 };
 
-const handler: PlasmoMessaging.MessageHandler<
-  {
-    type: SessionMessageType;
-  },
-  {
-    session: Session | null;
-  }
-> = async (req, res) => {
-  const type = req.body?.type;
-
-  if (type === SESSION_MESSAGE_TYPE.DELETE) {
-    await deleteCookie(
-      env.PLASMO_PUBLIC_SITE_URL,
-      env.PLASMO_PUBLIC_AUTH_COOKIE_NAME,
-    );
-    return res.send({
-      session: null,
-    });
-  }
-
-  if (type === SESSION_MESSAGE_TYPE.GET) {
-    const session = await getSession();
-
-    return res.send({
-      session,
-    });
-  }
-
-  return res.send({
-    session: null,
-  });
-};
-
-export default handler;
+onMessage(Message.SESSION_GET, getSession);
+onMessage(Message.SESSION_DELETE, async () => {
+  await deleteCookie(env.VITE_SITE_URL, env.VITE_AUTH_COOKIE_NAME);
+});

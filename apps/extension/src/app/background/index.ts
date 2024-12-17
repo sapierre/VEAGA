@@ -1,11 +1,11 @@
-import { setupStorage } from "~/lib/storage";
+import { defineBackground } from "wxt/sandbox";
 
-const main = async () => {
-  await setupStorage();
+import "./messaging/session";
 
+const main = () => {
   console.log(
     "Background service worker is running! Edit `src/app/background` and save to reload.",
   );
 };
 
-void main();
+export default defineBackground(main);

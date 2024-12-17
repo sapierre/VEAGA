@@ -11,13 +11,14 @@ export const EmailTemplate = {
 type AuthEmailTemplate =
   (typeof AuthEmailTemplate)[keyof typeof AuthEmailTemplate];
 
-export type AuthEmailVariables = {
-  [key in AuthEmailTemplate]: {
+export type AuthEmailVariables = Record<
+  AuthEmailTemplate,
+  {
     siteUrl: string;
     tokenHash: string;
     redirectTo?: string;
-  };
-};
+  }
+>;
 
 export type EmailTemplate = (typeof EmailTemplate)[keyof typeof EmailTemplate];
 export type EmailVariables = AuthEmailVariables;

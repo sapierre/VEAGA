@@ -1,15 +1,12 @@
-import { sendToBackground } from "@plasmohq/messaging";
 import { useQuery } from "@tanstack/react-query";
 
-import { SESSION_MESSAGE_TYPE } from "~/app/background/messages/session";
 import { ThemeControls } from "~/components/common/theme";
 import {
   UserNavigation,
   UserNavigationSkeleton,
 } from "~/components/user/user-navigation";
 import { api } from "~/lib/api/trpc";
-
-import type { Session } from "@turbostarter/auth";
+import { Message, sendMessage } from "~/lib/messaging";
 
 export const Header = () => {
   return (
@@ -22,22 +19,11 @@ export const Header = () => {
 
 const User = () => {
   const { data: session, isLoading: isSessionLoading } = useQuery({
-    queryKey: ["session"],
-    queryFn: () =>
-      sendToBackground<
-        {
-          type: typeof SESSION_MESSAGE_TYPE.GET;
-        },
-        {
-          session: Session | null;
-        }
-      >({
-        name: "session",
-        body: { type: SESSION_MESSAGE_TYPE.GET },
-      }),
+    queryKey: [Message.SESSION_GET],
+    queryFn: () => sendMessage(Message.SESSION_GET, undefined),
   });
 
-  const user = session?.session?.user ?? null;
+  const user = session?.user ?? null;
   const { data: customer, isLoading: isCustomerLoading } =
     api.billing.getCustomer.useQuery(undefined, {
       enabled: !!user,

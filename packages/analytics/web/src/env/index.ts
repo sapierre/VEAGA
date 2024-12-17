@@ -12,74 +12,73 @@ const shared = {
   emptyStringAsUndefined: true,
 } as const;
 
-const { NEXT_PUBLIC_ANALYTICS_PROVIDER } = createEnv({
-  ...shared,
-  client: {
-    NEXT_PUBLIC_ANALYTICS_PROVIDER: z
-      .nativeEnum(AnalyticsProvider)
-      .optional()
-      .default(AnalyticsProvider.VERCEL),
-  },
-  experimental__runtimeEnv: {
-    NEXT_PUBLIC_ANALYTICS_PROVIDER: process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER,
-  },
-});
+export const provider = z
+  .nativeEnum(AnalyticsProvider)
+  .optional()
+  .default(AnalyticsProvider.VERCEL)
+  .parse(process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER);
 
 const getAnalyticsEnv = () => {
-  switch (NEXT_PUBLIC_ANALYTICS_PROVIDER) {
+  switch (provider) {
     case AnalyticsProvider.VERCEL:
       return {
-        NEXT_PUBLIC_ANALYTICS_PROVIDER,
+        NEXT_PUBLIC_ANALYTICS_PROVIDER: provider,
       };
     case AnalyticsProvider.POSTHOG:
-      return {
-        ...createEnv({
-          ...shared,
-          client: {
-            NEXT_PUBLIC_POSTHOG_KEY: z.string(),
-            NEXT_PUBLIC_POSTHOG_HOST: z.string(),
-          },
-          experimental__runtimeEnv: {
-            NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-            NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-          },
-        }),
-        NEXT_PUBLIC_ANALYTICS_PROVIDER,
-      };
+      return createEnv({
+        ...shared,
+        client: {
+          NEXT_PUBLIC_POSTHOG_KEY: z.string(),
+          NEXT_PUBLIC_POSTHOG_HOST: z.string(),
+          NEXT_PUBLIC_ANALYTICS_PROVIDER: z
+            .literal(AnalyticsProvider.POSTHOG)
+            .optional()
+            .default(AnalyticsProvider.POSTHOG),
+        },
+        experimental__runtimeEnv: {
+          NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+          NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+          NEXT_PUBLIC_ANALYTICS_PROVIDER: provider,
+        },
+      });
     case AnalyticsProvider.OPEN_PANEL:
-      return {
-        ...createEnv({
-          ...shared,
-          client: {
-            NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID: z.string(),
-          },
-          server: {
-            OPEN_PANEL_SECRET: z.string(),
-          },
-          experimental__runtimeEnv: {
-            NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID:
-              process.env.NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID,
-          },
-        }),
-        NEXT_PUBLIC_ANALYTICS_PROVIDER,
-      };
+      return createEnv({
+        ...shared,
+        client: {
+          NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID: z.string(),
+          NEXT_PUBLIC_ANALYTICS_PROVIDER: z
+            .literal(AnalyticsProvider.OPEN_PANEL)
+            .optional()
+            .default(AnalyticsProvider.OPEN_PANEL),
+        },
+        server: {
+          OPEN_PANEL_SECRET: z.string(),
+        },
+        experimental__runtimeEnv: {
+          NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID:
+            process.env.NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID,
+          NEXT_PUBLIC_ANALYTICS_PROVIDER: provider,
+        },
+      });
     case AnalyticsProvider.GOOGLE_ANALYTICS:
-      return {
-        ...createEnv({
-          ...shared,
-          client: {
-            NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: z.string(),
-          },
-          server: {
-            GOOGLE_ANALYTICS_SECRET: z.string(),
-          },
-          experimental__runtimeEnv: {
-            NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID:
-              process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID,
-          },
-        }),
-        NEXT_PUBLIC_ANALYTICS_PROVIDER,
-      };
+      return createEnv({
+        ...shared,
+        client: {
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: z.string(),
+          NEXT_PUBLIC_ANALYTICS_PROVIDER: z
+            .literal(AnalyticsProvider.GOOGLE_ANALYTICS)
+            .optional()
+            .default(AnalyticsProvider.GOOGLE_ANALYTICS),
+        },
+        server: {
+          GOOGLE_ANALYTICS_SECRET: z.string(),
+        },
+        experimental__runtimeEnv: {
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID:
+            process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID,
+          NEXT_PUBLIC_ANALYTICS_PROVIDER: provider,
+        },
+      });
     default:
       throw new Error(`Unsupported analytics provider!`);
   }

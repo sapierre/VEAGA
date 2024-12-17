@@ -7,7 +7,7 @@ const postEvent = async (
   data?: Record<string, AllowedPropertyValues>,
 ) => {
   const response = await fetch(
-    `https://www.google-analytics.com/mp/collect?measurement_id=${env.PLASMO_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}&api_secret=${env.PLASMO_PUBLIC_GOOGLE_ANALYTICS_SECRET}`,
+    `https://www.google-analytics.com/mp/collect?measurement_id=${env.VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID}&api_secret=${env.VITE_GOOGLE_ANALYTICS_SECRET}`,
     {
       method: "POST",
       body: JSON.stringify({
