@@ -1,7 +1,6 @@
 import { DM_Mono, DM_Sans } from "next/font/google";
 
 import "~/assets/styles/globals.css";
-import { Footer } from "~/components/common/layout/footer";
 import { TailwindIndicator } from "~/components/common/tailwind-indicator";
 import { Toaster } from "~/components/common/toast";
 import { appConfig } from "~/config/app";
@@ -38,10 +37,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col items-center justify-center bg-background font-sans text-foreground antialiased">
         <Providers>
-          <div className="flex w-full max-w-[80rem] grow flex-col items-center gap-16 p-6 sm:p-8 md:gap-20 md:p-10 lg:gap-24 lg:p-12">
-            {children}
-            <Footer />
-          </div>
+          {children}
           <Toaster />
           <TailwindIndicator />
         </Providers>

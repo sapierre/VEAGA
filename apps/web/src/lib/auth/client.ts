@@ -1,10 +1,18 @@
-import { createBrowserClient } from "@turbostarter/auth";
+import { createClient } from "@turbostarter/auth/client/web";
 
-import { env } from "~/lib/env";
-
-export const auth = () => {
-  return createBrowserClient({
-    url: env.NEXT_PUBLIC_SUPABASE_URL,
-    key: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  });
-};
+export const {
+  useSession,
+  signIn,
+  signUp,
+  signOut,
+  forgetPassword,
+  resetPassword,
+  changePassword,
+  updateUser,
+  changeEmail,
+  listAccounts,
+  linkSocial,
+  unlinkAccount,
+  deleteUser,
+  sendVerificationEmail,
+} = createClient();

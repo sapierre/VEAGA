@@ -19,7 +19,10 @@ import {
   subscriptionStatusChangeHandler,
 } from "../subscription";
 
-import type { CheckoutInput, GetBillingPortalInput } from "../../../lib/schema";
+import type {
+  CheckoutPayload,
+  GetBillingPortalPayload,
+} from "../../../lib/schema";
 import type { User } from "@turbostarter/auth";
 import type Stripe from "stripe";
 
@@ -95,7 +98,7 @@ export const checkout = async ({
   user,
   price: { id },
   redirect,
-}: CheckoutInput & { user: User }) => {
+}: CheckoutPayload & { user: User }) => {
   try {
     const price = config.plans
       .find((plan) => plan.prices.some((p) => p.id === id))
@@ -106,8 +109,8 @@ export const checkout = async ({
     }
 
     const customer = await createOrRetrieveCustomer({
-      email: user.email ?? "",
-      uuid: user.id,
+      email: user.email,
+      id: user.id,
     });
 
     const discount = getHighestDiscountForPrice(price, config.discounts);
@@ -161,11 +164,11 @@ export const checkout = async ({
 export const getBillingPortal = async ({
   redirectUrl,
   user,
-}: GetBillingPortalInput & { user: User }) => {
+}: GetBillingPortalPayload & { user: User }) => {
   try {
     const customer = await createOrRetrieveCustomer({
-      email: user.email ?? "",
-      uuid: user.id,
+      email: user.email,
+      id: user.id,
     });
 
     const { url } = await createBillingPortalSession({

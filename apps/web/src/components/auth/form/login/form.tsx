@@ -26,9 +26,10 @@ const LOGIN_OPTIONS_DETAILS = {
 
 interface LoginFormProps {
   readonly options: LoginOption[];
+  readonly redirectTo?: string;
 }
 
-export const LoginForm = ({ options }: LoginFormProps) => {
+export const LoginForm = ({ options, redirectTo }: LoginFormProps) => {
   const [mainOption] = options;
 
   if (!options.length || !mainOption) {
@@ -37,7 +38,7 @@ export const LoginForm = ({ options }: LoginFormProps) => {
 
   if (options.length === 1) {
     const Component = LOGIN_OPTIONS_DETAILS[mainOption].component;
-    return <Component />;
+    return <Component redirectTo={redirectTo} />;
   }
 
   return (

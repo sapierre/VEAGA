@@ -1,5 +1,3 @@
-import variables from "@mertasan/tailwindcss-variables";
-import colorVariable from "@mertasan/tailwindcss-variables/colorVariable";
 import containerQueries from "@tailwindcss/container-queries";
 import typography from "@tailwindcss/typography";
 import animate from "tailwindcss-animate";
@@ -8,62 +6,70 @@ import type { Config } from "tailwindcss";
 import type { PluginsConfig } from "tailwindcss/types/config";
 
 export default {
-  darkMode: ["class", ".dark"],
+  darkMode: ["class"],
   content: ["src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        border: colorVariable("--colors-border", true),
-        input: colorVariable("--colors-input", true),
-        ring: colorVariable("--colors-ring", true),
-        background: colorVariable("--colors-background", true),
-        foreground: colorVariable("--colors-foreground", true),
+        border: "hsl(var(--color-border))",
+        input: "hsl(var(--color-input))",
+        ring: "hsl(var(--color-ring))",
+        background: "hsl(var(--color-background))",
+        foreground: "hsl(var(--color-foreground))",
         primary: {
-          DEFAULT: colorVariable("--colors-primary", true),
-          foreground: colorVariable("--colors-primary-foreground", true),
+          DEFAULT: "hsl(var(--color-primary))",
+          foreground: "hsl(var(--color-primary-foreground))",
         },
         secondary: {
-          DEFAULT: colorVariable("--colors-secondary", true),
-          foreground: colorVariable("--colors-secondary-foreground", true),
+          DEFAULT: "hsl(var(--color-secondary))",
+          foreground: "hsl(var(--color-secondary-foreground))",
         },
         success: {
-          DEFAULT: colorVariable("--colors-success", true),
-          foreground: colorVariable("--colors-success-foreground", true),
+          DEFAULT: "hsl(var(--color-success))",
+          foreground: "hsl(var(--color-success-foreground))",
         },
         destructive: {
-          DEFAULT: colorVariable("--colors-destructive", true),
-          foreground: colorVariable("--colors-destructive-foreground", true),
+          DEFAULT: "hsl(var(--color-destructive))",
+          foreground: "hsl(var(--color-destructive-foreground))",
         },
         muted: {
-          DEFAULT: colorVariable("--colors-muted", true),
-          foreground: colorVariable("--colors-muted-foreground", true),
+          DEFAULT: "hsl(var(--color-muted))",
+          foreground: "hsl(var(--color-muted-foreground))",
         },
         accent: {
-          DEFAULT: colorVariable("--colors-accent", true),
-          foreground: colorVariable("--colors-accent-foreground", true),
+          DEFAULT: "hsl(var(--color-accent))",
+          foreground: "hsl(var(--color-accent-foreground))",
         },
         popover: {
-          DEFAULT: colorVariable("--colors-popover", true),
-          foreground: colorVariable("--colors-popover-foreground", true),
+          DEFAULT: "hsl(var(--color-popover))",
+          foreground: "hsl(var(--color-popover-foreground))",
         },
         card: {
-          DEFAULT: colorVariable("--colors-card", true),
-          foreground: colorVariable("--colors-card-foreground", true),
+          DEFAULT: "hsl(var(--color-card))",
+          foreground: "hsl(var(--color-card-foreground))",
+        },
+        chart: {
+          1: "hsl(var(--color-chart-1))",
+          2: "hsl(var(--color-chart-2))",
+          3: "hsl(var(--color-chart-3))",
+          4: "hsl(var(--color-chart-4))",
+          5: "hsl(var(--color-chart-5))",
+        },
+        sidebar: {
+          DEFAULT: "hsl(var(--color-sidebar-background))",
+          foreground: "hsl(var(--color-sidebar-foreground))",
+          primary: "hsl(var(--color-sidebar-primary))",
+          "primary-foreground": "hsl(var(--color-sidebar-primary-foreground))",
+          accent: "hsl(var(--color-sidebar-accent))",
+          "accent-foreground": "hsl(var(--color-sidebar-accent-foreground))",
+          border: "hsl(var(--color-sidebar-border))",
+          ring: "hsl(var(--color-sidebar-ring))",
         },
       },
       borderColor: {
-        DEFAULT: colorVariable("--colors-border", true),
+        DEFAULT: "hsl(var(--color-border))",
       },
     },
   },
-  plugins: [
-    animate,
-    containerQueries,
-    typography,
-    variables({
-      colorVariables: true,
-      forceRGB: true,
-      darkToRoot: false,
-    }),
-  ] as Partial<PluginsConfig>,
+  plugins: [animate, containerQueries, typography] as Partial<PluginsConfig>,
 } satisfies Config;

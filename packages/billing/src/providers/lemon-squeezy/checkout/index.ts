@@ -16,14 +16,14 @@ import { getHighestDiscountForPrice } from "../../../utils";
 import { createOrRetrieveCustomer } from "../customer";
 import { toCheckoutBillingStatus } from "../mappers/toBillingStatus";
 
-import type { CheckoutInput, GetBillingPortalInput } from "../../../server";
+import type { CheckoutPayload, GetBillingPortalPayload } from "../../../server";
 import type { User } from "@turbostarter/auth";
 
 export const checkout = async ({
   user,
   price: { id },
   redirect,
-}: CheckoutInput & { user: User }) => {
+}: CheckoutPayload & { user: User }) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
     throw new ApiError(
       HttpStatusCode.INTERNAL_SERVER_ERROR,
@@ -43,8 +43,8 @@ export const checkout = async ({
     }
 
     const customer = await createOrRetrieveCustomer({
-      email: user.email ?? "",
-      uuid: user.id,
+      email: user.email,
+      id: user.id,
     });
 
     const discount = getHighestDiscountForPrice(price, config.discounts);
@@ -79,7 +79,7 @@ export const checkout = async ({
 
 export const getBillingPortal = async ({
   user,
-}: GetBillingPortalInput & { user: User }) => {
+}: GetBillingPortalPayload & { user: User }) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
     throw new ApiError(
       HttpStatusCode.INTERNAL_SERVER_ERROR,

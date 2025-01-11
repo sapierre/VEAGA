@@ -1,33 +1,13 @@
-import { createHydrationHelpers } from "@trpc/react-query/rsc";
+import { hc } from "hono/client";
 import { headers } from "next/headers";
-import { cache } from "react";
 
-import { createCaller, createTRPCContext } from "@turbostarter/api";
-
-import { auth } from "~/lib/auth/server";
-
-import { createQueryClient } from "./shared";
+import { getBaseUrl } from "./utils";
 
 import type { AppRouter } from "@turbostarter/api";
 
-/**
- * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
- * handling a tRPC call from a React Server Component.
- */
-const createContext = cache(async () => {
-  const heads = new Headers(await headers());
-  heads.set("x-trpc-source", "web-server");
-
-  return createTRPCContext({
-    auth: await auth(),
-    headers: heads,
-  });
+export const { api } = hc<AppRouter>(getBaseUrl(), {
+  headers: async () => ({
+    ...Object.fromEntries((await headers()).entries()),
+    "x-hono-source": "web-server",
+  }),
 });
-
-const getQueryClient = cache(createQueryClient);
-const caller = createCaller(createContext);
-
-export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
-  caller,
-  getQueryClient,
-);

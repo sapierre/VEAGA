@@ -21,11 +21,18 @@ export const provider = z
   /* eslint-disable-next-line turbo/no-undeclared-env-vars */
   .parse(process.env.EMAIL_PROVIDER);
 
+export const theme = z
+  .nativeEnum(ThemeColor)
+  .optional()
+  .default(ThemeColor.ORANGE)
+  /* eslint-disable-next-line turbo/no-undeclared-env-vars */
+  .parse(process.env.EMAIL_THEME);
+
 const configEnv = createEnv({
   ...shared,
   server: {
     EMAIL_FROM: z.string().email(),
-    EMAIL_THEME: z.nativeEnum(ThemeColor).optional().default(ThemeColor.ORANGE),
+    EMAIL_THEME: z.nativeEnum(ThemeColor).optional().default(theme),
   },
 });
 

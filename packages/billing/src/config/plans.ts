@@ -11,7 +11,7 @@ export const plans = [
   {
     id: "starter",
     name: "Starter",
-    description: "Start now. No credit card required",
+    description: "For small projects just getting started",
     type: PricingPlanType.FREE,
     badge: null,
     prices: [
@@ -37,7 +37,7 @@ export const plans = [
   {
     id: "premium",
     name: "Premium",
-    description: "Become a power user and gain benefits",
+    description: "Perfect for growing teams with advanced features",
     type: PricingPlanType.PREMIUM,
     badge: "Bestseller",
     prices: [

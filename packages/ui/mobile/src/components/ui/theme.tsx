@@ -83,7 +83,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                         )}
                         {...(colors[color] && {
                           style: vars({
-                            "--colors-primary": colors[color],
+                            "--color-primary": colors[color],
                           }),
                         })}
                       ></View>

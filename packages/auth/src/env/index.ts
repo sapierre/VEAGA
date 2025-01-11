@@ -3,7 +3,12 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    SEND_EMAIL_HOOK_SECRET: z.string(),
+    BETTER_AUTH_SECRET: z.string(),
+
+    GITHUB_CLIENT_ID: z.string().optional().default(""),
+    GITHUB_CLIENT_SECRET: z.string().optional().default(""),
+    GOOGLE_CLIENT_ID: z.string().optional().default(""),
+    GOOGLE_CLIENT_SECRET: z.string().optional().default(""),
   },
   skipValidation:
     (!!process.env.SKIP_ENV_VALIDATION &&

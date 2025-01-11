@@ -4,7 +4,7 @@ import { AccountInfo } from "~/components/settings/account/account-info";
 import { AccountSettings } from "~/components/settings/account/settings/account-settings";
 import { ThemeSettings } from "~/components/settings/theme";
 
-export default function Profile() {
+export default function Settings() {
   return (
     <ScrollView
       className="flex-1 bg-background px-6 py-10"

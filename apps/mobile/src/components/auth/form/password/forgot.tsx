@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Link } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -17,30 +16,34 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
-import { forgotPassword } from "~/lib/actions/auth";
+import { forgetPassword } from "~/lib/auth";
 
-import type { ForgotPasswordData } from "@turbostarter/auth";
+import type { ForgotPasswordPayload } from "@turbostarter/auth";
 
 export const ForgotPasswordForm = memo(() => {
-  const { mutate, isPending } = useMutation({
-    mutationFn: forgotPassword,
-    onSuccess: () => {
-      Alert.alert(
-        "Reset link sent!",
-        "Please check your email to reset your password.",
-      );
-      form.reset();
-    },
-    onError: (error) => {
-      Alert.alert("Something went wrong!", error.message);
-    },
-  });
-  const form = useForm<ForgotPasswordData>({
+  const form = useForm<ForgotPasswordPayload>({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = (data: ForgotPasswordData) => {
-    mutate(data);
+  const onSubmit = async (data: ForgotPasswordPayload) => {
+    await forgetPassword(
+      {
+        ...data,
+        redirectTo: pathsConfig.tabs.auth.updatePassword,
+      },
+      {
+        onSuccess: () => {
+          Alert.alert(
+            "Reset link sent!",
+            "Please check your email to reset your password.",
+          );
+          form.reset();
+        },
+        onError: ({ error }) => {
+          Alert.alert("Something went wrong!", error.message);
+        },
+      },
+    );
   };
 
   return (
@@ -65,9 +68,9 @@ export const ForgotPasswordForm = memo(() => {
           className="w-full"
           size="lg"
           onPress={form.handleSubmit(onSubmit)}
-          disabled={isPending}
+          disabled={form.formState.isSubmitting}
         >
-          {isPending ? (
+          {form.formState.isSubmitting ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
             <Text>Send reset link</Text>

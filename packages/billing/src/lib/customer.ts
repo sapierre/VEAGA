@@ -1,6 +1,6 @@
 import { eq } from "@turbostarter/db";
-import { db } from "@turbostarter/db/client";
 import { customers } from "@turbostarter/db/schema";
+import { db } from "@turbostarter/db/server";
 
 import type { InsertCustomer } from "@turbostarter/db/schema";
 

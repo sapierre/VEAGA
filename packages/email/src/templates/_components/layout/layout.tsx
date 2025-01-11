@@ -10,19 +10,19 @@ import {
 import { mapValues, hslToHex } from "@turbostarter/shared/utils";
 import { themes } from "@turbostarter/ui";
 
-import { env } from "../../../env";
+import { theme } from "../../../env";
 
 import { Footer } from "./footer";
 import { Header } from "./header";
 
 import type { PropsWithChildren } from "react";
 
-const colors = mapValues(themes[env.EMAIL_THEME].light, (v) => hslToHex(...v));
+const colors = mapValues(themes[theme].light, (v) => hslToHex(...v));
 
 export const Layout = ({
   children,
-  siteUrl,
-}: PropsWithChildren<{ siteUrl: string }>) => {
+  origin,
+}: PropsWithChildren<{ origin?: string }>) => {
   return (
     <Html lang="en">
       <Head>
@@ -86,9 +86,9 @@ export const Layout = ({
       >
         <Section className="p-1">
           <Container className="rounded-lg bg-card p-6 text-card-foreground">
-            <Header siteUrl={siteUrl} />
+            {origin && <Header origin={origin} />}
             {children}
-            <Footer siteUrl={siteUrl} />
+            {origin && <Footer origin={origin} />}
           </Container>
         </Section>
       </Tailwind>

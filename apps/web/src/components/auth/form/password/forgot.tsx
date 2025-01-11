@@ -21,34 +21,42 @@ import { Input } from "@turbostarter/ui-web/input";
 
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
-import { forgotPassword } from "~/lib/actions/auth";
+import { forgetPassword } from "~/lib/auth/client";
 import { onPromise } from "~/utils";
 
-import type { ForgotPasswordData } from "@turbostarter/auth";
+import type { ForgotPasswordPayload } from "@turbostarter/auth";
 
 type Status = "pending" | "success" | "error" | "idle";
 
 export const ForgotPasswordForm = memo(() => {
   const [status, setStatus] = useState<Status>("idle");
-  const form = useForm<ForgotPasswordData>({
+  const form = useForm<ForgotPasswordPayload>({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = async (data: ForgotPasswordData) => {
-    setStatus("pending");
+  const onSubmit = async (data: ForgotPasswordPayload) => {
     const loadingToast = toast.loading("Sending...");
-    const { error } = await forgotPassword(data);
-
-    if (error) {
-      setStatus("error");
-      return toast.error(`${error}!`, { id: loadingToast });
-    }
-
-    toast.success("Success! Now check your inbox!", {
-      id: loadingToast,
-    });
-
-    return setStatus("success");
+    await forgetPassword(
+      {
+        ...data,
+        redirectTo: pathsConfig.auth.updatePassword,
+      },
+      {
+        onRequest: () => {
+          setStatus("pending");
+        },
+        onSuccess: () => {
+          toast.success("Success! Now check your inbox!", {
+            id: loadingToast,
+          });
+          setStatus("success");
+        },
+        onError: ({ error }) => {
+          toast.error(`${error.message}!`, { id: loadingToast });
+          setStatus("error");
+        },
+      },
+    );
   };
 
   return (

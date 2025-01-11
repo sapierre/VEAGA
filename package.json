@@ -4,28 +4,24 @@
   "scripts": {
     "prepare": "husky",
     "build": "pnpm with-env turbo build",
-    "build:web": "turbo build --filter=web",
-    "build:mobile": "turbo build --filter=mobile",
-    "build:extension": "turbo build --filter=extension",
-    "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo run clean",
+    "clean": "turbo clean",
     "dev": "pnpm with-env turbo dev",
     "db:setup": "pnpm with-env turbo db:setup",
     "db:stop": "turbo db:stop",
     "db:start": "turbo db:start",
+    "db:status": "turbo db:status",
     "db:generate": "pnpm with-env turbo db:generate",
     "db:push": "pnpm with-env turbo db:push",
     "db:migrate": "pnpm with-env turbo db:migrate",
     "db:check": "pnpm with-env turbo db:check",
-    "db:status": "pnpm with-env turbo db:status",
     "db:studio": "pnpm with-env turbo db:studio",
-    "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
-    "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
-    "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
-    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
+    "format": "turbo format --continue -- --cache --cache-location .cache/.prettiercache",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location .cache/.prettiercache",
+    "lint": "turbo lint --continue -- --cache --cache-location .cache/.eslintcache",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest -r packages-without-package-json",
     "postinstall": "pnpm lint:ws",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo typecheck",
     "with-env": "dotenv -c --"
   },
   "devDependencies": {
@@ -45,11 +41,5 @@
     "node": ">=20.17.0"
   },
   "packageManager": "pnpm@9.9.0",
-  "prettier": "@turbostarter/prettier-config",
-  "pnpm": {
-    "patchedDependencies": {
-      "@react-navigation/bottom-tabs": "patches/@react-navigation__bottom-tabs.patch",
-      "@react-navigation/native": "patches/@react-navigation__native.patch"
-    }
-  }
+  "prettier": "@turbostarter/prettier-config"
 }

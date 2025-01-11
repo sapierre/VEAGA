@@ -6,22 +6,15 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { Spinner } from "~/components/common/spinner";
-import { logout } from "~/lib/actions/auth";
-import { api } from "~/lib/api/trpc";
+import { signOut, useSession } from "~/lib/auth";
 
 export const Logout = () => {
-  const utils = api.useUtils();
-  const { data: user, isLoading } = api.user.get.useQuery();
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: logout,
-    onSuccess: () => utils.user.get.invalidate(),
-    onError: (error) => {
-      return Alert.alert("Something went wrong!", error.message);
-    },
+  const { data, isPending } = useSession();
+  const { mutate, isPending: isSigningOut } = useMutation({
+    mutationFn: () => signOut(),
   });
 
-  if (isLoading || !user) {
+  if (isPending || !data?.user) {
     return null;
   }
 
@@ -51,7 +44,7 @@ export const Logout = () => {
           </CardContent>
         </Card>
       </Pressable>
-      {isPending && <Spinner />}
+      {isSigningOut && <Spinner />}
     </>
   );
 };

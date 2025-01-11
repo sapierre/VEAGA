@@ -14,5 +14,5 @@ export const getBillingPortalSchema = z.object({
   redirectUrl: z.string().url(),
 });
 
-export type CheckoutInput = z.infer<typeof checkoutSchema>;
-export type GetBillingPortalInput = z.infer<typeof getBillingPortalSchema>;
+export type CheckoutPayload = z.infer<typeof checkoutSchema>;
+export type GetBillingPortalPayload = z.infer<typeof getBillingPortalSchema>;

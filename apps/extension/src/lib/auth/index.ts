@@ -1,10 +1,7 @@
-import { createClient } from "@turbostarter/auth";
+import { createClient } from "@turbostarter/auth/client/web";
 
-import { env } from "~/lib/env";
+import { getBaseUrl } from "~/lib/api";
 
-export const auth = () => {
-  return createClient({
-    url: env.VITE_SUPABASE_URL,
-    key: env.VITE_SUPABASE_ANON_KEY,
-  });
-};
+export const { useSession, signOut } = createClient({
+  baseURL: getBaseUrl(),
+});

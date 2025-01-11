@@ -1,11 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Link, router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
-import { registerSchema } from "@turbostarter/auth";
+import { generateName, registerSchema } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -17,43 +16,47 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
-import { register } from "~/lib/actions/auth";
+import { signUp } from "~/lib/auth";
 
-import type { RegisterData } from "@turbostarter/auth";
+import type { RegisterPayload } from "@turbostarter/auth";
 
 export const RegisterForm = memo(() => {
-  const form = useForm<RegisterData>({
+  const form = useForm<RegisterPayload>({
     resolver: zodResolver(registerSchema),
   });
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (data: RegisterData) => register(data),
-    onSuccess: () => {
-      Alert.alert(
-        "Success!",
-        "You have successfully registered! Check your email to verify your account.",
-        [
-          {
-            text: "OK",
-            onPress: () => {
-              router.navigate(pathsConfig.tabs.auth.login);
-              form.reset();
-            },
-          },
-        ],
-      );
-    },
-    onError: (error) => {
-      Alert.alert("Something went wrong!", error.message);
-    },
-  });
-
-  const onSubmit = (data: RegisterData) => {
-    mutate(data);
+  const onSubmit = async (data: RegisterPayload) => {
+    await signUp.email(
+      {
+        ...data,
+        name: generateName(data.email),
+        callbackURL: pathsConfig.tabs.settings,
+      },
+      {
+        onSuccess: () => {
+          Alert.alert(
+            "Success!",
+            "You have successfully registered! Check your email to verify your account.",
+            [
+              {
+                text: "OK",
+                onPress: () => {
+                  router.navigate(pathsConfig.tabs.auth.login);
+                  form.reset();
+                },
+              },
+            ],
+          );
+        },
+        onError: ({ error }) => {
+          Alert.alert("Something went wrong!", error.message);
+        },
+      },
+    );
   };
 
   return (
-    <Form {...form} key="idle">
+    <Form {...form}>
       <View className="gap-6">
         <FormField
           control={form.control}
@@ -89,9 +92,9 @@ export const RegisterForm = memo(() => {
           className="w-full"
           size="lg"
           onPress={form.handleSubmit(onSubmit)}
-          disabled={isPending}
+          disabled={form.formState.isSubmitting}
         >
-          {isPending ? (
+          {form.formState.isSubmitting ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
             <Text>Sign up</Text>

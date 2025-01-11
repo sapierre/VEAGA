@@ -11,7 +11,7 @@ import { vars } from "nativewind";
 import { memo } from "react";
 import { View } from "react-native";
 
-import { hslToRgb, mapValues, transform } from "@turbostarter/shared/utils";
+import { mapValues, transform } from "@turbostarter/shared/utils";
 import { themes } from "@turbostarter/ui";
 
 import { appConfig } from "~/config/app";
@@ -37,8 +37,8 @@ interface ThemeProviderProps {
 const colors = mapValues(themes, (theme) =>
   mapValues(theme, (colors) =>
     vars(
-      transform(colors, (r: Record<string, string>, v, k) => {
-        r[`--colors-${k}`] = hslToRgb(...v).join(",");
+      transform(colors, (r: Record<string, string>, [h, s, l], k) => {
+        r[`--color-${k}`] = `${h} ${s * 100}% ${l * 100}%`;
       }),
     ),
   ),

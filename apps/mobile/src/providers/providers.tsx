@@ -3,7 +3,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // import { Provider as AnalyticsProvider } from "@turbostarter/analytics-mobile";
 
-import { TRPCProvider } from "~/lib/api/trpc";
+import { ApiProvider } from "~/lib/api";
 
 import { ThemeProvider } from "./theme";
 
@@ -13,13 +13,13 @@ interface ProvidersProps {
 
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (
-    <TRPCProvider>
+    <ApiProvider>
       {/* <AnalyticsProvider> */}
       <SafeAreaProvider>
         <ThemeProvider>{children}</ThemeProvider>
       </SafeAreaProvider>
       {/* </AnalyticsProvider> */}
-    </TRPCProvider>
+    </ApiProvider>
   );
 });
 

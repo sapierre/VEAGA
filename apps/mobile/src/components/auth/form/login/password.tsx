@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Link, router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -18,33 +17,42 @@ import {
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
+import { useAuthFormStore } from "~/components/auth/form/store";
 import { pathsConfig } from "~/config/paths";
-import { login } from "~/lib/actions/auth";
-import { api } from "~/lib/api/trpc";
+import { signIn } from "~/lib/auth";
 
-import type { PasswordLoginData } from "@turbostarter/auth";
+import type { PasswordLoginPayload } from "@turbostarter/auth";
 
 export const PasswordLoginForm = memo(() => {
-  const form = useForm<PasswordLoginData>({
+  const { provider, setProvider, isSubmitting, setIsSubmitting } =
+    useAuthFormStore();
+  const form = useForm<PasswordLoginPayload>({
     resolver: zodResolver(passwordLoginSchema),
   });
 
-  const utils = api.useUtils();
-  const { mutate, isPending } = useMutation({
-    mutationFn: (data: PasswordLoginData) =>
-      login({ data, option: AUTH_PROVIDER.PASSWORD }),
-    onSuccess: async () => {
-      await utils.user.get.invalidate();
-      router.navigate(pathsConfig.tabs.settings);
-      form.reset();
-    },
-    onError: (error) => {
-      return Alert.alert("Something went wrong!", error.message);
-    },
-  });
-
-  const onSubmit = (data: PasswordLoginData) => {
-    mutate(data);
+  const onSubmit = async (data: PasswordLoginPayload) => {
+    await signIn.email(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onRequest: () => {
+          setProvider(AUTH_PROVIDER.PASSWORD);
+          setIsSubmitting(true);
+        },
+        onSuccess: () => {
+          router.navigate(pathsConfig.tabs.settings);
+          form.reset();
+        },
+        onError: ({ error }) => {
+          Alert.alert("Something went wrong!", error.message);
+        },
+        onResponse: () => {
+          setIsSubmitting(false);
+        },
+      },
+    );
   };
 
   return (
@@ -59,6 +67,7 @@ export const PasswordLoginForm = memo(() => {
                 label="Email"
                 autoCapitalize="none"
                 autoComplete="email"
+                disabled={isSubmitting}
                 {...field}
               />
             </FormItem>
@@ -89,9 +98,9 @@ export const PasswordLoginForm = memo(() => {
           className="w-full"
           size="lg"
           onPress={form.handleSubmit(onSubmit)}
-          disabled={isPending}
+          disabled={isSubmitting}
         >
-          {isPending ? (
+          {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
             <Text>Sign in</Text>

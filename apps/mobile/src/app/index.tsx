@@ -67,7 +67,6 @@ export default function App() {
                     <CardTitle>{link.title}</CardTitle>
                     <Icons.ArrowRight className="text-foreground" size={20} />
                   </View>
-
                   <CardDescription>{link.description}</CardDescription>
                 </CardHeader>
               </Card>

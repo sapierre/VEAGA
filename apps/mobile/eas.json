@@ -25,9 +25,7 @@
       "distribution": "internal",
       "env": {
         "APP_ENV": "development",
-        "EXPO_PUBLIC_SITE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
+        "EXPO_PUBLIC_SITE_URL": ""
       }
     },
     // Needed for iOS, as you can't reuse `development` profile there for simulator
@@ -40,9 +38,7 @@
       },
       "env": {
         "APP_ENV": "development",
-        "EXPO_PUBLIC_SITE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
+        "EXPO_PUBLIC_SITE_URL": ""
       }
     },
     // Preview profile used for EAS preview builds in test environment
@@ -54,9 +50,7 @@
       },
       "env": {
         "APP_ENV": "test",
-        "EXPO_PUBLIC_SITE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
+        "EXPO_PUBLIC_SITE_URL": ""
       }
     },
     // Production profile used for EAS production builds to be submitted to the stores
@@ -65,9 +59,7 @@
       "autoIncrement": true,
       "env": {
         "APP_ENV": "production",
-        "EXPO_PUBLIC_SITE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_URL": "",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": ""
+        "EXPO_PUBLIC_SITE_URL": ""
       }
     }
   },

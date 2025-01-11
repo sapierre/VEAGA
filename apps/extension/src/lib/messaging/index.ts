@@ -1,17 +1,13 @@
 import { defineExtensionMessaging } from "@webext-core/messaging";
 
-import type { Session } from "@turbostarter/auth";
-
 export const Message = {
-  SESSION_GET: "session:get",
-  SESSION_DELETE: "session:delete",
+  HELLO: "hello",
 } as const;
 
 export type Message = (typeof Message)[keyof typeof Message];
 
 interface Messages {
-  [Message.SESSION_GET]: () => Session | null;
-  [Message.SESSION_DELETE]: () => void;
+  [Message.HELLO]: (filename: string) => string;
 }
 
 // eslint-disable-next-line @typescript-eslint/unbound-method

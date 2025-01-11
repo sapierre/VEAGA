@@ -1,16 +1,15 @@
 const AUTH_PREFIX = "/auth";
 const BLOG_PREFIX = "/blog";
-const ADMIN_PREFIX = "/admin";
+const DASHBOARD_PREFIX = "/dashboard";
 const LEGAL_PREFIX = "/legal";
 
 const API_PREFIX = "/api";
-const WEBHOOKS_PREFIX = "/webhooks";
 
 const pathsConfig = {
   index: "/",
-  ai: "/ai",
   marketing: {
     pricing: "/pricing",
+    contact: "/contact",
     blog: {
       index: BLOG_PREFIX,
       post: (slug: string) => `${BLOG_PREFIX}/${slug}`,
@@ -28,24 +27,19 @@ const pathsConfig = {
     updatePassword: `${AUTH_PREFIX}/password/update`,
     error: `${AUTH_PREFIX}/error`,
   },
-  admin: {
-    index: ADMIN_PREFIX,
-  },
-  api: {
-    webhooks: {
-      billing: `${API_PREFIX}${WEBHOOKS_PREFIX}/billing`,
-      auth: {
-        callback: `${API_PREFIX}${WEBHOOKS_PREFIX}/${AUTH_PREFIX}/callback`,
-        confirm: `${API_PREFIX}${WEBHOOKS_PREFIX}${AUTH_PREFIX}/confirm`,
-        email: `${API_PREFIX}${WEBHOOKS_PREFIX}${AUTH_PREFIX}/email`,
-      },
+  dashboard: {
+    index: DASHBOARD_PREFIX,
+    ai: `${DASHBOARD_PREFIX}/ai`,
+    settings: {
+      index: `${DASHBOARD_PREFIX}/settings`,
+      billing: `${DASHBOARD_PREFIX}/settings/billing`,
     },
   },
 } as const;
 
 export {
   pathsConfig,
-  ADMIN_PREFIX,
+  DASHBOARD_PREFIX,
   BLOG_PREFIX,
   AUTH_PREFIX,
   API_PREFIX,

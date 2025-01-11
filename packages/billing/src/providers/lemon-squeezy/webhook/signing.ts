@@ -1,5 +1,8 @@
 import crypto from "node:crypto";
 
+import { HttpStatusCode } from "@turbostarter/shared/constants";
+import { ApiError } from "@turbostarter/shared/utils";
+
 export const validateSignature = (
   sig: string,
   secret: string,
@@ -10,6 +13,9 @@ export const validateSignature = (
   const signature = Buffer.from(sig || "", "utf8");
 
   if (!crypto.timingSafeEqual(digest, signature)) {
-    throw new Error("Invalid signature.");
+    throw new ApiError(
+      HttpStatusCode.BAD_REQUEST,
+      "Invalid webhook signature.",
+    );
   }
 };

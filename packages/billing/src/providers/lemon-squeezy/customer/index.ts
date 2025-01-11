@@ -44,12 +44,12 @@ const createLemonSqueezyCustomer = async (email: string) => {
 
 export const createOrRetrieveCustomer = async ({
   email,
-  uuid,
+  id,
 }: {
   email: string;
-  uuid: string;
+  id: string;
 }) => {
-  const existingCustomer = await getCustomerByUserId(uuid);
+  const existingCustomer = await getCustomerByUserId(id);
 
   const lemonSqueezyCustomer = existingCustomer?.customerId
     ? (await getLemonSqueezyCustomerById(existingCustomer.customerId)).data
@@ -65,11 +65,11 @@ export const createOrRetrieveCustomer = async ({
 
   if (existingCustomer && lemonSqueezyCustomer) {
     if (existingCustomer.customerId !== lemonSqueezyCustomer.id) {
-      await updateCustomer(uuid, {
+      await updateCustomer(id, {
         customerId: lemonSqueezyCustomerToProcess.id,
       });
       console.warn(
-        `Customer ${uuid} had a different customerId. Updated to ${lemonSqueezyCustomerToProcess.id}.`,
+        `Customer ${id} had a different customerId. Updated to ${lemonSqueezyCustomerToProcess.id}.`,
       );
     }
 
@@ -77,7 +77,7 @@ export const createOrRetrieveCustomer = async ({
   }
 
   await upsertCustomer({
-    userId: uuid,
+    userId: id,
     customerId: lemonSqueezyCustomerToProcess.id,
   });
 

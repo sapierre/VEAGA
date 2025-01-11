@@ -1,14 +1,14 @@
 import { Img, Link, Text } from "@react-email/components";
 
 interface FooterProps {
-  readonly siteUrl: string;
+  readonly origin: string;
 }
 
-export const Footer = ({ siteUrl }: FooterProps) => {
+export const Footer = ({ origin }: FooterProps) => {
   return (
     <>
       <Img
-        src={`${siteUrl}/images/logo.png`}
+        src={`${origin}/images/logo.png`}
         alt="Turbostarter Logo"
         height={45}
         className="mt-12"

@@ -1,5 +1,8 @@
-import type { GetUploadUrlInput } from "../lib/schema";
+import type { GetObjectUrlInput } from "../lib/schema";
 
 export interface StorageProviderStrategy {
-  getUploadUrl: (data: GetUploadUrlInput) => Promise<{ url: string }>;
+  getUploadUrl: (data: GetObjectUrlInput) => Promise<{ url: string }>;
+  getSignedUrl: (data: GetObjectUrlInput) => Promise<{ url: string }>;
+  getPublicUrl: (data: GetObjectUrlInput) => Promise<{ url: string }>;
+  getDeleteUrl: (data: GetObjectUrlInput) => Promise<{ url: string }>;
 }

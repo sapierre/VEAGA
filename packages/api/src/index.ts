@@ -1,29 +1,36 @@
-import { appRouter } from "./router";
-import { createCallerFactory, createTRPCContext } from "./trpc";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { logger } from "hono/logger";
 
-import type { AppRouter } from "./router";
-import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { onApiError } from "@turbostarter/shared/utils";
 
-/**
- * Create a server-side caller for the tRPC API
- * @example
- * const trpc = createCaller(createContext);
- * const res = await trpc.post.all();
- *       ^? Post[]
- */
-const createCaller = createCallerFactory(appRouter);
+import { timing } from "./middleware";
+import { aiRouter } from "./modules/ai/ai.router";
+import { authRouter } from "./modules/auth/auth.router";
+import { billingRouter } from "./modules/billing/billing.router";
+import { storageRouter } from "./modules/storage/storage.router";
 
-/**
- * Inference helpers for input types
- * @example type HelloInput = RouterInputs['example']['hello']
- **/
-type RouterInputs = inferRouterInputs<AppRouter>;
+const appRouter = new Hono()
+  .basePath("/api")
+  .use(logger())
+  .use(
+    cors({
+      origin: "*",
+      allowHeaders: ["Content-Type", "Authorization"],
+      allowMethods: ["POST", "GET", "OPTIONS"],
+      exposeHeaders: ["Content-Length"],
+      maxAge: 600,
+      credentials: true,
+    }),
+  )
+  .use(timing)
+  .route("/ai", aiRouter)
+  .route("/auth", authRouter)
+  .route("/billing", billingRouter)
+  .route("/storage", storageRouter)
+  .onError((err, c) => onApiError(err, c.req.raw));
 
-/**
- * Inference helpers for output types
- * @example type HelloOutput = RouterOutputs['example']['hello']
- **/
-type RouterOutputs = inferRouterOutputs<AppRouter>;
+type AppRouter = typeof appRouter;
 
-export { createTRPCContext, appRouter, createCaller };
-export type { AppRouter, RouterInputs, RouterOutputs };
+export type { AppRouter };
+export { appRouter };

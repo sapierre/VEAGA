@@ -1,19 +1,10 @@
-import { router } from "expo-router";
-
 import { Auth } from "~/components/auth/auth";
 import { LOGIN_OPTIONS } from "~/components/auth/form/login/constants";
 import { authConfig } from "~/config/auth";
-import { pathsConfig } from "~/config/paths";
-import { useAuthDeepLink } from "~/lib/hooks/use-auth-deep-link";
 
 import type { LoginOption } from "~/components/auth/form/login/constants";
 
 const LoginPage = () => {
-  useAuthDeepLink({
-    onSuccess: () => router.replace(pathsConfig.tabs.settings),
-    path: pathsConfig.tabs.auth.login,
-  });
-
   const options = Object.entries(authConfig.providers)
     .filter(
       ([provider, enabled]) =>

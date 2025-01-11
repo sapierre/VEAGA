@@ -21,30 +21,36 @@ import { Icons } from "@turbostarter/ui-web/icons";
 import { Input } from "@turbostarter/ui-web/input";
 
 import { pathsConfig } from "~/config/paths";
-import { updatePassword } from "~/lib/actions";
+import { resetPassword } from "~/lib/auth/client";
 import { onPromise } from "~/utils";
 
-import type { UpdatePasswordData } from "@turbostarter/auth";
+import type { UpdatePasswordPayload } from "@turbostarter/auth";
 
 export const UpdatePasswordForm = memo(() => {
   const router = useRouter();
-  const form = useForm<UpdatePasswordData>({
+  const form = useForm<UpdatePasswordPayload>({
     resolver: zodResolver(updatePasswordSchema),
   });
 
-  const onSubmit = async (data: UpdatePasswordData) => {
+  const onSubmit = async (data: UpdatePasswordPayload) => {
     const loadingToast = toast.loading("Updating password...");
-    const { error } = await updatePassword(data);
 
-    if (error) {
-      return toast.error(error, { id: loadingToast });
-    }
-
-    toast.success("Success! Now you can login with your new password!", {
-      id: loadingToast,
-    });
-
-    router.replace(pathsConfig.auth.login);
+    await resetPassword(
+      {
+        newPassword: data.password,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Success! Now you can login with your new password!", {
+            id: loadingToast,
+          });
+          router.replace(pathsConfig.auth.login);
+        },
+        onError: ({ error }) => {
+          toast.error(`${error.message}!`, { id: loadingToast });
+        },
+      },
+    );
   };
 
   return (

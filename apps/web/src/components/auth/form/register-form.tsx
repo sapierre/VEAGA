@@ -2,11 +2,15 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER, registerSchema } from "@turbostarter/auth";
+import {
+  AUTH_PROVIDER,
+  registerSchema,
+  generateName,
+} from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -21,12 +25,12 @@ import { Input } from "@turbostarter/ui-web/input";
 
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
-import { register } from "~/lib/actions";
+import { signUp } from "~/lib/auth/client";
 import { onPromise } from "~/utils";
 
 import { useAuthFormStore } from "./store";
 
-import type { RegisterData } from "@turbostarter/auth";
+import type { RegisterPayload } from "@turbostarter/auth";
 
 type RegisterStatus = "pending" | "success" | "error" | "idle";
 
@@ -34,30 +38,40 @@ export const RegisterForm = memo(() => {
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
   const [status, setStatus] = useState<RegisterStatus>("idle");
-  const form = useForm<RegisterData>({
+  const form = useForm<RegisterPayload>({
     resolver: zodResolver(registerSchema),
   });
 
-  useEffect(() => {
-    setIsSubmitting(status === "pending");
-  }, [status, setIsSubmitting]);
-
-  const onSubmit = async (data: RegisterData) => {
-    setProvider(AUTH_PROVIDER.PASSWORD);
-    setStatus("pending");
+  const onSubmit = async (data: RegisterPayload) => {
     const loadingToast = toast.loading("Registering...");
-    const { error } = await register(data);
-
-    if (error) {
-      setStatus("error");
-      return toast.error(`${error}!`, { id: loadingToast });
-    }
-
-    toast.success("Success! Now verify your email!", {
-      id: loadingToast,
-    });
-
-    return setStatus("success");
+    await signUp.email(
+      {
+        email: data.email,
+        password: data.password,
+        name: generateName(data.email),
+        callbackURL: pathsConfig.dashboard.index,
+      },
+      {
+        onRequest: () => {
+          setProvider(AUTH_PROVIDER.PASSWORD);
+          setStatus("pending");
+          setIsSubmitting(true);
+        },
+        onSuccess: () => {
+          toast.success("Success! Now verify your email!", {
+            id: loadingToast,
+          });
+          setStatus("success");
+        },
+        onError: ({ error }) => {
+          setStatus("error");
+          toast.error(`${error.message}!`, { id: loadingToast });
+        },
+        onResponse: () => {
+          setIsSubmitting(false);
+        },
+      },
+    );
   };
 
   return (

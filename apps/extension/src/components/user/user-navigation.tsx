@@ -1,6 +1,5 @@
 import { memo } from "react";
 
-import { getAvatar, getName } from "@turbostarter/auth";
 import { PricingPlanType } from "@turbostarter/billing";
 import { cn } from "@turbostarter/ui";
 import {
@@ -17,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuPortal,
+  DropdownMenuGroup,
 } from "@turbostarter/ui-web/dropdown-menu";
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
@@ -75,14 +75,12 @@ export const UserNavigation = memo<UserNavigationProps>(
       return <AnonymousUser />;
     }
 
-    const name = getName(user);
-
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="relative flex items-center gap-4 rounded-md">
             <Avatar className="size-10">
-              <AvatarImage src={getAvatar(user)} alt={name} />
+              <AvatarImage src={user.image ?? undefined} alt={user.name} />
               <AvatarFallback>
                 <Icons.UserRound className="w-5" />
               </AvatarFallback>
@@ -93,9 +91,9 @@ export const UserNavigation = memo<UserNavigationProps>(
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-2">
-                {name && (
+                {user.name && (
                   <p className="font-sans text-sm font-medium leading-none">
-                    {name}
+                    {user.name}
                   </p>
                 )}
                 {user.email && (
@@ -106,6 +104,32 @@ export const UserNavigation = memo<UserNavigationProps>(
                 <CustomerStatus customer={customer} />
               </div>
             </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuGroup>
+              <DropdownMenuItem asChild>
+                <a
+                  href={`${env.VITE_SITE_URL}/dashboard`}
+                  target="_blank"
+                  className="flex w-full cursor-pointer items-center gap-1.5"
+                >
+                  <Icons.Home className="size-4" />
+                  Dashboard
+                </a>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <a
+                  href={`${env.VITE_SITE_URL}/dashboard/settings`}
+                  target="_blank"
+                  className="flex w-full cursor-pointer items-center gap-1.5"
+                >
+                  <Icons.Settings className="size-4" />
+                  Settings
+                </a>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+
             <DropdownMenuSeparator />
 
             <DropdownMenuItem className="cursor-pointer">

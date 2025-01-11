@@ -1,4 +1,4 @@
-import type { CheckoutInput, GetBillingPortalInput } from "../lib/schema";
+import type { CheckoutPayload, GetBillingPortalPayload } from "../lib/schema";
 import type { User } from "@turbostarter/auth";
 
 export interface WebhookCallbacks {
@@ -14,9 +14,9 @@ export interface BillingProviderStrategy {
     callbacks?: WebhookCallbacks,
   ) => Promise<Response>;
   checkout: (
-    input: CheckoutInput & { user: User },
+    input: CheckoutPayload & { user: User },
   ) => Promise<{ url: string | null }>;
   getBillingPortal: (
-    input: GetBillingPortalInput & { user: User },
+    input: GetBillingPortalPayload & { user: User },
   ) => Promise<{ url: string }>;
 }

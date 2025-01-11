@@ -1,7 +1,7 @@
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { memo } from "react";
 
-import { TRPCReactProvider } from "~/lib/api/react";
+import { ApiProvider } from "~/lib/api/client";
 
 import { AnalyticsProvider } from "./analytics";
 import { ThemeProvider } from "./theme";
@@ -12,13 +12,13 @@ interface ProvidersProps {
 
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (
-    <TRPCReactProvider>
+    <ApiProvider>
       <NuqsAdapter>
         <AnalyticsProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </AnalyticsProvider>
       </NuqsAdapter>
-    </TRPCReactProvider>
+    </ApiProvider>
   );
 });
 

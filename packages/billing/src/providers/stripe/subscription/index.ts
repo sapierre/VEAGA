@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { ApiError } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
@@ -22,7 +23,10 @@ export const getPromotionCode = async (code: string) => {
     return data[0];
   } catch (e) {
     console.error(e);
-    throw new ApiError(500, "Could not retrieve promotion code.");
+    throw new ApiError(
+      HttpStatusCode.INTERNAL_SERVER_ERROR,
+      "Could not retrieve promotion code.",
+    );
   }
 };
 

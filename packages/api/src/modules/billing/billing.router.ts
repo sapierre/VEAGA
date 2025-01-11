@@ -1,31 +1,43 @@
+import { zValidator } from "@hono/zod-validator";
+import { Hono } from "hono";
+
 import {
   checkoutSchema,
   checkout,
-  getCustomerByUserId,
   getBillingPortalSchema,
   getBillingPortal,
+  webhookHandler,
+  getCustomerByUserId,
 } from "@turbostarter/billing/server";
 
-import { createTRPCRouter, protectedProcedure } from "../../trpc";
+import { enforceAuth } from "../../middleware";
 
-export const billingRouter = createTRPCRouter({
-  checkout: protectedProcedure
-    .input(checkoutSchema)
-    .mutation(({ ctx, input }) =>
-      checkout({
-        user: ctx.user,
-        ...input,
-      }),
-    ),
-  getCustomer: protectedProcedure.query(({ ctx }) =>
-    getCustomerByUserId(ctx.user.id),
-  ),
-  getPortal: protectedProcedure
-    .input(getBillingPortalSchema)
-    .mutation(({ ctx, input }) =>
-      getBillingPortal({
-        user: ctx.user,
-        ...input,
-      }),
-    ),
-});
+export const billingRouter = new Hono()
+  .post(
+    "/checkout",
+    zValidator("json", checkoutSchema),
+    enforceAuth,
+    async (c) =>
+      c.json(
+        await checkout({
+          user: c.var.user,
+          ...c.req.valid("json"),
+        }),
+      ),
+  )
+  .get(
+    "/portal",
+    zValidator("query", getBillingPortalSchema),
+    enforceAuth,
+    async (c) =>
+      c.json(
+        await getBillingPortal({
+          user: c.var.user,
+          ...c.req.valid("query"),
+        }),
+      ),
+  )
+  .get("/customer", enforceAuth, async (c) =>
+    c.json(await getCustomerByUserId(c.var.user.id)),
+  )
+  .post("/webhook", (c) => webhookHandler(c.req.raw));

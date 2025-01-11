@@ -24,7 +24,12 @@ const MODE_ICONS = {
 
 export const ThemeStatus = forwardRef<HTMLButtonElement>((props, ref) => {
   return (
-    <Button variant="outline" className="rounded-full" ref={ref} {...props}>
+    <Button
+      variant="outline"
+      className="rounded-full bg-transparent"
+      ref={ref}
+      {...props}
+    >
       <span className="sr-only">Customize theme</span>
       <div className="flex items-center justify-center gap-2">
         <div className="size-4 rounded-full bg-primary"></div>

@@ -10,8 +10,8 @@ export default function Billing() {
       <View className="items-center gap-6 text-center">
         <Text className="mt-4 text-4xl font-bold">We're working on it!</Text>
         <Text className="text-pretty text-center text-lg text-muted-foreground">
-          Billing is currently not available. We're working on it and it will be
-          available soon.
+          Native mobile billing is currently not available. We're working on it
+          and it will be available soon.
         </Text>
         <Pressable
           onPress={() =>

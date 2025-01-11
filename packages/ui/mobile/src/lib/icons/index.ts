@@ -22,6 +22,7 @@ import {
   GraduationCap,
   Atom,
   Brain,
+  Loader,
 } from "lucide-react-native";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -55,6 +56,7 @@ iconWithClassName(Globe2);
 iconWithClassName(GraduationCap);
 iconWithClassName(Atom);
 iconWithClassName(Brain);
+iconWithClassName(Loader);
 
 export const Icons = {
   Logo: GlobalIcons.Logo,
@@ -84,4 +86,5 @@ export const Icons = {
   GraduationCap,
   Atom,
   Brain,
+  Loader,
 };

@@ -1,22 +1,15 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useChat } from "@ai-sdk/react";
+import { fetch as expoFetch } from "expo/fetch";
 import { FlatList, ScrollView, View } from "react-native";
 import Markdown from "react-native-marked";
-import { z } from "zod";
 
 import { cn } from "@turbostarter/ui";
 import { Button } from "@turbostarter/ui-mobile/button";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormTextarea,
-} from "@turbostarter/ui-mobile/form";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
+import { Textarea } from "@turbostarter/ui-mobile/textarea";
 
-import { api } from "~/lib/api/trpc";
+import { getBaseUrl } from "~/lib/api/utils";
 
 const EXAMPLES = [
   {
@@ -37,59 +30,31 @@ const EXAMPLES = [
   },
 ] as const;
 
-const promptSchema = z.object({
-  prompt: z.string(),
-});
-
 export default function AI() {
-  const [isThinking, setIsThinking] = useState(false);
-  const [messages, setMessages] = useState<
-    { role: "user" | "assistant"; content: string }[]
-  >([]);
-
-  const { mutate, isPending } = api.ai.chat.useMutation({
-    onMutate: () => {
-      setIsThinking(true);
-    },
-    onSuccess: async (data) => {
-      for await (const chunk of data) {
-        setMessages((prev) => {
-          if (prev.at(-1)?.role === "user") {
-            return [...prev, { role: "assistant", content: chunk }];
-          }
-
-          return [
-            ...prev.slice(0, -1),
-            {
-              role: "assistant",
-              content: (prev.at(-1)?.content ?? "") + chunk,
-            },
-          ];
-        });
-
-        setIsThinking(false);
-      }
-    },
+  const {
+    messages,
+    error,
+    append,
+    handleInputChange,
+    input,
+    handleSubmit,
+    isLoading,
+  } = useChat({
+    fetch: expoFetch as unknown as typeof globalThis.fetch,
+    api: `${getBaseUrl()}/api/ai/chat`,
+    onError: (error) => console.error(error),
   });
 
-  const form = useForm<z.infer<typeof promptSchema>>({
-    resolver: zodResolver(promptSchema),
-  });
+  if (error)
+    return (
+      <View className="flex-1 bg-background px-6">
+        <Text>{error.message}</Text>
+      </View>
+    );
 
   const messagesToDisplay = messages.filter((message) =>
     ["assistant", "user"].includes(message.role),
   );
-
-  const onSubmit = (values: z.infer<typeof promptSchema>) => {
-    const message = { role: "user", content: values.prompt.trim() } as const;
-    form.reset({
-      prompt: "",
-    });
-    mutate({
-      messages: [...messages, message],
-    });
-    setMessages((prev) => [...prev, message]);
-  };
 
   return (
     <View className="flex-1 bg-background px-6">
@@ -120,10 +85,14 @@ export default function AI() {
             )}
           </View>
         ))}
-        {isThinking && <Text className="py-2.5 text-lg">Thinking...</Text>}
+        {isLoading && (
+          <View className="py-2.5">
+            <Icons.Loader className="size-5 animate-spin text-muted-foreground" />
+          </View>
+        )}
       </ScrollView>
 
-      {!messagesToDisplay.length && !isThinking && (
+      {!messagesToDisplay.length && (
         <FlatList
           numColumns={2}
           data={EXAMPLES}
@@ -131,7 +100,7 @@ export default function AI() {
           columnWrapperClassName="gap-2"
           renderItem={({ item }) => (
             <Button
-              onPress={() => onSubmit({ prompt: item.prompt })}
+              onPress={() => append({ role: "user", content: item.prompt })}
               key={item.prompt}
               variant="outline"
               className="native:h-auto h-auto grow flex-col items-start gap-2 py-3 text-left"
@@ -141,7 +110,7 @@ export default function AI() {
                 width={20}
                 height={20}
               />
-              <Text className="max-w-32 text-base text-muted-foreground">
+              <Text className="max-w-40 text-base text-muted-foreground">
                 {item.prompt}
               </Text>
             </Button>
@@ -149,34 +118,34 @@ export default function AI() {
         />
       )}
 
-      <Form {...form}>
-        <View className="relative bg-background pb-4">
-          <FormField
-            control={form.control}
-            name="prompt"
-            render={({ field }) => (
-              <FormItem>
-                <FormTextarea
-                  placeholder="Ask a question..."
-                  disabled={isPending}
-                  onSubmitEditing={form.handleSubmit(onSubmit)}
-                  blurOnSubmit={false}
-                  {...field}
-                />
-              </FormItem>
-            )}
-          />
+      <View className="relative bg-background pb-4">
+        <Textarea
+          placeholder="Ask a question..."
+          value={input}
+          onSubmitEditing={(e) => {
+            handleSubmit(e);
+            e.preventDefault();
+          }}
+          onChange={(e) =>
+            handleInputChange({
+              ...e,
+              target: {
+                ...e.target,
+                value: e.nativeEvent.text,
+              },
+            } as unknown as React.ChangeEvent<HTMLInputElement>)
+          }
+        />
 
-          <Button
-            size="icon"
-            className="absolute bottom-6 right-2 rounded-full"
-            disabled={isPending}
-            onPress={form.handleSubmit(onSubmit)}
-          >
-            <Icons.ArrowUp className="text-background" />
-          </Button>
-        </View>
-      </Form>
+        <Button
+          size="icon"
+          className="absolute bottom-6 right-2 rounded-full"
+          disabled={isLoading}
+          onPress={() => handleSubmit()}
+        >
+          <Icons.ArrowUp className="text-background" />
+        </Button>
+      </View>
     </View>
   );
 }

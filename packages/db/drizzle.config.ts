@@ -3,11 +3,10 @@ import { defineConfig } from "drizzle-kit";
 import { env } from "./src/env";
 
 export default defineConfig({
-  schema: "./src/db/schema/index.ts",
-  out: "./supabase/migrations",
+  out: "./migrations",
+  schema: "./src/schema/index.ts",
   dialect: "postgresql",
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  schemaFilter: ["public"],
 });

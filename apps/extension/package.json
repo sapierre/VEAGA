@@ -20,9 +20,6 @@
   "dependencies": {
     "@t3-oss/env-core": "0.11.1",
     "@tanstack/react-query": "catalog:",
-    "@trpc/client": "catalog:",
-    "@trpc/react-query": "catalog:",
-    "@trpc/server": "catalog:",
     "@turbostarter/analytics-extension": "workspace:*",
     "@turbostarter/api": "workspace:*",
     "@turbostarter/auth": "workspace:*",

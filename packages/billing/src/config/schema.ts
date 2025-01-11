@@ -57,6 +57,14 @@ export const planSchema = z.object({
 
 export const billingConfigSchema = z.object({
   currency: z.string().optional().default("usd"),
-  plans: z.array(planSchema),
+  plans: z.array(planSchema).refine(
+    (plans) => {
+      const types = new Set(plans.map((plan) => plan.type));
+      return types.size === plans.length;
+    },
+    {
+      message: "You can't have two plans with the same type",
+    },
+  ),
   discounts: z.array(discountSchema).optional().default([]),
 });

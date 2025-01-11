@@ -1,6 +1,5 @@
 import { View } from "react-native";
 
-import { hslToRgb } from "@turbostarter/shared/utils";
 import { ThemeColor, themes } from "@turbostarter/ui";
 import { ThemeCustomizer } from "@turbostarter/ui-mobile/theme";
 
@@ -9,7 +8,7 @@ import { useTheme } from "~/lib/hooks/use-theme";
 import { useThemeConfig } from "~/providers/theme";
 
 export const ThemeSettings = () => {
-  const { theme, resolvedTheme, changeTheme } = useTheme();
+  const { theme, changeTheme } = useTheme();
   const [config, setConfig] = useThemeConfig();
 
   return (
@@ -22,12 +21,13 @@ export const ThemeSettings = () => {
           await setConfig(config);
         }}
         colors={Object.values(ThemeColor).reduce(
-          (acc, color) => ({
-            ...acc,
-            [color]: hslToRgb(...themes[color][resolvedTheme].primary).join(
-              ",",
-            ),
-          }),
+          (acc, color) => {
+            const [h, s, l] = themes[color].light.primary;
+            return {
+              ...acc,
+              [color]: `${h} ${s * 100}% ${l * 100}%`,
+            };
+          },
           {} as Record<ThemeColor, string>,
         )}
       />

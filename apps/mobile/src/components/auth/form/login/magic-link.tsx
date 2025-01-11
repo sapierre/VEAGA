@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
@@ -16,32 +15,46 @@ import {
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
-import { login } from "~/lib/actions/auth";
+import { useAuthFormStore } from "~/components/auth/form/store";
+import { pathsConfig } from "~/config/paths";
+import { signIn } from "~/lib/auth";
 
-import type { MagicLinkLoginData } from "@turbostarter/auth";
+import type { MagicLinkLoginPayload } from "@turbostarter/auth";
 
 export const MagicLinkLoginForm = memo(() => {
-  const form = useForm<MagicLinkLoginData>({
+  const { provider, setProvider, isSubmitting, setIsSubmitting } =
+    useAuthFormStore();
+
+  const form = useForm<MagicLinkLoginPayload>({
     resolver: zodResolver(magicLinkLoginSchema),
   });
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (data: MagicLinkLoginData) =>
-      login({ data, option: AUTH_PROVIDER.MAGIC_LINK }),
-    onSuccess: () => {
-      Alert.alert(
-        "Magic link sent!",
-        "Please check your email to login with the magic link.",
-      );
-      form.reset();
-    },
-    onError: (error) => {
-      Alert.alert("Something went wrong!", error.message);
-    },
-  });
-
-  const onSubmit = (data: MagicLinkLoginData) => {
-    mutate(data);
+  const onSubmit = async (data: MagicLinkLoginPayload) => {
+    await signIn.magicLink(
+      {
+        email: data.email,
+        callbackURL: pathsConfig.tabs.settings,
+      },
+      {
+        onRequest: () => {
+          setProvider(AUTH_PROVIDER.MAGIC_LINK);
+          setIsSubmitting(true);
+        },
+        onSuccess: () => {
+          Alert.alert(
+            "Magic link sent!",
+            "Please check your email to login with the magic link.",
+          );
+          form.reset();
+        },
+        onError: ({ error }) => {
+          Alert.alert("Something went wrong!", error.message);
+        },
+        onResponse: () => {
+          setIsSubmitting(false);
+        },
+      },
+    );
   };
 
   return (
@@ -66,9 +79,9 @@ export const MagicLinkLoginForm = memo(() => {
           className="w-full"
           size="lg"
           onPress={form.handleSubmit(onSubmit)}
-          disabled={isPending}
+          disabled={isSubmitting}
         >
-          {isPending ? (
+          {isSubmitting && provider === AUTH_PROVIDER.MAGIC_LINK ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
             <Text>Send magic link</Text>

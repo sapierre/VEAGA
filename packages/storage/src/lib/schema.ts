@@ -1,8 +1,12 @@
 import { z } from "zod";
 
-export const getUploadUrlSchema = z.object({
+import { env } from "../env";
+
+export const getObjectUrlSchema = z.object({
   path: z.string(),
-  bucket: z.string(),
+  bucket: env.S3_BUCKET
+    ? z.string().optional().default(env.S3_BUCKET)
+    : z.string(),
 });
 
-export type GetUploadUrlInput = z.infer<typeof getUploadUrlSchema>;
+export type GetObjectUrlInput = z.input<typeof getObjectUrlSchema>;

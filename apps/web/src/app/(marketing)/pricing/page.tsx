@@ -1,0 +1,21 @@
+import { handle } from "@turbostarter/api/utils";
+
+import { Pricing } from "~/components/marketing/pricing/pricing";
+import { api } from "~/lib/api/server";
+import { getSession } from "~/lib/auth/server";
+import { env } from "~/lib/env";
+import { getMetadata } from "~/lib/metadata";
+
+export const metadata = getMetadata({
+  title: "Pricing",
+});
+
+const PricingPage = async () => {
+  const { user } = await getSession();
+
+  const customer = user ? await handle(api.billing.customer.$get)() : null;
+
+  return <Pricing user={user} customer={customer} model={env.BILLING_MODEL} />;
+};
+
+export default PricingPage;

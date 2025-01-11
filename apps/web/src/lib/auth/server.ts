@@ -1,33 +1,14 @@
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
-import { createServerClient } from "@turbostarter/auth";
+import { auth } from "@turbostarter/auth/server";
 
-import { env } from "~/lib/env";
+export const getSession = async () => {
+  const data = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-export const auth = async () => {
-  const cookieStore = await cookies();
-  return createServerClient(
-    {
-      url: env.NEXT_PUBLIC_SUPABASE_URL,
-      key: env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    },
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options),
-            );
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
-      },
-    },
-  );
+  return {
+    session: data?.session ?? null,
+    user: data?.user ?? null,
+  };
 };

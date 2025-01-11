@@ -1,4 +1,16 @@
+import { z } from "zod";
+
 import { GENERIC_ERROR_MESSAGE, HttpStatusCode } from "../constants";
+
+const apiErrorSchema = z.object({
+  message: z.string(),
+  status: z.number(),
+  timestamp: z.string(),
+});
+
+export const isApiError = (e: unknown): e is ApiError => {
+  return apiErrorSchema.safeParse(e).success;
+};
 
 const isHttpStatus = (status: number): status is HttpStatusCode =>
   Object.values<number>(HttpStatusCode).includes(status);
@@ -13,14 +25,6 @@ export class ApiError extends Error {
   }
 }
 
-export const handleError = (e: unknown) => {
-  if (e instanceof Error) {
-    return { message: e.message, success: false } as const;
-  }
-
-  return { message: GENERIC_ERROR_MESSAGE, success: false } as const;
-};
-
 const getStatusCode = (e: unknown) => {
   if (typeof e === "object" && e && "status" in e) {
     return Number(e.status);
@@ -29,7 +33,10 @@ const getStatusCode = (e: unknown) => {
   return HttpStatusCode.INTERNAL_SERVER_ERROR;
 };
 
-export const handleApiError = (e: unknown) => {
+export const onApiError = (
+  e: unknown,
+  request?: Request,
+): globalThis.Response => {
   console.error(e);
 
   const details = {
@@ -40,27 +47,26 @@ export const handleApiError = (e: unknown) => {
   };
 
   const timestamp = new Date().toISOString();
+  const path = request?.url ? new URL(request.url).pathname : "/api";
 
   if (e instanceof Error) {
-    return new Response(
+    return new globalThis.Response(
       JSON.stringify({
-        error: {
-          message: e.message,
-          status: details.status,
-          timestamp,
-        },
+        message: e.message,
+        status: details.status,
+        timestamp,
+        path,
       }),
       details,
     );
   }
 
-  return new Response(
+  return new globalThis.Response(
     JSON.stringify({
-      error: {
-        message: GENERIC_ERROR_MESSAGE,
-        status: details.status,
-        timestamp,
-      },
+      message: GENERIC_ERROR_MESSAGE,
+      status: details.status,
+      timestamp,
+      path,
     }),
     details,
   );

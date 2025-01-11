@@ -8,7 +8,7 @@ import { Text } from "@turbostarter/ui-mobile/text";
 import { pathsConfig } from "~/config/paths";
 
 const AuthError = () => {
-  const { code } = useLocalSearchParams<{ code?: string }>();
+  const { error } = useLocalSearchParams<{ error?: string }>();
 
   return (
     <View className="flex-1 flex-col items-center justify-center gap-4 bg-background px-8">
@@ -17,9 +17,9 @@ const AuthError = () => {
         {GENERIC_ERROR_MESSAGE}
       </Text>
 
-      {code && (
+      {error && (
         <Text className="rounded-md bg-muted px-2 py-0.5 font-mono">
-          {code}
+          {error}
         </Text>
       )}
 

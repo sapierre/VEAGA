@@ -1,11 +1,14 @@
 import { Suspense } from "react";
 
-import {
-  UserNavigation,
-  UserNavigationSkeleton,
-} from "~/components/auth/layout/user-navigation";
+import { cn } from "@turbostarter/ui";
+import { buttonVariants } from "@turbostarter/ui-web/button";
+import { Icons } from "@turbostarter/ui-web/icons";
+import { Skeleton } from "@turbostarter/ui-web/skeleton";
+
 import { ThemeControls } from "~/components/common/theme";
-import { api } from "~/lib/api/server";
+import { TurboLink } from "~/components/common/turbo-link";
+import { pathsConfig } from "~/config/paths";
+import { getSession } from "~/lib/auth/server";
 
 export const HeaderControls = () => {
   return (
@@ -17,15 +20,37 @@ export const HeaderControls = () => {
 };
 
 const UserControlsContent = async () => {
-  const user = await api.user.get();
-  const customer = user ? await api.billing.getCustomer() : null;
+  const { session } = await getSession();
 
-  return <UserNavigation user={user} customer={customer} />;
+  return (
+    <TurboLink
+      href={session ? pathsConfig.dashboard.index : pathsConfig.auth.login}
+      className={cn(
+        buttonVariants({
+          variant: "outline",
+          size: "icon",
+        }),
+        "rounded-full",
+      )}
+    >
+      {session ? (
+        <>
+          <Icons.Home className="size-4" />
+          <div className="sr-only">Dashboard</div>
+        </>
+      ) : (
+        <>
+          <Icons.LogIn className="size-4" />
+          <div className="sr-only">Log in</div>
+        </>
+      )}
+    </TurboLink>
+  );
 };
 
 const UserControls = () => {
   return (
-    <Suspense fallback={<UserNavigationSkeleton />}>
+    <Suspense fallback={<Skeleton className="size-10 rounded-full" />}>
       <UserControlsContent />
     </Suspense>
   );

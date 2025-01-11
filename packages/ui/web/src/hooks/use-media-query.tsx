@@ -33,6 +33,9 @@ export const useMediaQuery = (query: string) => {
   return matches;
 };
 
-export const useBreakpoint = (breakpoint: keyof typeof DEFAULT_BREAKPOINTS) => {
-  return useMediaQuery(`(min-width: ${DEFAULT_BREAKPOINTS[breakpoint]}px)`);
+export const useBreakpoint = (
+  breakpoint: keyof typeof DEFAULT_BREAKPOINTS,
+  type: "min" | "max" = "min",
+) => {
+  return useMediaQuery(`(${type}-width: ${DEFAULT_BREAKPOINTS[breakpoint]}px)`);
 };

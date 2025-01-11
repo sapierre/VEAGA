@@ -8,11 +8,11 @@ import type { EmailVariables, EmailTemplate } from "../../types";
 
 type Props = EmailVariables[typeof EmailTemplate.CONFIRM_EMAIL];
 
-export const ResetPassword = ({ siteUrl, tokenHash, redirectTo }: Props) => {
-  const url = `${siteUrl}/api/webhooks/auth/confirm/?token_hash=${tokenHash}&type=recovery&next=${redirectTo}`;
+export const ResetPassword = ({ url }: Props) => {
+  const { origin } = new URL(url);
 
   return (
-    <Layout siteUrl={siteUrl}>
+    <Layout origin={origin}>
       <Preview>Reset your password for TurboStarter</Preview>
       <Heading>Reset your password</Heading>
 
@@ -39,9 +39,7 @@ export const ResetPassword = ({ siteUrl, tokenHash, redirectTo }: Props) => {
 ResetPassword.subject = "Reset your password";
 
 ResetPassword.PreviewProps = {
-  siteUrl: "http://localhost:3000",
-  tokenHash: "1234567890",
-  redirectTo: "http://localhost:3000/auth/password/update",
+  url: "http://localhost:3000/api/auth/reset-password/KwiyWf9xsTrfndZY5a0stg4p?callbackURL=/auth/password/update",
 };
 
 export default ResetPassword;

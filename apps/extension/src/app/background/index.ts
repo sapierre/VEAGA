@@ -1,6 +1,6 @@
 import { defineBackground } from "wxt/sandbox";
 
-import "./messaging/session";
+import "./messaging/hello";
 
 const main = () => {
   console.log(

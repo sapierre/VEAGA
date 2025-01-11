@@ -19,8 +19,8 @@ const getStripeCustomerByEmail = async (email: string) => {
   return customers.data.length > 0 ? customers.data[0] : null;
 };
 
-const createStripeCustomer = async (uuid: string, email: string) => {
-  const customerData = { metadata: { supabaseUUID: uuid }, email: email };
+const createStripeCustomer = async (id: string, email: string) => {
+  const customerData = { metadata: { userId: id }, email: email };
   const newCustomer = await stripe().customers.create(customerData);
 
   return newCustomer.id;
@@ -28,12 +28,12 @@ const createStripeCustomer = async (uuid: string, email: string) => {
 
 export const createOrRetrieveCustomer = async ({
   email,
-  uuid,
+  id,
 }: {
   email: string;
-  uuid: string;
+  id: string;
 }) => {
-  const existingCustomer = await getCustomerByUserId(uuid);
+  const existingCustomer = await getCustomerByUserId(id);
 
   const stripeCustomerId = existingCustomer?.customerId
     ? (await getStripeCustomerById(existingCustomer.customerId)).id
@@ -41,7 +41,7 @@ export const createOrRetrieveCustomer = async ({
 
   const stripeIdToInsert = stripeCustomerId
     ? stripeCustomerId
-    : await createStripeCustomer(uuid, email);
+    : await createStripeCustomer(id, email);
 
   if (!stripeIdToInsert) {
     throw new ApiError(500, "Stripe customer creation failed.");
@@ -49,11 +49,11 @@ export const createOrRetrieveCustomer = async ({
 
   if (existingCustomer && stripeCustomerId) {
     if (existingCustomer.customerId !== stripeCustomerId) {
-      await updateCustomer(uuid, {
+      await updateCustomer(id, {
         customerId: stripeCustomerId,
       });
       console.warn(
-        `Customer ${uuid} had a different customerId. Updated to ${stripeCustomerId}.`,
+        `Customer ${id} had a different customerId. Updated to ${stripeCustomerId}.`,
       );
     }
 
@@ -61,7 +61,7 @@ export const createOrRetrieveCustomer = async ({
   }
 
   await upsertCustomer({
-    userId: uuid,
+    userId: id,
     customerId: stripeIdToInsert,
   });
 

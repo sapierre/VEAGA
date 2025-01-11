@@ -35,7 +35,7 @@ export interface ThemeConfig {
 // HSL color variable
 export type ColorVariable = readonly [number, number, number];
 
-interface ThemeColorsVariables {
+export interface ThemeColorsVariables {
   background: ColorVariable;
   foreground: ColorVariable;
   card: ColorVariable;
@@ -62,6 +62,14 @@ interface ThemeColorsVariables {
   "chart-3": ColorVariable;
   "chart-4": ColorVariable;
   "chart-5": ColorVariable;
+  "sidebar-background": ColorVariable;
+  "sidebar-foreground": ColorVariable;
+  "sidebar-primary": ColorVariable;
+  "sidebar-primary-foreground": ColorVariable;
+  "sidebar-accent": ColorVariable;
+  "sidebar-accent-foreground": ColorVariable;
+  "sidebar-border": ColorVariable;
+  "sidebar-ring": ColorVariable;
 }
 
 export interface ThemeColors {

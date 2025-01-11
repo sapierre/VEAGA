@@ -14,10 +14,7 @@ export const env = createEnv({
   },
   clientPrefix: "VITE_",
   client: {
-    VITE_AUTH_COOKIE_NAME: z.string(),
     VITE_SITE_URL: z.string().url(),
-    VITE_SUPABASE_URL: z.string().url(),
-    VITE_SUPABASE_ANON_KEY: z.string(),
     VITE_THEME_MODE: z
       .nativeEnum(ThemeMode)
       .optional()
@@ -28,10 +25,7 @@ export const env = createEnv({
       .default(ThemeColor.ORANGE),
   },
   runtimeEnv: {
-    VITE_AUTH_COOKIE_NAME: import.meta.env.VITE_AUTH_COOKIE_NAME,
     VITE_SITE_URL: import.meta.env.VITE_SITE_URL,
-    VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
-    VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
     VITE_THEME_MODE: import.meta.env.VITE_THEME_MODE,
     VITE_THEME_COLOR: import.meta.env.VITE_THEME_COLOR,
   },

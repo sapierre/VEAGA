@@ -26,7 +26,7 @@ const ThemeConfigProvider = () => {
   const [themeConfig] = useThemeConfig();
 
   useEffect(() => {
-    document.body.setAttribute("data-theme", themeConfig.color);
+    document.documentElement.setAttribute("data-theme", themeConfig.color);
   }, [themeConfig.color]);
 
   return null;

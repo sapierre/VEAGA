@@ -35,10 +35,10 @@
     "db:stop": {
       "cache": false
     },
-    "db:setup": {
+    "db:status": {
       "cache": false
     },
-    "db:status": {
+    "db:setup": {
       "cache": false
     },
     "db:migrate": {
@@ -65,8 +65,6 @@
   },
   "globalEnv": [
     "DATABASE_URL",
-    "SUPABASE_ANON_KEY",
-    "SUPABASE_URL",
     "PRODUCT_NAME",
     "SITE_TITLE",
     "SITE_URL",

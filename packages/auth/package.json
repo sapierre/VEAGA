@@ -15,11 +15,16 @@
     "./server": {
       "types": "./dist/server.d.ts",
       "default": "./src/server.ts"
+    },
+    "./client/*": {
+      "types": "./dist/client/*.d.ts",
+      "default": "./src/client/*.ts"
     }
   },
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "db:generate": "SKIP_ENV_VALIDATION=1 pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/src/schema/auth/index.ts --y",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
@@ -35,11 +40,12 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@supabase/ssr": "0.5.1",
-    "@supabase/supabase-js": "2.45.3",
+    "@better-auth/expo": "1.1.14",
     "@t3-oss/env-core": "0.11.1",
+    "@turbostarter/db": "workspace:*",
     "@turbostarter/email": "workspace:*",
     "@turbostarter/shared": "workspace:*",
+    "better-auth": "1.1.14",
     "standardwebhooks": "1.0.0",
     "zod": "catalog:"
   }

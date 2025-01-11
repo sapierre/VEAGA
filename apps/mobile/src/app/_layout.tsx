@@ -14,7 +14,6 @@ import { StatusBar } from "react-native";
 
 import "~/assets/styles/globals.css";
 import { Header } from "~/components/common/layout/header";
-import { TABS_PREFIX } from "~/config/paths";
 import { useTheme } from "~/lib/hooks/use-theme";
 import { Providers } from "~/providers/providers";
 
@@ -28,7 +27,7 @@ const RootLayoutNav = () => {
           header: () => <Header title={Application.applicationName ?? ""} />,
         }}
       >
-        <Stack.Screen name={TABS_PREFIX} options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
         <Stack.Screen name="index" />
       </Stack>

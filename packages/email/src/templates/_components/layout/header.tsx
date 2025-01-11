@@ -1,13 +1,13 @@
 import { Img } from "@react-email/components";
 
 interface HeaderProps {
-  readonly siteUrl: string;
+  readonly origin: string;
 }
 
-export const Header = ({ siteUrl }: HeaderProps) => {
+export const Header = ({ origin }: HeaderProps) => {
   return (
     <Img
-      src={`${siteUrl}/images/logo-text.png`}
+      src={`${origin}/images/logo-text.png`}
       alt="Turbostarter Logo"
       className="mb-10"
       height={45}

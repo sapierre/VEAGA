@@ -1,20 +1,19 @@
-const TABS_PREFIX = "(tabs)";
 const AUTH_PREFIX = "/auth";
 
 const pathsConfig = {
   index: "/",
   tabs: {
     auth: {
-      login: `/${TABS_PREFIX}${AUTH_PREFIX}/login`,
-      register: `/${TABS_PREFIX}${AUTH_PREFIX}/register`,
-      forgotPassword: `/${TABS_PREFIX}${AUTH_PREFIX}/password/forgot`,
-      updatePassword: `/${TABS_PREFIX}${AUTH_PREFIX}/password/update`,
-      error: `/${TABS_PREFIX}${AUTH_PREFIX}/error`,
+      login: `${AUTH_PREFIX}/login`,
+      register: `${AUTH_PREFIX}/register`,
+      forgotPassword: `${AUTH_PREFIX}/password/forgot`,
+      updatePassword: `${AUTH_PREFIX}/password/update`,
+      error: `${AUTH_PREFIX}/error`,
     },
-    billing: `/${TABS_PREFIX}/billing`,
-    ai: `/${TABS_PREFIX}/ai`,
-    settings: `/${TABS_PREFIX}/settings`,
+    billing: `/billing`,
+    ai: `/ai`,
+    settings: `/settings`,
   },
 } as const;
 
-export { pathsConfig, TABS_PREFIX };
+export { pathsConfig };

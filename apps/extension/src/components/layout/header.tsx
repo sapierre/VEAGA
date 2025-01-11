@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { handle } from "@turbostarter/api/utils";
+
 import { ThemeControls } from "~/components/common/theme";
 import {
   UserNavigation,
   UserNavigationSkeleton,
 } from "~/components/user/user-navigation";
-import { api } from "~/lib/api/trpc";
-import { Message, sendMessage } from "~/lib/messaging";
+import { api } from "~/lib/api";
+import { useSession } from "~/lib/auth";
 
 export const Header = () => {
   return (
@@ -18,18 +20,16 @@ export const Header = () => {
 };
 
 const User = () => {
-  const { data: session, isLoading: isSessionLoading } = useQuery({
-    queryKey: [Message.SESSION_GET],
-    queryFn: () => sendMessage(Message.SESSION_GET, undefined),
+  const { data, isPending } = useSession();
+
+  const user = data?.user ?? null;
+  const { data: customer, isLoading } = useQuery({
+    queryKey: ["customer"],
+    queryFn: handle(api.billing.customer.$get),
+    enabled: !!user,
   });
 
-  const user = session?.user ?? null;
-  const { data: customer, isLoading: isCustomerLoading } =
-    api.billing.getCustomer.useQuery(undefined, {
-      enabled: !!user,
-    });
-
-  if (isSessionLoading || isCustomerLoading) {
+  if (isPending || isLoading) {
     return <UserNavigationSkeleton />;
   }
 

@@ -8,7 +8,7 @@ import { ErrorBoundary } from "~/components/common/error-boundary";
 import { Suspense } from "~/components/common/suspense";
 import { Footer } from "~/components/layout/footer";
 import { Header } from "~/components/layout/header";
-import { TRPCProvider } from "~/lib/api/trpc";
+import { ApiProvider } from "~/lib/api";
 import { StorageKey, useStorage } from "~/lib/storage";
 
 interface LayoutProps {
@@ -29,10 +29,11 @@ export const Layout = ({
   return (
     <ErrorBoundary fallback={errorFallback}>
       <Suspense fallback={loadingFallback}>
-        <TRPCProvider>
+        <ApiProvider>
           <div
+            data-theme={data.color}
             className={cn(
-              "flex min-h-screen w-full min-w-[23rem] flex-col font-sans text-base",
+              "flex min-h-screen w-full min-w-[23rem] flex-col bg-background font-sans text-base text-foreground",
               {
                 dark:
                   data.mode === ThemeMode.DARK ||
@@ -42,22 +43,17 @@ export const Layout = ({
             )}
           >
             <div
-              className="flex w-full grow justify-center bg-background text-foreground"
-              data-theme={data.color}
+              className={cn(
+                "flex w-full max-w-[80rem] grow flex-col items-center justify-between gap-16 p-4",
+                className,
+              )}
             >
-              <div
-                className={cn(
-                  "flex w-full max-w-[80rem] grow flex-col items-center justify-between gap-16 p-4",
-                  className,
-                )}
-              >
-                <Header />
-                {children}
-                <Footer />
-              </div>
+              <Header />
+              {children}
+              <Footer />
             </div>
           </div>
-        </TRPCProvider>
+        </ApiProvider>
       </Suspense>
     </ErrorBoundary>
   );

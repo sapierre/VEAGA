@@ -8,11 +8,11 @@ import type { EmailVariables, EmailTemplate } from "../../types";
 
 type Props = EmailVariables[typeof EmailTemplate.CONFIRM_EMAIL];
 
-export const MagicLink = ({ siteUrl, tokenHash, redirectTo }: Props) => {
-  const url = `${siteUrl}/api/webhooks/auth/confirm/?token_hash=${tokenHash}&type=magiclink&next=${redirectTo}`;
+export const MagicLink = ({ url }: Props) => {
+  const { origin } = new URL(url);
 
   return (
-    <Layout siteUrl={siteUrl}>
+    <Layout origin={origin}>
       <Preview>Login to TurboStarter with a magic link</Preview>
       <Heading>Your magic link 🪄</Heading>
 
@@ -37,9 +37,7 @@ export const MagicLink = ({ siteUrl, tokenHash, redirectTo }: Props) => {
 MagicLink.subject = "Your magic link 🪄";
 
 MagicLink.PreviewProps = {
-  siteUrl: "http://localhost:3000",
-  tokenHash: "1234567890",
-  redirectTo: "http://localhost:3000",
+  url: "http://localhost:3000/api/auth/magic-link/verify?token=123&callbackURL=/dashboard",
 };
 
 export default MagicLink;

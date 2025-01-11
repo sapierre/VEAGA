@@ -1,12 +1,12 @@
-import { blue } from "./blue";
-import { gray } from "./gray";
-import { green } from "./green";
-import { orange } from "./orange";
-import { red } from "./red";
-import { rose } from "./rose";
-import { stone } from "./stone";
-import { violet } from "./violet";
-import { yellow } from "./yellow";
+import { blue } from "./colors/blue";
+import { gray } from "./colors/gray";
+import { green } from "./colors/green";
+import { orange } from "./colors/orange";
+import { red } from "./colors/red";
+import { rose } from "./colors/rose";
+import { stone } from "./colors/stone";
+import { violet } from "./colors/violet";
+import { yellow } from "./colors/yellow";
 
 import type { ThemeColor, ThemeColors } from "../../types";
 

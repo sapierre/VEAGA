@@ -1,5 +1,4 @@
 import { Tabs, router } from "expo-router";
-import { cssInterop } from "nativewind";
 
 import { capitalize } from "@turbostarter/shared/utils";
 import { cn } from "@turbostarter/ui";
@@ -25,52 +24,15 @@ const TabBarLabel = ({
   );
 };
 
-const TabContainer = ({
-  tabBarClassName,
-  ...props
-}: React.ComponentProps<typeof Tabs> & {
-  tabBarClassName:
-    | {
-        backgroundColor: string;
-      }
-    | string;
-}) => {
-  return (
-    <Tabs
-      {...props}
-      screenOptions={(screenProps) => ({
-        tabBarStyle: {
-          backgroundColor:
-            typeof tabBarClassName === "string"
-              ? tabBarClassName
-              : tabBarClassName.backgroundColor,
-          paddingTop: 6,
-          borderTopWidth: 0,
-        },
-        ...(typeof props.screenOptions === "function"
-          ? props.screenOptions(screenProps)
-          : props.screenOptions),
-      })}
-    />
-  );
-};
-
-cssInterop(TabContainer, {
-  tabBarClassName: {
-    target: false,
-    nativeStyleToProp: {
-      backgroundColor: "tabBarClassName",
-    },
-  },
-});
-
 export default function DashboardLayout() {
   return (
-    <TabContainer
+    <Tabs
       screenOptions={({ route }) => ({
         header: () => <Header title={capitalize(route.name)} />,
+        tabBarStyle: {
+          paddingTop: 6,
+        },
       })}
-      tabBarClassName="bg-background"
     >
       <Tabs.Screen
         name="home"
@@ -156,6 +118,6 @@ export default function DashboardLayout() {
           tabBarLabel: TabBarLabel,
         }}
       />
-    </TabContainer>
+    </Tabs>
   );
 }
