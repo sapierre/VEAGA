@@ -1,4 +1,5 @@
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
 import { env } from "../../../env";
@@ -33,7 +34,9 @@ const createCheckoutSession = async (
     return await stripe().checkout.sessions.create(params);
   } catch (e) {
     console.error(e);
-    throw new ApiError(500, "Could not create checkout session.");
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.checkout",
+    });
   }
 };
 
@@ -44,7 +47,9 @@ const getCheckoutSession = async (sessionId: string) => {
     });
   } catch (e) {
     console.error(e);
-    throw new ApiError(500, "Could not retrieve checkout session.");
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.checkoutRetrieve",
+    });
   }
 };
 
@@ -54,7 +59,9 @@ export const checkoutStatusChangeHandler = async (
   const customerId = session.customer as string | null;
 
   if (!customerId) {
-    throw new ApiError(404, "Customer id not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.customerNotFound",
+    });
   }
 
   if (session.mode === "subscription") {
@@ -68,14 +75,18 @@ export const checkoutStatusChangeHandler = async (
   const customer = await getCustomerByCustomerId(customerId);
 
   if (!customer) {
-    throw new ApiError(404, "Customer not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.customerNotFound",
+    });
   }
 
   const checkoutSession = await getCheckoutSession(session.id);
   const priceId = checkoutSession.line_items?.data[0]?.price?.id;
 
   if (!priceId) {
-    throw new ApiError(404, "Price id not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.priceNotFound",
+    });
   }
 
   const plan = config.plans.find((p) =>
@@ -86,7 +97,7 @@ export const checkoutStatusChangeHandler = async (
     status: checkoutSession.status
       ? toCheckoutBillingStatus(checkoutSession.status)
       : toPaymentBillingStatus(checkoutSession.payment_status),
-    ...(plan && { plan: plan.type }),
+    ...(plan && { plan: plan.id }),
   });
 
   console.log(
@@ -105,7 +116,9 @@ export const checkout = async ({
       ?.prices.find((p) => p.id === id);
 
     if (!price) {
-      throw new ApiError(404, "Price not found.");
+      throw new HttpException(HttpStatusCode.NOT_FOUND, {
+        code: "billing:error.priceNotFound",
+      });
     }
 
     const customer = await createOrRetrieveCustomer({
@@ -151,13 +164,8 @@ export const checkout = async ({
     });
 
     return { url: session.url };
-  } catch (e) {
-    console.error(e);
-    if (e instanceof Error) {
-      throw new ApiError(500, e.message);
-    }
-
-    throw new ApiError(500, "An unknown error occurred.");
+  } catch {
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR);
   }
 };
 
@@ -177,12 +185,7 @@ export const getBillingPortal = async ({
     });
 
     return { url };
-  } catch (e) {
-    console.error(e);
-    if (e instanceof Error) {
-      throw new ApiError(500, e.message);
-    }
-
-    throw new ApiError(500, "An unknown error occurred.");
+  } catch {
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR);
   }
 };

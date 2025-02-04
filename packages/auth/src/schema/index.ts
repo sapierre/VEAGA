@@ -1,32 +1,17 @@
 import { z } from "zod";
 
-export const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
-
 const emailSchema = z.object({
-  email: z
-    .string({ required_error: "This field is required." })
-    .email("Email must be a valid email."),
+  email: z.string().email(),
 });
 
-const password = z
-  .string({ required_error: "This field is required." })
-  .regex(
-    PASSWORD_REGEX,
-    "Password must contain an uppercase letter, a special character, a number and must be at least 8 characters long.",
-  );
-
+const password = z.string().min(8);
 const passwordSchema = z.object({
   password,
 });
 
 const updateUserSchema = z.object({
-  name: z
-    .string()
-    .min(2, "Name must be at least 2 characters long.")
-    .max(32, "Name must be at most 32 characters long.")
-    .optional(),
-  image: z.string().url("Image must be a valid URL.").optional(),
+  name: z.string().min(2).max(32).optional(),
+  image: z.string().url().optional(),
 });
 
 const changePasswordSchema = passwordSchema.merge(

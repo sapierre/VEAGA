@@ -1,5 +1,5 @@
-name: "CI / Setup"
-description: "Common setup steps for Github Actions"
+name: CI / Setup
+description: Common setup steps for Github Actions
 
 inputs:
   node-version:

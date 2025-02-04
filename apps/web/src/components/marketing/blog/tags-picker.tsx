@@ -3,10 +3,12 @@
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import { ContentTag } from "@turbostarter/cms";
+import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import { Button } from "@turbostarter/ui-web/button";
 
 export const TagsPicker = () => {
+  const { t } = useTranslation("marketing");
   const [activeTag, setActiveTag] = useQueryState("tag", {
     ...parseAsStringLiteral(Object.values(ContentTag)),
     shallow: false,
@@ -26,7 +28,7 @@ export const TagsPicker = () => {
             activeTag === tag ? setActiveTag(null) : setActiveTag(tag)
           }
         >
-          {tag}
+          {t(`blog.tag.${tag}`)}
         </Button>
       ))}
     </div>

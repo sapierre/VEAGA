@@ -17,6 +17,8 @@ jobs:
     environment: Production
     needs: [tests]
     env:
+      VITE_PRODUCT_NAME: ${{ secrets.PRODUCT_NAME }}
+      VITE_DEFAULT_LOCALE: ${{ secrets.DEFAULT_LOCALE }}
       VITE_SITE_URL: ${{ secrets.SITE_URL }}
       VITE_GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.GOOGLE_ANALYTICS_MEASUREMENT_ID }}
       VITE_GOOGLE_ANALYTICS_SECRET: ${{ secrets.GOOGLE_ANALYTICS_SECRET }}

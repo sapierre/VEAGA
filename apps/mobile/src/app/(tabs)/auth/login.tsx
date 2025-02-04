@@ -1,3 +1,5 @@
+import { useTranslation } from "@turbostarter/i18n";
+
 import { Auth } from "~/components/auth/auth";
 import { LOGIN_OPTIONS } from "~/components/auth/form/login/constants";
 import { authConfig } from "~/config/auth";
@@ -5,6 +7,7 @@ import { authConfig } from "~/config/auth";
 import type { LoginOption } from "~/components/auth/form/login/constants";
 
 const LoginPage = () => {
+  const { t } = useTranslation("auth");
   const options = Object.entries(authConfig.providers)
     .filter(
       ([provider, enabled]) =>
@@ -15,8 +18,8 @@ const LoginPage = () => {
   return (
     <Auth.Layout>
       <Auth.Header
-        title="Welcome back! 👋"
-        description="Enter your email below to login to your account "
+        title={t("login.header.title")}
+        description={t("login.header.description")}
       />
       <Auth.Providers providers={authConfig.providers.oAuth} />
       {authConfig.providers.oAuth.length > 0 && options.length > 0 && (

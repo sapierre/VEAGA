@@ -65,3 +65,12 @@ declare module "eslint-plugin-turbo" {
   };
   export const rules: Record<string, Rule.RuleModule>;
 }
+
+declare module "eslint-plugin-i18next" {
+  import type { Linter, Rule } from "eslint";
+
+  export const configs: {
+    "flat/recommended": { rules: Linter.RulesRecord };
+  };
+  export const rules: Record<string, Rule.RuleModule>;
+}

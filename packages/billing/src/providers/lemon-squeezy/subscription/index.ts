@@ -1,7 +1,7 @@
 import { getSubscription } from "@lemonsqueezy/lemonsqueezy.js";
 
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
 import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
@@ -17,7 +17,9 @@ export const subscriptionStatusChangeHandler = async ({
   const subscription = data?.data;
 
   if (!subscription) {
-    throw new ApiError(HttpStatusCode.NOT_FOUND, "Subscription not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.subscriptionNotFound",
+    });
   }
 
   const customer = await getCustomerByCustomerId(
@@ -25,7 +27,9 @@ export const subscriptionStatusChangeHandler = async ({
   );
 
   if (!customer) {
-    throw new ApiError(HttpStatusCode.NOT_FOUND, "Customer not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.customerNotFound",
+    });
   }
 
   const priceId = subscription.attributes.variant_id.toString();
@@ -33,7 +37,7 @@ export const subscriptionStatusChangeHandler = async ({
 
   await updateCustomer(customer.userId, {
     status: toBillingStatus(subscription.attributes.status),
-    ...(plan && { plan: plan.type }),
+    ...(plan && { plan: plan.id }),
   });
 
   console.log(

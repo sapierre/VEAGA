@@ -3,6 +3,7 @@ import { memo } from "react";
 import { Alert, View } from "react-native";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { Trans, useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
@@ -53,7 +54,14 @@ const SocialProvider = ({
             <Icon className="text-foreground" />
           </View>
           <Text>
-            Sign in with <Text className="capitalize">{provider}</Text>
+            <Trans
+              ns="auth"
+              i18nKey="login.social"
+              values={{ provider }}
+              components={{
+                capitalize: <Text className="capitalize" />,
+              }}
+            />
           </Text>
         </>
       )}
@@ -62,6 +70,7 @@ const SocialProvider = ({
 };
 
 export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
+  const { t } = useTranslation("common");
   const {
     provider: actualProvider,
     setProvider,
@@ -85,7 +94,7 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
           setIsSubmitting(false);
         },
         onError: ({ error }) => {
-          Alert.alert("Something went wrong!", error.message);
+          Alert.alert(t("error.title"), error.message);
         },
       },
     );

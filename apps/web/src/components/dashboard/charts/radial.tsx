@@ -3,6 +3,7 @@
 import { TrendingUp } from "lucide-react";
 import { PolarGrid, RadialBar, RadialBarChart } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -24,13 +25,10 @@ const chartData = [
   { browser: "safari", visitors: 200, fill: "hsl(var(--color-chart-2))" },
   { browser: "firefox", visitors: 187, fill: "hsl(var(--color-chart-3))" },
   { browser: "edge", visitors: 173, fill: "hsl(var(--color-chart-4))" },
-  { browser: "other", visitors: 90, fill: "hsl(var(--color-chart-5))" },
+  { browser: "opera", visitors: 90, fill: "hsl(var(--color-chart-5))" },
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   chrome: {
     label: "Chrome",
     color: "hsl(var(--color-chart-1))",
@@ -47,18 +45,19 @@ const chartConfig = {
     label: "Edge",
     color: "hsl(var(--color-chart-4))",
   },
-  other: {
-    label: "Other",
+  opera: {
+    label: "Opera",
     color: "hsl(var(--color-chart-5))",
   },
 } satisfies ChartConfig;
 
 export function RadialChart() {
+  const { t } = useTranslation(["common", "marketing"]);
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center space-y-0.5 pb-0">
-        <CardTitle className="text-xl">Radial Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="text-xl">{t("dashboard.chart.radial")}</CardTitle>
+        <CardDescription>{t("dashboard.chart.period")}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -77,10 +76,10 @@ export function RadialChart() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          {t("dashboard.chart.trending")} <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          {t("dashboard.chart.showing")}
         </div>
       </CardFooter>
     </Card>

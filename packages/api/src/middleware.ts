@@ -1,11 +1,18 @@
+import { zValidator } from "@hono/zod-validator";
 import { env } from "hono/adapter";
 import { createMiddleware } from "hono/factory";
-import { HTTPException } from "hono/http-exception";
 
 import { auth } from "@turbostarter/auth/server";
+import {
+  getLocaleFromRequest,
+  getTranslation,
+} from "@turbostarter/i18n/server";
 import { HttpStatusCode, NodeEnv } from "@turbostarter/shared/constants";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import type { User } from "@turbostarter/auth";
+import type { Context, ValidationTargets } from "hono";
+import type { ZodSchema } from "zod";
 
 /**
  * Reusable middleware that enforces users are logged in before running the
@@ -20,8 +27,8 @@ export const enforceAuth = createMiddleware<{
   const user = session?.user ?? null;
 
   if (!user) {
-    throw new HTTPException(HttpStatusCode.UNAUTHORIZED, {
-      message: "You need to be logged in to access this feature!",
+    throw new HttpException(HttpStatusCode.UNAUTHORIZED, {
+      code: "auth:error.unauthorized",
     });
   }
 
@@ -48,3 +55,53 @@ export const timing = createMiddleware<{
 
   await next();
 });
+
+/**
+ * Middleware for setting the language based on the cookie and accept-language header.
+ */
+export const localize = createMiddleware<{
+  Variables: {
+    locale: string;
+  };
+}>(async (c, next) => {
+  const locale = getLocaleFromRequest(c.req.raw);
+  c.set("locale", locale);
+  await next();
+});
+
+/**
+ * Middleware for validating the request input using Zod.
+ */
+export const validate = <
+  T extends ZodSchema,
+  Target extends keyof ValidationTargets,
+>(
+  target: Target,
+  schema: T,
+) =>
+  zValidator(
+    target,
+    schema,
+    async (result, c: Context<{ Variables: { locale?: string } }>) => {
+      if (!result.success) {
+        const { errorMap, t } = await getTranslation({
+          locale: c.var.locale,
+        });
+        const error = result.error.errors[0];
+
+        if (!error) {
+          throw new HttpException(HttpStatusCode.UNPROCESSABLE_ENTITY);
+        }
+
+        const { message, code } = errorMap(error, {
+          defaultError: t("common:error.invalid"),
+          data: result.data,
+        });
+
+        throw new HttpException(HttpStatusCode.UNPROCESSABLE_ENTITY, {
+          code,
+          message,
+        });
+      }
+    },
+  );

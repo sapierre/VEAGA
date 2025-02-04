@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { env } from "../../../env";
 import { BillingProvider } from "../../../types";
@@ -16,20 +16,18 @@ export const webhookHandler = async (
   callbacks?: WebhookCallbacks,
 ) => {
   if (env.BILLING_PROVIDER !== BillingProvider.STRIPE) {
-    throw new ApiError(
-      HttpStatusCode.BAD_REQUEST,
-      "Unsupported billing provider!",
-    );
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.unsupportedProvider",
+    });
   }
 
   const body = await req.text();
   const sig = req.headers.get(STRIPE_SIGNATURE_HEADER);
 
   if (!sig) {
-    throw new ApiError(
-      HttpStatusCode.BAD_REQUEST,
-      "Webhook signature not found.",
-    );
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.webhook.signatureNotFound",
+    });
   }
 
   const event = constructEvent({
@@ -69,10 +67,9 @@ export const webhookHandler = async (
         void checkoutStatusChangeHandler(event.data.object);
         break;
       default:
-        throw new ApiError(
-          HttpStatusCode.BAD_REQUEST,
-          `Unsupported event type: ${event.type}`,
-        );
+        throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+          code: "billing:error.webhook.unhandledEvent",
+        });
     }
   }
 

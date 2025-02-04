@@ -30,6 +30,7 @@ const sharedPriceSchema = z.intersection(
   customPriceSchema,
   z.object({
     id: z.string(),
+    currency: z.string().optional(),
   }),
 );
 
@@ -47,23 +48,21 @@ const priceTypeSchema = z.discriminatedUnion("type", [
 export const priceSchema = z.intersection(sharedPriceSchema, priceTypeSchema);
 
 export const planSchema = z.object({
-  id: z.string(),
+  id: z.nativeEnum(PricingPlanType),
   name: z.string(),
   description: z.string(),
-  type: z.nativeEnum(PricingPlanType),
   badge: z.string().nullable().default(null),
   prices: z.array(priceSchema),
 });
 
 export const billingConfigSchema = z.object({
-  currency: z.string().optional().default("usd"),
   plans: z.array(planSchema).refine(
     (plans) => {
-      const types = new Set(plans.map((plan) => plan.type));
+      const types = new Set(plans.map((plan) => plan.id));
       return types.size === plans.length;
     },
     {
-      message: "You can't have two plans with the same type",
+      message: "You can't have two plans with the same id!",
     },
   ),
   discounts: z.array(discountSchema).optional().default([]),

@@ -1,4 +1,4 @@
-import { env } from "~/lib/env";
+import { appConfig } from "~/config/app";
 
 import type { MetadataRoute } from "next";
 
@@ -7,7 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/api", "/dashboard", "/auth"],
     },
-    sitemap: env.NEXT_PUBLIC_SITE_URL + "/sitemap.xml",
+    sitemap: appConfig.url + "/sitemap.xml",
   };
 }

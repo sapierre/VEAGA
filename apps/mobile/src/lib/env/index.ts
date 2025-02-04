@@ -25,6 +25,7 @@ export const env = createEnv({
       .transform((value) => value === "true"),
 
     EXPO_PUBLIC_SITE_URL: z.string().url(),
+    EXPO_PUBLIC_DEFAULT_LOCALE: z.string().optional().default("en"),
     EXPO_PUBLIC_THEME_MODE: z
       .nativeEnum(ThemeMode)
       .optional()
@@ -39,6 +40,7 @@ export const env = createEnv({
     EXPO_PUBLIC_AUTH_MAGIC_LINK: process.env.EXPO_PUBLIC_AUTH_MAGIC_LINK,
 
     EXPO_PUBLIC_SITE_URL: process.env.EXPO_PUBLIC_SITE_URL,
+    EXPO_PUBLIC_DEFAULT_LOCALE: process.env.EXPO_PUBLIC_DEFAULT_LOCALE,
     EXPO_PUBLIC_THEME_MODE: process.env.EXPO_PUBLIC_THEME_MODE,
     EXPO_PUBLIC_THEME_COLOR: process.env.EXPO_PUBLIC_THEME_COLOR,
   },

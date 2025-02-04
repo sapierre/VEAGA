@@ -1,27 +1,80 @@
 import { CollectionType, getContentItems } from "@turbostarter/cms";
+import { getPathname, config } from "@turbostarter/i18n";
 
+import { appConfig } from "~/config/app";
 import { pathsConfig } from "~/config/paths";
-import { env } from "~/lib/env";
 
 import type { MetadataRoute } from "next";
 
-const url = (path: string) => `${env.NEXT_PUBLIC_SITE_URL}/${path}`;
+const url = (path: string) => `${appConfig.url}${path}`;
 
-export default function sitemap(): Promise<MetadataRoute.Sitemap> {
-  return Promise.resolve([
+const getEntry = (path: string) => ({
+  url: url(
+    getPathname({
+      path,
+      locale: appConfig.locale,
+      defaultLocale: appConfig.locale,
+    }),
+  ),
+  alternates: {
+    languages: Object.fromEntries(
+      config.locales.map((locale) => [
+        locale,
+        url(
+          getPathname({
+            path,
+            locale,
+            defaultLocale: appConfig.locale,
+          }),
+        ),
+      ]),
+    ),
+  },
+});
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
     {
-      url: url(pathsConfig.index),
+      ...getEntry(pathsConfig.index),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
     },
-    ...getContentItems({ collection: CollectionType.BLOG }).items.map<
-      MetadataRoute.Sitemap[number]
-    >((post) => ({
-      url: url(pathsConfig.marketing.blog.post(post.slug)),
+    {
+      ...getEntry(pathsConfig.marketing.pricing),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      ...getEntry(pathsConfig.marketing.contact),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      ...getEntry(pathsConfig.marketing.blog.index),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...getContentItems({
+      collection: CollectionType.BLOG,
+      locale: appConfig.locale,
+    }).items.map<MetadataRoute.Sitemap[number]>((post) => ({
+      ...getEntry(pathsConfig.marketing.blog.post(post.slug)),
       lastModified: new Date(post.lastModifiedAt),
       changeFrequency: "monthly",
       priority: 0.7,
     })),
-  ]);
+    ...getContentItems({
+      collection: CollectionType.LEGAL,
+      locale: appConfig.locale,
+    }).items.map<MetadataRoute.Sitemap[number]>((post) => ({
+      ...getEntry(pathsConfig.marketing.legal(post.slug)),
+      lastModified: new Date(post.lastModifiedAt),
+      changeFrequency: "yearly",
+      priority: 0.5,
+    })),
+  ];
 }

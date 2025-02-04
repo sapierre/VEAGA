@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { forgotPasswordSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -29,13 +30,14 @@ import type { ForgotPasswordPayload } from "@turbostarter/auth";
 type Status = "pending" | "success" | "error" | "idle";
 
 export const ForgotPasswordForm = memo(() => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const [status, setStatus] = useState<Status>("idle");
   const form = useForm<ForgotPasswordPayload>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema, { errorMap }),
   });
 
   const onSubmit = async (data: ForgotPasswordPayload) => {
-    const loadingToast = toast.loading("Sending...");
+    const loadingToast = toast.loading(t("account.password.forgot.loading"));
     await forgetPassword(
       {
         ...data,
@@ -46,13 +48,13 @@ export const ForgotPasswordForm = memo(() => {
           setStatus("pending");
         },
         onSuccess: () => {
-          toast.success("Success! Now check your inbox!", {
+          toast.success(t("account.password.forgot.success.notification"), {
             id: loadingToast,
           });
           setStatus("success");
         },
         onError: ({ error }) => {
-          toast.error(`${error.message}!`, { id: loadingToast });
+          toast.error(error.message, { id: loadingToast });
           setStatus("error");
         },
       },
@@ -72,15 +74,17 @@ export const ForgotPasswordForm = memo(() => {
             className="h-20 w-20 text-success"
             strokeWidth={1.2}
           />
-          <h2 className="text-center text-2xl font-semibold">Success!</h2>
+          <h2 className="text-center text-2xl font-semibold">
+            {t("account.password.forgot.success.title")}
+          </h2>
           <p className="text-center">
-            We've sent you an email with a link to reset your password.
+            {t("account.password.forgot.success.description")}
           </p>
           <TurboLink
             href={pathsConfig.auth.login}
             className="-mt-1 text-sm text-muted-foreground underline hover:no-underline"
           >
-            Sign in
+            {t("login.cta")}
           </TurboLink>
         </motion.div>
       ) : (
@@ -95,7 +99,7 @@ export const ForgotPasswordForm = memo(() => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("email")}</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -118,7 +122,7 @@ export const ForgotPasswordForm = memo(() => {
               {form.formState.isSubmitting ? (
                 <Icons.Loader2 className="animate-spin" />
               ) : (
-                "Send reset link"
+                t("account.password.forgot.cta")
               )}
             </Button>
 
@@ -127,7 +131,7 @@ export const ForgotPasswordForm = memo(() => {
                 href={pathsConfig.auth.login}
                 className="pl-2 text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-primary"
               >
-                Back to sign in
+                {t("account.password.forgot.back")}
               </TurboLink>
             </div>
           </motion.form>

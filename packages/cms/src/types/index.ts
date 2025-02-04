@@ -28,6 +28,7 @@ export type GetContentItems = <T extends CollectionType>(args: {
   tags?: ContentCollectionItem<T> extends { tags: ContentTag[] }
     ? ContentTag[]
     : never;
+  locale?: string;
   sortBy?: keyof ContentCollectionItem<T>;
   sortOrder?: SortOrder;
 }) => {
@@ -39,4 +40,5 @@ export type GetContentItemBySlug = <T extends CollectionType>(args: {
   collection: T;
   slug: string;
   status?: ContentStatus;
+  locale?: string;
 }) => ContentCollectionItem<T> | null;

@@ -1,6 +1,8 @@
 import { Link } from "expo-router";
+import { Trans } from "react-i18next";
 import { View, ScrollView, Pressable } from "react-native";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { BuiltWith } from "@turbostarter/ui-mobile/built-with";
 import {
   Card,
@@ -15,42 +17,45 @@ import { pathsConfig } from "~/config/paths";
 
 const LINKS = [
   {
-    title: "Auth",
-    description:
-      "Authenticate users to your app. Social logins, magic link, email/password and many more.",
+    title: "feature.auth.title",
+    description: "feature.auth.description",
     href: pathsConfig.tabs.auth.login,
   },
   {
-    title: "AI",
-    description:
-      "Integrate AI into your app. Image recognition, chatbots, and more.",
+    title: "feature.ai.title",
+    description: "feature.ai.description",
     href: pathsConfig.tabs.ai,
   },
   {
-    title: "Billing",
-    description:
-      "Receive payments from your users using configured providers - Stripe or LemonSqueezy.",
+    title: "feature.billing.title",
+    description: "feature.billing.description",
     href: pathsConfig.tabs.billing,
   },
   {
-    title: "Docs",
-    description: `Learn how to use TurboStarter. From installation to deployment.`,
+    title: "feature.docs.title",
+    description: "feature.docs.description",
     href: "https://turbostarter.dev/docs/mobile",
   },
 ] as const;
 
 export default function App() {
+  const { t } = useTranslation("marketing");
   return (
     <ScrollView
       className="bg-background"
       contentContainerClassName="items-center bg-background p-6"
     >
       <Text className="w-full text-pretty rounded-md border border-input bg-muted/25 px-6 py-3 text-center">
-        Edit{" "}
-        <Text className="rounded-md bg-muted px-2 py-0.5 font-mono">
-          app/index.tsx
-        </Text>{" "}
-        and save to reload.
+        <Trans
+          i18nKey="editToReload"
+          ns="common"
+          values={{ file: "app/index.tsx" }}
+          components={{
+            code: (
+              <Text className="rounded-md bg-muted px-2 py-0.5 font-mono" />
+            ),
+          }}
+        />
       </Text>
 
       <View className="animate-pulse py-20">
@@ -64,10 +69,10 @@ export default function App() {
               <Card>
                 <CardHeader className="gap-1">
                   <View className="flex-row gap-1">
-                    <CardTitle>{link.title}</CardTitle>
+                    <CardTitle>{t(link.title)}</CardTitle>
                     <Icons.ArrowRight className="text-foreground" size={20} />
                   </View>
-                  <CardDescription>{link.description}</CardDescription>
+                  <CardDescription>{t(link.description)}</CardDescription>
                 </CardHeader>
               </Card>
             </Pressable>

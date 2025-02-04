@@ -4,28 +4,25 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "types": "./dist/components/*.d.ts",
-      "default": "./src/components/*.tsx"
-    }
+    ".": "./src/index.ts",
+    "./*": "./src/components/*.tsx"
+  },
+  "imports": {
+    "#*": "./src/*.tsx"
   },
   "scripts": {
-    "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "typecheck": "tsc --noEmit",
     "ui:add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.0",
     "@radix-ui/react-alert-dialog": "1.1.4",
+    "@radix-ui/react-aspect-ratio": "1.1.1",
     "@radix-ui/react-avatar": "1.1.0",
+    "@radix-ui/react-context-menu": "2.2.5",
     "@radix-ui/react-dialog": "1.1.4",
     "@radix-ui/react-dropdown-menu": "2.1.4",
     "@radix-ui/react-label": "2.1.0",
@@ -37,6 +34,7 @@
     "@radix-ui/react-switch": "1.1.0",
     "@radix-ui/react-tabs": "1.1.0",
     "@radix-ui/react-tooltip": "1.1.6",
+    "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
     "lucide-react": "0.439.0",

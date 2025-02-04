@@ -4,12 +4,13 @@ import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
+import { isKey, useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
-
-import { Label } from "./label";
 
 import type * as LabelPrimitive from "@radix-ui/react-label";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
+
+import { Label } from "#components/label";
 
 const Form = FormProvider;
 
@@ -139,9 +140,9 @@ const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
+  const { t, i18n } = useTranslation();
   const { error, formMessageId } = useFormField();
   const body = error ? String(error.message) : children;
-
   if (!body) {
     return null;
   }
@@ -153,7 +154,7 @@ const FormMessage = React.forwardRef<
       className={cn("text-xs font-medium text-destructive", className)}
       {...props}
     >
-      {body}
+      {typeof body === "string" && isKey(body, i18n) ? t(body) : body}
     </p>
   );
 });

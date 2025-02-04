@@ -5,7 +5,7 @@ import {
 } from "@lemonsqueezy/lemonsqueezy.js";
 
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { env } from "../../../env";
 import { updateCustomer, upsertCustomer } from "../../../lib/customer";
@@ -28,10 +28,9 @@ const getLemonSqueezyCustomerByEmail = async (email: string) => {
 
 const createLemonSqueezyCustomer = async (email: string) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
-    throw new ApiError(
-      HttpStatusCode.INTERNAL_SERVER_ERROR,
-      "Invalid billing provider!",
-    );
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.invalidProvider",
+    });
   }
 
   const newCustomer = await createCustomer(env.LEMON_SQUEEZY_STORE_ID, {
@@ -60,7 +59,9 @@ export const createOrRetrieveCustomer = async ({
     lemonSqueezyCustomer ?? (await createLemonSqueezyCustomer(email));
 
   if (!lemonSqueezyCustomerToProcess) {
-    throw new ApiError(500, "Lemon Squeezy customer creation failed.");
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.customerCreation",
+    });
   }
 
   if (existingCustomer && lemonSqueezyCustomer) {

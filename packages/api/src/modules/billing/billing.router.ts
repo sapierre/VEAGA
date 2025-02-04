@@ -1,4 +1,3 @@
-import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 
 import {
@@ -10,24 +9,20 @@ import {
   getCustomerByUserId,
 } from "@turbostarter/billing/server";
 
-import { enforceAuth } from "../../middleware";
+import { enforceAuth, validate } from "../../middleware";
 
 export const billingRouter = new Hono()
-  .post(
-    "/checkout",
-    zValidator("json", checkoutSchema),
-    enforceAuth,
-    async (c) =>
-      c.json(
-        await checkout({
-          user: c.var.user,
-          ...c.req.valid("json"),
-        }),
-      ),
+  .post("/checkout", validate("json", checkoutSchema), enforceAuth, async (c) =>
+    c.json(
+      await checkout({
+        user: c.var.user,
+        ...c.req.valid("json"),
+      }),
+    ),
   )
   .get(
     "/portal",
-    zValidator("query", getBillingPortalSchema),
+    validate("query", getBillingPortalSchema),
     enforceAuth,
     async (c) =>
       c.json(

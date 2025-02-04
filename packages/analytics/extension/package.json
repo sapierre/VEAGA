@@ -4,22 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./env": {
-      "types": "./dist/env/index.d.ts",
-      "default": "./src/env/index.ts"
-    }
+    ".": "./src/index.ts",
+    "./env": "./src/env/index.ts"
   },
   "scripts": {
-    "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",

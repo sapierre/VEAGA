@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@turbostarter/ui";
 
-import * as AvatarPrimitive from "../primitives/avatar";
+import * as AvatarPrimitive from "../primitives/avatar/index";
 
 const AvatarPrimitiveRoot = AvatarPrimitive.Root;
 const AvatarPrimitiveImage = AvatarPrimitive.Image;

@@ -8,6 +8,7 @@ import {
   XAxis,
 } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -126,21 +127,8 @@ const chartData = [
   { date: "2024-06-30", desktop: 446, mobile: 400 },
 ];
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--color-chart-1))",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "hsl(var(--color-chart-2))",
-  },
-} satisfies ChartConfig;
-
 export const AreaChart = () => {
+  const { t, i18n } = useTranslation(["common", "marketing"]);
   const [timeRange, setTimeRange] = React.useState("90d");
 
   const filteredData = chartData.filter((item) => {
@@ -157,14 +145,26 @@ export const AreaChart = () => {
     return date >= startDate;
   });
 
+  const chartConfig = {
+    visitors: {
+      label: t("visitors"),
+    },
+    desktop: {
+      label: t("desktop"),
+      color: "hsl(var(--color-chart-1))",
+    },
+    mobile: {
+      label: t("mobile"),
+      color: "hsl(var(--color-chart-2))",
+    },
+  } satisfies ChartConfig;
+
   return (
     <Card>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-0.5 text-center sm:text-left">
-          <CardTitle className="text-xl">Area Chart</CardTitle>
-          <CardDescription>
-            Showing total visitors for the last 3 months
-          </CardDescription>
+          <CardTitle className="text-xl">{t("dashboard.chart.area")}</CardTitle>
+          <CardDescription>{t("dashboard.chart.showing")}</CardDescription>
         </div>
         <Select value={timeRange} onValueChange={setTimeRange}>
           <SelectTrigger
@@ -175,13 +175,13 @@ export const AreaChart = () => {
           </SelectTrigger>
           <SelectContent className="rounded-xl">
             <SelectItem value="90d" className="rounded-lg">
-              Last 3 months
+              {t("lastMonths", { months: 3 })}
             </SelectItem>
             <SelectItem value="30d" className="rounded-lg">
-              Last 30 days
+              {t("lastMonths", { months: 1 })}
             </SelectItem>
             <SelectItem value="7d" className="rounded-lg">
-              Last 7 days
+              {t("lastDays", { days: 7 })}
             </SelectItem>
           </SelectContent>
         </Select>
@@ -227,7 +227,7 @@ export const AreaChart = () => {
               minTickGap={32}
               tickFormatter={(value: string) => {
                 const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
+                return date.toLocaleDateString(i18n.language, {
                   month: "short",
                   day: "numeric",
                 });
@@ -238,7 +238,7 @@ export const AreaChart = () => {
               content={
                 <ChartTooltipContent
                   labelFormatter={(value: string) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                    return new Date(value).toLocaleDateString(i18n.language, {
                       month: "short",
                       day: "numeric",
                     });

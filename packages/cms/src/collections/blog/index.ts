@@ -2,7 +2,6 @@ import { defineCollection } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import rehypeShiki from "@shikijs/rehype";
 import readingTime from "reading-time";
-import slugify from "slugify";
 
 import { ContentStatus, ContentTag } from "../../types";
 import { getLastModifiedAt } from "../../utils";
@@ -37,14 +36,15 @@ export const blog = defineCollection({
       getLastModifiedAt,
     );
 
-    const timeToRead = readingTime(document.content).text;
+    const timeToRead = readingTime(document.content).time;
 
     return {
       ...document,
       mdx,
       lastModifiedAt,
       timeToRead,
-      slug: slugify(document.title, { lower: true }),
+      slug: document._meta.directory,
+      locale: document._meta.fileName.split(".")[0],
     };
   },
 });

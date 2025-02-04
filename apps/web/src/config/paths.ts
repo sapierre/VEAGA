@@ -14,11 +14,7 @@ const pathsConfig = {
       index: BLOG_PREFIX,
       post: (slug: string) => `${BLOG_PREFIX}/${slug}`,
     },
-    legal: {
-      terms: `${LEGAL_PREFIX}/terms-and-conditions`,
-      privacy: `${LEGAL_PREFIX}/privacy-policy`,
-      cookies: `${LEGAL_PREFIX}/cookie-policy`,
-    },
+    legal: (slug: string) => `${LEGAL_PREFIX}/${slug}`,
   },
   auth: {
     login: `${AUTH_PREFIX}/login`,

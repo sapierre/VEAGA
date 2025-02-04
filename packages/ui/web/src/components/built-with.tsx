@@ -1,9 +1,15 @@
+"use client";
+
 import * as React from "react";
 
-import { buttonVariants } from "./button";
-import { Icons } from "./icons";
+import { useTranslation } from "@turbostarter/i18n";
+
+import { buttonVariants } from "#components/button";
+import { Icons } from "#components/icons";
 
 export const BuiltWith = () => {
+  const { t } = useTranslation("common");
+
   return (
     <a
       className={buttonVariants({
@@ -13,7 +19,7 @@ export const BuiltWith = () => {
       href="https://www.turbostarter.dev"
       target="_blank"
     >
-      Built with{" "}
+      {t("builtWith")}{" "}
       <div className="flex shrink-0 items-center gap-1.5">
         <Icons.Logo className="ml-1.5 h-4 text-primary" />
         <Icons.LogoText className="h-2.5 text-foreground" />

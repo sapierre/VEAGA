@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
@@ -12,8 +13,9 @@ interface MainProps {
 }
 
 export const Main = ({ className, filename }: MainProps) => {
+  const { t, i18n } = useTranslation("common");
   const { data } = useQuery({
-    queryKey: [Message.HELLO, filename],
+    queryKey: [Message.HELLO, filename, i18n.language],
     queryFn: () => sendMessage(Message.HELLO, filename),
   });
 
@@ -26,20 +28,15 @@ export const Main = ({ className, filename }: MainProps) => {
     >
       <Icons.Logo className="w-20 animate-pulse text-primary" />
       {data ? (
-        <p className="text-pretty text-center leading-tight">
-          {data.split(filename).map((part, i) =>
-            i === 0 ? (
-              <>
-                {part}
-                <code className="inline-block rounded-sm bg-muted px-1.5 text-sm text-muted-foreground">
-                  {filename}
-                </code>
-              </>
-            ) : (
-              part
+        <p
+          className="text-pretty text-center leading-tight"
+          dangerouslySetInnerHTML={{
+            __html: data.replace(
+              "<code>",
+              "<code class='inline-block rounded-sm bg-muted px-1.5 text-sm text-muted-foreground'>",
             ),
-          )}
-        </p>
+          }}
+        ></p>
       ) : (
         <Skeleton className="h-5 w-64" />
       )}
@@ -49,7 +46,7 @@ export const Main = ({ className, filename }: MainProps) => {
         rel="noopener noreferrer"
         className="cursor-pointer text-sm text-primary underline hover:no-underline"
       >
-        Learn more
+        {t("learnMore")}
       </a>
     </main>
   );

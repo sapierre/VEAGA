@@ -1,5 +1,6 @@
 "use client";
 
+import dayjs from "dayjs";
 import { TrendingUp } from "lucide-react";
 import {
   PolarAngleAxis,
@@ -8,6 +9,7 @@ import {
   RadarChart as RechartsRadarChart,
 } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -25,33 +27,32 @@ import {
 import type { ChartConfig } from "@turbostarter/ui-web/chart";
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { month: dayjs().month(0).format("MMMM"), desktop: 186, mobile: 80 },
+  { month: dayjs().month(1).format("MMMM"), desktop: 305, mobile: 200 },
+  { month: dayjs().month(2).format("MMMM"), desktop: 237, mobile: 120 },
+  { month: dayjs().month(3).format("MMMM"), desktop: 73, mobile: 190 },
+  { month: dayjs().month(4).format("MMMM"), desktop: 209, mobile: 130 },
+  { month: dayjs().month(5).format("MMMM"), desktop: 214, mobile: 140 },
 ];
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
+    label: "desktop",
     color: "hsl(var(--color-chart-1))",
   },
   mobile: {
-    label: "Mobile",
+    label: "mobile",
     color: "hsl(var(--color-chart-2))",
   },
 } satisfies ChartConfig;
 
 export function RadarChart() {
+  const { t } = useTranslation(["common", "marketing"]);
   return (
     <Card>
       <CardHeader className="items-center space-y-0.5 pb-4">
-        <CardTitle className="text-xl">Radar Chart</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
-        </CardDescription>
+        <CardTitle className="text-xl">{t("dashboard.chart.radar")}</CardTitle>
+        <CardDescription>{t("dashboard.chart.period")}</CardDescription>
       </CardHeader>
       <CardContent className="pb-0">
         <ChartContainer
@@ -129,10 +130,10 @@ export function RadarChart() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          {t("dashboard.chart.trending")} <TrendingUp className="h-4 w-4" />
         </div>
         <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          January - June 2024
+          {t("dashboard.chart.period")}
         </div>
       </CardFooter>
     </Card>

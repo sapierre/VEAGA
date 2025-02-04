@@ -1,10 +1,10 @@
 import { memo } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-// import { Provider as AnalyticsProvider } from "@turbostarter/analytics-mobile";
-
 import { ApiProvider } from "~/lib/api";
 
+// import { Provider as AnalyticsProvider } from "@turbostarter/analytics-mobile";
+import { I18nProvider } from "./i18n";
 import { ThemeProvider } from "./theme";
 
 interface ProvidersProps {
@@ -14,11 +14,13 @@ interface ProvidersProps {
 export const Providers = memo<ProvidersProps>(({ children }) => {
   return (
     <ApiProvider>
-      {/* <AnalyticsProvider> */}
-      <SafeAreaProvider>
-        <ThemeProvider>{children}</ThemeProvider>
-      </SafeAreaProvider>
-      {/* </AnalyticsProvider> */}
+      <I18nProvider>
+        {/* <AnalyticsProvider> */}
+        <SafeAreaProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </SafeAreaProvider>
+        {/* </AnalyticsProvider> */}
+      </I18nProvider>
     </ApiProvider>
   );
 });

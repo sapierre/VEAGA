@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
 import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
@@ -23,10 +23,9 @@ export const getPromotionCode = async (code: string) => {
     return data[0];
   } catch (e) {
     console.error(e);
-    throw new ApiError(
-      HttpStatusCode.INTERNAL_SERVER_ERROR,
-      "Could not retrieve promotion code.",
-    );
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.promotionCodeRetrieve",
+    });
   }
 };
 
@@ -40,7 +39,9 @@ export const subscriptionStatusChangeHandler = async ({
   const customer = await getCustomerByCustomerId(customerId);
 
   if (!customer) {
-    throw new ApiError(404, "Customer not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.customerNotFound",
+    });
   }
 
   const subscription = await getSubscription(id);
@@ -50,7 +51,7 @@ export const subscriptionStatusChangeHandler = async ({
 
   await updateCustomer(customer.userId, {
     status: toBillingStatus(subscription.status),
-    ...(plan && { plan: plan.type }),
+    ...(plan && { plan: plan.id }),
   });
 
   console.log(

@@ -5,6 +5,7 @@ import { memo } from "react";
 import { toast } from "sonner";
 
 import { PricingPlanType } from "@turbostarter/billing";
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Avatar,
   AvatarFallback,
@@ -55,6 +56,7 @@ const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
 
 export const UserNavigation = memo<UserNavigationProps>(
   ({ user, customer }) => {
+    const { t } = useTranslation(["common", "auth"]);
     const router = useRouter();
     const { isMobile } = useSidebar();
 
@@ -115,7 +117,7 @@ export const UserNavigation = memo<UserNavigationProps>(
                   className="flex w-full cursor-pointer items-center gap-1.5"
                 >
                   <Icons.Settings className="size-4" />
-                  Settings
+                  {t("settings")}
                 </TurboLink>
               </DropdownMenuItem>
 
@@ -125,7 +127,7 @@ export const UserNavigation = memo<UserNavigationProps>(
                   className="flex w-full cursor-pointer items-center gap-1.5"
                 >
                   <Icons.CreditCard className="size-4" />
-                  Billing
+                  {t("billing")}
                 </TurboLink>
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -136,19 +138,19 @@ export const UserNavigation = memo<UserNavigationProps>(
               <button
                 className="flex w-full items-center gap-1.5"
                 onClick={async () => {
-                  const loadingToast = toast.loading("Logging out...");
+                  const loadingToast = toast.loading(t("logout.loading"));
                   await signOut(
                     {},
                     {
                       onSuccess: () => {
                         router.replace("/");
                         router.refresh();
-                        toast.success("Logged out!", {
+                        toast.success(t("logout.success"), {
                           id: loadingToast,
                         });
                       },
                       onError: () => {
-                        toast.error("Failed to log out!", {
+                        toast.error(t("logout.error"), {
                           id: loadingToast,
                         });
                       },
@@ -157,7 +159,7 @@ export const UserNavigation = memo<UserNavigationProps>(
                 }}
               >
                 <Icons.LogOut className="size-4" />
-                Log out
+                {t("logout.cta")}
               </button>
             </DropdownMenuItem>
           </DropdownMenuContent>

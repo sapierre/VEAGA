@@ -19,6 +19,11 @@ import { Providers } from "~/providers/providers";
 
 void SplashScreen.preventAutoHideAsync();
 
+SplashScreen.setOptions({
+  duration: 500,
+  fade: true,
+});
+
 const RootLayoutNav = () => {
   return (
     <Providers>
@@ -31,7 +36,11 @@ const RootLayoutNav = () => {
 
         <Stack.Screen name="index" />
       </Stack>
-      <StatusBar barStyle="light-content" />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
     </Providers>
   );
 };

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import { Card, CardContent } from "@turbostarter/ui-web/card";
 import {
@@ -24,8 +25,11 @@ import { contactFormSchema, MAX_MESSAGE_LENGTH } from "./utils/schema";
 import type { ContactFormPayload } from "./utils/schema";
 
 export function ContactForm() {
+  const { t, errorMap } = useTranslation(["common", "marketing"]);
   const form = useForm<ContactFormPayload>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(contactFormSchema, {
+      errorMap,
+    }),
     defaultValues: {
       name: "",
       email: "",
@@ -42,8 +46,8 @@ export function ContactForm() {
       return toast.error(error);
     }
 
-    toast.success("Message sent!", {
-      description: "Thank you for your message. We'll get back to you soon.",
+    toast.success(t("contact.form.success.title"), {
+      description: t("contact.form.success.description"),
     });
 
     form.reset();
@@ -62,9 +66,12 @@ export function ContactForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t("name")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your name" {...field} />
+                    <Input
+                      placeholder={t("contact.form.name.placeholder")}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -76,9 +83,12 @@ export function ContactForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("email")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="your.email@example.com" {...field} />
+                    <Input
+                      placeholder={t("contact.form.email.placeholder")}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,14 +101,14 @@ export function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="mt-2 flex justify-between">
-                    <span>Message</span>
+                    <span>{t("message")}</span>
                     <span className="text-xs text-muted-foreground">
                       {message.length}/{MAX_MESSAGE_LENGTH}
                     </span>
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="How can we help you?"
+                      placeholder={t("contact.form.message.placeholder")}
                       className="min-h-[120px]"
                       maxLength={MAX_MESSAGE_LENGTH}
                       {...field}
@@ -117,7 +127,7 @@ export function ContactForm() {
               {form.formState.isSubmitting ? (
                 <Icons.Loader2 className="size-5 animate-spin" />
               ) : (
-                "Send message"
+                t("contact.form.submit")
               )}
             </Button>
           </form>

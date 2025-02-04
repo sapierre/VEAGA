@@ -2,17 +2,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { hc } from "hono/client";
 import { useState } from "react";
 
-import { env } from "~/lib/env";
+import { appConfig } from "~/config/app";
 
 import type { AppRouter } from "@turbostarter/api";
 
 export const getBaseUrl = () => {
-  return env.VITE_SITE_URL;
+  return appConfig.url;
 };
 
 export const { api } = hc<AppRouter>(getBaseUrl(), {
   headers: {
-    "x-hono-source": "extension",
+    "x-api-source": "extension",
   },
 });
 

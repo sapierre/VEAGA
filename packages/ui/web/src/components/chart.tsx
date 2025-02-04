@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
@@ -132,6 +133,7 @@ const ChartTooltipContent = React.forwardRef<
     },
     ref,
   ) => {
+    const { i18n } = useTranslation("common");
     const { config } = useChart();
 
     const tooltipLabel = React.useMemo(() => {
@@ -245,7 +247,7 @@ const ChartTooltipContent = React.forwardRef<
                       </div>
                       {item.value && (
                         <span className="font-mono font-medium tabular-nums text-foreground">
-                          {item.value.toLocaleString()}
+                          {item.value.toLocaleString(i18n.language)}
                         </span>
                       )}
                     </div>

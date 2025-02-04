@@ -1,10 +1,17 @@
 import { MDXContent } from "@content-collections/mdx/react";
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
 import Link from "next/link";
-import { memo } from "react";
 
+import { getTranslation } from "@turbostarter/i18n/server";
 import { badgeVariants } from "@turbostarter/ui-web/badge";
+
+import type { ContentTag } from "@turbostarter/cms";
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
 
 interface MdxProps {
   readonly data: {
@@ -13,13 +20,15 @@ interface MdxProps {
     readonly mdx: string;
     readonly thumbnail?: string;
     readonly publishedAt?: Date;
-    readonly tags?: string[];
-    readonly timeToRead?: string;
+    readonly tags?: ContentTag[];
+    readonly timeToRead?: number;
   };
   readonly base: string;
 }
 
-export const Mdx = memo<MdxProps>(({ data, base }) => {
+export const Mdx = async ({ data, base }: MdxProps) => {
+  const { t } = await getTranslation({ ns: "marketing" });
+
   return (
     <div className="flex w-full max-w-3xl flex-col gap-4 self-start md:mx-auto">
       {data.tags && (
@@ -30,7 +39,7 @@ export const Mdx = memo<MdxProps>(({ data, base }) => {
               href={`${base}?tag=${tag}`}
               className={badgeVariants({ variant: "outline" })}
             >
-              {tag}
+              {t(`blog.tag.${tag}`)}
             </Link>
           ))}
         </div>
@@ -53,7 +62,13 @@ export const Mdx = memo<MdxProps>(({ data, base }) => {
         )}
 
         {data.publishedAt && data.timeToRead && <span>·</span>}
-        {data.timeToRead && <span>{data.timeToRead}</span>}
+        {typeof data.timeToRead !== "undefined" && (
+          <span>
+            {t("blog.timeToRead", {
+              time: Math.ceil(dayjs.duration(data.timeToRead).asMinutes()),
+            })}
+          </span>
+        )}
       </div>
 
       <p className="mb-2 text-base text-muted-foreground">{data.description}</p>
@@ -73,6 +88,4 @@ export const Mdx = memo<MdxProps>(({ data, base }) => {
       </div>
     </div>
   );
-});
-
-Mdx.displayName = "Mdx";
+};

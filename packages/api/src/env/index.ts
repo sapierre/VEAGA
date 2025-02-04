@@ -8,8 +8,13 @@ import { env as storageEnv } from "@turbostarter/storage/env";
 
 export const env = createEnv({
   extends: [billingEnv, dbEnv, emailEnv, storageEnv],
-  runtimeEnv: process.env,
   server: {
     OPENAI_API_KEY: z.string().optional(), // change it to your provider API key (e.g. ANTHROPIC_API_KEY if you use Anthropic)
   },
+  skipValidation:
+    (!!process.env.SKIP_ENV_VALIDATION &&
+      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
+    process.env.npm_lifecycle_event === "lint",
+  runtimeEnv: process.env,
+  emptyStringAsUndefined: true,
 });

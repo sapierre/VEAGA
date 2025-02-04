@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
 import { generateName, registerSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -21,8 +22,10 @@ import { signUp } from "~/lib/auth";
 import type { RegisterPayload } from "@turbostarter/auth";
 
 export const RegisterForm = memo(() => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
+
   const form = useForm<RegisterPayload>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(registerSchema, { errorMap }),
   });
 
   const onSubmit = async (data: RegisterPayload) => {
@@ -35,11 +38,11 @@ export const RegisterForm = memo(() => {
       {
         onSuccess: () => {
           Alert.alert(
-            "Success!",
-            "You have successfully registered! Check your email to verify your account.",
+            t("register.success.title"),
+            t("register.success.description"),
             [
               {
-                text: "OK",
+                text: t("continue"),
                 onPress: () => {
                   router.navigate(pathsConfig.tabs.auth.login);
                   form.reset();
@@ -49,7 +52,7 @@ export const RegisterForm = memo(() => {
           );
         },
         onError: ({ error }) => {
-          Alert.alert("Something went wrong!", error.message);
+          Alert.alert(t("error.title"), error.message);
         },
       },
     );
@@ -64,7 +67,7 @@ export const RegisterForm = memo(() => {
           render={({ field }) => (
             <FormItem>
               <FormInput
-                label="Email"
+                label={t("email")}
                 autoCapitalize="none"
                 autoComplete="email"
                 {...field}
@@ -79,7 +82,7 @@ export const RegisterForm = memo(() => {
           render={({ field }) => (
             <FormItem>
               <FormInput
-                label="Password"
+                label={t("password")}
                 secureTextEntry
                 autoComplete="password"
                 {...field}
@@ -97,20 +100,20 @@ export const RegisterForm = memo(() => {
           {form.formState.isSubmitting ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
-            <Text>Sign up</Text>
+            <Text>{t("register.cta")}</Text>
           )}
         </Button>
 
         <View className="items-center justify-center pt-2">
           <View className="flex-row">
             <Text className="text-sm text-muted-foreground">
-              Already have an account?
+              {t("register.alreadyHaveAccount")}
             </Text>
             <Link
               href={pathsConfig.tabs.auth.login}
               className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
             >
-              Sign in!
+              {t("login.cta")}
             </Link>
           </View>
         </View>

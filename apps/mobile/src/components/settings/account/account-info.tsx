@@ -1,6 +1,7 @@
 import { Link } from "expo-router";
 import { View } from "react-native";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Avatar,
   AvatarFallback,
@@ -24,6 +25,7 @@ const AccountInfoSkeleton = () => {
 };
 
 export const AccountInfo = () => {
+  const { t } = useTranslation("auth");
   const { data, isPending } = useSession();
 
   const user = data?.user;
@@ -50,12 +52,12 @@ export const AccountInfo = () => {
         <Text className="text-xl font-semibold">{user.name}</Text>
       ) : (
         <Link href={pathsConfig.tabs.auth.login}>
-          <Text className="text-xl font-semibold">Login</Text>{" "}
+          <Text className="text-xl font-semibold">{t("login.cta")}</Text>{" "}
           <Icons.ArrowRight size={16} className="text-foreground" />
         </Link>
       )}
       <Text className="text-muted-foreground">
-        {user ? user.email : "You're not logged in."}
+        {user ? user.email : t("notLoggedIn")}
       </Text>
     </View>
   );

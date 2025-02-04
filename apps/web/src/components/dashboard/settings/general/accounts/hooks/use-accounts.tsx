@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
-import { capitalize } from "@turbostarter/shared/utils";
+import { useTranslation } from "@turbostarter/i18n";
 
 import { listAccounts, unlinkAccount } from "~/lib/auth/client";
 import { linkSocial } from "~/lib/auth/client";
@@ -10,6 +10,7 @@ import { linkSocial } from "~/lib/auth/client";
 const QUERY_KEY = ["accounts"];
 
 export const useAccounts = () => {
+  const { t } = useTranslation("auth");
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: QUERY_KEY,
@@ -27,7 +28,7 @@ export const useAccounts = () => {
   const connect = useMutation({
     mutationFn: (provider: SOCIAL_PROVIDER) => {
       const loadingToast = toast.loading(
-        `Connecting ${capitalize(provider)} account...`,
+        t("account.connnections.connect.loading", { provider }),
       );
 
       return linkSocial(
@@ -37,9 +38,12 @@ export const useAccounts = () => {
         },
         {
           onSuccess: () => {
-            toast.success(`${capitalize(provider)} account connected!`, {
-              id: loadingToast,
-            });
+            toast.success(
+              t("account.connnections.connect.success", { provider }),
+              {
+                id: loadingToast,
+              },
+            );
           },
           onError: ({ error }) => {
             toast.error(error.message, {
@@ -54,22 +58,25 @@ export const useAccounts = () => {
   const disconnect = useMutation({
     mutationFn: (provider: SOCIAL_PROVIDER) => {
       const loadingToast = toast.loading(
-        `Disconnecting ${capitalize(provider)} account...`,
+        t("account.connnections.disconnect.loading", { provider }),
       );
 
       return unlinkAccount(
         { providerId: provider },
         {
           onError: ({ error }) => {
-            toast.error(`${error.message}!`, {
+            toast.error(error.message, {
               id: loadingToast,
             });
           },
           onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-            toast.success(`${capitalize(provider)} account disconnected!`, {
-              id: loadingToast,
-            });
+            toast.success(
+              t("account.connnections.disconnect.success", { provider }),
+              {
+                id: loadingToast,
+              },
+            );
           },
         },
       );

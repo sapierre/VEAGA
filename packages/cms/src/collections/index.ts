@@ -74,6 +74,7 @@ export const getContentItems: GetContentItems = ({
   tags = [] as ContentTag[],
   sortBy,
   sortOrder = SortOrder.DESCENDING,
+  locale,
 }) => {
   const items = content[collection];
 
@@ -88,9 +89,13 @@ export const getContentItems: GetContentItems = ({
     (item) => item.status === status,
   );
 
+  const itemsWithLocale = itemsWithStatus.filter(
+    (item) => !locale || item.locale === locale,
+  );
+
   const sortedItems = sortBy
-    ? sortItems(itemsWithStatus, sortBy, sortOrder)
-    : itemsWithStatus;
+    ? sortItems(itemsWithLocale, sortBy, sortOrder)
+    : itemsWithLocale;
 
   return {
     count: sortedItems.length,
@@ -102,7 +107,9 @@ export const getContentItemBySlug: GetContentItemBySlug = ({
   collection,
   slug,
   status = ContentStatus.PUBLISHED,
+  locale,
 }) =>
   content[collection].find(
-    (item) => item.slug === slug && item.status === status,
+    (item) =>
+      item.slug === slug && item.status === status && item.locale === locale,
   ) ?? null;

@@ -1,6 +1,8 @@
 {
   "extends": "@turbostarter/tsconfig/internal.json",
-  "compilerOptions": {},
-  "include": ["src"],
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

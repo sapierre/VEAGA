@@ -1,6 +1,7 @@
 import { Suspense, useState } from "react";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Tabs,
   TabsList,
@@ -17,11 +18,11 @@ import type { LoginOption } from "./constants";
 const LOGIN_OPTIONS_DETAILS = {
   [AUTH_PROVIDER.PASSWORD]: {
     component: PasswordLoginForm,
-    label: "Password",
+    label: "password",
   },
   [AUTH_PROVIDER.MAGIC_LINK]: {
     component: MagicLinkLoginForm,
-    label: "Magic Link",
+    label: "login.magicLink.label",
   },
 } as const;
 
@@ -30,6 +31,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ options }: LoginFormProps) => {
+  const { t } = useTranslation("auth");
   const [mainOption] = options;
 
   const [value, setValue] = useState(mainOption);
@@ -52,7 +54,7 @@ export const LoginForm = ({ options }: LoginFormProps) => {
       <TabsList className="w-full flex-row">
         {options.map((provider) => (
           <TabsTrigger key={provider} value={provider} className="grow">
-            <Text>{LOGIN_OPTIONS_DETAILS[provider].label}</Text>
+            <Text>{t(LOGIN_OPTIONS_DETAILS[provider].label)}</Text>
           </TabsTrigger>
         ))}
       </TabsList>

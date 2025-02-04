@@ -1,5 +1,6 @@
 import { Tabs, router } from "expo-router";
 
+import { isKey, useTranslation } from "@turbostarter/i18n";
 import { capitalize } from "@turbostarter/shared/utils";
 import { cn } from "@turbostarter/ui";
 import { Icons } from "@turbostarter/ui-mobile/icons";
@@ -25,10 +26,20 @@ const TabBarLabel = ({
 };
 
 export default function DashboardLayout() {
+  const { t, i18n } = useTranslation("common");
+
   return (
     <Tabs
       screenOptions={({ route }) => ({
-        header: () => <Header title={capitalize(route.name)} />,
+        header: () => (
+          <Header
+            title={
+              isKey(route.name, i18n, "common")
+                ? t(route.name)
+                : capitalize(route.name)
+            }
+          />
+        ),
         tabBarStyle: {
           paddingTop: 6,
         },
@@ -43,7 +54,7 @@ export default function DashboardLayout() {
           },
         })}
         options={{
-          title: "Home",
+          title: t("home"),
           tabBarIcon: ({ focused }) => (
             <Icons.House
               size={22}
@@ -60,7 +71,7 @@ export default function DashboardLayout() {
         name="auth"
         options={{
           headerShown: false,
-          title: "Auth",
+          title: t("auth"),
           tabBarIcon: ({ focused }) => (
             <Icons.KeyRound
               size={22}
@@ -75,7 +86,7 @@ export default function DashboardLayout() {
       <Tabs.Screen
         name="ai"
         options={{
-          title: "AI",
+          title: t("ai"),
           tabBarIcon: ({ focused }) => (
             <Icons.WandSparkles
               size={22}
@@ -91,7 +102,7 @@ export default function DashboardLayout() {
       <Tabs.Screen
         name="billing"
         options={{
-          title: "Billing",
+          title: t("billing"),
           tabBarIcon: ({ focused }) => (
             <Icons.Wallet
               size={22}
@@ -106,7 +117,7 @@ export default function DashboardLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: t("settings"),
           tabBarIcon: ({ focused }) => (
             <Icons.Settings
               size={22}

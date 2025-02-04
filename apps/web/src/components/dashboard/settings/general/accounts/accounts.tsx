@@ -1,6 +1,7 @@
 "use client";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { capitalize } from "@turbostarter/shared/utils";
 import { useBreakpoint } from "@turbostarter/ui-web";
 import { Button } from "@turbostarter/ui-web/button";
@@ -34,8 +35,6 @@ import {
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
-import { appConfig } from "~/config/app";
-
 import { useAccounts } from "./hooks/use-accounts";
 
 import type { SVGProps } from "react";
@@ -46,16 +45,18 @@ const ICONS: Record<SOCIAL_PROVIDER, React.FC<SVGProps<SVGElement>>> = {
 };
 
 export const Accounts = () => {
+  const { t, i18n } = useTranslation(["auth", "common"]);
   const { accounts, socials, missing, isLoading, connect, disconnect } =
     useAccounts();
 
   return (
     <Card className="h-fit w-full max-w-3xl overflow-hidden">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl">Connections</CardTitle>
+        <CardTitle className="text-xl">
+          {t("account.connnections.title")}
+        </CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-          Connect your {appConfig.name} Account with a third-party service to
-          use it for login.
+          {t("account.connnections.description")}
         </CardDescription>
       </CardHeader>
 
@@ -79,7 +80,9 @@ export const Accounts = () => {
                     {social.provider}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    Connected at {social.updatedAt.toLocaleDateString()}
+                    {t("account.connnections.connectedAt", {
+                      date: social.updatedAt.toLocaleDateString(i18n.language),
+                    })}
                   </span>
                 </div>
 
@@ -92,7 +95,11 @@ export const Accounts = () => {
                     size="icon"
                     disabled={accounts.length === 1 || disconnect.isPending}
                   >
-                    <span className="sr-only">Disconnect</span>
+                    <span className="sr-only">
+                      {t("account.connnections.disconnect.cta", {
+                        provider,
+                      })}
+                    </span>
                     {disconnect.isPending &&
                     disconnect.variables === provider ? (
                       <Icons.Loader2 className="size-4 animate-spin" />
@@ -109,7 +116,7 @@ export const Accounts = () => {
 
       {missing.length > 0 && !isLoading && (
         <CardFooter className="m-6 mt-0 flex-col items-start gap-3 rounded-md border px-4 py-3">
-          <span className="text-sm font-medium">Add New</span>
+          <span className="text-sm font-medium">{t("addNew")}</span>
 
           <hr className="w-full bg-border" />
           <div className="flex flex-wrap gap-2">
@@ -138,9 +145,7 @@ export const Accounts = () => {
       )}
 
       <CardFooter className="min-h-14 border-t bg-muted/75 py-3 text-sm text-muted-foreground dark:bg-card">
-        <span>
-          We only access basic profile information for secure sign-in.
-        </span>
+        <span>{t("account.connnections.info")}</span>
       </CardFooter>
     </Card>
   );
@@ -155,20 +160,8 @@ const ConfirmModal = ({
   children: React.ReactNode;
   onConfirm: () => void;
 }) => {
+  const { t } = useTranslation(["common", "auth"]);
   const isDesktop = useBreakpoint("md");
-
-  const renderDescription = () => (
-    <>
-      You are about to remove the Login Connection for {capitalize(provider)}.
-      <br />
-      <br />
-      After removing it, you won't be able to use {capitalize(provider)} to log
-      into your Personal Account anymore.
-      <br />
-      <br />
-      Do you want to continue?
-    </>
-  );
 
   if (isDesktop) {
     return (
@@ -176,15 +169,23 @@ const ConfirmModal = ({
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Disconnect {capitalize(provider)}</DialogTitle>
-            <DialogDescription>{renderDescription()}</DialogDescription>
+            <DialogTitle>
+              {t("account.connnections.disconnect.cta", {
+                provider: capitalize(provider),
+              })}
+            </DialogTitle>
+            <DialogDescription className="whitespace-pre-line">
+              {t("account.connnections.disconnect.disclaimer", {
+                provider: capitalize(provider),
+              })}
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline">{t("cancel")}</Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button onClick={onConfirm}>Continue</Button>
+              <Button onClick={onConfirm}>{t("continue")}</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
@@ -197,14 +198,22 @@ const ConfirmModal = ({
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Disconnect {capitalize(provider)}</DrawerTitle>
-          <DrawerDescription>{renderDescription()}</DrawerDescription>
+          <DrawerTitle>
+            {t("account.connnections.disconnect.cta", {
+              provider: capitalize(provider),
+            })}
+          </DrawerTitle>
+          <DrawerDescription className="whitespace-pre-line">
+            {t("account.connnections.disconnect.disclaimer", {
+              provider: capitalize(provider),
+            })}
+          </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">{t("cancel")}</Button>
           </DrawerClose>
-          <Button onClick={onConfirm}>Continue</Button>
+          <Button onClick={onConfirm}>{t("continue")}</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import ReactDOM from "react-dom/client";
 import { createShadowRootUi } from "wxt/client";
 import { defineContentScript } from "wxt/sandbox";

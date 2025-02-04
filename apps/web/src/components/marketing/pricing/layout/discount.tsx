@@ -7,6 +7,7 @@ import {
   formatPrice,
   BillingDiscountType,
 } from "@turbostarter/billing";
+import { Trans } from "@turbostarter/i18n";
 import { Icons } from "@turbostarter/ui-web/icons";
 
 import type {
@@ -40,12 +41,22 @@ export const Discount = memo<DiscountProps>(
       <p className="sm mt-2 text-center md:text-lg">
         <Icons.Gift className="mb-1.5 mr-1.5 inline-block h-5 w-5 text-primary" />
         <span className="text-primary">
-          SPECIAL OFFER:{" "}
-          <span className="font-semibold">
-            -
-            {`${discount.type === BillingDiscountType.PERCENT ? discount.percentage + "%" : formatPrice({ amount: discount.original.amount - discount.discounted.amount, currency })}`}{" "}
-            off
-          </span>
+          <Trans
+            i18nKey="billing:discount.specialOffer"
+            values={{
+              discount:
+                discount.type === BillingDiscountType.PERCENT
+                  ? discount.percentage + "%"
+                  : formatPrice({
+                      amount:
+                        discount.original.amount - discount.discounted.amount,
+                      currency,
+                    }),
+            }}
+            components={{
+              bold: <span className="font-semibold" />,
+            }}
+          />
         </span>
       </p>
     );

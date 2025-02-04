@@ -21,7 +21,7 @@ const getQueryClient = () => {
 
 export const { api } = hc<AppRouter>(getBaseUrl(), {
   headers: {
-    "x-hono-source": "web-client",
+    "x-api-source": "web-client",
   },
 });
 

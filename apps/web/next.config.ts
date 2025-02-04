@@ -11,6 +11,7 @@ const INTERNAL_PACKAGES = [
   "@turbostarter/cms",
   "@turbostarter/db",
   "@turbostarter/shared",
+  "@turbostarter/i18n",
   "@turbostarter/ui",
   "@turbostarter/ui-web",
 ];
@@ -34,6 +35,7 @@ const config: NextConfig = {
         },
       },
     },
+    optimizePackageImports: INTERNAL_PACKAGES,
   },
 
   images: {

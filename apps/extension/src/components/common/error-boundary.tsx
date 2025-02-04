@@ -1,21 +1,23 @@
 import { Component } from "react";
 
-import type { ReactElement } from "react";
+import { useTranslation } from "@turbostarter/i18n";
+
+import type { ReactNode } from "react";
 
 const Error = () => {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex w-full min-w-64 items-center justify-center px-10 py-16">
-      <span className="text-center text-destructive">
-        Something went wrong. Please try again later.
-      </span>
+      <span className="text-center text-destructive">{t("error.general")}</span>
     </div>
   );
 };
 
 class ReactErrorBoundary extends Component<
   {
-    children: ReactElement;
-    fallback: ReactElement;
+    children: ReactNode;
+    fallback: ReactNode;
   },
   {
     hasError: boolean;
@@ -44,8 +46,8 @@ export const ErrorBoundary = ({
   children,
   fallback = <Error />,
 }: {
-  children: ReactElement;
-  fallback?: ReactElement;
+  children: ReactNode;
+  fallback?: ReactNode;
 }) => {
   return (
     <ReactErrorBoundary fallback={fallback}>{children}</ReactErrorBoundary>

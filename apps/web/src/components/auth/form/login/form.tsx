@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { getTranslation } from "@turbostarter/i18n/server";
 import {
   Tabs,
   TabsList,
@@ -16,11 +17,11 @@ import type { LoginOption } from "./constants";
 const LOGIN_OPTIONS_DETAILS = {
   [AUTH_PROVIDER.PASSWORD]: {
     component: PasswordLoginForm,
-    label: "Password",
+    label: "password",
   },
   [AUTH_PROVIDER.MAGIC_LINK]: {
     component: MagicLinkLoginForm,
-    label: "Magic Link",
+    label: "login.magicLink.label",
   },
 } as const;
 
@@ -29,7 +30,8 @@ interface LoginFormProps {
   readonly redirectTo?: string;
 }
 
-export const LoginForm = ({ options, redirectTo }: LoginFormProps) => {
+export const LoginForm = async ({ options, redirectTo }: LoginFormProps) => {
+  const { t } = await getTranslation({ ns: "auth" });
   const [mainOption] = options;
 
   if (!options.length || !mainOption) {
@@ -49,7 +51,7 @@ export const LoginForm = ({ options, redirectTo }: LoginFormProps) => {
       <TabsList className="w-full">
         {options.map((provider) => (
           <TabsTrigger key={provider} value={provider} className="w-full">
-            {LOGIN_OPTIONS_DETAILS[provider].label}
+            {t(LOGIN_OPTIONS_DETAILS[provider].label)}
           </TabsTrigger>
         ))}
       </TabsList>

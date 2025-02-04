@@ -6,6 +6,7 @@ import { Alert, View } from "react-native";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { passwordLoginSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -24,10 +25,11 @@ import { signIn } from "~/lib/auth";
 import type { PasswordLoginPayload } from "@turbostarter/auth";
 
 export const PasswordLoginForm = memo(() => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
   const form = useForm<PasswordLoginPayload>({
-    resolver: zodResolver(passwordLoginSchema),
+    resolver: zodResolver(passwordLoginSchema, { errorMap }),
   });
 
   const onSubmit = async (data: PasswordLoginPayload) => {
@@ -46,7 +48,7 @@ export const PasswordLoginForm = memo(() => {
           form.reset();
         },
         onError: ({ error }) => {
-          Alert.alert("Something went wrong!", error.message);
+          Alert.alert(t("error.title"), error.message);
         },
         onResponse: () => {
           setIsSubmitting(false);
@@ -64,7 +66,7 @@ export const PasswordLoginForm = memo(() => {
           render={({ field }) => (
             <FormItem>
               <FormInput
-                label="Email"
+                label={t("email")}
                 autoCapitalize="none"
                 autoComplete="email"
                 disabled={isSubmitting}
@@ -80,13 +82,13 @@ export const PasswordLoginForm = memo(() => {
           render={({ field }) => (
             <FormItem>
               <View className="flex-row items-center justify-between">
-                <FormLabel nativeID="password">Password</FormLabel>
+                <FormLabel nativeID="password">{t("password")}</FormLabel>
 
                 <Link
                   href={pathsConfig.tabs.auth.forgotPassword}
                   className="text-muted-foreground underline"
                 >
-                  Forgot password?
+                  {t("account.password.forgot.label")}
                 </Link>
               </View>
               <FormInput secureTextEntry autoComplete="password" {...field} />
@@ -103,20 +105,20 @@ export const PasswordLoginForm = memo(() => {
           {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
-            <Text>Sign in</Text>
+            <Text>{t("login.cta")}</Text>
           )}
         </Button>
 
         <View className="items-center justify-center pt-2">
           <View className="flex-row">
             <Text className="text-sm text-muted-foreground">
-              Don&apos;t have an account yet?
+              {t("login.noAccount")}
             </Text>
             <Link
               href={pathsConfig.tabs.auth.register}
               className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
             >
-              Sign up!
+              {t("register.cta")}
             </Link>
           </View>
         </View>

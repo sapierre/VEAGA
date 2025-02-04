@@ -1,6 +1,7 @@
 import { memo } from "react";
 
 import { BillingModel, formatPrice } from "@turbostarter/billing";
+import { isKey, useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import { Badge } from "@turbostarter/ui-web/badge";
 import { Button, buttonVariants } from "@turbostarter/ui-web/button";
@@ -32,6 +33,7 @@ interface PlanProps {
 
 export const Plan = memo<PlanProps>(
   ({ plan, interval, user, customer, model, currency, discounts }) => {
+    const { t, i18n } = useTranslation(["common", "billing"]);
     const {
       features,
       price,
@@ -40,7 +42,7 @@ export const Plan = memo<PlanProps>(
       handleCheckout,
       handleOpenPortal,
       hasPlan,
-    } = usePlan(plan, { model, interval, discounts });
+    } = usePlan(plan, { model, interval, discounts, currency });
 
     if (!price) {
       return null;
@@ -58,44 +60,59 @@ export const Plan = memo<PlanProps>(
         <Card className="relative flex flex-col gap-8 px-7 py-6 md:px-10 md:py-8">
           {plan.badge && (
             <Badge className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 px-6 py-2.5 hover:bg-primary">
-              {plan.badge}
+              {isKey(plan.badge, i18n, "billing") ? t(plan.badge) : plan.badge}
             </Badge>
           )}
           <div>
-            <span className="text-lg font-bold">{plan.name}</span>
+            <span className="text-lg font-bold">
+              {isKey(plan.name, i18n, "billing") ? t(plan.name) : plan.name}
+            </span>
             <p className="relative flex items-end gap-1 py-2">
               {discount?.original &&
                 "amount" in discount.original &&
                 typeof discount.original.amount === "number" &&
                 discount.percentage > 0 && (
                   <span className="mr-2 text-lg text-muted-foreground line-through md:text-xl">
-                    {formatPrice({
-                      amount: discount.original.amount,
-                      currency,
-                    })}
+                    {formatPrice(
+                      {
+                        amount: discount.original.amount,
+                        currency,
+                      },
+                      i18n.language,
+                    )}
                   </span>
                 )}
               <span className="text-4xl font-bold tracking-tight md:text-5xl">
                 {price.custom
-                  ? price.label
-                  : formatPrice({
-                      amount:
-                        discount?.discounted && "amount" in discount.discounted
-                          ? discount.discounted.amount
-                          : price.amount,
-                      currency,
-                    })}
+                  ? isKey(price.label, i18n, "billing")
+                    ? t(price.label)
+                    : price.label
+                  : formatPrice(
+                      {
+                        amount:
+                          discount?.discounted &&
+                          "amount" in discount.discounted
+                            ? discount.discounted.amount
+                            : price.amount,
+                        currency,
+                      },
+                      i18n.language,
+                    )}
               </span>
               {!price.custom && (
                 <span className="shrink-0 text-lg text-muted-foreground">
                   /{" "}
                   {price.type === BillingModel.RECURRING
-                    ? price.interval
-                    : "lifetime"}
+                    ? t(`interval.${price.interval}`)
+                    : t("interval.lifetime")}
                 </span>
               )}
             </p>
-            <span className="text-sm">{plan.description}</span>
+            <span className="text-sm">
+              {isKey(plan.description, i18n, "billing")
+                ? t(plan.description)
+                : plan.description}
+            </span>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -119,7 +136,9 @@ export const Plan = memo<PlanProps>(
                   )}
                 </div>
                 <span className="text-md">
-                  {feature.title}
+                  {isKey(feature.title, i18n, "billing")
+                    ? t(feature.title)
+                    : feature.title}
                   {"addon" in feature && (
                     <span className="ml-2 whitespace-nowrap">
                       &nbsp;{feature.addon}
@@ -140,13 +159,13 @@ export const Plan = memo<PlanProps>(
                 {isPending ? (
                   <Icons.Loader2 className="animate-spin" />
                 ) : (
-                  `Try with ${price.trialDays}-days trial`
+                  t("trial.period", { period: price.trialDays })
                 )}
               </Button>
             )}
             {price.custom ? (
               <TurboLink href={price.href} className={buttonVariants()}>
-                {hasPlan(customer) ? "Manage plan" : "Get started"}
+                {hasPlan(customer) ? t("manage.plan.title") : t("getStarted")}
               </TurboLink>
             ) : price.amount === 0 ? (
               <TurboLink
@@ -155,7 +174,7 @@ export const Plan = memo<PlanProps>(
                 }
                 className={buttonVariants({ variant: "outline" })}
               >
-                {user ? "Go to dashboard" : "Start for free"}
+                {user ? t("goToDashboard") : t("trial.cta")}
               </TurboLink>
             ) : (
               <Button
@@ -169,11 +188,11 @@ export const Plan = memo<PlanProps>(
                 {isPending ? (
                   <Icons.Loader2 className="animate-spin" />
                 ) : model === BillingModel.RECURRING && hasPlan(customer) ? (
-                  "Manage plan"
+                  t("manage.plan.title")
                 ) : model === BillingModel.RECURRING ? (
-                  "Subscribe now"
+                  t("subscribe")
                 ) : (
-                  "Get lifetime access"
+                  t("getLifetimeAccess")
                 )}
               </Button>
             )}

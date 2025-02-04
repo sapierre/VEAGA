@@ -8,6 +8,7 @@ import {
   config,
   getPriceWithHighestDiscount,
 } from "@turbostarter/billing";
+import { useTranslation } from "@turbostarter/i18n";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
 import { PricingHeader } from "./layout/header";
@@ -23,6 +24,7 @@ interface PricingProps {
 }
 
 export const Pricing = memo<PricingProps>(({ user, customer, model }) => {
+  const { t } = useTranslation("billing");
   const intervals = [
     ...new Set(
       config.plans.flatMap((plan) =>
@@ -45,7 +47,7 @@ export const Pricing = memo<PricingProps>(({ user, customer, model }) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-14 lg:gap-24">
       <PricingHeader
-        currency={config.currency}
+        currency={t("currency")}
         model={model}
         intervals={intervals}
         activeInterval={activeInterval}
@@ -56,7 +58,7 @@ export const Pricing = memo<PricingProps>(({ user, customer, model }) => {
         plans={config.plans}
         interval={activeInterval}
         model={model}
-        currency={config.currency}
+        currency={t("currency")}
         discounts={config.discounts}
         user={user}
         customer={customer}

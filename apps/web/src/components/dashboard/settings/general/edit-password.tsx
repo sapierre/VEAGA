@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { changePasswordSchema } from "@turbostarter/auth";
+import { Trans, useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Card,
@@ -35,10 +36,11 @@ import { useAccounts } from "./accounts/hooks/use-accounts";
 import type { ChangePasswordPayload } from "@turbostarter/auth";
 
 export const EditPassword = () => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const { accounts, isLoading } = useAccounts();
 
   const form = useForm<ChangePasswordPayload>({
-    resolver: zodResolver(changePasswordSchema),
+    resolver: zodResolver(changePasswordSchema, { errorMap }),
   });
 
   const onSubmit = async (data: ChangePasswordPayload) => {
@@ -50,11 +52,11 @@ export const EditPassword = () => {
       },
       {
         onSuccess: () => {
-          toast.success("Password updated successfully!");
+          toast.success(t("account.password.update.success"));
           form.reset();
         },
         onError: ({ error }) => {
-          toast.error(`${error.message}!`);
+          toast.error(error.message);
         },
       },
     );
@@ -69,11 +71,9 @@ export const EditPassword = () => {
       <Form {...form}>
         <form onSubmit={onPromise(form.handleSubmit(onSubmit))}>
           <CardHeader>
-            <CardTitle className="text-xl">Password</CardTitle>
+            <CardTitle className="text-xl">{t("password")}</CardTitle>
             <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-              Change your password here. Password must contain an uppercase
-              letter, a special character, a number and must be at least 8
-              characters long.
+              {t("account.password.update.description")}
             </CardDescription>
 
             {isLoading && <Skeleton className="mt-0 h-20" />}
@@ -86,7 +86,7 @@ export const EditPassword = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem className="w-full max-w-xs space-y-1">
-                        <FormLabel>Current Password</FormLabel>
+                        <FormLabel>{t("currentPassword")}</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -104,7 +104,7 @@ export const EditPassword = () => {
                     name="newPassword"
                     render={({ field }) => (
                       <FormItem className="w-full max-w-xs space-y-1">
-                        <FormLabel>New Password</FormLabel>
+                        <FormLabel>{t("newPassword")}</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -120,14 +120,18 @@ export const EditPassword = () => {
               ) : (
                 <div className="flex w-full items-center justify-center rounded-md border border-dashed p-6">
                   <p className="text-center">
-                    You have no password set. Use the{" "}
-                    <TurboLink
-                      href={pathsConfig.auth.forgotPassword}
-                      className="font-bold underline hover:no-underline"
-                    >
-                      forgot password
-                    </TurboLink>{" "}
-                    flow to set up a new one.
+                    <Trans
+                      i18nKey="account.password.update.noPassword"
+                      ns="auth"
+                      components={{
+                        bold: (
+                          <TurboLink
+                            href={pathsConfig.auth.forgotPassword}
+                            className="font-bold underline hover:no-underline"
+                          />
+                        ),
+                      }}
+                    />
                   </p>
                 </div>
               ))}
@@ -135,14 +139,14 @@ export const EditPassword = () => {
 
           <CardFooter className="flex min-h-14 justify-between gap-10 border-t bg-muted/75 py-3 text-sm text-muted-foreground dark:bg-card">
             <span className="leading-tight">
-              Try using a memorable phrase with mixed characters.
+              {t("account.password.update.info")}
             </span>
             {!isLoading && hasPassword && (
               <Button size="sm" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? (
                   <Icons.Loader2 className="size-4 animate-spin" />
                 ) : (
-                  "Save"
+                  t("save")
                 )}
               </Button>
             )}

@@ -9,7 +9,7 @@ import { useThemeConfig } from "~/providers/theme";
 
 export const ThemeSettings = () => {
   const { theme, changeTheme } = useTheme();
-  const [config, setConfig] = useThemeConfig();
+  const { config, setConfig } = useThemeConfig();
 
   return (
     <View className="rounded-lg border border-border bg-card p-6 shadow-sm shadow-foreground/10">
@@ -18,7 +18,7 @@ export const ThemeSettings = () => {
         config={{ ...config, mode: theme }}
         onChange={async ({ mode, ...config }) => {
           await changeTheme(mode);
-          await setConfig(config);
+          setConfig(config);
         }}
         colors={Object.values(ThemeColor).reduce(
           (acc, color) => {

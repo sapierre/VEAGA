@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
 import { updatePasswordSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -23,8 +24,10 @@ import { resetPassword } from "~/lib/auth";
 import type { UpdatePasswordPayload } from "@turbostarter/auth";
 
 export const UpdatePasswordForm = memo(() => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
+
   const form = useForm<UpdatePasswordPayload>({
-    resolver: zodResolver(updatePasswordSchema),
+    resolver: zodResolver(updatePasswordSchema, { errorMap }),
   });
 
   const onSubmit = async (data: UpdatePasswordPayload) => {
@@ -35,7 +38,7 @@ export const UpdatePasswordForm = memo(() => {
       {
         onSuccess: () => router.replace(pathsConfig.tabs.auth.login),
         onError: ({ error }) => {
-          Alert.alert("Something went wrong!", error.message);
+          Alert.alert(t("error.title"), error.message);
         },
       },
     );
@@ -50,7 +53,7 @@ export const UpdatePasswordForm = memo(() => {
           render={({ field }) => (
             <FormItem>
               <FormInput
-                label="Password"
+                label={t("password")}
                 secureTextEntry
                 autoComplete="new-password"
                 {...field}
@@ -68,7 +71,7 @@ export const UpdatePasswordForm = memo(() => {
           {form.formState.isSubmitting ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
-            <Text>Update password</Text>
+            <Text>{t("account.password.update.cta")}</Text>
           )}
         </Button>
       </View>

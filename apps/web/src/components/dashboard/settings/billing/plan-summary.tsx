@@ -7,6 +7,8 @@ import {
   config,
   PricingPlanType,
 } from "@turbostarter/billing";
+import { isKey } from "@turbostarter/i18n";
+import { getTranslation } from "@turbostarter/i18n/server";
 import { cn } from "@turbostarter/ui";
 import { Badge } from "@turbostarter/ui-web/badge";
 import { buttonVariants } from "@turbostarter/ui-web/button";
@@ -28,9 +30,10 @@ interface PlanSummaryProps {
   readonly customer: Customer | null;
 }
 
-export const PlanSummary = memo<PlanSummaryProps>(({ customer }) => {
+export const PlanSummary = memo<PlanSummaryProps>(async ({ customer }) => {
+  const { t, i18n } = await getTranslation({ ns: ["common", "billing"] });
   const plan = config.plans.find(
-    (plan) => plan.type === (customer?.plan ?? PricingPlanType.FREE),
+    (plan) => plan.id === (customer?.plan ?? PricingPlanType.FREE),
   );
 
   if (!plan) {
@@ -45,13 +48,14 @@ export const PlanSummary = memo<PlanSummaryProps>(({ customer }) => {
 
   const status = customer?.status ?? BillingStatus.ACTIVE;
 
+  const statusKey = `status.${status.toLowerCase().replace(/_([a-z])/g, (_, letter: string) => letter.toUpperCase())}`;
+
   return (
     <Card className="h-fit w-full max-w-3xl overflow-hidden">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl">Your plan</CardTitle>
+        <CardTitle className="text-xl">{t("manage.plan.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-          Check the details of your current plan. You can change your plan or
-          cancel your subscription at any time.
+          {t("manage.plan.description")}
         </CardDescription>
       </CardHeader>
 
@@ -64,7 +68,9 @@ export const PlanSummary = memo<PlanSummaryProps>(({ customer }) => {
               ) : (
                 <Icons.BadgeX className="size-5" />
               )}
-              <span className="text-lg font-bold capitalize">{plan.name}</span>
+              <span className="text-lg font-bold capitalize">
+                {isKey(plan.name, i18n, "billing") ? t(plan.name) : plan.name}
+              </span>
               <Badge
                 className={cn(
                   "ml-1 bg-destructive/15 capitalize text-destructive hover:bg-destructive/25",
@@ -76,23 +82,27 @@ export const PlanSummary = memo<PlanSummaryProps>(({ customer }) => {
                   },
                 )}
               >
-                {status.toLowerCase().replace("_", " ")}
+                {isKey(statusKey, i18n, "billing") ? t(statusKey) : statusKey}
               </Badge>
             </div>
 
             <span className="text-sm text-muted-foreground">
-              Updated at{" "}
-              {dayjs(customer?.updatedAt).toDate().toLocaleDateString()}
+              {t("updatedAt")}{" "}
+              {dayjs(customer?.updatedAt)
+                .toDate()
+                .toLocaleDateString(i18n.language)}
             </span>
           </div>
 
           <p className="text-sm text-muted-foreground">
-            {plan.description}{" "}
+            {isKey(plan.description, i18n, "billing")
+              ? t(plan.description)
+              : plan.description}{" "}
             <TurboLink
               href={pathsConfig.marketing.pricing}
               className="font-semibold underline hover:no-underline"
             >
-              Learn more
+              {t("learnMore")}
             </TurboLink>
           </p>
 
@@ -101,7 +111,7 @@ export const PlanSummary = memo<PlanSummaryProps>(({ customer }) => {
               href={pathsConfig.marketing.pricing}
               className={cn(buttonVariants(), "mt-2 w-fit gap-1")}
             >
-              Upgrade
+              {t("upgrade")}
               <Icons.ArrowUpRight className="size-4" />
             </TurboLink>
           )}

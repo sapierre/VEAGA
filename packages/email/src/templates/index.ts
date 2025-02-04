@@ -9,11 +9,13 @@ import { MagicLink } from "./auth/magic-link";
 import { ResetPassword } from "./auth/reset-password";
 import ContactForm from "./contact-form";
 
-import type { EmailVariables } from "../types";
+import type { CommonEmailProps, EmailVariables } from "../types";
 
 interface EmailTemplateComponent<T extends EmailTemplate> {
-  (props: EmailVariables[T]): React.ReactElement;
-  subject: string;
+  (
+    props: EmailVariables[T] & CommonEmailProps,
+  ): Promise<React.ReactElement> | React.ReactElement;
+  subject: ((props: CommonEmailProps) => Promise<string> | string) | string;
 }
 
 export const templates: {
@@ -29,14 +31,19 @@ export const templates: {
 
 export const getTemplate = async <T extends EmailTemplate>({
   id,
+  locale,
   variables,
 }: {
   id: T;
   variables: EmailVariables[T];
+  locale?: string;
 }) => {
   const template = templates[id];
-  const subject = template.subject;
-  const email = template(variables);
+  const subject =
+    typeof template.subject === "function"
+      ? await template.subject({ locale })
+      : template.subject;
+  const email = await template({ ...variables, locale });
 
   const html = await render(email);
   const text = await render(email, { plainText: true });

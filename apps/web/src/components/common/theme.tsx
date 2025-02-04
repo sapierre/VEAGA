@@ -22,7 +22,7 @@ import { useThemeConfig } from "~/providers/theme";
 import type { ThemeMode } from "@turbostarter/ui";
 
 const Customizer = () => {
-  const [config, setConfig] = useThemeConfig();
+  const { config, setConfig } = useThemeConfig();
   const { setTheme: setMode, theme: mode } = useTheme();
 
   return (

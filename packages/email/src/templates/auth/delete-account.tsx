@@ -1,43 +1,54 @@
 import { Heading, Preview, Text } from "@react-email/components";
 import * as React from "react";
 
+import { getTranslation } from "@turbostarter/i18n/server";
+
 import { Button } from "../_components/button";
 import { Layout } from "../_components/layout/layout";
 
-import type { EmailTemplate, EmailVariables } from "../../types";
+import type {
+  EmailTemplate,
+  EmailVariables,
+  CommonEmailProps,
+} from "../../types";
 
-type Props = EmailVariables[typeof EmailTemplate.DELETE_ACCOUNT];
+type Props = EmailVariables[typeof EmailTemplate.DELETE_ACCOUNT] &
+  CommonEmailProps;
 
-export const DeleteAccount = ({ url }: Props) => {
+export const DeleteAccount = async ({ url, locale }: Props) => {
+  const { t } = await getTranslation({ locale, ns: "auth" });
   const { origin } = new URL(url);
 
   return (
-    <Layout origin={origin}>
-      <Preview>Delete your account for TurboStarter</Preview>
-      <Heading>We're sorry to see you go</Heading>
+    <Layout origin={origin} locale={locale}>
+      <Preview>{t("account.delete.email.preview")}</Preview>
+      <Heading>{t("account.delete.email.subject")}</Heading>
 
-      <Text>Click the button below to permanently delete your account.</Text>
+      <Text>{t("account.delete.email.body")}</Text>
 
-      <Button href={url}>Delete account</Button>
+      <Button href={url}>{t("account.delete.email.cta")}</Button>
 
-      <Text>Or, copy and paste this link into your browser:</Text>
+      <Text>{t("account.delete.email.or")}</Text>
 
       <code className="inline-block rounded-md border border-solid border-border bg-muted px-5 py-3.5 font-mono text-xs">
         {url}
       </code>
 
       <Text className="text-muted-foreground">
-        If you didn't request account deletion, there's nothing to worry about,
-        you can safely ignore this email.
+        {t("account.delete.email.disclaimer")}
       </Text>
     </Layout>
   );
 };
 
-DeleteAccount.subject = "We're sorry to see you go";
+DeleteAccount.subject = async ({ locale }: CommonEmailProps) => {
+  const { t } = await getTranslation({ locale, ns: "auth" });
+  return t("account.delete.email.subject");
+};
 
 DeleteAccount.PreviewProps = {
   url: "http://localhost:3000/api/auth/delete-user/callback?token=123&callbackURL=/",
+  locale: "en",
 };
 
 export default DeleteAccount;

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { updatePasswordSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -27,13 +28,14 @@ import { onPromise } from "~/utils";
 import type { UpdatePasswordPayload } from "@turbostarter/auth";
 
 export const UpdatePasswordForm = memo(() => {
+  const { t, errorMap } = useTranslation("auth");
   const router = useRouter();
   const form = useForm<UpdatePasswordPayload>({
-    resolver: zodResolver(updatePasswordSchema),
+    resolver: zodResolver(updatePasswordSchema, { errorMap }),
   });
 
   const onSubmit = async (data: UpdatePasswordPayload) => {
-    const loadingToast = toast.loading("Updating password...");
+    const loadingToast = toast.loading(t("account.password.update.loading"));
 
     await resetPassword(
       {
@@ -41,13 +43,13 @@ export const UpdatePasswordForm = memo(() => {
       },
       {
         onSuccess: () => {
-          toast.success("Success! Now you can login with your new password!", {
+          toast.success(t("account.password.update.success"), {
             id: loadingToast,
           });
           router.replace(pathsConfig.auth.login);
         },
         onError: ({ error }) => {
-          toast.error(`${error.message}!`, { id: loadingToast });
+          toast.error(error.message, { id: loadingToast });
         },
       },
     );
@@ -65,7 +67,7 @@ export const UpdatePasswordForm = memo(() => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("password")}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -88,7 +90,7 @@ export const UpdatePasswordForm = memo(() => {
           {form.formState.isSubmitting ? (
             <Icons.Loader2 className="animate-spin" />
           ) : (
-            "Update password"
+            t("account.password.update.cta")
           )}
         </Button>
       </motion.form>

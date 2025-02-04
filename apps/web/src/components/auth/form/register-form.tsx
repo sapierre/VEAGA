@@ -11,6 +11,7 @@ import {
   registerSchema,
   generateName,
 } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -35,15 +36,16 @@ import type { RegisterPayload } from "@turbostarter/auth";
 type RegisterStatus = "pending" | "success" | "error" | "idle";
 
 export const RegisterForm = memo(() => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
   const [status, setStatus] = useState<RegisterStatus>("idle");
   const form = useForm<RegisterPayload>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(registerSchema, { errorMap }),
   });
 
   const onSubmit = async (data: RegisterPayload) => {
-    const loadingToast = toast.loading("Registering...");
+    const loadingToast = toast.loading(t("register.loading"));
     await signUp.email(
       {
         email: data.email,
@@ -58,7 +60,7 @@ export const RegisterForm = memo(() => {
           setIsSubmitting(true);
         },
         onSuccess: () => {
-          toast.success("Success! Now verify your email!", {
+          toast.success(t("register.success.notification"), {
             id: loadingToast,
           });
           setStatus("success");
@@ -87,15 +89,15 @@ export const RegisterForm = memo(() => {
             className="h-20 w-20 text-success"
             strokeWidth={1.2}
           />
-          <h2 className="text-center text-2xl font-semibold">Success!</h2>
-          <p className="text-center">
-            You have successfully registered! Now verify your email to continue.
-          </p>
+          <h2 className="text-center text-2xl font-semibold">
+            {t("register.success.title")}
+          </h2>
+          <p className="text-center">{t("register.success.description")}</p>
           <TurboLink
             href={pathsConfig.auth.login}
             className="-mt-1 text-sm text-muted-foreground underline hover:no-underline"
           >
-            Sign in
+            {t("login.cta")}
           </TurboLink>
         </motion.div>
       ) : (
@@ -110,7 +112,7 @@ export const RegisterForm = memo(() => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("email")}</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -129,7 +131,7 @@ export const RegisterForm = memo(() => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t("password")}</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -152,18 +154,18 @@ export const RegisterForm = memo(() => {
               {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
                 <Icons.Loader2 className="animate-spin" />
               ) : (
-                "Sign up"
+                t("register.cta")
               )}
             </Button>
 
             <div className="flex items-center justify-center pt-2">
               <div className="text-sm text-muted-foreground">
-                Already have an account?
+                {t("register.alreadyHaveAccount")}
                 <TurboLink
                   href={pathsConfig.auth.login}
                   className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
                 >
-                  Sign in!
+                  {t("login.cta")}!
                 </TurboLink>
               </div>
             </div>

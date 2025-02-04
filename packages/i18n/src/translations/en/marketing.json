@@ -1,0 +1,93 @@
+{
+  "feature": {
+    "admin": {
+      "title": "Admin",
+      "description": "Interactive dashboard for managing your account, analytics, settings and other app features."
+    },
+    "auth": {
+      "title": "Auth",
+      "description": "Authenticate users to your app. Social logins, magic link, email/password and many more."
+    },
+    "ai": {
+      "title": "AI",
+      "description": "Integrate AI into your app. Image recognition, chatbots, and more."
+    },
+    "billing": {
+      "title": "Billing",
+      "description": "Receive payments from your users using configured providers - Stripe or LemonSqueezy."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Manage your blog with ease with built-in integration. Supports MDX and content collections."
+    },
+    "docs": {
+      "title": "Docs",
+      "description": "Learn how to use TurboStarter. From installation to deployment."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Contact us for any questions or feedback",
+    "form": {
+      "name": {
+        "placeholder": "John Doe"
+      },
+      "email": {
+        "placeholder": "your@email.com"
+      },
+      "message": {
+        "placeholder": "How can we help you?"
+      },
+      "submit": "Send message",
+      "success": {
+        "title": "Message sent!",
+        "description": "Thank you for your message. We'll get back to you soon."
+      }
+    },
+    "email": {
+      "subject": "You've received a new contact form submission",
+      "body": "New contact form submission"
+    }
+  },
+  "ai": {
+    "prompt": {
+      "history": "Tell the history of the internet",
+      "capitals": "Quiz me on the world capitals",
+      "quantum": "Explain quantum computing",
+      "realWorld": "Describe a real-world AI case"
+    },
+    "placeholder": "Ask a question...",
+    "cta": "Submit"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "News and updates about the platform",
+    "timeToRead": "{{time}} min read",
+    "tag": {
+      "learning": "learning",
+      "skills": "skills",
+      "progress": "progress",
+      "product": "product",
+      "development": "development",
+      "prototype": "prototype",
+      "launch": "launch"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "An overview of your account's activity across all your projects.",
+    "chart": {
+      "cta": "Add chart",
+      "showing": "Showing total visitors for the last period",
+      "trending": "Trending by up to 5.2% this month",
+      "period": "January - June 2024",
+      "bar": "Bar Chart",
+      "pie": "Pie Chart",
+      "area": "Area Chart",
+      "line": "Line Chart",
+      "shape": "Shape Chart",
+      "radial": "Radial Chart",
+      "radar": "Radar Chart"
+    }
+  }
+}

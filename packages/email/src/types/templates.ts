@@ -1,3 +1,7 @@
+export interface CommonEmailProps {
+  readonly locale?: string;
+}
+
 const AuthEmailTemplate = {
   RESET_PASSWORD: "reset-password",
   MAGIC_LINK: "magic-link",

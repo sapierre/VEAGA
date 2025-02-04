@@ -6,7 +6,6 @@ import { billingConfigSchema } from "./schema";
 import type { BillingConfig } from "../types";
 
 export const config = billingConfigSchema.parse({
-  currency: "usd",
   plans,
   discounts,
 }) satisfies BillingConfig;

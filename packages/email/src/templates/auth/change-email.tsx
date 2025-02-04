@@ -1,46 +1,54 @@
 import { Heading, Preview, Text } from "@react-email/components";
 import * as React from "react";
 
+import { getTranslation } from "@turbostarter/i18n/server";
+
 import { Button } from "../_components/button";
 import { Layout } from "../_components/layout/layout";
 
-import type { EmailTemplate, EmailVariables } from "../../types";
+import type {
+  EmailVariables,
+  EmailTemplate,
+  CommonEmailProps,
+} from "../../types";
 
-type Props = EmailVariables[typeof EmailTemplate.CHANGE_EMAIL];
+type Props = EmailVariables[typeof EmailTemplate.CHANGE_EMAIL] &
+  CommonEmailProps;
 
-export const ChangeEmail = ({ url }: Props) => {
+export const ChangeEmail = async ({ url, locale }: Props) => {
+  const { t } = await getTranslation({ locale, ns: "auth" });
   const { origin } = new URL(url);
 
   return (
-    <Layout origin={origin}>
-      <Preview>Change your email address for TurboStarter</Preview>
-      <Heading>Change your email address</Heading>
+    <Layout origin={origin} locale={locale}>
+      <Preview>{t("account.email.change.email.preview")}</Preview>
+      <Heading>{t("account.email.change.email.subject")}</Heading>
 
-      <Text>
-        Did you request to change your email address? Click the button below to
-        confirm the change.
-      </Text>
+      <Text>{t("account.email.change.email.body")}</Text>
 
-      <Button href={url}>Confirm change email request</Button>
+      <Button href={url}>{t("account.email.change.email.cta")}</Button>
 
-      <Text>Or, copy and paste this link into your browser:</Text>
+      <Text>{t("account.email.change.email.or")}</Text>
 
       <code className="inline-block rounded-md border border-solid border-border bg-muted px-5 py-3.5 font-mono text-xs">
         {url}
       </code>
 
       <Text className="text-muted-foreground">
-        If you didn't request to change your email address, there's nothing to
-        worry about, you can safely ignore this email.
+        {t("account.email.change.email.disclaimer")}
       </Text>
     </Layout>
   );
 };
 
-ChangeEmail.subject = "Change email request";
+ChangeEmail.subject = async ({ locale }: CommonEmailProps) => {
+  const { t } = await getTranslation({ locale, ns: "auth" });
+  return t("account.email.change.email.subject");
+};
 
 ChangeEmail.PreviewProps = {
   url: "http://localhost:3000/api/auth/verify-email?token=123&callbackURL=/dashboard/settings",
+  locale: "en",
 };
 
 export default ChangeEmail;

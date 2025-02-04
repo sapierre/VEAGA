@@ -9,10 +9,9 @@ import type { Discount } from "../types";
 
 export const plans = [
   {
-    id: "starter",
-    name: "Starter",
-    description: "For small projects just getting started",
-    type: PricingPlanType.FREE,
+    id: PricingPlanType.FREE,
+    name: "plan.starter.name",
+    description: "plan.starter.description",
     badge: null,
     prices: [
       {
@@ -35,11 +34,10 @@ export const plans = [
     ],
   },
   {
-    id: "premium",
-    name: "Premium",
-    description: "Perfect for growing teams with advanced features",
-    type: PricingPlanType.PREMIUM,
-    badge: "Bestseller",
+    id: PricingPlanType.PREMIUM,
+    name: "plan.premium.name",
+    description: "plan.premium.description",
+    badge: "plan.premium.badge",
     prices: [
       {
         id: "price_1PpUagFQH4McJDTlHCzOmyT6",
@@ -63,34 +61,33 @@ export const plans = [
     ],
   },
   {
-    id: "enterprise",
-    name: "Enterprise",
-    description: "Designed for organizations and big teams",
-    type: PricingPlanType.ENTERPRISE,
+    id: PricingPlanType.ENTERPRISE,
+    name: "plan.enterprise.name",
+    description: "plan.enterprise.description",
     badge: null,
     prices: [
       {
         id: "enterprise-lifetime",
-        label: "Contact us!",
+        label: "common:contactUs",
         href: "/contact",
         type: BillingModel.ONE_TIME,
         custom: true,
       },
       {
         id: "enterprise-monthly",
-        label: "Contact us!",
+        label: "common:contactUs",
         href: "/contact",
+        type: BillingModel.RECURRING,
         interval: RecurringInterval.MONTH,
         custom: true,
-        type: BillingModel.RECURRING,
       },
       {
         id: "enterprise-yearly",
-        label: "Contact us!",
+        label: "common:contactUs",
         href: "/contact",
+        type: BillingModel.RECURRING,
         interval: RecurringInterval.YEAR,
         custom: true,
-        type: BillingModel.RECURRING,
       },
     ],
   },

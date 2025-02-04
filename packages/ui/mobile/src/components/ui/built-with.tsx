@@ -1,12 +1,16 @@
 import * as React from "react";
 import { Pressable, View, Linking } from "react-native";
 
+import { useTranslation } from "@turbostarter/i18n";
+
 import { Icons } from "../../lib/icons";
 
 import { buttonVariants } from "./button";
 import { Text } from "./text";
 
 export const BuiltWith = () => {
+  const { t } = useTranslation("common");
+
   return (
     <Pressable
       onPress={() => Linking.openURL("https://www.turbostarter.dev")}
@@ -15,7 +19,7 @@ export const BuiltWith = () => {
         className: "flex-row items-center justify-center font-sans",
       })}
     >
-      <Text>Built with</Text>
+      <Text>{t("builtWith")}</Text>
       <View className="shrink-0 flex-row items-center gap-1.5">
         <Icons.Logo className="ml-1.5 text-primary" height={16} width={16} />
         <Icons.LogoText className="text-foreground" height={10} width={82} />

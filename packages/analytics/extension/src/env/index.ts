@@ -10,7 +10,7 @@ const shared = {
   skipValidation:
     (!!import.meta.env.SKIP_ENV_VALIDATION &&
       ["1", "true"].includes(import.meta.env.SKIP_ENV_VALIDATION)) ||
-    import.meta.env.npm_lifecycle_event === "lint",
+    ["lint", "postinstall"].includes(import.meta.env.npm_lifecycle_event),
   emptyStringAsUndefined: true,
   clientPrefix: "VITE_",
 } as const;

@@ -6,11 +6,12 @@
   "build": {
     "base": {
       "node": "20.15.0",
-      "pnpm": "9.6.0",
+      "pnpm": "9.9.0",
       "ios": {
         "resourceClass": "m-medium"
       },
       "env": {
+        "EXPO_PUBLIC_DEFAULT_LOCALE": "en",
         "EXPO_PUBLIC_AUTH_PASSWORD": "true",
         "EXPO_PUBLIC_AUTH_MAGIC_LINK": "false",
         "EXPO_PUBLIC_THEME_MODE": "system",

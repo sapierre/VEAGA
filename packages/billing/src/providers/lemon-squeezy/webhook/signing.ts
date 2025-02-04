@@ -1,21 +1,41 @@
-import crypto from "node:crypto";
-
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
-export const validateSignature = (
+export const validateSignature = async (
   sig: string,
   secret: string,
   body: string,
 ) => {
-  const hmac = crypto.createHmac("sha256", secret);
-  const digest = Buffer.from(hmac.update(body).digest("hex"), "utf8");
-  const signature = Buffer.from(sig || "", "utf8");
+  const keyData = new TextEncoder().encode(secret);
+  const bodyData = new TextEncoder().encode(body);
 
-  if (!crypto.timingSafeEqual(digest, signature)) {
-    throw new ApiError(
-      HttpStatusCode.BAD_REQUEST,
-      "Invalid webhook signature.",
-    );
+  const key = await crypto.subtle.importKey(
+    "raw",
+    keyData,
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+
+  const signatureBuffer = await crypto.subtle.sign("HMAC", key, bodyData);
+  const expectedSignature = [...new Uint8Array(signatureBuffer)]
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  if (!timingSafeEqual(expectedSignature, sig)) {
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.webhook.signatureInvalid",
+    });
   }
+};
+
+const timingSafeEqual = (a: string, b: string) => {
+  if (a.length !== b.length) return false;
+
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+
+  return result === 0;
 };

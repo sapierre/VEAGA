@@ -1,29 +1,35 @@
 "use client";
 
-import { useAtom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
 import { ThemeProvider as NextThemeProvider } from "next-themes";
 import { memo, useEffect } from "react";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 import { appConfig } from "~/config/app";
 
 import type { ThemeConfig } from "@turbostarter/ui";
 
-const configAtom = atomWithStorage<Omit<ThemeConfig, "mode">>(
-  "config",
-  appConfig.theme,
+export const useThemeConfig = create<{
+  config: Omit<ThemeConfig, "mode">;
+  setConfig: (config: Omit<ThemeConfig, "mode">) => void;
+}>()(
+  persist(
+    (set) => ({
+      config: appConfig.theme,
+      setConfig: (config) => set({ config }),
+    }),
+    {
+      name: "theme-config",
+    },
+  ),
 );
-
-export function useThemeConfig() {
-  return useAtom(configAtom);
-}
 
 interface ThemeProviderProps {
   readonly children: React.ReactNode;
 }
 
 const ThemeConfigProvider = () => {
-  const [themeConfig] = useThemeConfig();
+  const themeConfig = useThemeConfig((s) => s.config);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", themeConfig.color);

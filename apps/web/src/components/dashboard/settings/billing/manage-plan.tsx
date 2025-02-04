@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { handle } from "@turbostarter/api/utils";
 import { config, PricingPlanType } from "@turbostarter/billing";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Card,
@@ -25,6 +26,7 @@ interface ManagePlanProps {
 }
 
 export const ManagePlan = memo<ManagePlanProps>(({ customer }) => {
+  const { t } = useTranslation("billing");
   const router = useRouter();
   const getPortal = useMutation({
     mutationFn: handle(api.billing.portal.$get),
@@ -37,7 +39,7 @@ export const ManagePlan = memo<ManagePlanProps>(({ customer }) => {
   });
 
   const plan = config.plans.find(
-    (plan) => plan.type === (customer?.plan ?? PricingPlanType.FREE),
+    (plan) => plan.id === (customer?.plan ?? PricingPlanType.FREE),
   );
 
   if (!plan) {
@@ -47,11 +49,9 @@ export const ManagePlan = memo<ManagePlanProps>(({ customer }) => {
   return (
     <Card className="h-fit w-full max-w-3xl overflow-hidden">
       <CardHeader>
-        <CardTitle className="text-xl">Manage billing</CardTitle>
+        <CardTitle className="text-xl">{t("manage.billing.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-          Visit the Billing Portal to manage your subscription and billing. You
-          can update your payment method, cancel your subscription, download
-          invoices and more.
+          {t("manage.billing.description")}
         </CardDescription>
 
         <Button
@@ -65,7 +65,7 @@ export const ManagePlan = memo<ManagePlanProps>(({ customer }) => {
             })
           }
         >
-          Visit Billing Portal
+          {t("manage.billing.visitPortal")}
           {getPortal.isPending ? (
             <Icons.Loader2 className="size-4 animate-spin" />
           ) : (

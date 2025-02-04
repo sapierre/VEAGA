@@ -3,6 +3,7 @@ import { fetch as expoFetch } from "expo/fetch";
 import { FlatList, ScrollView, View } from "react-native";
 import Markdown from "react-native-marked";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import { Button } from "@turbostarter/ui-mobile/button";
 import { Icons } from "@turbostarter/ui-mobile/icons";
@@ -14,23 +15,24 @@ import { getBaseUrl } from "~/lib/api/utils";
 const EXAMPLES = [
   {
     icon: Icons.Globe2,
-    prompt: "Tell the history of the internet",
+    prompt: "ai.prompt.history",
   },
   {
     icon: Icons.GraduationCap,
-    prompt: "Quiz me on the world capitals",
+    prompt: "ai.prompt.capitals",
   },
   {
     icon: Icons.Atom,
-    prompt: "Explain quantum computing",
+    prompt: "ai.prompt.quantum",
   },
   {
     icon: Icons.Brain,
-    prompt: "Describe a real-world AI case",
+    prompt: "ai.prompt.realWorld",
   },
 ] as const;
 
 export default function AI() {
+  const { t } = useTranslation("marketing");
   const {
     messages,
     error,
@@ -94,24 +96,24 @@ export default function AI() {
 
       {!messagesToDisplay.length && (
         <FlatList
-          numColumns={2}
+          // numColumns={2}
           data={EXAMPLES}
           contentContainerClassName="gap-2 mt-auto mb-6"
-          columnWrapperClassName="gap-2"
+          // columnWrapperClassName="gap-2"
           renderItem={({ item }) => (
             <Button
-              onPress={() => append({ role: "user", content: item.prompt })}
+              onPress={() => append({ role: "user", content: t(item.prompt) })}
               key={item.prompt}
               variant="outline"
-              className="native:h-auto h-auto grow flex-col items-start gap-2 py-3 text-left"
+              className="native:h-auto h-auto grow flex-row justify-start gap-4 py-3 text-left"
             >
               <item.icon
                 className="shrink-0 text-muted-foreground"
                 width={20}
                 height={20}
               />
-              <Text className="max-w-40 text-base text-muted-foreground">
-                {item.prompt}
+              <Text className="text-base text-muted-foreground">
+                {t(item.prompt)}
               </Text>
             </Button>
           )}
@@ -120,7 +122,7 @@ export default function AI() {
 
       <View className="relative bg-background pb-4">
         <Textarea
-          placeholder="Ask a question..."
+          placeholder={t("ai.placeholder")}
           value={input}
           onSubmitEditing={(e) => {
             handleSubmit(e);
@@ -142,6 +144,7 @@ export default function AI() {
           className="absolute bottom-6 right-2 rounded-full"
           disabled={isLoading}
           onPress={() => handleSubmit()}
+          accessibilityLabel={t("ai.cta")}
         >
           <Icons.ArrowUp className="text-background" />
         </Button>

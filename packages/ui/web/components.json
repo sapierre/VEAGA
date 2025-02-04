@@ -11,9 +11,9 @@
   },
   "aliases": {
     "utils": "@turbostarter/ui",
-    "components": "@/components",
-    "ui": "@/components",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "components": "#components",
+    "ui": "#components",
+    "lib": "#lib",
+    "hooks": "#hooks"
   }
 }

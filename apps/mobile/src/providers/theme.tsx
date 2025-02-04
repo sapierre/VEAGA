@@ -5,11 +5,11 @@ import {
   ThemeProvider as NavigationThemeProvider,
 } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
-import { useAtom } from "jotai";
-import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { vars } from "nativewind";
 import { memo } from "react";
 import { View } from "react-native";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 import { mapValues, transform } from "@turbostarter/shared/utils";
 import { themes } from "@turbostarter/ui";
@@ -20,15 +20,21 @@ import { isAndroid } from "~/utils/device";
 
 import type { ThemeConfig } from "@turbostarter/ui";
 
-type Storage = Omit<ThemeConfig, "mode">;
-
-const storage = createJSONStorage<Storage>(() => AsyncStorage);
-
-const configAtom = atomWithStorage<Storage>("config", appConfig.theme, storage);
-
-export function useThemeConfig() {
-  return useAtom(configAtom);
-}
+export const useThemeConfig = create<{
+  config: Omit<ThemeConfig, "mode">;
+  setConfig: (config: Omit<ThemeConfig, "mode">) => void;
+}>()(
+  persist(
+    (set) => ({
+      config: appConfig.theme,
+      setConfig: (config) => set({ config }),
+    }),
+    {
+      name: "theme-config",
+      storage: createJSONStorage(() => AsyncStorage),
+    },
+  ),
+);
 
 interface ThemeProviderProps {
   readonly children: React.ReactNode;
@@ -46,7 +52,7 @@ const colors = mapValues(themes, (theme) =>
 
 export const ThemeProvider = memo<ThemeProviderProps>(({ children }) => {
   const { isDark, resolvedTheme } = useTheme();
-  const [config] = useThemeConfig();
+  const config = useThemeConfig((state) => state.config);
 
   if (isAndroid) {
     void NavigationBar.setPositionAsync("absolute");

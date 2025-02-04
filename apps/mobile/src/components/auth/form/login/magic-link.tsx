@@ -5,6 +5,7 @@ import { Alert, View } from "react-native";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { magicLinkLoginSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
@@ -22,11 +23,12 @@ import { signIn } from "~/lib/auth";
 import type { MagicLinkLoginPayload } from "@turbostarter/auth";
 
 export const MagicLinkLoginForm = memo(() => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
 
   const form = useForm<MagicLinkLoginPayload>({
-    resolver: zodResolver(magicLinkLoginSchema),
+    resolver: zodResolver(magicLinkLoginSchema, { errorMap }),
   });
 
   const onSubmit = async (data: MagicLinkLoginPayload) => {
@@ -42,13 +44,13 @@ export const MagicLinkLoginForm = memo(() => {
         },
         onSuccess: () => {
           Alert.alert(
-            "Magic link sent!",
-            "Please check your email to login with the magic link.",
+            t("login.magicLink.success.title"),
+            t("login.magicLink.success.description"),
           );
           form.reset();
         },
         onError: ({ error }) => {
-          Alert.alert("Something went wrong!", error.message);
+          Alert.alert(t("error.title"), error.message);
         },
         onResponse: () => {
           setIsSubmitting(false);
@@ -66,7 +68,7 @@ export const MagicLinkLoginForm = memo(() => {
           render={({ field }) => (
             <FormItem>
               <FormInput
-                label="Email"
+                label={t("email")}
                 autoCapitalize="none"
                 autoComplete="email"
                 {...field}
@@ -84,7 +86,7 @@ export const MagicLinkLoginForm = memo(() => {
           {isSubmitting && provider === AUTH_PROVIDER.MAGIC_LINK ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
-            <Text>Send magic link</Text>
+            <Text>{t("login.magicLink.cta")}</Text>
           )}
         </Button>
       </View>

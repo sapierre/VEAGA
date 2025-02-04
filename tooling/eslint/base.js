@@ -8,6 +8,7 @@ import importPlugin from "eslint-plugin-import";
 import turboPlugin from "eslint-plugin-turbo";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
+import i18nextPlugin from "eslint-plugin-i18next";
 
 export const restrictEnvAccess = tseslint.config({
   files: ["**/*.js", "**/*.ts", "**/*.tsx"],
@@ -51,6 +52,7 @@ export default tseslint.config(
     },
     extends: [
       eslint.configs.recommended,
+      i18nextPlugin.configs["flat/recommended"],
       ...tseslint.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,

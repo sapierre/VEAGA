@@ -1,14 +1,17 @@
+"use client";
+
 import * as React from "react";
 import { forwardRef, memo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 import { cn } from "@turbostarter/ui";
 
-import { Button } from "./button";
-import { Icons } from "./icons";
-import { Label } from "./label";
-
 import type { ThemeConfig } from "@turbostarter/ui";
+
+import { Button } from "#components/button";
+import { Icons } from "#components/icons";
+import { Label } from "#components/label";
 
 interface ThemeCustomizerProps {
   readonly config: ThemeConfig;
@@ -23,6 +26,8 @@ const MODE_ICONS = {
 } as const;
 
 export const ThemeStatus = forwardRef<HTMLButtonElement>((props, ref) => {
+  const { t } = useTranslation("common");
+
   return (
     <Button
       variant="outline"
@@ -30,7 +35,7 @@ export const ThemeStatus = forwardRef<HTMLButtonElement>((props, ref) => {
       ref={ref}
       {...props}
     >
-      <span className="sr-only">Customize theme</span>
+      <span className="sr-only">{t("theme.customization.label")}</span>
       <div className="flex items-center justify-center gap-2">
         <div className="size-4 rounded-full bg-primary"></div>
         <Icons.Sun className="size-[1.2rem] dark:hidden" />
@@ -42,15 +47,16 @@ export const ThemeStatus = forwardRef<HTMLButtonElement>((props, ref) => {
 
 export const ThemeCustomizer = memo<ThemeCustomizerProps>(
   ({ config, defaultConfig, onChange }) => {
+    const { t } = useTranslation("common");
     return (
       <>
         <div className="flex items-start">
           <div className="space-y-1 pr-2">
             <div className="font-semibold leading-none tracking-tight">
-              Customize
+              {t("theme.customization.title")}
             </div>
             <div className="text-xs text-muted-foreground">
-              Pick a style and color for your app.
+              {t("theme.customization.description")}
             </div>
           </div>
           {defaultConfig && (
@@ -63,13 +69,13 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
               }}
             >
               <Icons.Undo2 className="size-4" />
-              <span className="sr-only">Reset</span>
+              <span className="sr-only">{t("reset")}</span>
             </Button>
           )}
         </div>
         <div className="mt-2 flex flex-1 flex-col items-center space-y-4 md:space-y-6">
           <div className="w-full space-y-1.5">
-            <Label className="text-xs">Color</Label>
+            <Label className="text-xs">{t("theme.color.label")}</Label>
             <div className="flex flex-wrap gap-2">
               {Object.values(ThemeColor)
                 .filter((color) => Object.values(ThemeColor).includes(color))
@@ -93,14 +99,14 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                           "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full border border-white bg-primary",
                         )}
                       ></span>
-                      {color}
+                      {t(`theme.color.${color}`)}
                     </Button>
                   );
                 })}
             </div>
           </div>
           <div className="w-full space-y-1.5">
-            <Label className="text-xs">Mode</Label>
+            <Label className="text-xs">{t("theme.mode.label")}</Label>
             <div className="flex flex-wrap gap-2">
               {Object.values(ThemeMode).map((mode) => {
                 const isActive = config.mode === mode;
@@ -118,7 +124,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                     )}
                   >
                     <Icon className="mr-1 size-5 shrink-0 -translate-x-1" />
-                    {mode}
+                    {t(`theme.mode.${mode}`)}
                   </Button>
                 );
               })}

@@ -33,6 +33,7 @@ const configEnv = createEnv({
   server: {
     EMAIL_FROM: z.string().email(),
     EMAIL_THEME: z.nativeEnum(ThemeColor).optional().default(theme),
+    PRODUCT_NAME: z.string().optional(),
   },
 });
 

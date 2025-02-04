@@ -2,7 +2,7 @@ import { Suspense as ReactSuspense } from "react";
 
 import { Icons } from "@turbostarter/ui-web/icons";
 
-import type { ReactElement } from "react";
+import type { ReactNode } from "react";
 
 const Loading = () => {
   return (
@@ -16,8 +16,8 @@ export const Suspense = ({
   children,
   fallback = <Loading />,
 }: {
-  children: ReactElement;
-  fallback?: ReactElement;
+  children: ReactNode;
+  fallback?: ReactNode;
 }) => {
   return <ReactSuspense fallback={fallback}>{children}</ReactSuspense>;
 };

@@ -4,28 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./env": {
-      "types": "./dist/env/index.d.ts",
-      "default": "./src/env/index.ts"
-    },
-    "./server": {
-      "types": "./dist/server.d.ts",
-      "default": "./src/server.ts"
-    },
-    "./client/*": {
-      "types": "./dist/client/*.d.ts",
-      "default": "./src/client/*.ts"
-    }
+    ".": "./src/index.ts",
+    "./env": "./src/env/index.ts",
+    "./server": "./src/server.ts",
+    "./client/*": "./src/client/*.ts"
   },
   "scripts": {
-    "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "db:generate": "SKIP_ENV_VALIDATION=1 pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/src/schema/auth/index.ts --y",
-    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
@@ -40,13 +26,13 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@better-auth/expo": "1.1.14",
+    "@better-auth/expo": "1.1.15",
     "@t3-oss/env-core": "0.11.1",
     "@turbostarter/db": "workspace:*",
     "@turbostarter/email": "workspace:*",
+    "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
-    "better-auth": "1.1.14",
-    "standardwebhooks": "1.0.0",
+    "better-auth": "1.1.15",
     "zod": "catalog:"
   }
 }

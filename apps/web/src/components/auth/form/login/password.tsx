@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { AUTH_PROVIDER, passwordLoginSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -32,14 +33,15 @@ interface PasswordLoginFormProps {
 
 export const PasswordLoginForm = memo<PasswordLoginFormProps>(
   ({ redirectTo = pathsConfig.dashboard.index }) => {
+    const { t, errorMap } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
     const form = useForm<PasswordLoginPayload>({
-      resolver: zodResolver(passwordLoginSchema),
+      resolver: zodResolver(passwordLoginSchema, { errorMap }),
     });
 
     const onSubmit = async (data: PasswordLoginPayload) => {
-      const loadingToast = toast.loading("Signing in...");
+      const loadingToast = toast.loading(t("login.password.loading"));
       await signIn.email(
         {
           email: data.email,
@@ -52,10 +54,13 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             setIsSubmitting(true);
           },
           onSuccess: () => {
-            toast.success("Signed in!", { id: loadingToast });
+            toast.success(t("login.password.success"), {
+              id: loadingToast,
+            });
           },
           onError: ({ error }) => {
-            toast.error(`${error.message}!`, { id: loadingToast });
+            console.log(error);
+            toast.error(error.message, { id: loadingToast });
           },
           onResponse: () => {
             setIsSubmitting(false);
@@ -75,7 +80,7 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t("common:email")}</FormLabel>
                 <FormControl>
                   <Input {...field} type="email" disabled={isSubmitting} />
                 </FormControl>
@@ -90,12 +95,12 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             render={({ field }) => (
               <FormItem>
                 <div className="flex w-full items-center justify-between">
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t("password")}</FormLabel>
                   <TurboLink
                     href={pathsConfig.auth.forgotPassword}
                     className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
                   >
-                    Forgot password?
+                    {t("account.password.forgot.label")}
                   </TurboLink>
                 </div>
                 <FormControl>
@@ -115,18 +120,18 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
               <Icons.Loader2 className="animate-spin" />
             ) : (
-              "Sign in"
+              t("login.cta")
             )}
           </Button>
 
           <div className="flex items-center justify-center pt-2">
             <div className="text-sm text-muted-foreground">
-              Don&apos;t have an account yet?
+              {t("login.noAccount")}
               <TurboLink
                 href={pathsConfig.auth.register}
                 className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
               >
-                Sign up!
+                {t("register.cta")}
               </TurboLink>
             </div>
           </div>

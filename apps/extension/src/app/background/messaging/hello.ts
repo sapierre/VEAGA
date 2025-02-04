@@ -1,7 +1,13 @@
+import { getI18n } from "@turbostarter/i18n";
+
+import { getLocale } from "~/lib/i18n";
 import { Message, onMessage } from "~/lib/messaging";
 
-const getMessage = (filename: string) => {
-  return `Edit ${filename} and save to reload.`;
+const getMessage = async (filename: string) => {
+  const locale = await getLocale();
+  const { t } = await getI18n({ locale, ns: "common" });
+
+  return t("editToReload", { file: filename });
 };
 
 onMessage(Message.HELLO, ({ data }) => getMessage(data));

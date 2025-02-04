@@ -8,6 +8,12 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": [".wxt/wxt.d.ts", "src", "*.ts", "*.js"],
+  "include": [
+    "../../packages/ui/shared/src/typings/*.d.ts",
+    ".wxt/wxt.d.ts",
+    "src/**/*",
+    "*.ts",
+    "*.js"
+  ],
   "exclude": ["node_modules"]
 }

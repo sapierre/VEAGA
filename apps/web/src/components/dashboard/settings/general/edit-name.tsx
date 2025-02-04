@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { updateUserSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Card,
@@ -35,9 +36,10 @@ interface EditNameProps {
 }
 
 export const EditName = memo<EditNameProps>(({ user }) => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const router = useRouter();
   const form = useForm({
-    resolver: zodResolver(updateUserSchema),
+    resolver: zodResolver(updateUserSchema, { errorMap }),
     defaultValues: {
       name: user.name,
     },
@@ -46,11 +48,11 @@ export const EditName = memo<EditNameProps>(({ user }) => {
   const onSubmit = async (data: UpdateUserPayload) => {
     await updateUser(data, {
       onSuccess: () => {
-        toast.success("Name updated successfully!");
+        toast.success(t("account.name.edit.success"));
         router.refresh();
       },
       onError: ({ error }) => {
-        toast.error(`${error.message}!`);
+        toast.error(error.message);
       },
     });
   };
@@ -60,10 +62,9 @@ export const EditName = memo<EditNameProps>(({ user }) => {
       <Form {...form}>
         <form onSubmit={onPromise(form.handleSubmit(onSubmit))}>
           <CardHeader>
-            <CardTitle className="text-xl">Name</CardTitle>
+            <CardTitle className="text-xl">{t("name")}</CardTitle>
             <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-              Please enter your full name, or a display name you are comfortable
-              with.
+              {t("account.name.edit.description")}
             </CardDescription>
 
             <FormField
@@ -86,14 +87,12 @@ export const EditName = memo<EditNameProps>(({ user }) => {
           </CardHeader>
 
           <CardFooter className="flex min-h-14 justify-between gap-10 border-t bg-muted/75 py-3 text-sm text-muted-foreground dark:bg-card">
-            <span className="leading-tight">
-              Please use 32 characters at maximum.
-            </span>
+            <span className="leading-tight">{t("account.name.edit.info")}</span>
             <Button size="sm" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
                 <Icons.Loader2 className="size-4 animate-spin" />
               ) : (
-                "Save"
+                t("save")
               )}
             </Button>
           </CardFooter>

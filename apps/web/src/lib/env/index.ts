@@ -39,9 +39,8 @@ export const env = createEnv({
       .transform((value) => value === "true"),
 
     NEXT_PUBLIC_PRODUCT_NAME: z.string(),
-    NEXT_PUBLIC_SITE_TITLE: z.string(),
-    NEXT_PUBLIC_SITE_URL: z.string().url(),
-    NEXT_PUBLIC_SITE_DESCRIPTION: z.string(),
+    NEXT_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_DEFAULT_LOCALE: z.string().optional().default("en"),
     NEXT_PUBLIC_THEME_MODE: z
       .nativeEnum(ThemeMode)
       .optional()
@@ -61,9 +60,8 @@ export const env = createEnv({
     NEXT_PUBLIC_AUTH_MAGIC_LINK: process.env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
 
     NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME,
-    NEXT_PUBLIC_SITE_TITLE: process.env.NEXT_PUBLIC_SITE_TITLE,
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-    NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+    NEXT_PUBLIC_DEFAULT_LOCALE: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
     NEXT_PUBLIC_THEME_MODE: process.env.NEXT_PUBLIC_THEME_MODE,
     NEXT_PUBLIC_THEME_COLOR: process.env.NEXT_PUBLIC_THEME_COLOR,
   },

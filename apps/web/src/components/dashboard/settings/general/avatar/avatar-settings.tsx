@@ -5,6 +5,7 @@ import { memo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Avatar,
   AvatarFallback,
@@ -36,31 +37,39 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-const avatarSchema = z.object({
-  avatar: z
-    .custom<FileList>()
-    .refine((files) => files.length === 1, "Please select an image file.")
-    .transform((files) => files[0])
-    .refine(
-      (file) => (file?.size ?? 0) <= MAX_FILE_SIZE,
-      "File size must be less than 5MB.",
-    )
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type ?? ""),
-      "Only .jpg, .jpeg, .png and .webp files are accepted.",
-    ),
-});
-
-type AvatarPayload = z.infer<typeof avatarSchema>;
-
 export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
+  const { t, i18n, errorMap } = useTranslation(["common", "auth"]);
   const { upload, remove, previewUrl, setPreviewUrl } = useAvatar(user);
-  const form = useForm<AvatarPayload>({
-    resolver: zodResolver(avatarSchema),
+
+  const avatarSchema = z.object({
+    avatar: z
+      .custom<FileList>()
+      .refine(
+        (files) => files.length === 1,
+        t("account.avatar.validation.file"),
+      )
+      .transform((files) => files[0])
+      .refine(
+        (file) => (file?.size ?? 0) <= MAX_FILE_SIZE,
+        t("account.avatar.validation.size", { size: MAX_FILE_SIZE }),
+      )
+      .refine(
+        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type ?? ""),
+        t("account.avatar.validation.type", {
+          types: new Intl.ListFormat(i18n.language, {
+            style: "long",
+            type: "conjunction",
+          }).format(ACCEPTED_IMAGE_TYPES.map((t) => t.replace("image/", "."))),
+        }),
+      ),
+  });
+
+  const form = useForm<z.infer<typeof avatarSchema>>({
+    resolver: zodResolver(avatarSchema, { errorMap }),
   });
 
   const onSubmit = useCallback(
-    (data: AvatarPayload) => {
+    (data: z.infer<typeof avatarSchema>) => {
       upload.mutate(data);
       form.reset();
     },
@@ -118,7 +127,7 @@ export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
                 type="file"
                 accept={ACCEPTED_IMAGE_TYPES.join(",")}
                 className="sr-only"
-                aria-label="Upload avatar"
+                aria-label={t("account.avatar.update.cta")}
                 onClick={(e) => "value" in e.target && (e.target.value = "")}
               />
             </label>
@@ -134,16 +143,16 @@ export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
                 disabled={remove.isPending}
               >
                 <Icons.X className="size-3.5" />
-                <span className="sr-only">Remove avatar</span>
+                <span className="sr-only">
+                  {t("account.avatar.remove.cta")}
+                </span>
               </Button>
             )}
           </div>
         </div>
-        <CardTitle className="text-xl">Avatar</CardTitle>
-        <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-          This is your avatar.
-          <br />
-          Click on the avatar to upload a custom one from your files.
+        <CardTitle className="text-xl">{t("avatar")}</CardTitle>
+        <CardDescription className="flex flex-col gap-1 whitespace-pre-line py-1.5 text-foreground">
+          {t("account.avatar.description")}
         </CardDescription>
 
         {form.formState.errors.avatar && (
@@ -154,9 +163,7 @@ export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
       </CardHeader>
 
       <CardFooter className="flex min-h-14 items-center justify-between gap-10 border-t bg-muted/75 py-3 text-sm text-muted-foreground dark:bg-card">
-        <span className="leading-tight">
-          An avatar is optional but strongly recommended.
-        </span>
+        <span className="leading-tight">{t("account.avatar.info")}</span>
       </CardFooter>
     </Card>
   );

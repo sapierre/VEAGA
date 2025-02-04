@@ -2,7 +2,7 @@
 
 import { EmailTemplate } from "@turbostarter/email";
 import { sendEmail } from "@turbostarter/email/server";
-import { GENERIC_ERROR_MESSAGE } from "@turbostarter/shared/constants";
+import { getTranslation } from "@turbostarter/i18n/server";
 
 import { env } from "~/lib/env";
 
@@ -20,6 +20,8 @@ export const sendContactForm = async (data: ContactFormPayload) => {
     if (e instanceof Error) {
       return { error: e.message };
     }
-    return { error: GENERIC_ERROR_MESSAGE };
+
+    const { t } = await getTranslation({ ns: "common" });
+    return { error: t("error.general") };
   }
 };

@@ -2,12 +2,13 @@ import svgr from "vite-plugin-svgr";
 import { type WxtViteConfig, defineConfig } from "wxt";
 
 export default defineConfig({
-  manifest: {
-    name: "__MSG_extensionName__",
-    description: "__MSG_extensionDescription__",
-    default_locale: "en",
-    permissions: ["storage", "cookies", "sidePanel", "scripting"],
-    host_permissions: ["<all_urls>"],
+  manifest: async () => {
+    const { appConfig } = await import("./src/config/app");
+    return {
+      name: appConfig.name,
+      permissions: ["storage", "cookies", "sidePanel", "scripting"],
+      host_permissions: ["<all_urls>"],
+    };
   },
   dev: {
     server: {
@@ -29,5 +30,8 @@ export default defineConfig({
           include: "**/*.svg",
         }),
       ],
+      define: {
+        "process.env": import.meta.env,
+      },
     }) as WxtViteConfig,
 });

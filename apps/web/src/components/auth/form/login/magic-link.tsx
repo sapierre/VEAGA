@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { AUTH_PROVIDER, magicLinkLoginSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
   Form,
@@ -34,12 +35,13 @@ interface MagicLinkLoginFormProps {
 
 export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
   ({ redirectTo = pathsConfig.dashboard.index }) => {
+    const { t, errorMap } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
     const [status, setStatus] = useState<LoginStatus>("idle");
 
     const form = useForm<MagicLinkLoginPayload>({
-      resolver: zodResolver(magicLinkLoginSchema),
+      resolver: zodResolver(magicLinkLoginSchema, { errorMap }),
     });
 
     useEffect(() => {
@@ -47,7 +49,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
     }, [status, setIsSubmitting]);
 
     const onSubmit = async (data: MagicLinkLoginPayload) => {
-      const loadingToast = toast.loading("Sending magic link...");
+      const loadingToast = toast.loading(t("login.magicLink.loading"));
 
       await signIn.magicLink(
         {
@@ -61,7 +63,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
             setStatus("pending");
           },
           onSuccess: () => {
-            toast.success("Success! Now check your inbox!", {
+            toast.success(t("login.magicLink.success.notification"), {
               id: loadingToast,
             });
             setStatus("success");
@@ -90,10 +92,11 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
               className="h-20 w-20 text-success"
               strokeWidth={1.2}
             />
-            <h2 className="text-center text-2xl font-semibold">Success!</h2>
+            <h2 className="text-center text-2xl font-semibold">
+              {t("login.magicLink.success.title")}
+            </h2>
             <p className="text-center">
-              Email with a magic link has been sent to your inbox. Click it to
-              login!
+              {t("login.magicLink.success.description")}
             </p>
           </motion.div>
         ) : (
@@ -107,7 +110,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -129,7 +132,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
                 {isSubmitting && provider === AUTH_PROVIDER.MAGIC_LINK ? (
                   <Icons.Loader2 className="animate-spin" />
                 ) : (
-                  "Send magic link"
+                  t("login.magicLink.cta")
                 )}
               </Button>
             </form>

@@ -4,16 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsc",
-    "build:content": "content-collections build",
+    "build": "content-collections build",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "concurrently \"content-collections watch\" \"tsc\"",
+    "dev": "content-collections watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"

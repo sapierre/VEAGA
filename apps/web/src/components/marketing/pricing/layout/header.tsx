@@ -3,6 +3,7 @@
 import { memo } from "react";
 
 import { BillingModel } from "@turbostarter/billing";
+import { useTranslation } from "@turbostarter/i18n";
 import { Tabs, TabsList, TabsTrigger } from "@turbostarter/ui-web/tabs";
 
 import { Discount } from "./discount";
@@ -33,15 +34,15 @@ export const PricingHeader = memo<PricingHeaderProps>(
     priceWithDiscount,
     currency,
   }) => {
+    const { t } = useTranslation("billing");
+
     return (
       <header className="flex flex-col items-center justify-center gap-3">
         <h1 className="lg:leading-tighter max-w-4xl text-center text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          Pricing
+          {t("pricing.title")}
         </h1>
         <p className="max-w-2xl text-center text-muted-foreground">
-          {model === BillingModel.ONE_TIME
-            ? "Pay once. Use forever. No recurring fees. No hidden charges."
-            : "Choose a billing period that fits your needs."}
+          {t("pricing.description")}
         </p>
 
         <Discount
@@ -66,7 +67,7 @@ export const PricingHeader = memo<PricingHeaderProps>(
                   value={interval}
                   className="capitalize"
                 >
-                  {interval}
+                  {t(`interval.${interval}`)}
                 </TabsTrigger>
               ))}
             </TabsList>

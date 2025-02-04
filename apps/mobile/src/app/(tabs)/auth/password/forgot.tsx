@@ -1,11 +1,14 @@
+import { useTranslation } from "@turbostarter/i18n";
+
 import { Auth } from "~/components/auth/auth";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation("auth");
   return (
     <Auth.Layout>
       <Auth.Header
-        title="Forgot your password?"
-        description="Please enter your email address and we'll send you a link to reset your password"
+        title={t("account.password.forgot.header.title")}
+        description={t("account.password.forgot.header.description")}
       />
       <Auth.ForgotPassword />
     </Auth.Layout>

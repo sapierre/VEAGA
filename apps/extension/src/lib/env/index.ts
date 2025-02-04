@@ -14,7 +14,9 @@ export const env = createEnv({
   },
   clientPrefix: "VITE_",
   client: {
+    VITE_PRODUCT_NAME: z.string(),
     VITE_SITE_URL: z.string().url(),
+    VITE_DEFAULT_LOCALE: z.string().optional().default("en"),
     VITE_THEME_MODE: z
       .nativeEnum(ThemeMode)
       .optional()
@@ -25,13 +27,15 @@ export const env = createEnv({
       .default(ThemeColor.ORANGE),
   },
   runtimeEnv: {
+    VITE_PRODUCT_NAME: import.meta.env.VITE_PRODUCT_NAME,
     VITE_SITE_URL: import.meta.env.VITE_SITE_URL,
+    VITE_DEFAULT_LOCALE: import.meta.env.VITE_DEFAULT_LOCALE,
     VITE_THEME_MODE: import.meta.env.VITE_THEME_MODE,
     VITE_THEME_COLOR: import.meta.env.VITE_THEME_COLOR,
   },
   skipValidation:
     (!!import.meta.env.SKIP_ENV_VALIDATION &&
       ["1", "true"].includes(import.meta.env.SKIP_ENV_VALIDATION)) ||
-    import.meta.env.npm_lifecycle_event === "lint",
+    ["postinstall", "lint"].includes(import.meta.env.npm_lifecycle_event),
   emptyStringAsUndefined: true,
 });

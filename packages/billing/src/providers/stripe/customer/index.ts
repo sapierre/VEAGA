@@ -1,4 +1,5 @@
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpStatusCode } from "@turbostarter/shared/constants";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import {
   getCustomerByUserId,
@@ -44,7 +45,9 @@ export const createOrRetrieveCustomer = async ({
     : await createStripeCustomer(id, email);
 
   if (!stripeIdToInsert) {
-    throw new ApiError(500, "Stripe customer creation failed.");
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.customerCreation",
+    });
   }
 
   if (existingCustomer && stripeCustomerId) {
@@ -75,6 +78,8 @@ export const createBillingPortalSession = async (
     return await stripe().billingPortal.sessions.create(params);
   } catch (e) {
     console.error(e);
-    throw new ApiError(500, "Could not create billing portal session.");
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.portal",
+    });
   }
 };

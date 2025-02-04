@@ -5,7 +5,7 @@ import {
 } from "@lemonsqueezy/lemonsqueezy.js";
 
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { config } from "../../../config";
 import { env } from "../../../env";
@@ -25,10 +25,9 @@ export const checkout = async ({
   redirect,
 }: CheckoutPayload & { user: User }) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
-    throw new ApiError(
-      HttpStatusCode.INTERNAL_SERVER_ERROR,
-      "Invalid billing provider!",
-    );
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.invalidProvider",
+    });
   }
 
   try {
@@ -39,7 +38,9 @@ export const checkout = async ({
     const price = plan?.prices.find((p) => p.id === id);
 
     if (!price || !plan) {
-      throw new ApiError(HttpStatusCode.NOT_FOUND, "Price not found.");
+      throw new HttpException(HttpStatusCode.NOT_FOUND, {
+        code: "billing:error.priceNotFound",
+      });
     }
 
     const customer = await createOrRetrieveCustomer({
@@ -59,21 +60,16 @@ export const checkout = async ({
         ...(discount && { discountCode: discount.code }),
       },
       productOptions: {
-        name: plan.name,
-        description: plan.description,
         enabledVariants: [Number(id)],
         redirectUrl: redirect.success,
       },
     });
 
     return { url: session.data?.data.attributes.url ?? null };
-  } catch (e) {
-    console.error(e);
-    if (e instanceof Error) {
-      throw new ApiError(500, e.message);
-    }
-
-    throw new ApiError(500, "An unknown error occurred.");
+  } catch {
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.checkout",
+    });
   }
 };
 
@@ -81,10 +77,9 @@ export const getBillingPortal = async ({
   user,
 }: GetBillingPortalPayload & { user: User }) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
-    throw new ApiError(
-      HttpStatusCode.INTERNAL_SERVER_ERROR,
-      "Invalid billing provider!",
-    );
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.invalidProvider",
+    });
   }
 
   const defaultUrl = `https://${env.LEMON_SQUEEZY_STORE_ID}.lemonsqueezy.com/billing`;
@@ -103,13 +98,10 @@ export const getBillingPortal = async ({
     const url = lemonCustomer.data?.data.attributes.urls.customer_portal;
 
     return { url: url ?? defaultUrl };
-  } catch (e) {
-    console.error(e);
-    if (e instanceof Error) {
-      throw new ApiError(500, e.message);
-    }
-
-    throw new ApiError(500, "An unknown error occurred.");
+  } catch {
+    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+      code: "billing:error.portal",
+    });
   }
 };
 
@@ -119,7 +111,9 @@ export const checkoutStatusChangeHandler = async ({ id }: { id: string }) => {
   const order = data?.data;
 
   if (!order) {
-    throw new ApiError(HttpStatusCode.NOT_FOUND, "Order not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.orderNotFound",
+    });
   }
 
   const customer = await getCustomerByCustomerId(
@@ -127,7 +121,9 @@ export const checkoutStatusChangeHandler = async ({ id }: { id: string }) => {
   );
 
   if (!customer) {
-    throw new ApiError(HttpStatusCode.NOT_FOUND, "Customer not found.");
+    throw new HttpException(HttpStatusCode.NOT_FOUND, {
+      code: "billing:error.customerNotFound",
+    });
   }
 
   const priceId = order.attributes.first_order_item.variant_id.toString();
@@ -135,7 +131,7 @@ export const checkoutStatusChangeHandler = async ({ id }: { id: string }) => {
 
   await updateCustomer(customer.userId, {
     status: toCheckoutBillingStatus(order.attributes.status),
-    ...(plan && { plan: plan.type }),
+    ...(plan && { plan: plan.id }),
   });
 
   console.log(

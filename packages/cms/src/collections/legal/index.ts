@@ -1,6 +1,5 @@
 import { defineCollection } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
-import slugify from "slugify";
 
 import { ContentStatus } from "../../types";
 import { getLastModifiedAt } from "../../utils";
@@ -25,7 +24,8 @@ export const legal = defineCollection({
       ...document,
       mdx,
       lastModifiedAt,
-      slug: slugify(document.title, { lower: true }),
+      slug: document._meta.directory,
+      locale: document._meta.fileName.split(".")[0],
     };
   },
 });

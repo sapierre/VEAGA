@@ -7,6 +7,7 @@ import {
   Tailwind,
 } from "@react-email/components";
 
+import { I18nProvider } from "@turbostarter/i18n";
 import { mapValues, hslToHex } from "@turbostarter/shared/utils";
 import { themes } from "@turbostarter/ui";
 
@@ -22,9 +23,10 @@ const colors = mapValues(themes[theme].light, (v) => hslToHex(...v));
 export const Layout = ({
   children,
   origin,
-}: PropsWithChildren<{ origin?: string }>) => {
+  locale,
+}: PropsWithChildren<{ origin?: string; locale?: string }>) => {
   return (
-    <Html lang="en">
+    <Html lang={locale}>
       <Head>
         <Font
           fontFamily="DM Sans"
@@ -84,13 +86,15 @@ export const Layout = ({
           },
         }}
       >
-        <Section className="p-1">
-          <Container className="rounded-lg bg-card p-6 text-card-foreground">
-            {origin && <Header origin={origin} />}
-            {children}
-            {origin && <Footer origin={origin} />}
-          </Container>
-        </Section>
+        <I18nProvider locale={locale}>
+          <Section className="p-1">
+            <Container className="rounded-lg bg-card p-6 text-card-foreground">
+              {origin && <Header origin={origin} />}
+              {children}
+              {origin && <Footer origin={origin} />}
+            </Container>
+          </Section>
+        </I18nProvider>
       </Tailwind>
     </Html>
   );

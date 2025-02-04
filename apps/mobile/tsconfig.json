@@ -10,7 +10,7 @@
     "checkJs": false
   },
   "include": [
-    "src",
+    "src/**/*",
     "*.ts",
     "*.js",
     ".expo/types/**/*.ts",

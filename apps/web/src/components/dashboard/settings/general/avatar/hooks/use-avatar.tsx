@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { handle } from "@turbostarter/api/utils";
+import { useTranslation } from "@turbostarter/i18n";
 
 import { api } from "~/lib/api/client";
 import { updateUser } from "~/lib/auth/client";
@@ -11,6 +12,7 @@ import { updateUser } from "~/lib/auth/client";
 import type { User } from "@turbostarter/auth";
 
 export const useAvatar = (user: User) => {
+  const { t } = useTranslation("auth");
   const router = useRouter();
   const [previewUrl, setPreviewUrl] = useState(user.image ?? null);
 
@@ -33,7 +35,7 @@ export const useAvatar = (user: User) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to upload avatar");
+        throw new Error(t("account.avatar.update.error"));
       }
 
       const { url: publicUrl } = await handle(api.storage.public.$get)({
@@ -49,7 +51,7 @@ export const useAvatar = (user: User) => {
       return { publicUrl, oldImage: user.image };
     },
     onMutate: () => {
-      const id = toast.loading("Updating avatar...");
+      const id = toast.loading(t("account.avatar.update.loading"));
       return { id };
     },
     onError: (error, _, context) => {
@@ -73,7 +75,7 @@ export const useAvatar = (user: User) => {
         }
       }
 
-      toast.success("Avatar updated!", { id: context.id });
+      toast.success(t("account.avatar.update.success"), { id: context.id });
       router.refresh();
     },
   });
@@ -100,7 +102,7 @@ export const useAvatar = (user: User) => {
       });
     },
     onMutate: () => {
-      const id = toast.loading("Removing avatar...");
+      const id = toast.loading(t("account.avatar.remove.loading"));
       setPreviewUrl(null);
       return { id };
     },
@@ -109,7 +111,7 @@ export const useAvatar = (user: User) => {
     },
     onSuccess: (_, __, context) => {
       setPreviewUrl(null);
-      toast.success("Avatar removed!", { id: context.id });
+      toast.success(t("account.avatar.remove.success"), { id: context.id });
       router.refresh();
     },
   });

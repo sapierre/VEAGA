@@ -1,8 +1,10 @@
 "use client";
 
+import dayjs from "dayjs";
 import * as React from "react";
 import { Label, Pie, PieChart as RechartsPieChart, Sector } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -36,38 +38,30 @@ const desktopData = [
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  desktop: {
-    label: "Desktop",
-  },
-  mobile: {
-    label: "Mobile",
-  },
   january: {
-    label: "January",
+    label: dayjs().month(0).format("MMMM"),
     color: "hsl(var(--color-chart-1))",
   },
   february: {
-    label: "February",
+    label: dayjs().month(1).format("MMMM"),
     color: "hsl(var(--color-chart-2))",
   },
   march: {
-    label: "March",
+    label: dayjs().month(2).format("MMMM"),
     color: "hsl(var(--color-chart-3))",
   },
   april: {
-    label: "April",
+    label: dayjs().month(3).format("MMMM"),
     color: "hsl(var(--color-chart-4))",
   },
   may: {
-    label: "May",
+    label: dayjs().month(4).format("MMMM"),
     color: "hsl(var(--color-chart-5))",
   },
 } satisfies ChartConfig;
 
 export function PieChart() {
+  const { t, i18n } = useTranslation(["common", "marketing"]);
   const id = "pie-interactive";
   const [activeMonth, setActiveMonth] = React.useState(
     desktopData[0]?.month ?? "january",
@@ -84,15 +78,15 @@ export function PieChart() {
       <ChartStyle id={id} config={chartConfig} />
       <CardHeader className="flex-row items-start space-y-0 pb-0">
         <div className="grid gap-0.5">
-          <CardTitle className="text-xl">Pie Chart</CardTitle>
-          <CardDescription>January - June 2024</CardDescription>
+          <CardTitle className="text-xl">{t("dashboard.chart.pie")}</CardTitle>
+          <CardDescription>{t("dashboard.chart.period")}</CardDescription>
         </div>
         <Select value={activeMonth} onValueChange={setActiveMonth}>
           <SelectTrigger
             className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
-            aria-label="Select a value"
+            aria-label={t("selectMonth")}
           >
-            <SelectValue placeholder="Select month" />
+            <SelectValue placeholder={t("selectMonth")} />
           </SelectTrigger>
           <SelectContent align="end" className="rounded-xl">
             {months.map((key) => {
@@ -170,14 +164,14 @@ export function PieChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {data.desktop.toLocaleString()}
+                          {data.desktop.toLocaleString(i18n.language)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy ?? 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          {t("visitors")}
                         </tspan>
                       </text>
                     );

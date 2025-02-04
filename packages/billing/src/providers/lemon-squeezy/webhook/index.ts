@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { ApiError } from "@turbostarter/shared/utils";
+import { HttpException } from "@turbostarter/shared/utils";
 
 import { env } from "../../../env";
 import { BillingProvider } from "../../../types";
@@ -17,28 +17,28 @@ export const webhookHandler = async (
   callbacks?: WebhookCallbacks,
 ) => {
   if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
-    throw new ApiError(
-      HttpStatusCode.BAD_REQUEST,
-      "Unsupported billing provider!",
-    );
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.unsupportedProvider",
+    });
   }
 
   const body = await req.text();
   const sig = req.headers.get(LEMON_SQUEEZY_SIGNATURE_HEADER);
 
   if (!sig) {
-    throw new ApiError(
-      HttpStatusCode.BAD_REQUEST,
-      "Webhook signature not found.",
-    );
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.webhook.signatureNotFound",
+    });
   }
 
-  validateSignature(sig, env.LEMON_SQUEEZY_SIGNING_SECRET, body);
+  await validateSignature(sig, env.LEMON_SQUEEZY_SIGNING_SECRET, body);
 
   const data = JSON.parse(body);
 
   if (!webhookHasMeta(data)) {
-    throw new ApiError(HttpStatusCode.BAD_REQUEST, "Invalid webhook meta.");
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.webhook.metaInvalid",
+    });
   }
 
   const type = data.meta.event_name;
@@ -46,7 +46,9 @@ export const webhookHandler = async (
   console.log(`🔔  Webhook received: ${type}`);
 
   if (!webhookHasData(data)) {
-    throw new ApiError(HttpStatusCode.BAD_REQUEST, "Invalid webhook data.");
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.webhook.dataInvalid",
+    });
   }
 
   if (relevantEvents.has(type)) {
@@ -77,16 +79,14 @@ export const webhookHandler = async (
         });
         break;
       default:
-        throw new ApiError(
-          HttpStatusCode.BAD_REQUEST,
-          `Unhandled relevant event: ${type}`,
-        );
+        throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+          code: "billing:error.webhook.unhandledEvent",
+        });
     }
   } else {
-    throw new ApiError(
-      HttpStatusCode.BAD_REQUEST,
-      `Unhandled event type: ${type}`,
-    );
+    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
+      code: "billing:error.webhook.unsupportedEvent",
+    });
   }
 
   return new Response(JSON.stringify({ received: true }), {

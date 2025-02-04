@@ -11,11 +11,12 @@ import {
   getPlanPrice,
   getHighestDiscountForPrice,
 } from "@turbostarter/billing";
+import { useTranslation } from "@turbostarter/i18n";
 
 import { PLAN_FEATURES } from "~/components/marketing/pricing/constants/features";
+import { appConfig } from "~/config/app";
 import { pathsConfig } from "~/config/paths";
 import { api } from "~/lib/api/client";
-import { env } from "~/lib/env";
 
 import type { User } from "@turbostarter/auth";
 import type {
@@ -31,15 +32,17 @@ export const usePlan = (
     model: BillingModel;
     interval: RecurringInterval;
     discounts: Discount[];
+    currency?: string;
   },
 ) => {
+  const { t } = useTranslation("billing");
   const router = useRouter();
   const checkout = useMutation({
     mutationFn: handle(api.billing.checkout.$post),
     onError: (error) => toast.error(error.message),
     onSuccess: (data) => {
       if (!data.url) {
-        return toast.error("An error occurred while checking out.");
+        return toast.error(t("error.checkout"));
       }
       return router.push(data.url);
     },
@@ -50,16 +53,16 @@ export const usePlan = (
     onError: (error) => toast.error(error.message),
     onSuccess: (data) => {
       if (!data.url) {
-        return toast.error("An error occurred while getting the portal URL.");
+        return toast.error(t("error.portal"));
       }
       return router.push(data.url);
     },
   });
 
   const pathname = usePathname();
-  const price = getPlanPrice(plan, options.model, options.interval);
+  const price = getPlanPrice(plan, options);
 
-  const features = plan.type in PLAN_FEATURES ? PLAN_FEATURES[plan.type] : null;
+  const features = plan.id in PLAN_FEATURES ? PLAN_FEATURES[plan.id] : null;
 
   const discountForPrice = price
     ? getHighestDiscountForPrice(price, options.discounts)
@@ -89,8 +92,8 @@ export const usePlan = (
           id: price.id,
         },
         redirect: {
-          success: `${env.NEXT_PUBLIC_SITE_URL}${pathsConfig.dashboard.index}`,
-          cancel: `${env.NEXT_PUBLIC_SITE_URL}${pathname}`,
+          success: `${appConfig.url}${pathsConfig.dashboard.index}`,
+          cancel: `${appConfig.url}${pathname}`,
         },
       },
     });
@@ -105,7 +108,7 @@ export const usePlan = (
 
     getPortal.mutate({
       query: {
-        redirectUrl: `${env.NEXT_PUBLIC_SITE_URL}${pathname}`,
+        redirectUrl: `${appConfig.url}${pathname}`,
       },
     });
   };
@@ -115,7 +118,7 @@ export const usePlan = (
       return false;
     }
 
-    const currentPlanIndex = Object.values(PricingPlanType).indexOf(plan.type);
+    const currentPlanIndex = Object.values(PricingPlanType).indexOf(plan.id);
     const customerCurrentPlanIndex = customer.plan
       ? Object.values(PricingPlanType).indexOf(customer.plan)
       : -1;

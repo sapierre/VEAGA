@@ -2,16 +2,20 @@ import * as Linking from "expo-linking";
 import { Pressable } from "react-native";
 import { View } from "react-native";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 export default function Billing() {
+  const { t } = useTranslation("common");
+
   return (
     <View className="flex flex-1 items-center justify-center bg-background px-6">
       <View className="items-center gap-6 text-center">
-        <Text className="mt-4 text-4xl font-bold">We're working on it!</Text>
+        <Text className="mt-4 text-4xl font-bold">
+          {t("workInProgress.title")}
+        </Text>
         <Text className="text-pretty text-center text-lg text-muted-foreground">
-          Native mobile billing is currently not available. We're working on it
-          and it will be available soon.
+          {t("workInProgress.description", { feature: t("billing") })}
         </Text>
         <Pressable
           onPress={() =>
@@ -19,7 +23,7 @@ export default function Billing() {
           }
           className="mt-6"
         >
-          <Text className="text-primary underline">See roadmap</Text>
+          <Text className="text-primary underline">{t("seeRoadmap")}</Text>
         </Pressable>
       </View>
     </View>

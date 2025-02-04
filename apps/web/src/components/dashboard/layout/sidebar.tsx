@@ -1,5 +1,7 @@
 import { memo } from "react";
 
+import { isKey } from "@turbostarter/i18n";
+import { getTranslation } from "@turbostarter/i18n/server";
 import { Icons } from "@turbostarter/ui-web/icons";
 import {
   SidebarGroup,
@@ -39,7 +41,9 @@ interface DashboardSidebarProps {
 }
 
 export const DashboardSidebar = memo<DashboardSidebarProps>(
-  ({ user, customer, menu }) => {
+  async ({ user, customer, menu }) => {
+    const { t, i18n } = await getTranslation({ ns: "common" });
+
     return (
       <Sidebar collapsible="offcanvas">
         <SidebarHeader>
@@ -47,9 +51,9 @@ export const DashboardSidebar = memo<DashboardSidebarProps>(
             <SidebarMenuItem>
               <TurboLink
                 href={pathsConfig.index}
-                className="flex w-fit shrink-0 items-center gap-3.5 px-2 pt-2"
+                className="flex w-fit shrink-0 items-center gap-3 px-2 pt-2"
               >
-                <Icons.Logo className="h-8 text-primary" />
+                <Icons.Logo className="h-7 text-primary" />
                 <Icons.LogoText className="h-3.5 text-foreground" />
               </TurboLink>
             </SidebarMenuItem>
@@ -59,7 +63,9 @@ export const DashboardSidebar = memo<DashboardSidebarProps>(
           {menu.map((group) => (
             <SidebarGroup key={group.label}>
               <SidebarGroupLabel className="uppercase">
-                {group.label}
+                {isKey(group.label, i18n, "common")
+                  ? t(group.label)
+                  : group.label}
               </SidebarGroupLabel>
               <SidebarMenu>
                 {group.items.map((item) => (
@@ -67,7 +73,11 @@ export const DashboardSidebar = memo<DashboardSidebarProps>(
                     <SidebarMenuButton tooltip={item.title} asChild>
                       <TurboLink href={item.href}>
                         <item.icon />
-                        <span>{item.title}</span>
+                        <span>
+                          {isKey(item.title, i18n, "common")
+                            ? t(item.title)
+                            : item.title}
+                        </span>
                       </TurboLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -83,7 +93,7 @@ export const DashboardSidebar = memo<DashboardSidebarProps>(
                   <SidebarMenuButton asChild size="sm">
                     <TurboLink href={pathsConfig.marketing.contact}>
                       <Icons.LifeBuoy />
-                      <span>Support</span>
+                      <span>{t("support")}</span>
                     </TurboLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -92,7 +102,7 @@ export const DashboardSidebar = memo<DashboardSidebarProps>(
                   <SidebarMenuButton asChild size="sm">
                     <TurboLink href={pathsConfig.marketing.contact}>
                       <Icons.MessageCircle />
-                      <span>Feedback</span>
+                      <span>{t("feedback")}</span>
                     </TurboLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

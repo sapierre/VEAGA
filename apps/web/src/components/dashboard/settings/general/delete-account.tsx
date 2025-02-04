@@ -2,6 +2,7 @@
 
 import { toast } from "sonner";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { useBreakpoint } from "@turbostarter/ui-web";
 import { Button } from "@turbostarter/ui-web/button";
 import {
@@ -32,25 +33,24 @@ import {
   DrawerTrigger,
 } from "@turbostarter/ui-web/drawer";
 
-import { appConfig } from "~/config/app";
 import { deleteUser } from "~/lib/auth/client";
 
 export const DeleteAccount = () => {
+  const { t } = useTranslation("auth");
+
   return (
     <Card className="h-fit w-full max-w-3xl overflow-hidden border-destructive/25 dark:border-destructive/50">
       <CardHeader>
-        <CardTitle className="text-xl">Delete Account</CardTitle>
+        <CardTitle className="text-xl">{t("account.delete.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-          Permanently remove your Personal Account and all of its contents from
-          the {appConfig.name} platform. This action is not reversible, so
-          please continue with caution.
+          {t("account.delete.description")}
         </CardDescription>
       </CardHeader>
 
       <CardFooter className="min-h-14 border-t border-t-destructive/25 bg-destructive/15 py-3 text-sm text-muted-foreground dark:border-t-destructive/50 dark:bg-destructive/40">
         <ConfirmModal>
           <Button size="sm" className="ml-auto" variant="destructive">
-            Delete Account
+            {t("account.delete.cta")}
           </Button>
         </ConfirmModal>
       </CardFooter>
@@ -59,15 +59,18 @@ export const DeleteAccount = () => {
 };
 
 const ConfirmModal = ({ children }: { children: React.ReactNode }) => {
+  const { t } = useTranslation(["common", "auth"]);
   const isDesktop = useBreakpoint("md");
 
   const deleteAccount = async () => {
-    const loadingToast = toast.loading("Sending confirmation link...");
+    const loadingToast = toast.loading(
+      t("account.delete.confirmation.loading"),
+    );
 
     await deleteUser({
       fetchOptions: {
         onSuccess: () => {
-          toast.success("Confirmation link sent, check your inbox!", {
+          toast.success(t("account.delete.confirmation.success"), {
             id: loadingToast,
           });
         },
@@ -78,36 +81,24 @@ const ConfirmModal = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  const renderDescription = () => (
-    <>
-      You are about to delete your Personal Account.
-      <br />
-      <br />
-      After deleting your account, all your data will be permanently deleted and
-      cannot be recovered. We will send you a confirmation link to verify this
-      action.
-      <br />
-      <br />
-      Do you want to continue?
-    </>
-  );
-
   if (isDesktop) {
     return (
       <Dialog>
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete Account</DialogTitle>
-            <DialogDescription>{renderDescription()}</DialogDescription>
+            <DialogTitle>{t("account.delete.title")}</DialogTitle>
+            <DialogDescription className="whitespace-pre-line">
+              {t("account.delete.disclaimer")}
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline">{t("cancel")}</Button>
             </DialogClose>
             <DialogClose asChild>
               <Button onClick={deleteAccount} variant="destructive">
-                Send confirmation link
+                {t("account.delete.confirmation.cta")}
               </Button>
             </DialogClose>
           </DialogFooter>
@@ -121,15 +112,17 @@ const ConfirmModal = ({ children }: { children: React.ReactNode }) => {
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Delete Account</DrawerTitle>
-          <DrawerDescription>{renderDescription()}</DrawerDescription>
+          <DrawerTitle>{t("account.delete.title")}</DrawerTitle>
+          <DrawerDescription className="whitespace-pre-line">
+            {t("account.delete.disclaimer")}
+          </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">{t("cancel")}</Button>
           </DrawerClose>
           <Button onClick={deleteAccount} variant="destructive">
-            Send confirmation link
+            {t("account.delete.confirmation.cta")}
           </Button>
         </DrawerFooter>
       </DrawerContent>

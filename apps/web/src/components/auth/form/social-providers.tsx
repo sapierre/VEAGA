@@ -4,6 +4,7 @@ import { memo } from "react";
 import { toast } from "sonner";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { Trans } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import { Icons } from "@turbostarter/ui-web/icons";
 
@@ -52,12 +53,20 @@ const SocialProvider = ({
         <Icons.Loader2 className="animate-spin" />
       ) : (
         <>
-          <span className="sr-only">Sign in with {provider}</span>
+          <span className="sr-only">
+            <Trans i18nKey="auth:login.social" values={{ provider }} />
+          </span>
           <div className="h-6 w-6 dark:brightness-125">
             <Icon />
           </div>
           <span>
-            Sign in with <span className="capitalize">{provider}</span>
+            <Trans
+              i18nKey="auth:login.social"
+              values={{ provider }}
+              components={{
+                capitalize: <span className="capitalize" />,
+              }}
+            />
           </span>
         </>
       )}

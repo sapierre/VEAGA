@@ -7,6 +7,7 @@ import { Controller, FormProvider, useFormContext } from "react-hook-form";
 import { View } from "react-native";
 import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
 
+import { isKey, useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 
 import { Checkbox } from "../../components/ui/checkbox";
@@ -138,6 +139,7 @@ const FormMessage = React.forwardRef<
   React.ElementRef<typeof Animated.Text>,
   React.ComponentPropsWithoutRef<typeof Animated.Text>
 >(({ className, children, ...props }, ref) => {
+  const { t, i18n } = useTranslation();
   const { error, formMessageNativeID } = useFormField();
   const body = error ? String(error.message) : children;
 
@@ -154,7 +156,7 @@ const FormMessage = React.forwardRef<
       className={cn("text-sm text-destructive", className)}
       {...props}
     >
-      {body}
+      {typeof body === "string" && isKey(body, i18n) ? t(body) : body}
     </Animated.Text>
   );
 });

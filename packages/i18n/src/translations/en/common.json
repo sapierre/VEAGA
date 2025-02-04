@@ -1,0 +1,94 @@
+{
+  "product": {
+    "title": "Ship your startup everywhere. In minutes.",
+    "description": "The Next.js, React Native (Expo) and Plasmo SaaS production-ready starter kit. Launch your web, mobile app and browser extension with one-click boilerplate."
+  },
+  "legal": {
+    "privacy": "Privacy policy",
+    "terms": "Terms and Conditions",
+    "copyright": "All rights reserved"
+  },
+  "auth": "Auth",
+  "builtWith": "Built with",
+  "contactUs": "Contact us",
+  "reset": "Reset",
+  "more": "More",
+  "close": "Close",
+  "toggle": "Toggle",
+  "getStarted": "Get started",
+  "goToDashboard": "Go to dashboard",
+  "home": "Home",
+  "ai": "AI",
+  "settings": "Settings",
+  "billing": "Billing",
+  "support": "Support",
+  "feedback": "Feedback",
+  "dashboard": "Dashboard",
+  "platform": "Platform",
+  "account": "Account",
+  "continue": "Continue",
+  "cancel": "Cancel",
+  "save": "Save",
+  "verified": "Verified",
+  "unverified": "Unverified",
+  "addNew": "Add new",
+  "connect": "Connect",
+  "disconnect": "Disconnect",
+  "avatar": "Avatar",
+  "learnMore": "Learn more",
+  "upgrade": "Upgrade",
+  "updatedAt": "Updated at",
+  "visitors": "Visitors",
+  "desktop": "Desktop",
+  "mobile": "Mobile",
+  "other": "Other",
+  "views": "views",
+  "lastDays": "Last {{days}} days",
+  "lastMonths": "Last {{months}} months",
+  "selectMonth": "Select month",
+  "seeRoadmap": "See roadmap",
+  "language": {
+    "label": "Language",
+    "description": "Pick a language for your app."
+  },
+  "theme": {
+    "customization": {
+      "title": "Customize",
+      "label": "Customize theme",
+      "description": "Pick a style and color for your app."
+    },
+    "color": {
+      "label": "Color",
+      "orange": "Orange",
+      "rose": "Rose",
+      "red": "Red",
+      "yellow": "Yellow",
+      "gray": "Gray",
+      "stone": "Stone",
+      "green": "Green",
+      "blue": "Blue",
+      "violet": "Violet"
+    },
+    "mode": {
+      "label": "Mode",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "name": "Name",
+  "message": "Message",
+  "email": "Email",
+  "error": {
+    "title": "Oops!",
+    "general": "Something went wrong, please try again.",
+    "invalid": "Invalid payload!",
+    "notFound": "Not found!"
+  },
+  "editToReload": "Edit <code>{{file}}</code> and save to reload.",
+  "goBackHome": "Go back home",
+  "workInProgress": {
+    "title": "We're working on it!",
+    "description": "{{feature}} is currently not available. We're working on it and it will be available soon."
+  }
+}

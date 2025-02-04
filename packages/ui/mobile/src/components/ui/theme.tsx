@@ -2,6 +2,7 @@ import { vars } from "nativewind";
 import { memo } from "react";
 import { View } from "react-native";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { cn, ThemeColor, ThemeMode } from "@turbostarter/ui";
 
 import { Icons } from "../../lib/icons";
@@ -27,6 +28,7 @@ const MODE_ICONS = {
 
 export const ThemeCustomizer = memo<ThemeCustomizerProps>(
   ({ config, defaultConfig, onChange, colors }) => {
+    const { t } = useTranslation("common");
     return (
       <>
         <View className="flex-row items-start">
@@ -36,10 +38,10 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
               aria-level={3}
               className="font-sans-medium text-2xl leading-none tracking-tight"
             >
-              Customize
+              {t("theme.customization.title")}
             </Text>
             <Text className="text-sm text-muted-foreground">
-              Pick a style and color for your app.
+              {t("theme.customization.description")}
             </Text>
           </View>
           {defaultConfig && (
@@ -57,7 +59,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
         <View className="mt-2 flex flex-1 flex-col items-center gap-4">
           <View className="w-full gap-1.5">
             <Label nativeID="color" className="text-xs">
-              Color
+              {t("theme.color.label")}
             </Label>
             <View className="flex-row flex-wrap gap-2">
               {Object.values(ThemeColor)
@@ -87,7 +89,9 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                           }),
                         })}
                       ></View>
-                      <Text className="text-xs capitalize">{color}</Text>
+                      <Text className="text-xs capitalize">
+                        {t(`theme.color.${color}`)}
+                      </Text>
                     </Button>
                   );
                 })}
@@ -95,7 +99,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
           </View>
           <View className="w-full gap-1.5">
             <Label nativeID="mode" className="text-xs">
-              Mode
+              {t("theme.mode.label")}
             </Label>
             <View className="flex-row flex-wrap gap-2">
               {Object.values(ThemeMode).map((mode) => {
@@ -119,7 +123,9 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                       width={20}
                       height={20}
                     />
-                    <Text className="capitalize">{mode}</Text>
+                    <Text className="capitalize">
+                      {t(`theme.mode.${mode}`)}
+                    </Text>
                   </Button>
                 );
               })}

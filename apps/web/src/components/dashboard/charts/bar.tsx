@@ -9,6 +9,7 @@ import {
   XAxis,
 } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -34,9 +35,6 @@ const chartData = [
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   chrome: {
     label: "Chrome",
     color: "hsl(var(--color-chart-1))",
@@ -54,20 +52,29 @@ const chartConfig = {
     color: "hsl(var(--color-chart-4))",
   },
   other: {
-    label: "Other",
+    label: "Opera",
     color: "hsl(var(--color-chart-5))",
   },
 } satisfies ChartConfig;
 
 export function BarChart() {
+  const { t } = useTranslation(["common", "marketing"]);
+
   return (
     <Card>
       <CardHeader className="space-y-0.5">
-        <CardTitle className="text-xl">Bar Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="text-xl">{t("dashboard.chart.bar")}</CardTitle>
+        <CardDescription>{t("dashboard.chart.period")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer
+          config={{
+            visitors: {
+              label: t("visitors"),
+            },
+            ...chartConfig,
+          }}
+        >
           <RechartsBarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -106,10 +113,10 @@ export function BarChart() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          {t("dashboard.chart.trending")} <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          {t("dashboard.chart.showing")}
         </div>
       </CardFooter>
     </Card>

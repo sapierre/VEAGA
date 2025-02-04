@@ -1,6 +1,7 @@
 import { memo } from "react";
 
 import { PricingPlanType } from "@turbostarter/billing";
+import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import {
   Avatar,
@@ -21,7 +22,7 @@ import {
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
-import { env } from "~/lib/env";
+import { appConfig } from "~/config/app";
 
 import { Logout } from "./logout";
 
@@ -46,9 +47,10 @@ const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
 };
 
 const AnonymousUser = () => {
+  const { t } = useTranslation("auth");
   return (
     <a
-      href={`${env.VITE_SITE_URL}/auth/login`}
+      href={`${appConfig.url}/auth/login`}
       className={cn(
         buttonVariants({
           variant: "outline",
@@ -59,7 +61,7 @@ const AnonymousUser = () => {
       target="_blank"
     >
       <Icons.LogIn className="size-4" />
-      <div className="sr-only">Log in</div>
+      <div className="sr-only">{t("login.cta")}</div>
     </a>
   );
 };
@@ -71,6 +73,7 @@ interface UserNavigationProps {
 
 export const UserNavigation = memo<UserNavigationProps>(
   ({ user, customer }) => {
+    const { t } = useTranslation("common");
     if (!user) {
       return <AnonymousUser />;
     }
@@ -109,23 +112,23 @@ export const UserNavigation = memo<UserNavigationProps>(
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
                 <a
-                  href={`${env.VITE_SITE_URL}/dashboard`}
+                  href={`${appConfig.url}/dashboard`}
                   target="_blank"
                   className="flex w-full cursor-pointer items-center gap-1.5"
                 >
                   <Icons.Home className="size-4" />
-                  Dashboard
+                  {t("dashboard")}
                 </a>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
                 <a
-                  href={`${env.VITE_SITE_URL}/dashboard/settings`}
+                  href={`${appConfig.url}/dashboard/settings`}
                   target="_blank"
                   className="flex w-full cursor-pointer items-center gap-1.5"
                 >
                   <Icons.Settings className="size-4" />
-                  Settings
+                  {t("settings")}
                 </a>
               </DropdownMenuItem>
             </DropdownMenuGroup>

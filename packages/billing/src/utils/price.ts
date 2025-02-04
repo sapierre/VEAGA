@@ -16,21 +16,34 @@ const INTERVAL_MULTIPLIER: Record<RecurringInterval, number> = {
 
 export const getPlanPrice = (
   plan: PricingPlan,
-  model: BillingModel,
-  interval?: RecurringInterval,
+  options: {
+    model: BillingModel;
+    interval?: RecurringInterval;
+    currency?: string;
+  },
 ) => {
-  if (model === BillingModel.RECURRING && interval) {
-    return plan.prices.find(
-      (price) =>
-        price.type === BillingModel.RECURRING && price.interval === interval,
-    );
-  }
+  const filteredPrices =
+    options.model === BillingModel.RECURRING && options.interval
+      ? plan.prices.filter(
+          (price) =>
+            price.type === BillingModel.RECURRING &&
+            price.interval === options.interval,
+        )
+      : plan.prices.filter((price) => price.type === options.model);
 
-  return plan.prices.find((price) => price.type === model);
+  return filteredPrices.find(
+    (price) =>
+      !price.currency ||
+      !options.currency ||
+      price.currency.toLowerCase() === options.currency.toLowerCase(),
+  );
 };
 
-export const formatPrice = (price: { amount: number; currency: string }) => {
-  return new Intl.NumberFormat("en-US", {
+export const formatPrice = (
+  price: { amount: number; currency: string },
+  lang?: string,
+) => {
+  return new Intl.NumberFormat(lang, {
     style: "currency",
     currency: price.currency,
     minimumFractionDigits: 0,

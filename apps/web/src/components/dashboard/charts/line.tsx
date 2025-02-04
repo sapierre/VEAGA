@@ -8,6 +8,7 @@ import {
   XAxis,
 } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -119,19 +120,20 @@ const chartData = [
 
 const chartConfig = {
   views: {
-    label: "Page Views",
+    label: "views",
   },
   desktop: {
-    label: "Desktop",
+    label: "desktop",
     color: "hsl(var(--color-chart-1))",
   },
   mobile: {
-    label: "Mobile",
+    label: "mobile",
     color: "hsl(var(--color-chart-2))",
   },
 } satisfies ChartConfig;
 
 export const LineChart = () => {
+  const { t, i18n } = useTranslation(["common", "marketing"]);
   const [activeChart, setActiveChart] = React.useState<"desktop" | "mobile">(
     "desktop",
   );
@@ -148,10 +150,8 @@ export const LineChart = () => {
     <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-0.5 px-6 py-5 sm:py-6">
-          <CardTitle className="text-xl">Line Chart</CardTitle>
-          <CardDescription>
-            Showing total visitors for the last 3 months
-          </CardDescription>
+          <CardTitle className="text-xl">{t("dashboard.chart.line")}</CardTitle>
+          <CardDescription>{t("dashboard.chart.showing")}</CardDescription>
         </div>
         <div className="flex">
           {(["desktop", "mobile"] as const).map((key) => (
@@ -161,11 +161,9 @@ export const LineChart = () => {
               className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
               onClick={() => setActiveChart(key)}
             >
-              <span className="text-xs text-muted-foreground">
-                {chartConfig[key].label}
-              </span>
+              <span className="text-xs text-muted-foreground">{t(key)}</span>
               <span className="text-lg font-bold leading-none sm:text-3xl">
-                {total[key].toLocaleString()}
+                {total[key].toLocaleString(i18n.language)}
               </span>
             </button>
           ))}
@@ -193,7 +191,7 @@ export const LineChart = () => {
               minTickGap={32}
               tickFormatter={(value: string) => {
                 const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
+                return date.toLocaleDateString(i18n.language, {
                   month: "short",
                   day: "numeric",
                 });
@@ -205,7 +203,7 @@ export const LineChart = () => {
                   className="w-[150px]"
                   nameKey="views"
                   labelFormatter={(value: string) => {
-                    return new Date(value).toLocaleDateString("en-US", {
+                    return new Date(value).toLocaleDateString(i18n.language, {
                       month: "short",
                       day: "numeric",
                       year: "numeric",

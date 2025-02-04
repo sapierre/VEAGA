@@ -1,43 +1,54 @@
 import { Heading, Preview, Text } from "@react-email/components";
 import * as React from "react";
 
+import { getTranslation } from "@turbostarter/i18n/server";
+
 import { Button } from "../_components/button";
 import { Layout } from "../_components/layout/layout";
 
-import type { EmailVariables, EmailTemplate } from "../../types";
+import type {
+  EmailVariables,
+  EmailTemplate,
+  CommonEmailProps,
+} from "../../types";
 
-type Props = EmailVariables[typeof EmailTemplate.CONFIRM_EMAIL];
+type Props = EmailVariables[typeof EmailTemplate.CONFIRM_EMAIL] &
+  CommonEmailProps;
 
-export const MagicLink = ({ url }: Props) => {
+export const MagicLink = async ({ url, locale }: Props) => {
+  const { t } = await getTranslation({ locale, ns: "auth" });
   const { origin } = new URL(url);
 
   return (
-    <Layout origin={origin}>
-      <Preview>Login to TurboStarter with a magic link</Preview>
-      <Heading>Your magic link 🪄</Heading>
+    <Layout origin={origin} locale={locale}>
+      <Preview>{t("login.magicLink.email.preview")}</Preview>
+      <Heading>{t("login.magicLink.email.subject")}</Heading>
 
-      <Text>Almost in! Click the button below to login.</Text>
+      <Text>{t("login.magicLink.email.body")}</Text>
 
-      <Button href={url}>Login with magic link</Button>
+      <Button href={url}>{t("login.magicLink.email.cta")}</Button>
 
-      <Text>Or, copy and paste this link into your browser:</Text>
+      <Text>{t("login.magicLink.email.or")}</Text>
 
       <code className="inline-block rounded-md border border-solid border-border bg-muted px-5 py-3.5 font-mono text-xs">
         {url}
       </code>
 
       <Text className="text-muted-foreground">
-        If you didn't try to login, there's nothing to worry about, you can
-        safely ignore this email.
+        {t("login.magicLink.email.disclaimer")}
       </Text>
     </Layout>
   );
 };
 
-MagicLink.subject = "Your magic link 🪄";
+MagicLink.subject = async ({ locale }: CommonEmailProps) => {
+  const { t } = await getTranslation({ locale, ns: "auth" });
+  return t("login.magicLink.email.subject");
+};
 
 MagicLink.PreviewProps = {
   url: "http://localhost:3000/api/auth/magic-link/verify?token=123&callbackURL=/dashboard",
+  locale: "en",
 };
 
 export default MagicLink;

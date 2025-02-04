@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { emailSchema } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import { Badge } from "@turbostarter/ui-web/badge";
 import { Button } from "@turbostarter/ui-web/button";
@@ -37,8 +38,9 @@ interface EditEmailProps {
 }
 
 export const EditEmail = memo<EditEmailProps>(({ user }) => {
+  const { t, errorMap } = useTranslation(["common", "auth"]);
   const form = useForm<EmailPayload>({
-    resolver: zodResolver(emailSchema),
+    resolver: zodResolver(emailSchema, { errorMap }),
     defaultValues: {
       email: user.email,
     },
@@ -53,10 +55,10 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
         },
         {
           onSuccess: () => {
-            toast.success("Verification email sent! Please check your inbox.");
+            toast.success(t("account.email.confirm.email.sent"));
           },
           onError: ({ error }) => {
-            toast.error(`${error.message}!`);
+            toast.error(error.message);
           },
         },
       ),
@@ -70,10 +72,10 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
       },
       {
         onSuccess: () => {
-          toast.success("Check your inbox to confirm your new email!");
+          toast.success(t("account.email.change.success"));
         },
         onError: ({ error }) => {
-          toast.error(`${error.message}!`);
+          toast.error(error.message);
         },
       },
     );
@@ -85,7 +87,7 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <CardTitle className="text-xl">Email</CardTitle>
+              <CardTitle className="text-xl">{t("email")}</CardTitle>
               <Badge
                 className={cn({
                   "bg-success/15 text-success hover:bg-success/25":
@@ -94,7 +96,7 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
                     !user.emailVerified,
                 })}
               >
-                {user.emailVerified ? "Verified" : "Unverified"}
+                {user.emailVerified ? t("verified") : t("unverified")}
               </Badge>
               {!user.emailVerified && (
                 <Button
@@ -106,15 +108,14 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
                   className="h-auto py-1 text-xs"
                 >
                   {sendVerification.isPending
-                    ? "Sending email..."
-                    : "Click to verify"}
+                    ? t("account.email.confirm.loading")
+                    : t("account.email.confirm.cta")}
                 </Button>
               )}
             </div>
 
             <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-              Enter the email address you want to use to log in. This will be
-              used for account-related notifications.
+              {t("account.email.change.description")}
             </CardDescription>
 
             <FormField
@@ -127,7 +128,7 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
                       {...field}
                       type="email"
                       className="max-w-xs"
-                      placeholder="email@example.com"
+                      placeholder="john@doe.com"
                       disabled={form.formState.isSubmitting}
                       autoComplete="email"
                     />
@@ -140,13 +141,13 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
 
           <CardFooter className="min-h-14 justify-between gap-10 border-t bg-muted/75 py-3 text-sm text-muted-foreground dark:bg-card">
             <span className="leading-tight">
-              Email must be verified before it can be used.
+              {t("account.email.change.info")}
             </span>
             <Button size="sm" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
                 <Icons.Loader2 className="size-4 animate-spin" />
               ) : (
-                "Save"
+                t("save")
               )}
             </Button>
           </CardFooter>

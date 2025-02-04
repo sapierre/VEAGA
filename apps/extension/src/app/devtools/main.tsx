@@ -3,15 +3,16 @@ import { browser } from "wxt/browser";
 
 import { Main } from "~/components/common/main";
 import { Layout, render } from "~/components/layout/layout";
+import { env } from "~/lib/env";
 
 void browser.devtools.panels.create(
-  browser.i18n.getMessage("extensionName"),
+  env.VITE_PRODUCT_NAME,
   "icons/128.png",
   "devtools.html",
 );
 
 void browser.devtools.panels.elements
-  .createSidebarPane(browser.i18n.getMessage("extensionName"))
+  .createSidebarPane(env.VITE_PRODUCT_NAME)
   .then((sidebar) =>
     sidebar.setObject({
       name: "DevTools",

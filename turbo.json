@@ -26,6 +26,7 @@
       "outputs": [".cache/tsbuildinfo.json"]
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": false
     },
@@ -58,18 +59,9 @@
     },
     "clean": {
       "cache": false
-    },
-    "//#clean": {
-      "cache": false
     }
   },
-  "globalEnv": [
-    "DATABASE_URL",
-    "PRODUCT_NAME",
-    "SITE_TITLE",
-    "SITE_URL",
-    "SITE_DESCRIPTION"
-  ],
+  "globalEnv": ["DATABASE_URL", "PRODUCT_NAME", "URL", "DEFAULT_LOCALE"],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "SKIP_ENV_VALIDATION",

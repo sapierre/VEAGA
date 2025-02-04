@@ -1,6 +1,8 @@
 import { Heading, Preview, Row, Column } from "@react-email/components";
 import * as React from "react";
 
+import { getTranslation } from "@turbostarter/i18n/server";
+
 import { Layout } from "./_components/layout/layout";
 
 import type { EmailTemplate } from "../types";
@@ -8,11 +10,13 @@ import type { EmailVariables } from "../types";
 
 type Props = EmailVariables[typeof EmailTemplate.CONTACT_FORM];
 
-export const ContactForm = (props: Props) => {
+export const ContactForm = async (props: Props) => {
+  const { t } = await getTranslation({ ns: "marketing" });
+
   return (
     <Layout>
-      <Preview>You've received a new contact form submission</Preview>
-      <Heading>New contact form submission</Heading>
+      <Preview>{t("contact.email.subject")}</Preview>
+      <Heading>{t("contact.email.body")}</Heading>
 
       {Object.entries(props).map(([key, value]) => (
         <Row key={key}>
@@ -25,7 +29,10 @@ export const ContactForm = (props: Props) => {
   );
 };
 
-ContactForm.subject = "You've received a new contact form submission";
+ContactForm.subject = async () => {
+  const { t } = await getTranslation({ ns: "marketing" });
+  return t("contact.email.subject");
+};
 
 ContactForm.PreviewProps = {
   name: "John Doe",

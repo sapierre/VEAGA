@@ -9,6 +9,7 @@ import {
   RadialBarChart,
 } from "recharts";
 
+import { useTranslation } from "@turbostarter/i18n";
 import {
   Card,
   CardContent,
@@ -26,9 +27,6 @@ const chartData = [
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   safari: {
     label: "Safari",
     color: "hsl(var(--color-chart-2))",
@@ -36,11 +34,12 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function ShapeChart() {
+  const { t, i18n } = useTranslation(["common", "marketing"]);
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center space-y-0.5 pb-0">
-        <CardTitle className="text-xl">Shape Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="text-xl">{t("dashboard.chart.shape")}</CardTitle>
+        <CardDescription>{t("dashboard.chart.period")}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -80,14 +79,14 @@ export function ShapeChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-4xl font-bold"
                         >
-                          {data.visitors.toLocaleString()}
+                          {data.visitors.toLocaleString(i18n.language)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy ?? 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          {t("visitors")}
                         </tspan>
                       </text>
                     );
@@ -100,7 +99,7 @@ export function ShapeChart() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          {t("dashboard.chart.trending")} <TrendingUp className="h-4 w-4" />
         </div>
       </CardFooter>
     </Card>
