@@ -19,7 +19,7 @@ type AuthEmailTemplate =
   (typeof AuthEmailTemplate)[keyof typeof AuthEmailTemplate];
 
 export type AuthEmailVariables = Record<
-  AuthEmailTemplate,
+  Exclude<AuthEmailTemplate, "magic-link">,
   {
     url: string;
   }
@@ -33,5 +33,9 @@ export interface ContactFormEmailVariables {
 
 export type EmailTemplate = (typeof EmailTemplate)[keyof typeof EmailTemplate];
 export type EmailVariables = AuthEmailVariables & {
+  [EmailTemplate.MAGIC_LINK]: {
+    url: string;
+    token: string;
+  };
   [EmailTemplate.CONTACT_FORM]: ContactFormEmailVariables;
 };

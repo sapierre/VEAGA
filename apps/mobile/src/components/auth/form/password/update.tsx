@@ -23,7 +23,11 @@ import { resetPassword } from "~/lib/auth";
 
 import type { UpdatePasswordPayload } from "@turbostarter/auth";
 
-export const UpdatePasswordForm = memo(() => {
+interface UpdatePasswordFormProps {
+  readonly token?: string;
+}
+
+export const UpdatePasswordForm = memo<UpdatePasswordFormProps>(({ token }) => {
   const { t, errorMap } = useTranslation(["common", "auth"]);
 
   const form = useForm<UpdatePasswordPayload>({
@@ -34,6 +38,7 @@ export const UpdatePasswordForm = memo(() => {
     await resetPassword(
       {
         newPassword: data.password,
+        token,
       },
       {
         onSuccess: () => router.replace(pathsConfig.tabs.auth.login),

@@ -11,3 +11,5 @@ export const LocaleLabel: Record<Locale, string> = {
 export const LocaleFlag: Record<Locale, string> = {
   [Locale.EN]: "🇬🇧",
 } as const;
+
+export type { TFunction } from "i18next";

@@ -7,8 +7,16 @@ export const generateMetadata = getMetadata({
   title: "auth:account.password.update.title",
 });
 
-const UpdatePassword = async () => {
+interface UpdatePasswordPageProps {
+  readonly searchParams: Promise<{
+    readonly token?: string;
+  }>;
+}
+
+const UpdatePassword = async ({ searchParams }: UpdatePasswordPageProps) => {
+  const token = (await searchParams).token;
   const { t } = await getTranslation({ ns: "auth" });
+
   return (
     <>
       <Auth.Layout>
@@ -16,7 +24,7 @@ const UpdatePassword = async () => {
           title={t("account.password.update.header.title")}
           description={t("account.password.update.header.description")}
         />
-        <Auth.UpdatePassword />
+        <Auth.UpdatePassword token={token} />
       </Auth.Layout>
     </>
   );

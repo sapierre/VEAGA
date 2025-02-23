@@ -2,12 +2,15 @@
 
 import { useTheme } from "next-themes";
 
+import { useTranslation } from "@turbostarter/i18n";
 import { useBreakpoint } from "@turbostarter/ui-web";
+import { Button } from "@turbostarter/ui-web/button";
 import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
 } from "@turbostarter/ui-web/drawer";
+import { Icons } from "@turbostarter/ui-web/icons";
 import {
   Popover,
   PopoverTrigger,
@@ -19,24 +22,51 @@ import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
 import { appConfig } from "~/config/app";
 import { useThemeConfig } from "~/providers/theme";
 
-import type { ThemeMode } from "@turbostarter/ui";
+import type { ThemeConfig, ThemeMode } from "@turbostarter/ui";
 
 const Customizer = () => {
+  const { t } = useTranslation("common");
   const { config, setConfig } = useThemeConfig();
   const { setTheme: setMode, theme: mode } = useTheme();
 
+  const onChange = (config: ThemeConfig) => {
+    setConfig(config);
+    setMode(config.mode);
+  };
+
   return (
-    <ThemeCustomizer
-      defaultConfig={appConfig.theme}
-      config={{
-        ...config,
-        mode: (mode as ThemeMode | undefined) ?? appConfig.theme.mode,
-      }}
-      onChange={({ mode, ...config }) => {
-        setMode(mode);
-        setConfig(config);
-      }}
-    />
+    <>
+      <div className="flex items-start">
+        <div className="space-y-1 pr-2">
+          <div className="font-semibold leading-none tracking-tight">
+            {t("theme.customization.title")}
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {t("theme.customization.description")}
+          </div>
+        </div>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="ml-auto rounded-[0.5rem]"
+          onClick={() => {
+            onChange(appConfig.theme);
+          }}
+        >
+          <Icons.Undo2 className="size-4" />
+          <span className="sr-only">{t("reset")}</span>
+        </Button>
+      </div>
+      <ThemeCustomizer
+        defaultConfig={appConfig.theme}
+        config={{
+          ...config,
+          mode: (mode as ThemeMode | undefined) ?? appConfig.theme.mode,
+        }}
+        onChange={onChange}
+      />
+    </>
   );
 };
 

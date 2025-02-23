@@ -26,9 +26,6 @@ const getClient = () => {
 const track = (event: string, data?: Record<string, AllowedPropertyValues>) => {
   const client = getClient();
 
-  console.log("event", event);
-  console.log("data", data);
-
   client.capture({
     event,
     distinctId: typeof data?.distinctId === "string" ? data.distinctId : "",

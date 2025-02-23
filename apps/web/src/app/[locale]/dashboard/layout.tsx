@@ -34,11 +34,6 @@ const menu = [
         href: pathsConfig.dashboard.settings.index,
         icon: Icons.Settings,
       },
-      {
-        title: "billing",
-        href: pathsConfig.dashboard.settings.billing,
-        icon: Icons.CreditCard,
-      },
     ],
   },
 ];
@@ -60,16 +55,10 @@ export default async function DashboardLayout({
     <SidebarProvider>
       <DashboardSidebar user={user} customer={customer} menu={menu} />
       <SidebarInset className="mx-auto max-w-[80rem]">
-        <DashboardHeader
-          menu={menu.map((group) => ({
-            label: group.label,
-            items: group.items.map((item) => ({
-              title: item.title,
-              href: item.href,
-            })),
-          }))}
-        />
-        <div className="flex flex-1 p-4 pt-0 md:p-6 md:pt-0">{children}</div>
+        <DashboardHeader />
+        <div className="flex flex-1 p-4 pt-0 md:p-6 md:pt-0 lg:p-7 lg:pt-0">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 
 import { useTranslation } from "@turbostarter/i18n";
 
@@ -32,7 +32,12 @@ export default function AuthLayout() {
       <Stack.Screen
         name="password/forgot"
         options={{
-          header: () => <Header title={t("account.password.forgot.title")} />,
+          header: () => (
+            <Header
+              title={t("account.password.forgot.title")}
+              onBack={router.back}
+            />
+          ),
         }}
       />
 

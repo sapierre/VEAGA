@@ -51,6 +51,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     "expo-font",
     "expo-secure-store",
     "expo-build-properties",
+    "expo-image-picker",
     /* required to enable i18n */
     "expo-localization",
     [

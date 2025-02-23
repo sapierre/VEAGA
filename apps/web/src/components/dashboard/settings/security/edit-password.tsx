@@ -31,7 +31,7 @@ import { pathsConfig } from "~/config/paths";
 import { changePassword } from "~/lib/auth/client";
 import { onPromise } from "~/utils";
 
-import { useAccounts } from "./accounts/hooks/use-accounts";
+import { useAccounts } from "../security/accounts/hooks/use-accounts";
 
 import type { ChangePasswordPayload } from "@turbostarter/auth";
 
@@ -67,7 +67,7 @@ export const EditPassword = () => {
     .includes("credential");
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden">
+    <Card className="h-fit w-full overflow-hidden">
       <Form {...form}>
         <form onSubmit={onPromise(form.handleSubmit(onSubmit))}>
           <CardHeader>

@@ -8,7 +8,6 @@ import { RegisterForm } from "~/components/auth/form/register-form";
 import { SocialProviders } from "~/components/auth/form/social-providers";
 import { AuthDivider } from "~/components/auth/layout/auth-divider";
 import { AuthHeader } from "~/components/auth/layout/auth-header";
-import { isIOS } from "~/utils/device";
 
 interface AuthLayoutProps {
   readonly children: React.ReactNode;
@@ -16,11 +15,11 @@ interface AuthLayoutProps {
 
 const AuthLayout = memo<AuthLayoutProps>(({ children }) => {
   return (
-    <KeyboardAvoidingView
-      className="flex-1 bg-background"
-      behavior={isIOS ? "padding" : "height"}
-    >
-      <ScrollView contentContainerClassName="grow bg-background px-6 py-10">
+    <KeyboardAvoidingView className="flex-1 bg-background" behavior="padding">
+      <ScrollView
+        contentContainerClassName="grow bg-background px-6 py-10"
+        bounces={false}
+      >
         <View className="flex flex-1 justify-start">
           <View className="mx-auto w-full">
             <View className="flex flex-col gap-6">{children}</View>

@@ -44,7 +44,7 @@ export const PasswordLoginForm = memo(() => {
           setIsSubmitting(true);
         },
         onSuccess: () => {
-          router.navigate(pathsConfig.tabs.settings);
+          router.navigate(pathsConfig.tabs.settings.index);
           form.reset();
         },
         onError: ({ error }) => {

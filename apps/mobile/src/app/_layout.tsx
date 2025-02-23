@@ -32,9 +32,8 @@ const RootLayoutNav = () => {
           header: () => <Header title={Application.applicationName ?? ""} />,
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
         <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
       <StatusBar
         barStyle="light-content"

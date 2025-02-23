@@ -15,4 +15,6 @@ export const {
   unlinkAccount,
   deleteUser,
   sendVerificationEmail,
+  listSessions,
+  revokeSession,
 } = createClient();

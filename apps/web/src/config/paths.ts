@@ -28,6 +28,7 @@ const pathsConfig = {
     ai: `${DASHBOARD_PREFIX}/ai`,
     settings: {
       index: `${DASHBOARD_PREFIX}/settings`,
+      security: `${DASHBOARD_PREFIX}/settings/security`,
       billing: `${DASHBOARD_PREFIX}/settings/billing`,
     },
   },

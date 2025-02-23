@@ -26,7 +26,7 @@ export const customers = pgTable("customers", {
       onDelete: "cascade",
     })
     .primaryKey(),
-  customerId: text("customer_id").notNull(),
+  customerId: text("customer_id").notNull().unique(),
   status: billingStatusEnum("status"),
   plan: pricingPlanTypeEnum("plan"),
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),

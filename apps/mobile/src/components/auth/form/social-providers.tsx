@@ -47,7 +47,7 @@ const SocialProvider = ({
       disabled={isSubmitting}
     >
       {isSubmitting && actualProvider === provider ? (
-        <Icons.Loader2 className="animate-spin" />
+        <Icons.Loader2 className="size-5 animate-spin text-foreground" />
       ) : (
         <>
           <View className="h-6 w-6 dark:brightness-125">
@@ -82,7 +82,7 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
     await signIn.social(
       {
         provider,
-        callbackURL: pathsConfig.tabs.settings,
+        callbackURL: pathsConfig.tabs.settings.index,
         errorCallbackURL: pathsConfig.tabs.auth.error,
       },
       {
@@ -102,7 +102,7 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
     const session = await getSession();
 
     if (session.data) {
-      router.navigate(pathsConfig.tabs.settings);
+      router.navigate(pathsConfig.tabs.settings.index);
     }
   };
 

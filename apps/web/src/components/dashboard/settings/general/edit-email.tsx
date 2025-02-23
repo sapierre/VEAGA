@@ -82,7 +82,7 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
   };
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden">
+    <Card className="h-fit w-full overflow-hidden">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>

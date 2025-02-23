@@ -51,7 +51,7 @@ export const PlanSummary = memo<PlanSummaryProps>(async ({ customer }) => {
   const statusKey = `status.${status.toLowerCase().replace(/_([a-z])/g, (_, letter: string) => letter.toUpperCase())}`;
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden">
+    <Card className="h-fit w-full overflow-hidden">
       <CardHeader className="pb-4">
         <CardTitle className="text-xl">{t("manage.plan.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">

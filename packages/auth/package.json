@@ -26,13 +26,13 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@better-auth/expo": "1.1.15",
+    "@better-auth/expo": "1.1.16",
     "@t3-oss/env-core": "0.11.1",
     "@turbostarter/db": "workspace:*",
     "@turbostarter/email": "workspace:*",
     "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
-    "better-auth": "1.1.15",
+    "better-auth": "1.1.16",
     "zod": "catalog:"
   }
 }

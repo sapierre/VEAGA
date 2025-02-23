@@ -15,7 +15,7 @@ export default function Error({ error }: { error: Error }) {
   }, [error]);
 
   return (
-    <main className="mx-auto flex max-w-xl flex-1 items-center justify-center">
+    <main className="mx-auto flex max-w-xl flex-1 items-center justify-center px-6">
       <div className="text-center">
         <h1 className="mt-4 text-4xl font-bold">{t("error.general")}</h1>
         <p className="text-pretty text-center text-lg leading-tight">

@@ -23,40 +23,26 @@ import {
   Atom,
   Brain,
   Loader,
+  ChevronRight,
+  Share2,
+  Bell,
+  ThumbsUp,
+  Lock,
+  ChevronLeft,
+  X,
+  Languages,
+  IdCard,
+  AtSign,
+  Workflow,
+  LogOut,
+  Trash,
+  Trash2,
+  Pencil,
 } from "lucide-react-native";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
 
 import { iconWithClassName } from "./icon-with-classname";
-
-iconWithClassName(GlobalIcons.Logo);
-iconWithClassName(GlobalIcons.LogoText);
-iconWithClassName(GlobalIcons.Google);
-iconWithClassName(GlobalIcons.Github);
-iconWithClassName(ArrowRight);
-iconWithClassName(ArrowLeft);
-iconWithClassName(House);
-iconWithClassName(KeyRound);
-iconWithClassName(Wallet);
-iconWithClassName(Newspaper);
-iconWithClassName(UserRound);
-iconWithClassName(Loader2);
-iconWithClassName(Check);
-iconWithClassName(ChevronDown);
-iconWithClassName(ChevronUp);
-iconWithClassName(Settings);
-iconWithClassName(Sun);
-iconWithClassName(SunMoon);
-iconWithClassName(Moon);
-iconWithClassName(CircleX);
-iconWithClassName(WandSparkles);
-iconWithClassName(Undo2);
-iconWithClassName(ArrowUp);
-iconWithClassName(Globe2);
-iconWithClassName(GraduationCap);
-iconWithClassName(Atom);
-iconWithClassName(Brain);
-iconWithClassName(Loader);
 
 export const Icons = {
   Logo: GlobalIcons.Logo,
@@ -87,4 +73,21 @@ export const Icons = {
   Atom,
   Brain,
   Loader,
+  ChevronRight,
+  Share2,
+  Bell,
+  ThumbsUp,
+  Lock,
+  ChevronLeft,
+  X,
+  Languages,
+  IdCard,
+  AtSign,
+  Workflow,
+  LogOut,
+  Trash,
+  Trash2,
+  Pencil,
 };
+
+Object.values(Icons).forEach(iconWithClassName);

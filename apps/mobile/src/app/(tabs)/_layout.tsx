@@ -50,7 +50,8 @@ export default function DashboardLayout() {
         listeners={() => ({
           tabPress: (e) => {
             e.preventDefault();
-            router.navigate(pathsConfig.index);
+            router.dismissAll();
+            router.replace(pathsConfig.index);
           },
         })}
         options={{
@@ -127,6 +128,7 @@ export default function DashboardLayout() {
             />
           ),
           tabBarLabel: TabBarLabel,
+          headerShown: false,
         }}
       />
     </Tabs>
