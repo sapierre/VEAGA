@@ -12,10 +12,9 @@ import type {
   CommonEmailProps,
 } from "../../types";
 
-type Props = EmailVariables[typeof EmailTemplate.CONFIRM_EMAIL] &
-  CommonEmailProps;
+type Props = EmailVariables[typeof EmailTemplate.MAGIC_LINK] & CommonEmailProps;
 
-export const MagicLink = async ({ url, locale }: Props) => {
+export const MagicLink = async ({ url, token, locale }: Props) => {
   const { t } = await getTranslation({ locale, ns: "auth" });
   const { origin } = new URL(url);
 
@@ -26,12 +25,14 @@ export const MagicLink = async ({ url, locale }: Props) => {
 
       <Text>{t("login.magicLink.email.body")}</Text>
 
-      <Button href={url}>{t("login.magicLink.email.cta")}</Button>
+      <Button href={`${url}?token=${token}`}>
+        {t("login.magicLink.email.cta")}
+      </Button>
 
       <Text>{t("login.magicLink.email.or")}</Text>
 
       <code className="inline-block rounded-md border border-solid border-border bg-muted px-5 py-3.5 font-mono text-xs">
-        {url}
+        {`${url}?token=${token}`}
       </code>
 
       <Text className="text-muted-foreground">

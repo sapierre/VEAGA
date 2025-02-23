@@ -8,7 +8,9 @@
     "terms": "Terms and Conditions",
     "copyright": "All rights reserved"
   },
+  "success": "Success!",
   "auth": "Auth",
+  "security": "Security",
   "builtWith": "Built with",
   "contactUs": "Contact us",
   "reset": "Reset",
@@ -47,11 +49,17 @@
   "lastMonths": "Last {{months}} months",
   "selectMonth": "Select month",
   "seeRoadmap": "See roadmap",
+  "general": "General",
+  "notifications": "Notifications",
+  "rate": "Rate",
+  "share": "Share",
+  "privacy": "Privacy",
   "language": {
     "label": "Language",
     "description": "Pick a language for your app."
   },
   "theme": {
+    "title": "Theme",
     "customization": {
       "title": "Customize",
       "label": "Customize theme",

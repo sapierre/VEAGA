@@ -59,7 +59,6 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             });
           },
           onError: ({ error }) => {
-            console.log(error);
             toast.error(error.message, { id: loadingToast });
           },
           onResponse: () => {

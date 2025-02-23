@@ -121,7 +121,7 @@ export const UserNavigation = memo<UserNavigationProps>(
                 </TurboLink>
               </DropdownMenuItem>
 
-              <DropdownMenuItem>
+              <DropdownMenuItem asChild>
                 <TurboLink
                   href={pathsConfig.dashboard.settings.billing}
                   className="flex w-full cursor-pointer items-center gap-1.5"

@@ -16,10 +16,10 @@ export const BuiltWith = () => {
       onPress={() => Linking.openURL("https://www.turbostarter.dev")}
       className={buttonVariants({
         variant: "outline",
-        className: "flex-row items-center justify-center font-sans",
+        className: "flex-row items-center justify-center gap-1",
       })}
     >
-      <Text>{t("builtWith")}</Text>
+      <Text className="text-sm">{t("builtWith")}</Text>
       <View className="shrink-0 flex-row items-center gap-1.5">
         <Icons.Logo className="ml-1.5 text-primary" height={16} width={16} />
         <Icons.LogoText className="text-foreground" height={10} width={82} />

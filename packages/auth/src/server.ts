@@ -74,13 +74,14 @@ export const auth = betterAuth({
   }),
   plugins: [
     magicLink({
-      sendMagicLink: async ({ email, url }, request) =>
+      sendMagicLink: async ({ email, url, token }, request) =>
         sendEmail({
           to: email,
           template: EmailTemplate.MAGIC_LINK,
           locale: getLocaleFromRequest(request),
           variables: {
             url,
+            token,
           },
         }),
     }),

@@ -7,7 +7,6 @@ import {
   Tailwind,
 } from "@react-email/components";
 
-import { I18nProvider } from "@turbostarter/i18n";
 import { mapValues, hslToHex } from "@turbostarter/shared/utils";
 import { themes } from "@turbostarter/ui";
 
@@ -86,15 +85,13 @@ export const Layout = ({
           },
         }}
       >
-        <I18nProvider locale={locale}>
-          <Section className="p-1">
-            <Container className="rounded-lg bg-card p-6 text-card-foreground">
-              {origin && <Header origin={origin} />}
-              {children}
-              {origin && <Footer origin={origin} />}
-            </Container>
-          </Section>
-        </I18nProvider>
+        <Section className="p-1">
+          <Container className="rounded-lg bg-card p-6 text-card-foreground">
+            {origin && <Header origin={origin} />}
+            {children}
+            {origin && <Footer origin={origin} />}
+          </Container>
+        </Section>
       </Tailwind>
     </Html>
   );

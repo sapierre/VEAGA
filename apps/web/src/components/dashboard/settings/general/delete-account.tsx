@@ -39,7 +39,7 @@ export const DeleteAccount = () => {
   const { t } = useTranslation("auth");
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden border-destructive/25 dark:border-destructive/50">
+    <Card className="h-fit w-full overflow-hidden border-destructive/25 dark:border-destructive/50">
       <CardHeader>
         <CardTitle className="text-xl">{t("account.delete.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">

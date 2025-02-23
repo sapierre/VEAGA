@@ -2,6 +2,7 @@ import { useTranslation } from "@turbostarter/i18n";
 
 import { Auth } from "~/components/auth/auth";
 import { LOGIN_OPTIONS } from "~/components/auth/form/login/constants";
+import { VerifyMagicLink } from "~/components/auth/form/login/magic-link";
 import { authConfig } from "~/config/auth";
 
 import type { LoginOption } from "~/components/auth/form/login/constants";
@@ -25,6 +26,7 @@ const LoginPage = () => {
       {authConfig.providers.oAuth.length > 0 && options.length > 0 && (
         <Auth.Divider />
       )}
+      <VerifyMagicLink />
       <Auth.Login options={options} />
     </Auth.Layout>
   );

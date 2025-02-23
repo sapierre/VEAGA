@@ -1,29 +1,36 @@
 import { useMutation } from "@tanstack/react-query";
-import { Alert, Pressable } from "react-native";
+import { router } from "expo-router";
+import { Alert } from "react-native";
 
 import { useTranslation } from "@turbostarter/i18n";
-import { Card, CardContent } from "@turbostarter/ui-mobile/card";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { Spinner } from "~/components/common/spinner";
-import { signOut, useSession } from "~/lib/auth";
+import { SettingsTile } from "~/components/settings/layout/tile";
+import { pathsConfig } from "~/config/paths";
+import { signOut } from "~/lib/auth";
 
 export const Logout = () => {
   const { t } = useTranslation(["common", "auth"]);
-  const { data, isPending } = useSession();
   const { mutate, isPending: isSigningOut } = useMutation({
-    mutationFn: () => signOut(),
+    mutationFn: () =>
+      signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.replace(pathsConfig.index);
+          },
+          onError: ({ error }) => {
+            Alert.alert(t("error.title"), error.message);
+          },
+        },
+      }),
   });
-
-  if (isPending || !data?.user) {
-    return null;
-  }
 
   return (
     <>
-      <Pressable
-        hitSlop={8}
+      <SettingsTile
+        icon={Icons.LogOut}
         onPress={() => {
           Alert.alert(t("logout.cta"), t("logout.confirm"), [
             {
@@ -38,14 +45,8 @@ export const Logout = () => {
           ]);
         }}
       >
-        <Card>
-          <CardContent className="flex-row items-center justify-between py-3">
-            <Text className="text-lg text-destructive">{t("logout.cta")}</Text>
-
-            <Icons.ArrowRight className="text-destructive" size={20} />
-          </CardContent>
-        </Card>
-      </Pressable>
+        <Text className="mr-auto">{t("logout.cta")}</Text>
+      </SettingsTile>
       {isSigningOut && <Spinner />}
     </>
   );

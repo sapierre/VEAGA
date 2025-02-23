@@ -2,17 +2,14 @@ import { Link } from "expo-router";
 import { View } from "react-native";
 
 import { useTranslation } from "@turbostarter/i18n";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@turbostarter/ui-mobile/avatar";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Skeleton } from "@turbostarter/ui-mobile/skeleton";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { pathsConfig } from "~/config/paths";
 import { useSession } from "~/lib/auth";
+
+import { AvatarSettings } from "./avatar/avatar-settings";
 
 const AccountInfoSkeleton = () => {
   return (
@@ -36,18 +33,7 @@ export const AccountInfo = () => {
 
   return (
     <View className="items-center">
-      <Avatar alt="" className="mb-4 size-28">
-        {user && <AvatarImage source={{ uri: user.image ?? "" }} />}
-        <AvatarFallback>
-          <Icons.UserRound
-            className="text-foreground"
-            width={50}
-            height={50}
-            strokeWidth={1.5}
-          />
-        </AvatarFallback>
-      </Avatar>
-
+      <AvatarSettings />
       {user ? (
         <Text className="text-xl font-semibold">{user.name}</Text>
       ) : (

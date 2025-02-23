@@ -33,6 +33,8 @@ import {
   BadgeCheck,
   BadgeX,
   ArrowUpRight,
+  Menu,
+  MonitorSmartphone,
 } from "lucide-react";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -73,4 +75,6 @@ export const Icons = {
   BadgeCheck,
   BadgeX,
   ArrowUpRight,
+  Menu,
+  MonitorSmartphone,
 };

@@ -47,7 +47,7 @@ export const ManagePlan = memo<ManagePlanProps>(({ customer }) => {
   }
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden">
+    <Card className="h-fit w-full overflow-hidden">
       <CardHeader>
         <CardTitle className="text-xl">{t("manage.billing.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">

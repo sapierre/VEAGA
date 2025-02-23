@@ -50,13 +50,11 @@ export const Accounts = () => {
     useAccounts();
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden">
+    <Card className="h-fit w-full overflow-hidden">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl">
-          {t("account.connnections.title")}
-        </CardTitle>
+        <CardTitle className="text-xl">{t("account.accounts.title")}</CardTitle>
         <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
-          {t("account.connnections.description")}
+          {t("account.accounts.description")}
         </CardDescription>
       </CardHeader>
 
@@ -80,7 +78,7 @@ export const Accounts = () => {
                     {social.provider}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    {t("account.connnections.connectedAt", {
+                    {t("account.accounts.connectedAt", {
                       date: social.updatedAt.toLocaleDateString(i18n.language),
                     })}
                   </span>
@@ -96,7 +94,7 @@ export const Accounts = () => {
                     disabled={accounts.length === 1 || disconnect.isPending}
                   >
                     <span className="sr-only">
-                      {t("account.connnections.disconnect.cta", {
+                      {t("account.accounts.disconnect.cta", {
                         provider,
                       })}
                     </span>
@@ -145,7 +143,7 @@ export const Accounts = () => {
       )}
 
       <CardFooter className="min-h-14 border-t bg-muted/75 py-3 text-sm text-muted-foreground dark:bg-card">
-        <span>{t("account.connnections.info")}</span>
+        <span>{t("account.accounts.info")}</span>
       </CardFooter>
     </Card>
   );
@@ -170,12 +168,12 @@ const ConfirmModal = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("account.connnections.disconnect.cta", {
+              {t("account.accounts.disconnect.cta", {
                 provider: capitalize(provider),
               })}
             </DialogTitle>
             <DialogDescription className="whitespace-pre-line">
-              {t("account.connnections.disconnect.disclaimer", {
+              {t("account.accounts.disconnect.disclaimer", {
                 provider: capitalize(provider),
               })}
             </DialogDescription>
@@ -199,12 +197,12 @@ const ConfirmModal = ({
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>
-            {t("account.connnections.disconnect.cta", {
+            {t("account.accounts.disconnect.cta", {
               provider: capitalize(provider),
             })}
           </DrawerTitle>
           <DrawerDescription className="whitespace-pre-line">
-            {t("account.connnections.disconnect.disclaimer", {
+            {t("account.accounts.disconnect.disclaimer", {
               provider: capitalize(provider),
             })}
           </DrawerDescription>

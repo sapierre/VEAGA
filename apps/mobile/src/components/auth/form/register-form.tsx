@@ -33,7 +33,7 @@ export const RegisterForm = memo(() => {
       {
         ...data,
         name: generateName(data.email),
-        callbackURL: pathsConfig.tabs.settings,
+        callbackURL: pathsConfig.tabs.settings.index,
       },
       {
         onSuccess: () => {

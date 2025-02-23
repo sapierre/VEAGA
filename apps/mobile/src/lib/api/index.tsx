@@ -12,10 +12,10 @@ import { getBaseUrl } from "./utils";
 import type { AppRouter } from "@turbostarter/api";
 
 export const { api } = hc<AppRouter>(getBaseUrl(), {
-  headers: {
+  headers: () => ({
     cookie: `${config.cookie}=${useI18nConfig.getState().config.locale};${getCookie()}`,
     "x-api-source": "mobile",
-  },
+  }),
 });
 
 export function ApiProvider(props: { children: React.ReactNode }) {

@@ -1,9 +1,9 @@
 "use client";
-
 import dayjs from "dayjs";
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import resourcesToBackend from "i18next-resources-to-backend";
+import { useEffect, useState } from "react";
 import {
   I18nextProvider,
   initReactI18next,
@@ -109,17 +109,26 @@ export const I18nProvider = ({
   defaultLocale?: string;
   ns?: Namespace;
 }) => {
-  if (!client) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
-    throw getI18n({ locale, defaultLocale, ns });
+  const [i18nClient, setI18nClient] = useState<i18n | null>(client);
+
+  useEffect(() => {
+    void (async () => {
+      if (!client) {
+        setI18nClient(await getI18n({ locale, defaultLocale, ns }));
+      }
+    })();
+  }, [client]);
+
+  if (!i18nClient) {
+    return null;
   }
 
-  if (locale !== client.language) {
+  if (locale !== i18nClient.language) {
     dayjs.locale(locale);
-    void client.changeLanguage(locale);
+    void i18nClient.changeLanguage(locale);
   }
 
-  return <I18nextProvider i18n={client}>{children}</I18nextProvider>;
+  return <I18nextProvider i18n={i18nClient}>{children}</I18nextProvider>;
 };
 
 export type { ParseKeys as TranslationKey } from "i18next";

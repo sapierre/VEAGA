@@ -80,7 +80,7 @@ export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
     form.formState.errors.avatar ?? (upload.isError || remove.isError);
 
   return (
-    <Card className="w-full max-w-3xl overflow-hidden">
+    <Card className="w-full overflow-hidden">
       <CardHeader className="relative block">
         <div className="float-right flex flex-col items-center justify-center gap-1">
           <div className="relative">
@@ -129,6 +129,7 @@ export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
                 className="sr-only"
                 aria-label={t("account.avatar.update.cta")}
                 onClick={(e) => "value" in e.target && (e.target.value = "")}
+                disabled={upload.isPending || remove.isPending}
               />
             </label>
             {previewUrl && !upload.isPending && (

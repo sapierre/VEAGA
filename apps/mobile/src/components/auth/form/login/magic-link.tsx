@@ -1,5 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { memo } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { router, useLocalSearchParams } from "expo-router";
+import { memo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
@@ -17,10 +19,48 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
 import { useAuthFormStore } from "~/components/auth/form/store";
+import { Spinner } from "~/components/common/spinner";
 import { pathsConfig } from "~/config/paths";
-import { signIn } from "~/lib/auth";
+import { magicLink, signIn } from "~/lib/auth";
 
 import type { MagicLinkLoginPayload } from "@turbostarter/auth";
+
+export const VerifyMagicLink = () => {
+  const { t } = useTranslation("common");
+  const { token } = useLocalSearchParams<{ token?: string }>();
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => {
+      if (!token) {
+        return;
+      }
+
+      await magicLink.verify(
+        { query: { token } },
+        {
+          onSuccess: () => {
+            router.setParams({ token: undefined });
+            router.navigate(pathsConfig.tabs.settings.index);
+          },
+          onError: ({ error }) => {
+            Alert.alert(t("error.title"), error.message);
+          },
+        },
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (token) {
+      mutate();
+    }
+  }, [token, mutate]);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return null;
+};
 
 export const MagicLinkLoginForm = memo(() => {
   const { t, errorMap } = useTranslation(["common", "auth"]);
@@ -35,7 +75,7 @@ export const MagicLinkLoginForm = memo(() => {
     await signIn.magicLink(
       {
         email: data.email,
-        callbackURL: pathsConfig.tabs.settings,
+        callbackURL: pathsConfig.tabs.auth.login,
       },
       {
         onRequest: () => {

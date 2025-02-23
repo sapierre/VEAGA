@@ -3,6 +3,7 @@ import { toast } from "sonner";
 
 import { SOCIAL_PROVIDER } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
+import { capitalize } from "@turbostarter/shared/utils";
 
 import { listAccounts, unlinkAccount } from "~/lib/auth/client";
 import { linkSocial } from "~/lib/auth/client";
@@ -28,7 +29,7 @@ export const useAccounts = () => {
   const connect = useMutation({
     mutationFn: (provider: SOCIAL_PROVIDER) => {
       const loadingToast = toast.loading(
-        t("account.connnections.connect.loading", { provider }),
+        t("account.accounts.connect.loading", { provider }),
       );
 
       return linkSocial(
@@ -37,9 +38,12 @@ export const useAccounts = () => {
           callbackURL: window.location.href,
         },
         {
-          onSuccess: () => {
+          onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
             toast.success(
-              t("account.connnections.connect.success", { provider }),
+              t("account.accounts.connect.success", {
+                provider: capitalize(provider),
+              }),
               {
                 id: loadingToast,
               },
@@ -58,7 +62,7 @@ export const useAccounts = () => {
   const disconnect = useMutation({
     mutationFn: (provider: SOCIAL_PROVIDER) => {
       const loadingToast = toast.loading(
-        t("account.connnections.disconnect.loading", { provider }),
+        t("account.accounts.disconnect.loading", { provider }),
       );
 
       return unlinkAccount(
@@ -72,7 +76,9 @@ export const useAccounts = () => {
           onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
             toast.success(
-              t("account.connnections.disconnect.success", { provider }),
+              t("account.accounts.disconnect.success", {
+                provider: capitalize(provider),
+              }),
               {
                 id: loadingToast,
               },

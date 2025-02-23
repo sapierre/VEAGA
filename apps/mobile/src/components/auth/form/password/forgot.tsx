@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import Constants from "expo-constants";
 import { Link } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -32,7 +33,7 @@ export const ForgotPasswordForm = memo(() => {
     await forgetPassword(
       {
         ...data,
-        redirectTo: pathsConfig.tabs.auth.updatePassword,
+        redirectTo: `${Constants.expoConfig?.scheme?.toString()}://${pathsConfig.tabs.auth.updatePassword}`,
       },
       {
         onSuccess: () => {

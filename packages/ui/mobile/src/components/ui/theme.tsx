@@ -15,47 +15,21 @@ import type { ThemeConfig } from "@turbostarter/ui";
 
 interface ThemeCustomizerProps {
   readonly config: ThemeConfig;
-  readonly defaultConfig?: ThemeConfig;
   readonly onChange: (config: ThemeConfig) => Promise<void>;
   readonly colors: Record<ThemeColor, string>;
 }
 
-const MODE_ICONS = {
+export const MODE_ICONS = {
   [ThemeMode.LIGHT]: Icons.Sun,
   [ThemeMode.DARK]: Icons.Moon,
   [ThemeMode.SYSTEM]: Icons.SunMoon,
 } as const;
 
 export const ThemeCustomizer = memo<ThemeCustomizerProps>(
-  ({ config, defaultConfig, onChange, colors }) => {
+  ({ config, onChange, colors }) => {
     const { t } = useTranslation("common");
     return (
       <>
-        <View className="flex-row items-start">
-          <View className="space-y-1 pr-2">
-            <Text
-              role="heading"
-              aria-level={3}
-              className="font-sans-medium text-2xl leading-none tracking-tight"
-            >
-              {t("theme.customization.title")}
-            </Text>
-            <Text className="text-sm text-muted-foreground">
-              {t("theme.customization.description")}
-            </Text>
-          </View>
-          {defaultConfig && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="ml-auto rounded-[0.5rem]"
-              onPress={() => onChange(defaultConfig)}
-            >
-              <Icons.Undo2 className="text-foreground" width={20} height={20} />
-            </Button>
-          )}
-        </View>
-
         <View className="mt-2 flex flex-1 flex-col items-center gap-4">
           <View className="w-full gap-1.5">
             <Label nativeID="color" className="text-xs">
@@ -81,7 +55,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                     >
                       <View
                         className={cn(
-                          "flex size-5 shrink-0 items-center justify-center rounded-full border border-white bg-primary",
+                          "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white bg-primary",
                         )}
                         {...(colors[color] && {
                           style: vars({

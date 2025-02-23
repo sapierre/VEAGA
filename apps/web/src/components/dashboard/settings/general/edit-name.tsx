@@ -58,7 +58,7 @@ export const EditName = memo<EditNameProps>(({ user }) => {
   };
 
   return (
-    <Card className="h-fit w-full max-w-3xl overflow-hidden">
+    <Card className="h-fit w-full overflow-hidden">
       <Form {...form}>
         <form onSubmit={onPromise(form.handleSubmit(onSubmit))}>
           <CardHeader>

@@ -40,6 +40,7 @@ const LINKS = [
 
 export default function App() {
   const { t } = useTranslation("marketing");
+
   return (
     <ScrollView
       className="bg-background"
@@ -65,8 +66,11 @@ export default function App() {
       <View className="gap-3">
         {LINKS.map((link) => (
           <Link href={link.href} key={link.title} asChild>
-            <Pressable>
-              <Card>
+            <Pressable
+              className="rounded-lg bg-card shadow-sm shadow-foreground/10 transition-colors active:bg-muted"
+              key={link.title}
+            >
+              <Card className="bg-transparent shadow-none">
                 <CardHeader className="gap-1">
                   <View className="flex-row gap-1">
                     <CardTitle>{t(link.title)}</CardTitle>
