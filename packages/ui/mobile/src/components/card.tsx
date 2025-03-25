@@ -5,7 +5,7 @@ import { cn } from "@turbostarter/ui";
 
 import { TextClassContext } from "./text";
 
-import type { TextRef, ViewRef } from "../primitives/types";
+import type { TextRef, ViewRef } from "@rn-primitives/types";
 
 const Card = React.forwardRef<
   ViewRef,

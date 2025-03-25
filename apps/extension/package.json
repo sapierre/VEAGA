@@ -47,6 +47,6 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "wxt": "0.19.22"
+    "wxt": "0.19.29"
   }
 }

@@ -5,7 +5,7 @@ import { View } from "react-native";
 import { useTranslation } from "@turbostarter/i18n";
 import { cn, ThemeColor, ThemeMode } from "@turbostarter/ui";
 
-import { Icons } from "../../lib/icons";
+import { Icons } from "../lib/icons";
 
 import { Button } from "./button";
 import { Label } from "./label";

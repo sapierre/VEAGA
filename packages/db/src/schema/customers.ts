@@ -1,7 +1,8 @@
 import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
-import { users } from "../auth";
+import { createInsertSchema, createSelectSchema } from "../utils";
+
+import { users } from "./auth";
 
 export const billingStatusEnum = pgEnum("status", [
   "ACTIVE",
@@ -29,10 +30,10 @@ export const customers = pgTable("customers", {
   customerId: text("customer_id").notNull().unique(),
   status: billingStatusEnum("status"),
   plan: pricingPlanTypeEnum("plan"),
-  createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { mode: "string" })
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at")
     .notNull()
-    .$onUpdate(() => new Date().toISOString()),
+    .$onUpdate(() => new Date()),
 });
 
 export const insertCustomerSchema = createInsertSchema(customers);

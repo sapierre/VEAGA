@@ -1,12 +1,11 @@
+import * as LabelPrimitive from "@rn-primitives/label";
 import * as React from "react";
 
 import { cn } from "@turbostarter/ui";
 
-import * as LabelPrimitive from "../primitives/label";
-
 const Label = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Text>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Text>
+  LabelPrimitive.TextRef,
+  LabelPrimitive.TextProps
 >(
   (
     { className, onPress, onLongPress, onPressIn, onPressOut, ...props },
@@ -22,7 +21,7 @@ const Label = React.forwardRef<
       <LabelPrimitive.Text
         ref={ref}
         className={cn(
-          "native:text-base web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70 text-sm leading-none text-foreground",
+          "native:text-base web:peer-disabled:cursor-not-allowed web:peer-disabled:opacity-70 text-sm font-medium leading-none text-foreground",
           className,
         )}
         {...props}

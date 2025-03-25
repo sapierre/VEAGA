@@ -2,11 +2,11 @@
   "name": "mobile",
   "version": "0.1.0",
   "private": true,
-  "main": "index.ts",
+  "main": "expo-router/entry",
   "scripts": {
     "android": "expo run:android",
     "clean": "git clean -xdf .cache .expo .turbo android ios node_modules",
-    "dev": "expo start --clear",
+    "dev": "expo run:ios",
     "dev:android": "expo start --android",
     "dev:ios": "expo start --ios",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -21,6 +21,7 @@
     "@expo/metro-config": "^0.19.6",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@shopify/flash-list": "1.7.1",
+    "@stardazed/streams-text-encoding": "1.0.2",
     "@t3-oss/env-core": "0.11.1",
     "@tanstack/react-query": "catalog:",
     "@turbostarter/analytics-mobile": "workspace:*",
@@ -31,6 +32,7 @@
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
     "@turbostarter/ui-mobile": "workspace:*",
+    "@ungap/structured-clone": "1.3.0",
     "expo": "~52.0.28",
     "expo-application": "~6.0.2",
     "expo-auth-session": "~6.0.2",
@@ -58,7 +60,6 @@
     "react-native-css-interop": "~0.0.36",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-marked": "6.0.5",
-    "react-native-polyfill-globals": "3.1.0",
     "react-native-reanimated": "~3.16.3",
     "react-native-safe-area-context": "~4.12.0",
     "react-native-screens": "~4.4.0",
@@ -66,7 +67,6 @@
     "react-native-svg-transformer": "1.5.0",
     "react-native-web": "~0.19.12",
     "react-native-webview": "13.12.5",
-    "web-streams-polyfill": "4.0.0",
     "zustand": "5.0.2"
   },
   "devDependencies": {
@@ -79,6 +79,7 @@
     "@turbostarter/tsconfig": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/react": "catalog:react19",
+    "@types/ungap__structured-clone": "1.2.0",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

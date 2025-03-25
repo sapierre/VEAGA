@@ -53,7 +53,19 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <DashboardSidebar user={user} customer={customer} menu={menu} />
+      <DashboardSidebar
+        user={user}
+        customer={
+          customer
+            ? {
+                ...customer,
+                createdAt: new Date(customer.createdAt),
+                updatedAt: new Date(customer.updatedAt),
+              }
+            : null
+        }
+        menu={menu}
+      />
       <SidebarInset className="mx-auto max-w-[80rem]">
         <DashboardHeader />
         <div className="flex flex-1 p-4 pt-0 md:p-6 md:pt-0 lg:p-7 lg:pt-0">

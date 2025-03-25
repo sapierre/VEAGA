@@ -38,5 +38,18 @@ const User = () => {
     return <UserNavigationSkeleton />;
   }
 
-  return <UserNavigation user={user} customer={customer ?? null} />;
+  return (
+    <UserNavigation
+      user={user}
+      customer={
+        customer
+          ? {
+              ...customer,
+              createdAt: new Date(customer.createdAt),
+              updatedAt: new Date(customer.updatedAt),
+            }
+          : null
+      }
+    />
+  );
 };

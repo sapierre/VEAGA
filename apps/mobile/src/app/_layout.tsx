@@ -15,6 +15,7 @@ import { StatusBar } from "react-native";
 import "~/assets/styles/globals.css";
 import { Header } from "~/components/common/layout/header";
 import { useTheme } from "~/lib/hooks/use-theme";
+import "~/lib/polyfills";
 import { Providers } from "~/providers/providers";
 
 void SplashScreen.preventAutoHideAsync();

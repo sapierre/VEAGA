@@ -10,7 +10,7 @@ import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 import { Textarea } from "@turbostarter/ui-mobile/textarea";
 
-import { getBaseUrl } from "~/lib/api/utils";
+import { api } from "~/lib/api";
 
 const EXAMPLES = [
   {
@@ -43,7 +43,7 @@ export default function AI() {
     isLoading,
   } = useChat({
     fetch: expoFetch as unknown as typeof globalThis.fetch,
-    api: `${getBaseUrl()}/api/ai/chat`,
+    api: api.ai.chat.$url().toString(),
     onError: (error) => console.error(error),
   });
 
@@ -96,10 +96,8 @@ export default function AI() {
 
       {!messagesToDisplay.length && (
         <FlatList
-          // numColumns={2}
           data={EXAMPLES}
           contentContainerClassName="gap-2 mt-auto mb-6"
-          // columnWrapperClassName="gap-2"
           renderItem={({ item }) => (
             <Button
               onPress={() => append({ role: "user", content: t(item.prompt) })}

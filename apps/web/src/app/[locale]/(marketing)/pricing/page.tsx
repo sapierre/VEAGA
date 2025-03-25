@@ -16,7 +16,21 @@ const PricingPage = async () => {
 
   const customer = user ? await handle(api.billing.customer.$get)() : null;
 
-  return <Pricing user={user} customer={customer} model={env.BILLING_MODEL} />;
+  return (
+    <Pricing
+      user={user}
+      customer={
+        customer
+          ? {
+              ...customer,
+              createdAt: new Date(customer.createdAt),
+              updatedAt: new Date(customer.updatedAt),
+            }
+          : null
+      }
+      model={env.BILLING_MODEL}
+    />
+  );
 };
 
 export default PricingPage;

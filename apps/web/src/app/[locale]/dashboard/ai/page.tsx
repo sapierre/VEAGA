@@ -1,6 +1,6 @@
 "use client";
 
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import { marked } from "marked";
 
 import { useTranslation } from "@turbostarter/i18n";
@@ -9,6 +9,8 @@ import { Button } from "@turbostarter/ui-web/button";
 import { Icons } from "@turbostarter/ui-web/icons";
 import { ScrollArea } from "@turbostarter/ui-web/scroll-area";
 import { Textarea } from "@turbostarter/ui-web/textarea";
+
+import { api } from "~/lib/api/client";
 
 import type { KeyboardEvent } from "react";
 
@@ -41,7 +43,7 @@ const AI = () => {
     isLoading,
     handleInputChange,
   } = useChat({
-    api: "/api/ai/chat",
+    api: api.ai.chat.$url().toString(),
   });
 
   const messagesToDisplay = messages.filter((message) =>

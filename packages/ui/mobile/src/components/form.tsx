@@ -1,7 +1,3 @@
-// This project uses code from shadcn/ui.
-// The code is licensed under the MIT License.
-// https://github.com/shadcn-ui/ui
-
 import * as React from "react";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 import { View } from "react-native";
@@ -10,15 +6,13 @@ import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
 import { isKey, useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 
-import { Checkbox } from "../../components/ui/checkbox";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
-import { RadioGroup } from "../../components/ui/radio-group";
-// import { Select } from "../../components/ui/select";
-import { Switch } from "../../components/ui/switch";
-import { Textarea } from "../../components/ui/textarea";
-
+import { Checkbox } from "./checkbox";
+import { Input } from "./input";
+import { Label } from "./label";
+import { RadioGroup } from "./radio-group";
+import { Switch } from "./switch";
 import { Text } from "./text";
+import { Textarea } from "./textarea";
 
 import type {
   ControllerProps,
@@ -387,25 +381,6 @@ const FormRadioGroup = React.forwardRef<
 });
 
 FormRadioGroup.displayName = "FormRadioGroup";
-
-/**
- * @prop {children} 
- * @example
- *  <SelectTrigger className='w-[250px]'>
-      <SelectValue
-        className='text-foreground text-sm native:text-lg'
-        placeholder='Select a fruit'
-      />
-    </SelectTrigger>
-    <SelectContent insets={contentInsets} className='w-[250px]'>
-      <SelectGroup>
-        <SelectLabel>Fruits</SelectLabel>
-        <SelectItem label='Apple' value='apple'>
-          Apple
-        </SelectItem>
-      </SelectGroup>
-    </SelectContent>
- */
 
 const FormSwitch = React.forwardRef<
   React.ElementRef<typeof Switch>,

@@ -23,10 +23,18 @@ export default async function BillingPage() {
 
   const customer = await handle(api.billing.customer.$get)();
 
+  const parsedCustomer = customer
+    ? {
+        ...customer,
+        createdAt: new Date(customer.createdAt),
+        updatedAt: new Date(customer.updatedAt),
+      }
+    : null;
+
   return (
     <>
-      <PlanSummary customer={customer} />
-      <ManagePlan customer={customer} />
+      <PlanSummary customer={parsedCustomer} />
+      <ManagePlan customer={parsedCustomer} />
     </>
   );
 }

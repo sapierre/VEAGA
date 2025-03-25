@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "db:generate": "SKIP_ENV_VALIDATION=1 pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/src/schema/auth/index.ts --y",
+    "db:generate": "SKIP_ENV_VALIDATION=1 pnpm dlx @better-auth/cli@latest generate --config src/server.ts --output ../db/src/schema/auth.ts --y",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"

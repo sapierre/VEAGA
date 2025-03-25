@@ -15,7 +15,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { cn } from "@turbostarter/ui";
 
-import { Icons } from "../../lib/icons";
+import { Icons } from "../lib/icons";
 
 import { Button } from "./button";
 

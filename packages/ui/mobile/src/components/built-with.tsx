@@ -3,7 +3,7 @@ import { Pressable, View, Linking } from "react-native";
 
 import { useTranslation } from "@turbostarter/i18n";
 
-import { Icons } from "../../lib/icons";
+import { Icons } from "../lib/icons";
 
 import { buttonVariants } from "./button";
 import { Text } from "./text";

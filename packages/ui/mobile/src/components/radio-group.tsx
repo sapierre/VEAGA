@@ -1,13 +1,12 @@
+import * as RadioGroupPrimitive from "@rn-primitives/radio-group";
 import * as React from "react";
 import { View } from "react-native";
 
 import { cn } from "@turbostarter/ui";
 
-import * as RadioGroupPrimitive from "../primitives/radio-group";
-
 const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+  RadioGroupPrimitive.RootRef,
+  RadioGroupPrimitive.RootProps
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
@@ -20,8 +19,8 @@ const RadioGroup = React.forwardRef<
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
 const RadioGroupItem = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+  RadioGroupPrimitive.ItemRef,
+  RadioGroupPrimitive.ItemProps
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item
