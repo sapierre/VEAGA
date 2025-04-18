@@ -25,11 +25,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   newArchEnabled: true,
   ios: {
-    bundleIdentifier: "your.bundle.identifier",
+    bundleIdentifier: "core.turbostarter.dev",
     supportsTablet: false,
   },
   android: {
-    package: "your.bundle.identifier",
+    package: "core.turbostarter.dev",
     adaptiveIcon: {
       monochromeImage: "./public/images/icon/android/monochrome.png",
       foregroundImage: "./public/images/icon/android/adaptive.png",

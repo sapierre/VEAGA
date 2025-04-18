@@ -4,7 +4,7 @@ packages:
   - "tooling/*"
 
 catalog:
-  "@tanstack/react-query": 5.62.8
+  "@tanstack/react-query": 5.74.4
   eslint: 9.16.0
   prettier: 3.3.3
   typescript: 5.7.2

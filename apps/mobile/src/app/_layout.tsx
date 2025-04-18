@@ -1,3 +1,4 @@
+import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
 import { DMMono_400Regular } from "@expo-google-fonts/dm-mono";
 import {
   DMSans_400Regular,
@@ -8,6 +9,7 @@ import {
 } from "@expo-google-fonts/dm-sans";
 import * as Application from "expo-application";
 import { Stack } from "expo-router";
+import { useNavigationContainerRef } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
@@ -26,6 +28,11 @@ SplashScreen.setOptions({
 });
 
 const RootLayoutNav = () => {
+  const navigationRef = useNavigationContainerRef();
+  useReactNavigationDevTools(
+    navigationRef as Parameters<typeof useReactNavigationDevTools>[0],
+  );
+
   return (
     <Providers>
       <Stack

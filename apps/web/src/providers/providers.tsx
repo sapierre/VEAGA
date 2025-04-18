@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { memo } from "react";
 
@@ -23,6 +24,7 @@ export const Providers = memo<ProvidersProps>(({ children, locale }) => {
             <ThemeProvider>{children}</ThemeProvider>
           </AnalyticsProvider>
         </NuqsAdapter>
+        <ReactQueryDevtools />
       </ApiProvider>
     </I18nProvider>
   );

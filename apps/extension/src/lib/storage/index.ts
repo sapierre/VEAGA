@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { storage as browserStorage } from "wxt/storage";
+import { storage as browserStorage } from "wxt/utils/storage";
 
 import { appConfig } from "~/config/app";
 
 import type { ThemeConfig } from "@turbostarter/ui";
-import type { WxtStorageItem } from "wxt/storage";
+import type { WxtStorageItem } from "wxt/utils/storage";
 
 export const StorageKey = {
   THEME: "local:theme",

@@ -22,16 +22,16 @@ export const pricingPlanTypeEnum = pgEnum("plan", [
 ]);
 
 export const customers = pgTable("customers", {
-  userId: text("user_id")
+  userId: text()
     .references(() => users.id, {
       onDelete: "cascade",
     })
     .primaryKey(),
-  customerId: text("customer_id").notNull().unique(),
-  status: billingStatusEnum("status"),
-  plan: pricingPlanTypeEnum("plan"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at")
+  customerId: text().notNull().unique(),
+  status: billingStatusEnum(),
+  plan: pricingPlanTypeEnum(),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp()
     .notNull()
     .$onUpdate(() => new Date()),
 });

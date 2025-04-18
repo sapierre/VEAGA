@@ -15,7 +15,7 @@ export default defineConfig({
       port: 1234,
     },
   },
-  runner: {
+  webExt: {
     disabled: true,
   },
   srcDir: "src",
