@@ -1,0 +1,68 @@
+---
+description: 
+globs: apps/web/**/*
+alwaysApply: false
+---
+# Web Application (`apps/web`)
+
+## Overview
+
+The `apps/web` directory contains the main Next.js web application for the project. It serves as the primary user-facing interface, built using the App Router.
+
+## Key Directories
+
+-   **[src/app/[locale]](mdc:apps/web/src/app/[locale])**: Contains the main application routes, organized by locale. Uses Next.js App Router conventions.
+    -   `(marketing)`: Routes related to marketing pages (landing, pricing, blog).
+    -   `auth`: Authentication-related pages (login, signup).
+    -   `dashboard`: Protected routes for logged-in users.
+-   **[src/app/api](mdc:apps/web/src/app/api)**: Houses API route handlers, often integrating with the core API package (`packages/api`).
+-   **[src/components](mdc:apps/web/src/components)**: Contains React components specific to the web application, organized by feature (auth, dashboard, marketing, common).
+-   **[src/lib](mdc:apps/web/src/lib)**: Includes web-specific libraries and utilities, such as API clients, auth helpers, and environment variable handling.
+-   **[src/providers](mdc:apps/web/src/providers)**: Contains context providers used throughout the web application.
+-   **[public](mdc:apps/web/public)**: Static assets like images and fonts.
+
+## Technology Stack
+
+-   **Framework**: Next.js (with App Router) + React
+-   **Styling**: Tailwind CSS, likely utilizing components from **[packages/ui/web](mdc:packages/ui/web)**.
+-   **State Management**: Primarily relies on Next.js built-in mechanisms (Server Components, `useState`, `useContext`), potentially supplemented by URL state management.
+
+## Key Conventions & Integrations
+
+-   Follows the general **[Code Conventions](mdc:.cursor/rules/02-code-conventions.mdc)**.
+-   Integrates heavily with shared packages:
+    -   **[auth](mdc:packages/auth)** for user authentication.
+    -   **[i18n](mdc:packages/i18n)** for internationalization.
+    -   **[api](mdc:packages/api)** client (potentially via `src/lib/api`) for backend communication.
+    -   **[ui/web](mdc:packages/ui/web)** for shared web components.
+    -   **[billing](mdc:packages/billing)** for subscription management UI flows.
+-   Likely uses React Server Components (RSC) extensively for performance.
+
+## Guidance
+
+-   When dealing with UI elements, check both `apps/web/src/components` and `packages/ui/web/src/components`.
+-   For backend interactions, look at API routes in `apps/web/src/app/api` and how they potentially use or proxy `packages/api`.
+-   Routing logic is defined by directory structure within `apps/web/src/app/[locale]`.
+-   Authentication flow involves components in `apps/web/src/components/auth` and integration with `packages/auth`.
+-   Internationalization is managed via `packages/i18n` and the `[locale]` dynamic segment in routes.
+  
+### UI and Styling
+
+- Use Shadcn UI, Radix, and Tailwind Aria for components and styling
+- Implement responsive design with Tailwind CSS; use a mobile-first approach
+
+### Performance Optimization
+
+- Minimize 'use client', 'useEffect', and 'setState'; favor React Server Components (RSC)
+- Wrap client components in Suspense with fallback
+- Use dynamic loading for non-critical components
+- Optimize images: use WebP format, include size data, implement lazy loading
+
+### Other
+
+- Use 'nuqs' for URL search parameter state management
+- Optimize Web Vitals (LCP, CLS, FID)
+- Limit 'use client':
+  - Favor server components and Next.js SSR
+  - Use only for Web API access in small components
+  - Avoid for data fetching or state management

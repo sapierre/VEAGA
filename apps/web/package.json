@@ -51,7 +51,7 @@
     "@turbostarter/prettier-config": "workspace:*",
     "@turbostarter/tailwind-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
-    "@types/node": "20.16.10",
+    "@types/node": "22.15.2",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "autoprefixer": "10.4.20",

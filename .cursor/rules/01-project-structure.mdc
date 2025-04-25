@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## Project Structure Overview
+
+The Turbostarter project follows a monorepo structure managed by Turborepo. Key directories include:
+
+-   `apps/`: Contains the main applications:
+    -   `web`: Next.js web application.
+    -   `mobile`: React Native (Expo) mobile application.
+    -   `extension`: WXT (Vite + React) browser extension.
+-   `packages/`: Houses shared code, features, and utilities used across applications:
+    -   `api`: Core Hono API server logic.
+    -   `auth`: Authentication setup and logic with Better Auth .
+    -   `billing`: Billing configurations and provider integrations.
+    -   `cms`: Content management setup.
+    -   `db`: Database schema and setup (using Drizzle ORM).
+    -   `email`: Email templates and sending providers.
+    -   `i18n`: Internationalization setup.
+    -   `shared`: Common utilities and helper functions.
+    -   `storage`: File storage setup.
+    -   `ui`: Shared UI components (web, mobile, shared).
+-   `tooling/`: Contains configuration for development tools like ESLint, Prettier, TypeScript, and Tailwind CSS.
+  
+
+# Key Configuration Files
+
+- [package.json](mdc:package.json) - Root packages configuration
+- [turbo.json](mdc:turbo.json) - Turborepo configuration
+

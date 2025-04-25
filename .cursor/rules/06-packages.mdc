@@ -1,0 +1,28 @@
+---
+description: 
+globs: packages/**/*
+alwaysApply: false
+---
+# Packages (`packages/`)
+
+-   **[analytics](mdc:packages/analytics)**: Handles analytics integration for different platforms (web, mobile, extension). Includes providers like Google Analytics and PostHog.
+
+-   **[api](mdc:packages/api)**: Contains the core backend API logic built with Hono. It includes modules for various features like AI, auth, billing, and storage, facilitating server-side operations.
+
+-   **[auth](mdc:packages/auth)**: Manages authentication setup and logic using Better Auth. Provides client-side utilities, schema definitions, and core authentication mechanisms.
+
+-   **[billing](mdc:packages/billing)**: Handles billing configurations and integrations with providers like Lemon Squeezy and Stripe. Includes logic for checkout, customer management, subscriptions, and webhooks.
+
+-   **[cms](mdc:packages/cms)**: Implements content management using Content Collections. Defines collections for blog posts and legal documents, managing structured content.
+
+-   **[db](mdc:packages/db)**: Contains the database schema defined with Drizzle ORM and migration files. Provides utilities for database interactions and ensures data consistency.
+
+-   **[email](mdc:packages/email)**: Manages email sending functionality, including templates and integrations with various email providers (e.g., Resend, SendGrid). Handles transactional and marketing emails.
+
+-   **[i18n](mdc:packages/i18n)**: Provides internationalization setup for both client and server environments. Includes translation files and utilities for multi-language support.
+
+-   **[shared](mdc:packages/shared)**: Houses common utilities, hooks, and constants shared across multiple applications and packages. Promotes code reuse and consistency.
+
+-   **[storage](mdc:packages/storage)**: Manages file storage setup and integrations with providers like AWS S3. Defines types and libraries for handling file uploads and retrievals.
+
+-   **[ui](mdc:packages/ui)**: Contains shared UI components categorized by platform (web, mobile) and common elements. Includes styling, icons, themes, and utility functions for building user interfaces.
