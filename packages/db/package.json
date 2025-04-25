@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "db:start": "docker compose up -d",
+    "db:start": "docker compose up -d --wait",
     "db:stop": "docker compose down",
     "db:setup": "pnpm run db:start && pnpm run db:migrate",
     "db:migrate": "drizzle-kit migrate",
@@ -35,7 +35,7 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@t3-oss/env-core": "0.11.1",
+    "@t3-oss/env-core": "catalog:",
     "drizzle-orm": "0.38.3",
     "drizzle-zod": "0.7.0",
     "postgres": "3.4.4",

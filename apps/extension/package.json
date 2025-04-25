@@ -17,7 +17,7 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@t3-oss/env-core": "0.11.1",
+    "@t3-oss/env-core": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@turbostarter/analytics-extension": "workspace:*",
     "@turbostarter/api": "workspace:*",

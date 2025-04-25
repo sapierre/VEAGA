@@ -1,6 +1,7 @@
 import svgr from "vite-plugin-svgr";
 import { type WxtViteConfig, defineConfig } from "wxt";
 
+
 export default defineConfig({
   manifest: async () => {
     const { appConfig } = await import("./src/config/app");
@@ -31,7 +32,11 @@ export default defineConfig({
         }),
       ],
       define: {
-        "process.env": import.meta.env,
+        "process.env": Object.fromEntries(
+          Object.entries(import.meta.env).filter(([key]) =>
+            key.toLowerCase() !== "path",
+          ),
+        ),
       },
     }) as WxtViteConfig,
 });

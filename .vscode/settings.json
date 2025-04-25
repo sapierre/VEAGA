@@ -24,6 +24,5 @@
     "next/router.d.ts",
     "next/dist/client/router.d.ts"
   ],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "CodeGPT.apiKey": "Ollama"
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

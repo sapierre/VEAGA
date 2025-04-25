@@ -23,7 +23,7 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@t3-oss/env-core": "0.11.1",
+    "@t3-oss/env-core": "catalog:",
     "@turbostarter/shared": "workspace:*",
     "zod": "catalog:"
   }

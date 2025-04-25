@@ -5,6 +5,7 @@ packages:
 
 catalog:
   "@tanstack/react-query": 5.74.4
+  "@t3-oss/env-core": 0.13.0
   eslint: 9.16.0
   prettier: 3.3.3
   typescript: 5.7.2
