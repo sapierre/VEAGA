@@ -14,7 +14,7 @@ import { getSession } from "~/lib/auth/server";
 
 export const HeaderControls = () => {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
       <I18nControls />
       <ThemeControls />
       <UserControls />

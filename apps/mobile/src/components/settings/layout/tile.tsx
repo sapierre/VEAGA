@@ -20,7 +20,7 @@ export const SettingsTile = ({
     <Pressable
       hitSlop={4}
       className={cn(
-        "flex-row items-center justify-between gap-5 bg-card px-7 py-4 transition-colors active:bg-muted",
+        "flex-row items-center justify-between gap-5 bg-background px-7 py-4 transition-colors active:bg-muted",
       )}
       onPress={onPress}
     >

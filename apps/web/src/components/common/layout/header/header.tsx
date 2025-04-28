@@ -13,7 +13,7 @@ export const Header = () => {
         className="flex shrink-0 items-center gap-3.5"
       >
         <Icons.Logo className="h-9 text-primary" />
-        <Icons.LogoText className="h-4 text-foreground" />
+        <Icons.LogoText className="hidden h-4 text-foreground sm:block" />
       </TurboLink>
 
       <HeaderControls />
