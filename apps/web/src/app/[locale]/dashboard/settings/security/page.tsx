@@ -1,6 +1,8 @@
 import { Accounts } from "~/components/dashboard/settings/security/accounts/accounts";
 import { EditPassword } from "~/components/dashboard/settings/security/edit-password";
+import { Passkeys } from "~/components/dashboard/settings/security/passkeys/passkeys";
 import { Sessions } from "~/components/dashboard/settings/security/sessions";
+import { authConfig } from "~/config/auth";
 import { getMetadata } from "~/lib/metadata";
 
 export const generateMetadata = getMetadata({
@@ -13,6 +15,7 @@ export default function SettingsPage() {
     <>
       <EditPassword />
       <Accounts />
+      {authConfig.providers.passkey && <Passkeys />}
       <Sessions />
     </>
   );

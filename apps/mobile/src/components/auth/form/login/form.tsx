@@ -1,4 +1,6 @@
+import { Link } from "expo-router";
 import { Suspense, useState } from "react";
+import { View } from "react-native";
 
 import { AUTH_PROVIDER } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
@@ -9,6 +11,8 @@ import {
   TabsContent,
 } from "@turbostarter/ui-mobile/tabs";
 import { Text } from "@turbostarter/ui-mobile/text";
+
+import { pathsConfig } from "~/config/paths";
 
 import { MagicLinkLoginForm } from "./magic-link";
 import { PasswordLoginForm } from "./password";
@@ -70,5 +74,24 @@ export const LoginForm = ({ options }: LoginFormProps) => {
         );
       })}
     </Tabs>
+  );
+};
+
+export const LoginCta = () => {
+  const { t } = useTranslation("auth");
+  return (
+    <View className="items-center justify-center pt-2">
+      <View className="flex-row">
+        <Text className="text-sm text-muted-foreground">
+          {t("register.alreadyHaveAccount")}
+        </Text>
+        <Link
+          href={pathsConfig.tabs.auth.login}
+          className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
+        >
+          {t("login.cta")}
+        </Link>
+      </View>
+    </View>
   );
 };

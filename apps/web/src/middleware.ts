@@ -11,4 +11,5 @@ export const middleware = (request: NextRequest) =>
 
 export const config = {
   matcher: "/((?!api|static|.*\\..*|_next).*)",
+  unstable_allowDynamic: ["lodash"],
 };

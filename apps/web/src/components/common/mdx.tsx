@@ -45,7 +45,7 @@ export const Mdx = async ({ data, base }: MdxProps) => {
         </div>
       )}
 
-      <h1 className="text-pretty text-4xl font-bold tracking-tight md:text-5xl">
+      <h1 className="text-pretty text-4xl font-bold tracking-tighter md:text-5xl">
         {data.title}
       </h1>
 

@@ -1,5 +1,7 @@
 import { expoClient } from "@better-auth/expo/client";
 import { magicLinkClient } from "better-auth/client/plugins";
+import { anonymousClient } from "better-auth/client/plugins";
+import { passkeyClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
 import type { AuthMobileClientOptions } from "..";
@@ -13,6 +15,8 @@ export const createClient = ({
     ...options,
     plugins: [
       ...(options.plugins ?? []),
+      passkeyClient(),
+      anonymousClient(),
       magicLinkClient(),
       expoClient(mobile),
     ],

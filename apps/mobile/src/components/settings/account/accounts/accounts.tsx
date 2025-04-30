@@ -100,7 +100,7 @@ export const Accounts = () => {
           )}
 
           {missing.length > 0 && (
-            <View className="gap-3 rounded-lg border border-border px-5 py-4">
+            <View className="gap-3 rounded-lg border border-dashed border-border px-5 py-4">
               <Text className="font-sans-medium">{t("addNew")}</Text>
               <View className="h-px bg-border" />
               <View className="flex-row flex-wrap gap-2">

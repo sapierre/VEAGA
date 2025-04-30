@@ -5,7 +5,7 @@ import { memo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { AUTH_PROVIDER, generateName } from "@turbostarter/auth";
 import { magicLinkLoginSchema } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
@@ -74,6 +74,7 @@ export const MagicLinkLoginForm = memo(() => {
   const onSubmit = async (data: MagicLinkLoginPayload) => {
     await signIn.magicLink(
       {
+        name: generateName(data.email),
         email: data.email,
         callbackURL: pathsConfig.tabs.auth.login,
       },

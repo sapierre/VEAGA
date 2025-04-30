@@ -1,3 +1,5 @@
+import { View } from "react-native";
+
 import { useTranslation } from "@turbostarter/i18n";
 
 import { Auth } from "~/components/auth/auth";
@@ -27,7 +29,13 @@ const LoginPage = () => {
         <Auth.Divider />
       )}
       <VerifyMagicLink />
-      <Auth.Login options={options} />
+
+      <View className="gap-2">
+        <Auth.Login options={options} />
+        {authConfig.providers.anonymous && <Auth.Anonymous />}
+      </View>
+
+      <Auth.RegisterCta />
     </Auth.Layout>
   );
 };

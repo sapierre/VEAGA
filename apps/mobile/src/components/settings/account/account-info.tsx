@@ -42,7 +42,7 @@ export const AccountInfo = () => {
           <Icons.ArrowRight size={16} className="text-foreground" />
         </Link>
       )}
-      <Text className="text-muted-foreground">
+      <Text className="text-center text-muted-foreground">
         {user ? user.email : t("notLoggedIn")}
       </Text>
     </View>

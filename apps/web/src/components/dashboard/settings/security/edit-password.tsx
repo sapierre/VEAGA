@@ -31,7 +31,7 @@ import { pathsConfig } from "~/config/paths";
 import { changePassword } from "~/lib/auth/client";
 import { onPromise } from "~/utils";
 
-import { useAccounts } from "../security/accounts/hooks/use-accounts";
+import { useAccounts } from "./accounts/use-accounts";
 
 import type { ChangePasswordPayload } from "@turbostarter/auth";
 

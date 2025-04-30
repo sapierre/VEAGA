@@ -82,7 +82,7 @@ export const Plan = memo<PlanProps>(
                     )}
                   </span>
                 )}
-              <span className="text-4xl font-bold tracking-tight md:text-5xl">
+              <span className="text-4xl font-bold tracking-tighter md:text-5xl">
                 {price.custom
                   ? isKey(price.label, i18n, "billing")
                     ? t(price.label)

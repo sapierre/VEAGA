@@ -5,16 +5,17 @@ import { SOCIAL_PROVIDER } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { capitalize } from "@turbostarter/shared/utils";
 
-import { listAccounts, unlinkAccount } from "~/lib/auth/client";
+import { listAccounts, unlinkAccount, useSession } from "~/lib/auth/client";
 import { linkSocial } from "~/lib/auth/client";
 
-const QUERY_KEY = ["accounts"];
+const QUERY_KEY = (userId: string) => ["accounts", userId];
 
 export const useAccounts = () => {
+  const { data: session } = useSession();
   const { t } = useTranslation("auth");
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY_KEY(session?.user.id ?? ""),
     queryFn: () => listAccounts(),
   });
 
@@ -39,7 +40,9 @@ export const useAccounts = () => {
         },
         {
           onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+            await queryClient.invalidateQueries({
+              queryKey: QUERY_KEY(session?.user.id ?? ""),
+            });
             toast.success(
               t("account.accounts.connect.success", {
                 provider: capitalize(provider),
@@ -74,7 +77,9 @@ export const useAccounts = () => {
             });
           },
           onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+            await queryClient.invalidateQueries({
+              queryKey: QUERY_KEY(session?.user.id ?? ""),
+            });
             toast.success(
               t("account.accounts.disconnect.success", {
                 provider: capitalize(provider),

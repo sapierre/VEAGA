@@ -21,7 +21,11 @@ const changePasswordSchema = passwordSchema.merge(
 );
 
 const registerSchema = emailSchema.merge(passwordSchema);
-const passwordLoginSchema = emailSchema.merge(passwordSchema);
+const passwordLoginSchema = emailSchema.merge(passwordSchema).merge(
+  z.object({
+    rememberMe: z.boolean().optional().default(true),
+  }),
+);
 const magicLinkLoginSchema = emailSchema;
 const forgotPasswordSchema = emailSchema;
 const updatePasswordSchema = passwordSchema;

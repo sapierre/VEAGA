@@ -23,7 +23,7 @@ export default async function AdminPage() {
     <div className="flex flex-1 flex-col gap-4">
       <header className="flex items-center justify-between py-2">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tighter">
             {t("dashboard.title")}
           </h1>
           <p className="text-pretty text-sm text-muted-foreground">

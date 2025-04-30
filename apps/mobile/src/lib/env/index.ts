@@ -8,6 +8,14 @@ import { env as analyticsEnv } from "@turbostarter/analytics-mobile/env";
 import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
+const castStringToBool = z.preprocess((val) => {
+  if (typeof val === "string") {
+    if (["1", "true"].includes(val.toLowerCase())) return true;
+    if (["0", "false"].includes(val.toLowerCase())) return false;
+  }
+  return val;
+}, z.coerce.boolean());
+
 export const env = createEnv({
   extends: [analyticsEnv],
   shared: {
@@ -15,16 +23,9 @@ export const env = createEnv({
   },
   clientPrefix: "EXPO_PUBLIC_",
   client: {
-    EXPO_PUBLIC_AUTH_PASSWORD: z
-      .enum(["true", "false"])
-      .optional()
-      .default("true")
-      .transform((value) => value === "true"),
-    EXPO_PUBLIC_AUTH_MAGIC_LINK: z
-      .enum(["true", "false"])
-      .optional()
-      .default("false")
-      .transform((value) => value === "true"),
+    EXPO_PUBLIC_AUTH_PASSWORD: castStringToBool.optional().default(true),
+    EXPO_PUBLIC_AUTH_MAGIC_LINK: castStringToBool.optional().default(false),
+    EXPO_PUBLIC_AUTH_ANONYMOUS: castStringToBool.optional().default(true),
 
     EXPO_PUBLIC_SITE_URL: z.string().url(),
     EXPO_PUBLIC_DEFAULT_LOCALE: z.string().optional().default("en"),
@@ -40,6 +41,7 @@ export const env = createEnv({
   runtimeEnv: {
     EXPO_PUBLIC_AUTH_PASSWORD: process.env.EXPO_PUBLIC_AUTH_PASSWORD,
     EXPO_PUBLIC_AUTH_MAGIC_LINK: process.env.EXPO_PUBLIC_AUTH_MAGIC_LINK,
+    EXPO_PUBLIC_AUTH_ANONYMOUS: process.env.EXPO_PUBLIC_AUTH_ANONYMOUS,
 
     EXPO_PUBLIC_SITE_URL: process.env.EXPO_PUBLIC_SITE_URL,
     EXPO_PUBLIC_DEFAULT_LOCALE: process.env.EXPO_PUBLIC_DEFAULT_LOCALE,

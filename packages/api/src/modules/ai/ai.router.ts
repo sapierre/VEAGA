@@ -20,7 +20,7 @@ export const aiRouter = new Hono().post(
   ),
   (c) =>
     streamText({
-      model: openai("gpt-4o"),
+      model: openai.responses("gpt-4.1-nano"),
       messages: convertToCoreMessages(c.req.valid("json").messages),
     }).toDataStreamResponse(),
 );

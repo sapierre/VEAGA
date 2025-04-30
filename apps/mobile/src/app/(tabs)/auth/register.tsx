@@ -1,3 +1,5 @@
+import { View } from "react-native";
+
 import { useTranslation } from "@turbostarter/i18n";
 
 import { Auth } from "~/components/auth/auth";
@@ -13,7 +15,12 @@ const RegisterPage = () => {
       />
       <Auth.Providers providers={authConfig.providers.oAuth} />
       {authConfig.providers.oAuth.length > 0 && <Auth.Divider />}
-      <Auth.Register />
+
+      <View className="gap-2">
+        <Auth.Register />
+        {authConfig.providers.anonymous && <Auth.Anonymous />}
+      </View>
+      <Auth.LoginCta />
     </Auth.Layout>
   );
 };

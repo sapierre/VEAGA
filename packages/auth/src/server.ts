@@ -3,6 +3,8 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { magicLink } from "better-auth/plugins";
+import { anonymous } from "better-auth/plugins";
+import { passkey } from "better-auth/plugins/passkey";
 
 import * as schema from "@turbostarter/db/schema";
 import { db } from "@turbostarter/db/server";
@@ -85,6 +87,8 @@ export const auth = betterAuth({
           },
         }),
     }),
+    passkey(),
+    anonymous(),
     expo(),
     nextCookies(),
   ],

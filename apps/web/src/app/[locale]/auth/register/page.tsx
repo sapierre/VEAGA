@@ -20,7 +20,11 @@ const Register = async () => {
         />
         <Auth.Providers providers={authConfig.providers.oAuth} />
         {authConfig.providers.oAuth.length > 0 && <Auth.Divider />}
-        <Auth.Register />
+        <div className="flex flex-col gap-2">
+          <Auth.Register />
+          {authConfig.providers.anonymous && <Auth.Anonymous />}
+        </div>
+        <Auth.LoginCta />
       </Auth.Layout>
     </>
   );

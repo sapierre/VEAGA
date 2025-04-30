@@ -35,6 +35,7 @@ import {
   ArrowUpRight,
   Menu,
   MonitorSmartphone,
+  Key,
 } from "lucide-react";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -44,6 +45,7 @@ export const Icons = {
   ArrowRight,
   LogIn,
   UserRound,
+  Key,
   SunMoon,
   Moon,
   Sun,

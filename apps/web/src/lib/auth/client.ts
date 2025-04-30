@@ -12,6 +12,7 @@ export const {
   changeEmail,
   listAccounts,
   linkSocial,
+  passkey,
   unlinkAccount,
   deleteUser,
   sendVerificationEmail,

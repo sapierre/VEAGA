@@ -29,7 +29,7 @@ export default async function SettingsLayout({
     <div className="flex w-full flex-col gap-6">
       <header className="flex items-center justify-between gap-10 py-2">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tighter">
             {t("account.settings.header.title")}
           </h1>
           <p className="text-sm text-muted-foreground">

@@ -35,20 +35,16 @@ const EXAMPLES = [
 
 const AI = () => {
   const { t } = useTranslation("marketing");
-  const {
-    messages,
-    handleSubmit,
-    append,
-    input,
-    isLoading,
-    handleInputChange,
-  } = useChat({
-    api: api.ai.chat.$url().toString(),
-  });
+  const { messages, handleSubmit, append, input, status, handleInputChange } =
+    useChat({
+      api: api.ai.chat.$url().toString(),
+    });
 
   const messagesToDisplay = messages.filter((message) =>
     ["assistant", "user"].includes(message.role),
   );
+
+  const isLoading = ["submitted", "streaming"].includes(status);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {

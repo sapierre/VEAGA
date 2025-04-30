@@ -103,23 +103,29 @@ export const RegisterForm = memo(() => {
             <Text>{t("register.cta")}</Text>
           )}
         </Button>
-
-        <View className="items-center justify-center pt-2">
-          <View className="flex-row">
-            <Text className="text-sm text-muted-foreground">
-              {t("register.alreadyHaveAccount")}
-            </Text>
-            <Link
-              href={pathsConfig.tabs.auth.login}
-              className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
-            >
-              {t("login.cta")}
-            </Link>
-          </View>
-        </View>
       </View>
     </Form>
   );
 });
 
 RegisterForm.displayName = "RegisterForm";
+
+export const RegisterCta = () => {
+  const { t } = useTranslation("auth");
+
+  return (
+    <View className="items-center justify-center pt-2">
+      <View className="flex-row">
+        <Text className="text-sm text-muted-foreground">
+          {t("login.noAccount")}
+        </Text>
+        <Link
+          href={pathsConfig.tabs.auth.register}
+          className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
+        >
+          {t("register.cta")}
+        </Link>
+      </View>
+    </View>
+  );
+};

@@ -80,7 +80,7 @@ export const RegisterForm = memo(() => {
     <AnimatePresence mode="wait">
       {status === "success" ? (
         <motion.div
-          className="mt-6 flex flex-col items-center justify-center gap-4"
+          className="my-6 flex flex-col items-center justify-center gap-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           key="success"
@@ -93,12 +93,6 @@ export const RegisterForm = memo(() => {
             {t("register.success.title")}
           </h2>
           <p className="text-center">{t("register.success.description")}</p>
-          <TurboLink
-            href={pathsConfig.auth.login}
-            className="-mt-1 text-sm text-muted-foreground underline hover:no-underline"
-          >
-            {t("login.cta")}
-          </TurboLink>
         </motion.div>
       ) : (
         <Form {...form} key="idle">
@@ -157,18 +151,6 @@ export const RegisterForm = memo(() => {
                 t("register.cta")
               )}
             </Button>
-
-            <div className="flex items-center justify-center pt-2">
-              <div className="text-sm text-muted-foreground">
-                {t("register.alreadyHaveAccount")}
-                <TurboLink
-                  href={pathsConfig.auth.login}
-                  className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-                >
-                  {t("login.cta")}!
-                </TurboLink>
-              </div>
-            </div>
           </motion.form>
         </Form>
       )}
@@ -177,3 +159,20 @@ export const RegisterForm = memo(() => {
 });
 
 RegisterForm.displayName = "RegisterForm";
+
+export const RegisterCta = () => {
+  const { t } = useTranslation("auth");
+  return (
+    <div className="flex items-center justify-center pt-2">
+      <div className="text-sm text-muted-foreground">
+        {t("login.noAccount")}
+        <TurboLink
+          href={pathsConfig.auth.register}
+          className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
+        >
+          {t("register.cta")}
+        </TurboLink>
+      </div>
+    </div>
+  );
+};

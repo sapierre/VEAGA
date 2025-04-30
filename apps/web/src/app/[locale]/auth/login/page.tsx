@@ -31,17 +31,31 @@ const Login = async ({
           title={t("login.header.title")}
           description={t("login.header.description")}
         />
-        <Auth.Providers
-          providers={authConfig.providers.oAuth}
-          redirectTo={(await searchParams).redirectTo}
-        />
-        {authConfig.providers.oAuth.length > 0 && options.length > 0 && (
-          <Auth.Divider />
-        )}
-        <Auth.Login
-          options={options}
-          redirectTo={(await searchParams).redirectTo}
-        />
+
+        <div className="flex flex-col gap-2">
+          <Auth.Providers
+            providers={authConfig.providers.oAuth}
+            redirectTo={(await searchParams).redirectTo}
+          />
+          {authConfig.providers.passkey && (
+            <Auth.Passkey redirectTo={(await searchParams).redirectTo} />
+          )}
+        </div>
+
+        {(authConfig.providers.oAuth.length > 0 ||
+          authConfig.providers.passkey) &&
+          options.length > 0 && <Auth.Divider />}
+
+        <div className="flex flex-col gap-2">
+          <Auth.Login
+            options={options}
+            redirectTo={(await searchParams).redirectTo}
+          />
+
+          {authConfig.providers.anonymous && <Auth.Anonymous />}
+        </div>
+
+        <Auth.RegisterCta />
       </Auth.Layout>
     </>
   );

@@ -1,10 +1,14 @@
 import { memo } from "react";
 import { KeyboardAvoidingView, ScrollView, View } from "react-native";
 
-import { LoginForm } from "~/components/auth/form/login/form";
+import { AnonymousLogin } from "~/components/auth/form/anonymous";
+import { LoginCta, LoginForm } from "~/components/auth/form/login/form";
 import { ForgotPasswordForm } from "~/components/auth/form/password/forgot";
 import { UpdatePasswordForm } from "~/components/auth/form/password/update";
-import { RegisterForm } from "~/components/auth/form/register-form";
+import {
+  RegisterCta,
+  RegisterForm,
+} from "~/components/auth/form/register-form";
 import { SocialProviders } from "~/components/auth/form/social-providers";
 import { AuthDivider } from "~/components/auth/layout/auth-divider";
 import { AuthHeader } from "~/components/auth/layout/auth-header";
@@ -38,7 +42,10 @@ export const Auth = {
   Divider: AuthDivider,
   Providers: SocialProviders,
   Login: LoginForm,
+  LoginCta: LoginCta,
   Register: RegisterForm,
+  RegisterCta: RegisterCta,
+  Anonymous: AnonymousLogin,
   ForgotPassword: ForgotPasswordForm,
   UpdatePassword: UpdatePasswordForm,
 };

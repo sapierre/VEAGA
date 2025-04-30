@@ -9,6 +9,9 @@ import {
   TabsContent,
 } from "@turbostarter/ui-web/tabs";
 
+import { TurboLink } from "~/components/common/turbo-link";
+import { pathsConfig } from "~/config/paths";
+
 import { MagicLinkLoginForm } from "./magic-link";
 import { PasswordLoginForm } from "./password";
 
@@ -67,5 +70,23 @@ export const LoginForm = async ({ options, redirectTo }: LoginFormProps) => {
         );
       })}
     </Tabs>
+  );
+};
+
+export const LoginCta = async () => {
+  const { t } = await getTranslation({ ns: "auth" });
+
+  return (
+    <div className="flex items-center justify-center pt-2">
+      <div className="text-sm text-muted-foreground">
+        {t("register.alreadyHaveAccount")}
+        <TurboLink
+          href={pathsConfig.auth.login}
+          className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
+        >
+          {t("login.cta")}!
+        </TurboLink>
+      </div>
+    </div>
   );
 };

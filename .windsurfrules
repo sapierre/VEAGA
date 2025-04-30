@@ -1,0 +1,33 @@
+You are an expert specifically trained for the Turbostarter monorepo project. Your goal is to generate and modify code adhering strictly to the project's structure, conventions, and tech stack (TypeScript, React, Next.js, Hono, Drizzle, Tailwind, etc.) outlined below.
+
+## Project Overview & Tech Stack
+
+- **Monorepo:** Managed by Turborepo (`turbo.json`). Root `package.json`.
+- **Applications (`apps/`):**
+  - `web`: Next.js App Router (SSR/RSC focus).
+  - `mobile`: React Native / Expo.
+  - `extension`: WXT (Vite + React) Browser Extension.
+- **Packages (`packages/`):** Shared modules:
+  - `api`: Hono backend logic.
+  - `auth`: Better Auth setup & helpers.
+  - `billing`: Provider integrations (e.g., Lemon Squeezy, Stripe).
+  - `cms`: Content management (Content Collections).
+  - `db`: Drizzle ORM schema & utilities.
+  - `email`: Email templates & providers (e.g., Resend, Nodemailer).
+  - `i18n`: Internationalization setup.
+  - `shared`: Common utilities, hooks, constants.
+  - `storage`: File storage providers (e.g., S3).
+  - `ui`: Shared UI components (Web: Shadcn/Radix, Mobile: Native components, Shared: Base styles/types).
+- **Tooling (`tooling/`):** Configs for ESLint, Prettier, TypeScript, Tailwind CSS.
+- **Core Tech:** TypeScript, React, Tailwind CSS.
+
+## Key Coding Conventions
+
+- **Style:** Concise, functional, declarative TypeScript. Avoid classes. Modular design.
+- **Naming:** Descriptive variables (`isLoading`). Lowercase-dashed directories. Named exports for components.
+- **TypeScript:** Use interfaces over types. Avoid enums (use maps). Functional components + interfaces.
+- **Syntax:** Minimize curly braces. Declarative JSX.
+- **UI (Web):** Use Shadcn UI, Radix UI, Tailwind CSS. Use `cn()` for class merging.
+- **Error Handling:** Early returns/guards. Zod for validation. Model errors as return values (Server Actions). Use error boundaries.
+- **Structure:** Correct placement in `apps/` vs `packages/`. Logical file structure (component, subcomponents, helpers, types).
+- **Next.js (Web):** Prioritize React Server Components (RSC). Minimize `'use client'`. Use SSR. Optimize images and Web Vitals.

@@ -23,6 +23,8 @@ const AUTH_PROVIDER = {
   ...SOCIAL_PROVIDER,
   PASSWORD: "password",
   MAGIC_LINK: "magicLink",
+  ANONYMOUS: "anonymous",
+  PASSKEY: "passkey",
 } as const;
 
 type AUTH_PROVIDER = (typeof AUTH_PROVIDER)[keyof typeof AUTH_PROVIDER];
@@ -31,6 +33,8 @@ const authConfigSchema = z.object({
   providers: z.object({
     [AUTH_PROVIDER.PASSWORD]: z.boolean(),
     [AUTH_PROVIDER.MAGIC_LINK]: z.boolean(),
+    [AUTH_PROVIDER.ANONYMOUS]: z.boolean(),
+    [AUTH_PROVIDER.PASSKEY]: z.boolean().optional(),
     oAuth: z.array(z.nativeEnum(SOCIAL_PROVIDER)),
   }),
 });
@@ -39,8 +43,11 @@ type AuthConfig = z.infer<typeof authConfigSchema>;
 
 const ERROR_MESSAGES: Record<AuthErrorCode, TranslationKey> = {
   USER_NOT_FOUND: "auth:error.user.notFound",
+  AUTHENTICATION_FAILED: "auth:error.authenticationFailed",
   FAILED_TO_CREATE_USER: "auth:error.account.creation",
   FAILED_TO_CREATE_SESSION: "auth:error.session.creation",
+  UNABLE_TO_CREATE_SESSION: "auth:error.session.creation",
+  COULD_NOT_CREATE_SESSION: "auth:error.session.creation",
   FAILED_TO_UPDATE_USER: "auth:error.account.update",
   FAILED_TO_GET_SESSION: "auth:error.session.retrieval",
   INVALID_PASSWORD: "auth:error.credentials.password.invalid",
@@ -61,6 +68,13 @@ const ERROR_MESSAGES: Record<AuthErrorCode, TranslationKey> = {
   SESSION_EXPIRED: "auth:error.session.expired",
   FAILED_TO_UNLINK_LAST_ACCOUNT: "auth:error.social.unlinkLastAccount",
   ACCOUNT_NOT_FOUND: "auth:error.user.accountNotFound",
+  CHALLENGE_NOT_FOUND: "auth:error.passkey.challengeNotFound",
+  YOU_ARE_NOT_ALLOWED_TO_REGISTER_THIS_PASSKEY: "auth:error.passkey.notAllowed",
+  FAILED_TO_VERIFY_REGISTRATION: "auth:error.passkey.verificationFailed",
+  PASSKEY_NOT_FOUND: "auth:error.passkey.notFound",
+  FAILED_TO_UPDATE_PASSKEY: "auth:error.passkey.updateFailed",
+  ANONYMOUS_USERS_CANNOT_SIGN_IN_AGAIN_ANONYMOUSLY:
+    "auth:error.anonymous.cannotSignInAgain",
 } as const;
 
 export type {

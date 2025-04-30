@@ -1,0 +1,71 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
+
+import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { useTranslation } from "@turbostarter/i18n";
+import { Button } from "@turbostarter/ui-web/button";
+import { Icons } from "@turbostarter/ui-web/icons";
+
+import { pathsConfig } from "~/config/paths";
+import { signIn } from "~/lib/auth/client";
+
+import { useAuthFormStore } from "../store";
+
+interface PasskeyLoginProps {
+  readonly redirectTo?: string;
+}
+
+export const PasskeyLogin = ({
+  redirectTo = pathsConfig.dashboard.index,
+}: PasskeyLoginProps) => {
+  const router = useRouter();
+  const { setProvider, setIsSubmitting, isSubmitting, provider } =
+    useAuthFormStore();
+  const { t } = useTranslation("auth");
+
+  useEffect(() => {
+    void signIn.passkey({ autoFill: true });
+  }, []);
+
+  const handleSignIn = async () => {
+    await signIn.passkey({
+      fetchOptions: {
+        onRequest: () => {
+          setProvider(AUTH_PROVIDER.PASSKEY);
+          setIsSubmitting(true);
+        },
+        onResponse: () => {
+          setIsSubmitting(false);
+        },
+        onSuccess: () => {
+          router.replace(redirectTo);
+        },
+        onError: ({ error }) => {
+          toast.error(error.message);
+        },
+      },
+    });
+  };
+
+  return (
+    <Button
+      variant="outline"
+      className="gap-2"
+      size="lg"
+      onClick={handleSignIn}
+      disabled={isSubmitting}
+    >
+      {isSubmitting && provider === AUTH_PROVIDER.PASSKEY ? (
+        <Icons.Loader className="size-4 animate-spin" />
+      ) : (
+        <>
+          <Icons.Key className="size-4" />
+          {t("login.passkey.cta")}
+        </>
+      )}
+    </Button>
+  );
+};

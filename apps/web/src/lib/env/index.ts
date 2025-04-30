@@ -9,6 +9,14 @@ import { env as authEnv } from "@turbostarter/auth/env";
 import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
+const castStringToBool = z.preprocess((val) => {
+  if (typeof val === "string") {
+    if (["1", "true"].includes(val.toLowerCase())) return true;
+    if (["0", "false"].includes(val.toLowerCase())) return false;
+  }
+  return val;
+}, z.coerce.boolean());
+
 export const env = createEnv({
   extends: [vercel(), apiEnv, authEnv, analyticsEnv],
   shared: {
@@ -27,16 +35,10 @@ export const env = createEnv({
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_AUTH_PASSWORD: z
-      .enum(["true", "false"])
-      .optional()
-      .default("true")
-      .transform((value) => value === "true"),
-    NEXT_PUBLIC_AUTH_MAGIC_LINK: z
-      .enum(["true", "false"])
-      .optional()
-      .default("false")
-      .transform((value) => value === "true"),
+    NEXT_PUBLIC_AUTH_PASSWORD: castStringToBool.optional().default(true),
+    NEXT_PUBLIC_AUTH_MAGIC_LINK: castStringToBool.optional().default(false),
+    NEXT_PUBLIC_AUTH_PASSKEY: castStringToBool.optional().default(true),
+    NEXT_PUBLIC_AUTH_ANONYMOUS: castStringToBool.optional().default(true),
 
     NEXT_PUBLIC_PRODUCT_NAME: z.string(),
     NEXT_PUBLIC_URL: z.string().url(),
@@ -58,6 +60,8 @@ export const env = createEnv({
 
     NEXT_PUBLIC_AUTH_PASSWORD: process.env.NEXT_PUBLIC_AUTH_PASSWORD,
     NEXT_PUBLIC_AUTH_MAGIC_LINK: process.env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
+    NEXT_PUBLIC_AUTH_PASSKEY: process.env.NEXT_PUBLIC_AUTH_PASSKEY,
+    NEXT_PUBLIC_AUTH_ANONYMOUS: process.env.NEXT_PUBLIC_AUTH_ANONYMOUS,
 
     NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,

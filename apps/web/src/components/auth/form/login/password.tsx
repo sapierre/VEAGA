@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { AUTH_PROVIDER, passwordLoginSchema } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
+import { Checkbox } from "@turbostarter/ui-web/checkbox";
 import {
   Form,
   FormControl,
@@ -38,14 +39,16 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
       useAuthFormStore();
     const form = useForm<PasswordLoginPayload>({
       resolver: zodResolver(passwordLoginSchema, { errorMap }),
+      defaultValues: {
+        rememberMe: true,
+      },
     });
 
     const onSubmit = async (data: PasswordLoginPayload) => {
       const loadingToast = toast.loading(t("login.password.loading"));
       await signIn.email(
         {
-          email: data.email,
-          password: data.password,
+          ...data,
           callbackURL: redirectTo,
         },
         {
@@ -72,7 +75,7 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
       <Form {...form}>
         <form
           onSubmit={onPromise(form.handleSubmit(onSubmit))}
-          className="space-y-6"
+          className="flex flex-col gap-6"
         >
           <FormField
             control={form.control}
@@ -81,7 +84,12 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
               <FormItem>
                 <FormLabel>{t("common:email")}</FormLabel>
                 <FormControl>
-                  <Input {...field} type="email" disabled={isSubmitting} />
+                  <Input
+                    {...field}
+                    type="email"
+                    disabled={isSubmitting}
+                    autoComplete="email webauthn"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -103,9 +111,30 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
                   </TurboLink>
                 </div>
                 <FormControl>
-                  <Input {...field} type="password" disabled={isSubmitting} />
+                  <Input
+                    {...field}
+                    type="password"
+                    disabled={isSubmitting}
+                    autoComplete="current-password webauthn"
+                  />
                 </FormControl>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="rememberMe"
+            render={({ field }) => (
+              <FormItem className="-mt-2 ml-px flex items-center gap-2 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormLabel>{t("rememberMe")}</FormLabel>
               </FormItem>
             )}
           />
@@ -122,18 +151,6 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
               t("login.cta")
             )}
           </Button>
-
-          <div className="flex items-center justify-center pt-2">
-            <div className="text-sm text-muted-foreground">
-              {t("login.noAccount")}
-              <TurboLink
-                href={pathsConfig.auth.register}
-                className="pl-2 font-medium underline underline-offset-4 hover:text-primary"
-              >
-                {t("register.cta")}
-              </TurboLink>
-            </div>
-          </div>
         </form>
       </Form>
     );

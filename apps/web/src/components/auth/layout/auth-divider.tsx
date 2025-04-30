@@ -9,7 +9,7 @@ export const AuthDivider = async () => {
         <div className="w-full border-t border-input" />
       </div>
       <div className="relative flex justify-center text-sm">
-        <span className="bg-background px-2 text-muted-foreground">
+        <span className="bg-background px-2 leading-tight text-muted-foreground">
           {t("divider")}
         </span>
       </div>

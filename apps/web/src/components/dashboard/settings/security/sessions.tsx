@@ -15,9 +15,10 @@ import {
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
-import { listSessions, revokeSession } from "~/lib/auth/client";
+import { listSessions, revokeSession, useSession } from "~/lib/auth/client";
 
 export const Sessions = () => {
+  const { data: session } = useSession();
   const { t } = useTranslation(["common", "auth"]);
 
   const {
@@ -25,7 +26,7 @@ export const Sessions = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["sessions"],
+    queryKey: ["sessions", session?.user.id],
     queryFn: () => listSessions(),
   });
 
@@ -70,7 +71,7 @@ export const Sessions = () => {
                 key={session.id}
                 className="flex min-w-0 items-center gap-3 border-b px-4 py-3 last:border-b-0"
               >
-                <Icons.MonitorSmartphone className="size-7 shrink-0 text-muted-foreground" />
+                <Icons.MonitorSmartphone className="size-6 shrink-0" />
 
                 <div className="mr-auto grid grid-cols-1">
                   <span className="truncate text-sm font-medium capitalize">

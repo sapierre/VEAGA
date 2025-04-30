@@ -35,7 +35,7 @@ import {
 import { Icons } from "@turbostarter/ui-web/icons";
 import { Skeleton } from "@turbostarter/ui-web/skeleton";
 
-import { useAccounts } from "./hooks/use-accounts";
+import { useAccounts } from "./use-accounts";
 
 import type { SVGProps } from "react";
 
@@ -113,8 +113,11 @@ export const Accounts = () => {
       )}
 
       {missing.length > 0 && !isLoading && (
-        <CardFooter className="m-6 mt-0 flex-col items-start gap-3 rounded-md border px-4 py-3">
-          <span className="text-sm font-medium">{t("addNew")}</span>
+        <CardFooter className="m-6 mt-0 flex-col items-start gap-3 rounded-md border border-dashed px-4 py-3">
+          <div className="flex items-center justify-center gap-1">
+            <Icons.Plus className="size-4" />
+            <span className="text-sm font-medium">{t("addNew")}</span>
+          </div>
 
           <hr className="w-full bg-border" />
           <div className="flex flex-wrap gap-2">
@@ -130,9 +133,9 @@ export const Accounts = () => {
                   onClick={() => connect.mutate(provider)}
                 >
                   {connect.isPending && connect.variables === provider ? (
-                    <Icons.Loader2 className="size-7 animate-spin" />
+                    <Icons.Loader2 className="size-6 animate-spin" />
                   ) : (
-                    <Icon className="size-7" />
+                    <Icon className="size-6" />
                   )}
                   {provider}
                 </Button>

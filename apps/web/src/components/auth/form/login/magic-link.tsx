@@ -6,7 +6,11 @@ import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER, magicLinkLoginSchema } from "@turbostarter/auth";
+import {
+  AUTH_PROVIDER,
+  generateName,
+  magicLinkLoginSchema,
+} from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
@@ -53,6 +57,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
 
       await signIn.magicLink(
         {
+          name: generateName(data.email),
           email: data.email,
           callbackURL: redirectTo,
         },
@@ -83,7 +88,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
       <AnimatePresence mode="wait">
         {status === "success" ? (
           <motion.div
-            className="mt-6 flex flex-col items-center justify-center gap-4"
+            className="my-6 flex flex-col items-center justify-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             key="success"

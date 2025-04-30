@@ -10,6 +10,7 @@ import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import {
   Form,
+  FormCheckbox,
   FormField,
   FormInput,
   FormItem,
@@ -30,31 +31,28 @@ export const PasswordLoginForm = memo(() => {
     useAuthFormStore();
   const form = useForm<PasswordLoginPayload>({
     resolver: zodResolver(passwordLoginSchema, { errorMap }),
+    defaultValues: {
+      rememberMe: true,
+    },
   });
 
   const onSubmit = async (data: PasswordLoginPayload) => {
-    await signIn.email(
-      {
-        email: data.email,
-        password: data.password,
+    await signIn.email(data, {
+      onRequest: () => {
+        setProvider(AUTH_PROVIDER.PASSWORD);
+        setIsSubmitting(true);
       },
-      {
-        onRequest: () => {
-          setProvider(AUTH_PROVIDER.PASSWORD);
-          setIsSubmitting(true);
-        },
-        onSuccess: () => {
-          router.navigate(pathsConfig.tabs.settings.index);
-          form.reset();
-        },
-        onError: ({ error }) => {
-          Alert.alert(t("error.title"), error.message);
-        },
-        onResponse: () => {
-          setIsSubmitting(false);
-        },
+      onSuccess: () => {
+        router.navigate(pathsConfig.tabs.settings.index);
+        form.reset();
       },
-    );
+      onError: ({ error }) => {
+        Alert.alert(t("error.title"), error.message);
+      },
+      onResponse: () => {
+        setIsSubmitting(false);
+      },
+    });
   };
 
   return (
@@ -96,6 +94,21 @@ export const PasswordLoginForm = memo(() => {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="rememberMe"
+          render={({ field }) => (
+            <FormCheckbox
+              className="-ml-0.5 -mt-2"
+              name="rememberMe"
+              label={t("rememberMe")}
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+            />
+          )}
+        />
+
         <Button
           className="w-full"
           size="lg"
@@ -108,20 +121,6 @@ export const PasswordLoginForm = memo(() => {
             <Text>{t("login.cta")}</Text>
           )}
         </Button>
-
-        <View className="items-center justify-center pt-2">
-          <View className="flex-row">
-            <Text className="text-sm text-muted-foreground">
-              {t("login.noAccount")}
-            </Text>
-            <Link
-              href={pathsConfig.tabs.auth.register}
-              className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
-            >
-              {t("register.cta")}
-            </Link>
-          </View>
-        </View>
       </View>
     </Form>
   );
