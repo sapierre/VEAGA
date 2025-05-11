@@ -21,6 +21,7 @@ export const PricingPlanType = pricingPlanTypeEnumSchema.enum;
 export const BillingProvider = {
   STRIPE: "stripe",
   LEMON_SQUEEZY: "lemon-squeezy",
+  POLAR: "polar",
 } as const;
 
 export const BillingModel = {

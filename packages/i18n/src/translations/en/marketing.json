@@ -14,7 +14,7 @@
     },
     "billing": {
       "title": "Billing",
-      "description": "Receive payments from your users using configured providers - Stripe or LemonSqueezy."
+      "description": "Receive payments from your users using configured providers - Stripe, LemonSqueezy or Polar."
     },
     "blog": {
       "title": "Blog",

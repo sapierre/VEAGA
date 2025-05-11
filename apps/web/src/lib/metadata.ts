@@ -2,7 +2,6 @@ import { isKey } from "@turbostarter/i18n";
 import { getTranslation } from "@turbostarter/i18n/server";
 
 import { appConfig } from "~/config/app";
-import { env } from "~/lib/env";
 
 import type { TranslationKey } from "@turbostarter/i18n";
 import type { Metadata, Viewport } from "next";
@@ -28,10 +27,23 @@ interface SeoProps {
   readonly url?: string;
   readonly canonical?: string;
   readonly type?: OpenGraphType;
+  readonly images?: {
+    url: string;
+    width: number;
+    height: number;
+    alt?: string;
+  }[];
 }
 
 const SITE_NAME_SEPARATOR = " | ";
-export const SITE_NAME_TEMPLATE = `%s${SITE_NAME_SEPARATOR}${env.NEXT_PUBLIC_PRODUCT_NAME}`;
+export const SITE_NAME_TEMPLATE = `%s${SITE_NAME_SEPARATOR}${appConfig.name}`;
+
+const DEFAULT_IMAGE = {
+  url: `${appConfig.url}/opengraph-image.png`,
+  width: 1200,
+  height: 630,
+  alt: appConfig.name,
+};
 
 export const getMetadata =
   (
@@ -40,6 +52,7 @@ export const getMetadata =
       description = "common:product.description",
       url,
       canonical,
+      images = [DEFAULT_IMAGE],
       type = "website",
     } = {} as SeoProps,
   ) =>
@@ -66,8 +79,9 @@ export const getMetadata =
       openGraph: {
         ...common,
         url: url ? url : canonical ? canonical : appConfig.url,
-        siteName: env.NEXT_PUBLIC_PRODUCT_NAME,
+        siteName: appConfig.name,
         type,
+        images,
       },
       ...{
         ...(canonical && {
@@ -78,6 +92,7 @@ export const getMetadata =
       },
       twitter: {
         card: "summary_large_image" as const,
+        images,
       },
     };
   };
@@ -88,7 +103,7 @@ export const DEFAULT_METADATA: Metadata = {
   })),
   title: {
     template: SITE_NAME_TEMPLATE,
-    default: env.NEXT_PUBLIC_PRODUCT_NAME,
+    default: appConfig.name,
   },
   metadataBase: appConfig.url ? new URL(appConfig.url) : null,
 };

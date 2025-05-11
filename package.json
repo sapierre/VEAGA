@@ -1,5 +1,5 @@
 {
-  "name": "main",
+  "name": "core",
   "private": true,
   "scripts": {
     "prepare": "husky",

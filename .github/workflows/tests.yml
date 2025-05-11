@@ -17,7 +17,7 @@ concurrency:
 # @link https://turbo.build/repo/docs/guides/ci-vendors/github-actions
 env:
   FORCE_COLOR: 3
-  NODE_VERSION: 20.x
+  NODE_VERSION: 22.x
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 

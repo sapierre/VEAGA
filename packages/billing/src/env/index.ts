@@ -1,6 +1,8 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
+import { NodeEnv } from "@turbostarter/shared/constants";
+
 import { BillingModel, BillingProvider } from "../types";
 
 export const provider = z
@@ -58,6 +60,27 @@ const getBillingEnv = () => {
             .default(BillingProvider.STRIPE),
         },
       });
+    case BillingProvider.POLAR:
+      return createEnv({
+        ...shared,
+        shared: {
+          NODE_ENV: z
+            .nativeEnum(NodeEnv)
+            .optional()
+            .default(NodeEnv.DEVELOPMENT),
+        },
+        extends: [configEnv],
+        server: {
+          POLAR_ACCESS_TOKEN: z.string(),
+          POLAR_WEBHOOK_SECRET: z.string(),
+          POLAR_ORGANIZATION_SLUG: z.string().optional(),
+          BILLING_PROVIDER: z
+            .literal(BillingProvider.POLAR)
+            .optional()
+            .default(BillingProvider.POLAR),
+        },
+      });
+
     default:
       throw new Error(`Unsupported billing provider!`);
   }

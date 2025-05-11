@@ -3,9 +3,10 @@ import { getSubscription } from "@lemonsqueezy/lemonsqueezy.js";
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { config } from "../../../config";
-import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
-import { toBillingStatus } from "../mappers/toBillingStatus";
+import { config } from "../../config";
+import { getCustomerByCustomerId, updateCustomer } from "../../lib/customer";
+
+import { toBillingStatus } from "./mappers/to-billing-status";
 
 export const subscriptionStatusChangeHandler = async ({
   id,

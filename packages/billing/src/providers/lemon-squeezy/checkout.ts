@@ -7,16 +7,17 @@ import {
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { config } from "../../../config";
-import { env } from "../../../env";
-import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
-import { getCustomerByUserId } from "../../../server";
-import { BillingProvider } from "../../../types";
-import { getHighestDiscountForPrice } from "../../../utils";
-import { createOrRetrieveCustomer } from "../customer";
-import { toCheckoutBillingStatus } from "../mappers/toBillingStatus";
+import { config } from "../../config";
+import { env } from "../../env";
+import { getCustomerByCustomerId, updateCustomer } from "../../lib/customer";
+import { getCustomerByUserId } from "../../server";
+import { BillingProvider } from "../../types";
+import { getHighestDiscountForPrice } from "../../utils";
 
-import type { CheckoutPayload, GetBillingPortalPayload } from "../../../server";
+import { createOrRetrieveCustomer } from "./customer";
+import { toCheckoutBillingStatus } from "./mappers/to-billing-status";
+
+import type { CheckoutPayload, GetBillingPortalPayload } from "../../server";
 import type { User } from "@turbostarter/auth";
 
 export const checkout = async ({

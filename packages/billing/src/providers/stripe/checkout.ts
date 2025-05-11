@@ -1,29 +1,30 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { config } from "../../../config";
-import { env } from "../../../env";
-import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
-import { BillingModel } from "../../../types";
-import { getHighestDiscountForPrice } from "../../../utils";
-import { stripe } from "../client";
+import { config } from "../../config";
+import { env } from "../../env";
+import { getCustomerByCustomerId, updateCustomer } from "../../lib/customer";
+import { BillingModel } from "../../types";
+import { getHighestDiscountForPrice } from "../../utils";
+
+import { stripe } from "./client";
 import {
   createBillingPortalSession,
   createOrRetrieveCustomer,
-} from "../customer";
+} from "./customer";
 import {
   toCheckoutBillingStatus,
   toPaymentBillingStatus,
-} from "../mappers/toBillingStatus";
+} from "./mappers/to-billing-status";
 import {
   getPromotionCode,
   subscriptionStatusChangeHandler,
-} from "../subscription";
+} from "./subscription";
 
 import type {
   CheckoutPayload,
   GetBillingPortalPayload,
-} from "../../../lib/schema";
+} from "../../lib/schema";
 import type { User } from "@turbostarter/auth";
 import type Stripe from "stripe";
 

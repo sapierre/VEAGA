@@ -1,10 +1,11 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { config } from "../../../config";
-import { getCustomerByCustomerId, updateCustomer } from "../../../lib/customer";
-import { stripe } from "../client";
-import { toBillingStatus } from "../mappers/toBillingStatus";
+import { config } from "../../config";
+import { getCustomerByCustomerId, updateCustomer } from "../../lib/customer";
+
+import { stripe } from "./client";
+import { toBillingStatus } from "./mappers/to-billing-status";
 
 import type Stripe from "stripe";
 

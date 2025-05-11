@@ -5,8 +5,9 @@ import {
   getCustomerByUserId,
   updateCustomer,
   upsertCustomer,
-} from "../../../lib/customer";
-import { stripe } from "../client";
+} from "../../lib/customer";
+
+import { stripe } from "./client";
 
 import type Stripe from "stripe";
 

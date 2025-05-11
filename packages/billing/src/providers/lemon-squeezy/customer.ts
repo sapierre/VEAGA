@@ -7,10 +7,10 @@ import {
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { env } from "../../../env";
-import { updateCustomer, upsertCustomer } from "../../../lib/customer";
-import { getCustomerByUserId } from "../../../server";
-import { BillingProvider } from "../../../types";
+import { env } from "../../env";
+import { updateCustomer, upsertCustomer } from "../../lib/customer";
+import { getCustomerByUserId } from "../../server";
+import { BillingProvider } from "../../types";
 
 const getLemonSqueezyCustomerById = async (customerId: string) => {
   return getCustomer(customerId);
