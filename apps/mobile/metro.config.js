@@ -14,10 +14,6 @@ const config = withTurborepoManagedCache(
   ),
 );
 
-// XXX: Resolve our exports in workspace packages
-// https://github.com/expo/expo/issues/26926
-config.resolver.unstable_enablePackageExports = true;
-
 // Force resolving nested modules to the folders below
 // https://github.com/nativewind/nativewind/issues/734
 config.resolver.disableHierarchicalLookup = true;

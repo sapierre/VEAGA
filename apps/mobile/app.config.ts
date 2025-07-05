@@ -35,6 +35,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: "./public/images/icon/android/adaptive.png",
       backgroundColor: "#0D121C",
     },
+    edgeToEdgeEnabled: true,
   },
   extra: {
     eas: {
@@ -44,7 +45,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: {
     tsconfigPaths: true,
     typedRoutes: true,
-    reactCanary: true,
   },
   plugins: [
     "expo-router",

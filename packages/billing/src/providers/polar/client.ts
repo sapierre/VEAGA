@@ -12,12 +12,10 @@ export const polar = () => {
     throw new Error("Invalid billing provider!");
   }
 
-  if (!polarInstance) {
-    polarInstance = new Polar({
-      server: env.NODE_ENV === NodeEnv.PRODUCTION ? "production" : "sandbox",
-      accessToken: env.POLAR_ACCESS_TOKEN,
-    });
-  }
+  polarInstance ??= new Polar({
+    server: env.NODE_ENV === NodeEnv.PRODUCTION ? "production" : "sandbox",
+    accessToken: env.POLAR_ACCESS_TOKEN,
+  });
 
   return polarInstance;
 };

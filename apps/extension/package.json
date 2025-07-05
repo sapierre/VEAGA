@@ -39,7 +39,7 @@
     "@turbostarter/tailwind-config": "workspace:*",
     "@turbostarter/tsconfig": "workspace:*",
     "@types/chrome": "0.0.270",
-    "@types/node": "22.15.2",
+    "@types/node": "catalog:node22",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "@wxt-dev/auto-icons": "1.0.2",
@@ -47,6 +47,6 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "wxt": "0.20.0"
+    "wxt": "0.20.7"
   }
 }

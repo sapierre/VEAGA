@@ -18,8 +18,8 @@ export const useImagePicker = () => {
 
       const image =
         result.assets[0] ??
-        (pendingResult[0] && "assets" in pendingResult[0]
-          ? pendingResult[0].assets?.[0]
+        (pendingResult && "assets" in pendingResult
+          ? pendingResult.assets?.[0]
           : null);
 
       return image;

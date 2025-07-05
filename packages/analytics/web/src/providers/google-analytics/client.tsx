@@ -31,7 +31,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
             return;
           }
 
-          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer = (window as any).dataLayer ?? [];
 
           function gtag(...rest: any[]) {
             (window as any).dataLayer.push(...rest);

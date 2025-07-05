@@ -1,3 +1,4 @@
+import { fileURLToPath } from "url";
 import svgr from "vite-plugin-svgr";
 import { type WxtViteConfig, defineConfig } from "wxt";
 
@@ -36,6 +37,9 @@ export default defineConfig({
             ([key]) => key.toLowerCase() !== "path",
           ),
         ),
+      },
+      alias: {
+        "~": fileURLToPath(new URL("./src", import.meta.url)),
       },
     }) as WxtViteConfig,
 });

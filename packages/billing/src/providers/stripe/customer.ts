@@ -41,9 +41,8 @@ export const createOrRetrieveCustomer = async ({
     ? (await getStripeCustomerById(existingCustomer.customerId)).id
     : (await getStripeCustomerByEmail(email))?.id;
 
-  const stripeIdToInsert = stripeCustomerId
-    ? stripeCustomerId
-    : await createStripeCustomer(id, email);
+  const stripeIdToInsert =
+    stripeCustomerId ?? (await createStripeCustomer(id, email));
 
   if (!stripeIdToInsert) {
     throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {

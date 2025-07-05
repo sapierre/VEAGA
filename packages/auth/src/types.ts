@@ -43,6 +43,7 @@ type AuthConfig = z.infer<typeof authConfigSchema>;
 
 const ERROR_MESSAGES: Record<AuthErrorCode, TranslationKey> = {
   USER_NOT_FOUND: "auth:error.user.notFound",
+  USER_ALREADY_HAS_PASSWORD: "auth:error.user.alreadyHasPassword",
   AUTHENTICATION_FAILED: "auth:error.authenticationFailed",
   FAILED_TO_CREATE_USER: "auth:error.account.creation",
   FAILED_TO_CREATE_SESSION: "auth:error.session.creation",

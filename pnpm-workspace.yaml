@@ -1,20 +1,22 @@
 packages:
-  - "apps/*"
-  - "packages/**"
-  - "tooling/*"
+  - apps/*
+  - packages/**
+  - tooling/*
 
 catalog:
-  "@tanstack/react-query": 5.74.4
+  "@tanstack/react-query": 5.81.5
   "@t3-oss/env-core": 0.13.0
-  eslint: 9.16.0
-  prettier: 3.5.3
-  typescript: 5.7.2
-  zod: 3.24.1
-  react-native: 0.76.7
+  eslint: 9.30.1
+  prettier: 3.6.2
+  typescript: 5.8.3
+  zod: 3.25.72
+  react-native: 0.79.5
 
 catalogs:
   react19:
     react: 19.0.0
     react-dom: 19.0.0
-    "@types/react": 19.0.0
-    "@types/react-dom": 19.0.0
+    "@types/react": 19.1.6
+    "@types/react-dom": 19.1.5
+  node22:
+    "@types/node": 22.16.0

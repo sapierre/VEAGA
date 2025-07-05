@@ -1,5 +1,5 @@
+import { vars } from "nativewind";
 import { View } from "react-native";
-import { vars } from "react-native-css-interop";
 
 import { useTranslation } from "@turbostarter/i18n";
 import { cn, ThemeColor, themes } from "@turbostarter/ui";

@@ -32,10 +32,10 @@
     "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
-    "lucide-react-native": "0.439.0",
-    "nativewind": "~4.0.36",
+    "lucide-react-native": "0.525.0",
+    "nativewind": "~4.1.23",
     "react-native": "catalog:",
-    "react-native-svg": "15.2.0",
+    "react-native-svg": "15.11.2",
     "zustand": "5.0.2"
   },
   "devDependencies": {

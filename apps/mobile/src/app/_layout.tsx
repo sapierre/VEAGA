@@ -8,8 +8,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/dm-sans";
 import * as Application from "expo-application";
-import { Stack } from "expo-router";
-import { useNavigationContainerRef } from "expo-router";
+import { Stack, useNavigationContainerRef } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { StatusBar } from "react-native";

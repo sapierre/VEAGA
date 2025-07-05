@@ -36,7 +36,7 @@ const PLAN_EMOJIS: Record<PricingPlanType, string> = {
 };
 
 const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
-  const plan = !customer?.plan ? PricingPlanType.FREE : customer.plan;
+  const plan = customer?.plan ?? PricingPlanType.FREE;
 
   return (
     <div className="flex w-full items-center justify-center gap-2 rounded-md border border-dashed bg-muted/25 py-1.5">

@@ -10,9 +10,7 @@ export const stripe = () => {
     throw new Error("Invalid billing provider!");
   }
 
-  if (!stripeInstance) {
-    stripeInstance = new Stripe(env.STRIPE_SECRET_KEY);
-  }
+  stripeInstance ??= new Stripe(env.STRIPE_SECRET_KEY);
 
   return stripeInstance;
 };

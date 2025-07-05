@@ -78,7 +78,7 @@ export const getMetadata =
       ...common,
       openGraph: {
         ...common,
-        url: url ? url : canonical ? canonical : appConfig.url,
+        url: url ?? canonical ?? appConfig.url,
         siteName: appConfig.name,
         type,
         images,

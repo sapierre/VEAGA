@@ -42,7 +42,12 @@ export const auth = betterAuth({
         }),
     },
   },
-  trustedOrigins: ["chrome-extension://", "turbostarter://"],
+  trustedOrigins: [
+    "chrome-extension://",
+    "turbostarter://",
+    "http://localhost:*",
+    "https://localhost:*",
+  ],
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
