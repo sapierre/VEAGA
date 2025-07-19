@@ -43,9 +43,6 @@ export const ForgotPasswordForm = memo(() => {
           );
           form.reset();
         },
-        onError: ({ error }) => {
-          Alert.alert(t("error.title"), error.message);
-        },
       },
     );
   };

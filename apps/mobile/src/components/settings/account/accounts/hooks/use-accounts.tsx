@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Alert } from "react-native";
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { SocialProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 
 import { pathsConfig } from "~/config/paths";
@@ -19,38 +18,28 @@ export const useAccounts = () => {
 
   const accounts = data?.data ?? [];
   const socials = accounts.filter((account) =>
-    Object.values(SOCIAL_PROVIDER).includes(account.provider),
+    Object.values(SocialProvider).includes(account.provider),
   );
-  const missing = Object.values(SOCIAL_PROVIDER).filter(
+  const missing = Object.values(SocialProvider).filter(
     (provider) => !socials.some((social) => social.provider === provider),
   );
 
   const connect = useMutation({
-    mutationFn: async (provider: SOCIAL_PROVIDER) => {
-      await signIn.social(
-        {
-          provider,
-          callbackURL: pathsConfig.tabs.settings.index,
-        },
-        {
-          onError: ({ error }) => {
-            Alert.alert(t("error.title"), error.message);
-          },
-        },
-      );
+    mutationFn: async (provider: SocialProvider) => {
+      await signIn.social({
+        provider,
+        callbackURL: pathsConfig.tabs.settings.index,
+      });
 
       await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
     },
   });
 
   const disconnect = useMutation({
-    mutationFn: async (provider: SOCIAL_PROVIDER) => {
+    mutationFn: async (provider: SocialProvider) => {
       await unlinkAccount(
         { providerId: provider },
         {
-          onError: ({ error }) => {
-            Alert.alert(t("error.title"), error.message);
-          },
           onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: QUERY_KEY });
           },

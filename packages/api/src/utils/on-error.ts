@@ -22,7 +22,10 @@ export const onError = async (
     Variables: { locale: string };
   }>,
 ) => {
-  const { t, i18n } = await getTranslation({ locale: c?.var.locale });
+  const { t, i18n } = await getTranslation({
+    locale: c?.var.locale,
+    request: c?.req.raw,
+  });
   const details = {
     status: getStatusCode(e),
     headers: {

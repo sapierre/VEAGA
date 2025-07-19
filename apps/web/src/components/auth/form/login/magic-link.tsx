@@ -2,12 +2,12 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import {
-  AUTH_PROVIDER,
+  AuthProvider,
   generateName,
   magicLinkLoginSchema,
 } from "@turbostarter/auth";
@@ -31,8 +31,6 @@ import { onPromise } from "~/utils";
 
 import type { MagicLinkLoginPayload } from "@turbostarter/auth";
 
-type LoginStatus = "pending" | "success" | "error" | "idle";
-
 interface MagicLinkLoginFormProps {
   readonly redirectTo?: string;
 }
@@ -42,15 +40,10 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
     const { t, errorMap } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
-    const [status, setStatus] = useState<LoginStatus>("idle");
 
     const form = useForm<MagicLinkLoginPayload>({
       resolver: zodResolver(magicLinkLoginSchema, { errorMap }),
     });
-
-    useEffect(() => {
-      setIsSubmitting(status === "pending");
-    }, [status, setIsSubmitting]);
 
     const onSubmit = async (data: MagicLinkLoginPayload) => {
       const loadingToast = toast.loading(t("login.magicLink.loading"));
@@ -63,19 +56,16 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
         },
         {
           onRequest: () => {
-            setProvider(AUTH_PROVIDER.MAGIC_LINK);
+            setProvider(AuthProvider.MAGIC_LINK);
             setIsSubmitting(true);
-            setStatus("pending");
           },
           onSuccess: () => {
             toast.success(t("login.magicLink.success.notification"), {
               id: loadingToast,
             });
-            setStatus("success");
           },
           onError: ({ error }) => {
-            setStatus("error");
-            toast.error(`${error.message}!`, { id: loadingToast });
+            toast.error(error.message, { id: loadingToast });
           },
           onResponse: () => {
             setIsSubmitting(false);
@@ -86,7 +76,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
 
     return (
       <AnimatePresence mode="wait">
-        {status === "success" ? (
+        {form.formState.isSubmitSuccessful ? (
           <motion.div
             className="my-6 flex flex-col items-center justify-center gap-4"
             initial={{ opacity: 0 }}
@@ -134,7 +124,7 @@ export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
                 size="lg"
                 disabled={isSubmitting}
               >
-                {isSubmitting && provider === AUTH_PROVIDER.MAGIC_LINK ? (
+                {isSubmitting && provider === AuthProvider.MAGIC_LINK ? (
                   <Icons.Loader2 className="animate-spin" />
                 ) : (
                   t("login.magicLink.cta")

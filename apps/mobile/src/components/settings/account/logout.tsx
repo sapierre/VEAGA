@@ -20,9 +20,6 @@ export const Logout = () => {
           onSuccess: () => {
             router.replace(pathsConfig.index);
           },
-          onError: ({ error }) => {
-            Alert.alert(t("error.title"), error.message);
-          },
         },
       }),
   });

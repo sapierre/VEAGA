@@ -47,10 +47,10 @@ export const getPathname = ({
   );
 
   if (locale === (defaultLocale ?? config.defaultLocale)) {
-    return pathname;
+    return pathname.startsWith("/") ? pathname : `/${pathname}`;
   }
 
-  return `/${locale}${pathname}`;
+  return `/${locale}${pathname.startsWith("/") ? pathname : `/${pathname}`}`;
 };
 
 export * from "./validation";

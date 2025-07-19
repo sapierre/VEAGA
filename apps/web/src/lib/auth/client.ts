@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 import { createClient } from "@turbostarter/auth/client/web";
 
 export const {
@@ -18,4 +20,13 @@ export const {
   sendVerificationEmail,
   listSessions,
   revokeSession,
-} = createClient();
+  twoFactor,
+} = createClient({
+  fetchOptions: {
+    throw: true,
+    onError: ({ error }) => {
+      console.error(error);
+      toast.error(error.message);
+    },
+  },
+});

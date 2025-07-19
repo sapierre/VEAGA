@@ -1,6 +1,7 @@
 import { memo } from "react";
 
 import { AnonymousLogin } from "~/components/auth/form/anonymous";
+import { TwoFactor } from "~/components/auth/form/two-factor";
 
 import { LoginCta, LoginForm } from "./form/login/form";
 import { PasskeyLogin } from "./form/login/passkey";
@@ -42,4 +43,5 @@ export const Auth = {
   UpdatePassword: UpdatePasswordForm,
   Anonymous: AnonymousLogin,
   Passkey: PasskeyLogin,
+  TwoFactor,
 };

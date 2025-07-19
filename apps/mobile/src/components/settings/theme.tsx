@@ -14,7 +14,7 @@ import {
 import { Button } from "@turbostarter/ui-mobile/button";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
-import { ThemeCustomizer, MODE_ICONS } from "@turbostarter/ui-mobile/theme";
+import { MODE_ICONS, ThemeCustomizer } from "@turbostarter/ui-mobile/theme";
 
 import { SettingsTile } from "~/components/settings/layout/tile";
 import { appConfig } from "~/config/app";
@@ -64,7 +64,11 @@ export const ThemeSettings = () => {
           ></View>
         </SettingsTile>
       </BottomSheetOpenTrigger>
-      <BottomSheetContent ref={ref}>
+      <BottomSheetContent
+        ref={ref}
+        stackBehavior="replace"
+        name="theme-settings"
+      >
         <BottomSheetView className="gap-2 px-7 py-4">
           <View className="flex-row items-start">
             <View className="space-y-1 pr-2">

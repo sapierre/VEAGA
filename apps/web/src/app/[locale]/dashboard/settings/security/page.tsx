@@ -2,6 +2,7 @@ import { Accounts } from "~/components/dashboard/settings/security/accounts/acco
 import { EditPassword } from "~/components/dashboard/settings/security/edit-password";
 import { Passkeys } from "~/components/dashboard/settings/security/passkeys/passkeys";
 import { Sessions } from "~/components/dashboard/settings/security/sessions";
+import { TwoFactorAuthentication } from "~/components/dashboard/settings/security/two-factor/two-factor";
 import { authConfig } from "~/config/auth";
 import { getMetadata } from "~/lib/metadata";
 
@@ -16,6 +17,7 @@ export default function SettingsPage() {
       <EditPassword />
       <Accounts />
       {authConfig.providers.passkey && <Passkeys />}
+      <TwoFactorAuthentication />
       <Sessions />
     </>
   );

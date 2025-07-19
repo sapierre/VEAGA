@@ -1,9 +1,8 @@
 "use client";
 
 import { router } from "expo-router";
-import { Alert } from "react-native";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { AuthProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import { Icons } from "@turbostarter/ui-mobile/icons";
@@ -22,14 +21,11 @@ export const AnonymousLogin = () => {
   const handleSignIn = async () => {
     await signIn.anonymous(undefined, {
       onRequest: () => {
-        setProvider(AUTH_PROVIDER.ANONYMOUS);
+        setProvider(AuthProvider.ANONYMOUS);
         setIsSubmitting(true);
       },
       onResponse: () => {
         setIsSubmitting(false);
-      },
-      onError: ({ error }) => {
-        Alert.alert(t("error.title"), error.message);
       },
       onSuccess: () => {
         router.navigate(pathsConfig.tabs.settings.index);
@@ -45,7 +41,7 @@ export const AnonymousLogin = () => {
       disabled={isSubmitting}
       onPress={handleSignIn}
     >
-      {isSubmitting && provider === AUTH_PROVIDER.ANONYMOUS ? (
+      {isSubmitting && provider === AuthProvider.ANONYMOUS ? (
         <Icons.Loader2 className="animate-spin text-foreground" size={16} />
       ) : (
         <>

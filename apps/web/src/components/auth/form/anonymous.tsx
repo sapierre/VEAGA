@@ -1,9 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { AuthProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import { Icons } from "@turbostarter/ui-web/icons";
@@ -28,14 +27,11 @@ export const AnonymousLogin = ({
   const handleSignIn = async () => {
     await signIn.anonymous(undefined, {
       onRequest: () => {
-        setProvider(AUTH_PROVIDER.ANONYMOUS);
+        setProvider(AuthProvider.ANONYMOUS);
         setIsSubmitting(true);
       },
       onResponse: () => {
         setIsSubmitting(false);
-      },
-      onError: ({ error }) => {
-        toast.error(error.message);
       },
       onSuccess: () => {
         router.replace(redirectTo);
@@ -52,7 +48,7 @@ export const AnonymousLogin = ({
       disabled={isSubmitting}
       onClick={handleSignIn}
     >
-      {isSubmitting && provider === AUTH_PROVIDER.ANONYMOUS ? (
+      {isSubmitting && provider === AuthProvider.ANONYMOUS ? (
         <Icons.Loader2 className="animate-spin" />
       ) : (
         <>

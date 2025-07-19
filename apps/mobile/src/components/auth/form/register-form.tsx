@@ -51,9 +51,6 @@ export const RegisterForm = memo(() => {
             ],
           );
         },
-        onError: ({ error }) => {
-          Alert.alert(t("error.title"), error.message);
-        },
       },
     );
   };

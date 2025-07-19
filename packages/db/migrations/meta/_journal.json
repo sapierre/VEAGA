@@ -15,6 +15,13 @@
       "when": 1745863441120,
       "tag": "0001_curious_wallflower",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752259599987,
+      "tag": "0002_good_vertigo",
+      "breakpoints": true
     }
   ]
 }

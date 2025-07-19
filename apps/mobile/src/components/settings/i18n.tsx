@@ -32,7 +32,7 @@ export const I18nSettings = () => {
           <Text>{LocaleFlag[config.locale as keyof typeof LocaleFlag]}</Text>
         </SettingsTile>
       </BottomSheetOpenTrigger>
-      <BottomSheetContent ref={ref}>
+      <BottomSheetContent ref={ref} stackBehavior="replace" name="i18n">
         <BottomSheetView className="gap-2 px-7 py-4">
           <View className="flex-row items-start">
             <View className="space-y-1 pr-2">

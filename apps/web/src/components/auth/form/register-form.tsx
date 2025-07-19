@@ -2,15 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import {
-  AUTH_PROVIDER,
-  registerSchema,
-  generateName,
-} from "@turbostarter/auth";
+import { AuthProvider, registerSchema, generateName } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import {
@@ -33,13 +29,10 @@ import { useAuthFormStore } from "./store";
 
 import type { RegisterPayload } from "@turbostarter/auth";
 
-type RegisterStatus = "pending" | "success" | "error" | "idle";
-
 export const RegisterForm = memo(() => {
   const { t, errorMap } = useTranslation(["common", "auth"]);
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
-  const [status, setStatus] = useState<RegisterStatus>("idle");
   const form = useForm<RegisterPayload>({
     resolver: zodResolver(registerSchema, { errorMap }),
   });
@@ -55,19 +48,16 @@ export const RegisterForm = memo(() => {
       },
       {
         onRequest: () => {
-          setProvider(AUTH_PROVIDER.PASSWORD);
-          setStatus("pending");
+          setProvider(AuthProvider.PASSWORD);
           setIsSubmitting(true);
         },
         onSuccess: () => {
           toast.success(t("register.success.notification"), {
             id: loadingToast,
           });
-          setStatus("success");
         },
         onError: ({ error }) => {
-          setStatus("error");
-          toast.error(`${error.message}!`, { id: loadingToast });
+          toast.error(error.message, { id: loadingToast });
         },
         onResponse: () => {
           setIsSubmitting(false);
@@ -78,7 +68,7 @@ export const RegisterForm = memo(() => {
 
   return (
     <AnimatePresence mode="wait">
-      {status === "success" ? (
+      {form.formState.isSubmitSuccessful ? (
         <motion.div
           className="my-6 flex flex-col items-center justify-center gap-4"
           initial={{ opacity: 0 }}
@@ -145,7 +135,7 @@ export const RegisterForm = memo(() => {
               size="lg"
               disabled={isSubmitting}
             >
-              {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
+              {isSubmitting && provider === AuthProvider.PASSWORD ? (
                 <Icons.Loader2 className="animate-spin" />
               ) : (
                 t("register.cta")

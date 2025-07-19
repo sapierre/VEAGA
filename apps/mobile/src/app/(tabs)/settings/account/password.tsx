@@ -54,9 +54,6 @@ export default function Password() {
             ],
           );
         },
-        onError: ({ error }: { error: { message: string } }) => {
-          Alert.alert(t("common:error.title"), error.message);
-        },
       },
     );
   };
@@ -76,9 +73,9 @@ export default function Password() {
           </View>
 
           {isLoading ? (
-            <View className="h-20 animate-pulse bg-muted/50" />
+            <View className="h-20 animate-pulse bg-muted/50" key="loading" />
           ) : (
-            <View className="gap-4">
+            <View className="gap-4" key="password">
               {hasPassword ? (
                 <>
                   <FormField
@@ -117,7 +114,7 @@ export default function Password() {
                   />
                 </>
               ) : (
-                <View className="items-center justify-center rounded-lg border border-dashed p-6">
+                <View className="items-center justify-center rounded-lg border border-dashed border-border p-6">
                   <Text className="text-center text-muted-foreground">
                     <Trans
                       i18nKey="account.password.update.noPassword"

@@ -36,6 +36,8 @@ import {
   Menu,
   MonitorSmartphone,
   Key,
+  Download,
+  Copy,
 } from "lucide-react";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -79,4 +81,6 @@ export const Icons = {
   ArrowUpRight,
   Menu,
   MonitorSmartphone,
+  Download,
+  Copy,
 };

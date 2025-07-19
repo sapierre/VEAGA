@@ -1,12 +1,21 @@
-import { middleware as i18nMiddleware } from "@turbostarter/i18n/server";
+import { i18nRouter } from "next-i18n-router";
+
+import { config as i18nConfig } from "@turbostarter/i18n";
+import { getLocaleFromRequest } from "@turbostarter/i18n/server";
 
 import { appConfig } from "~/config/app";
+import { env } from "~/lib/env";
 
 import type { NextRequest } from "next/server";
 
 export const middleware = (request: NextRequest) =>
-  i18nMiddleware(request, {
-    defaultLocale: appConfig.locale,
+  i18nRouter(request, {
+    locales: i18nConfig.locales,
+    defaultLocale:
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      appConfig.locale ?? env.DEFAULT_LOCALE ?? i18nConfig.defaultLocale,
+    localeCookie: i18nConfig.cookie,
+    localeDetector: getLocaleFromRequest,
   });
 
 export const config = {

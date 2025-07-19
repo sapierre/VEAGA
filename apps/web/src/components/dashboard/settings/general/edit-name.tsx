@@ -51,9 +51,6 @@ export const EditName = memo<EditNameProps>(({ user }) => {
         toast.success(t("account.name.edit.success"));
         router.refresh();
       },
-      onError: ({ error }) => {
-        toast.error(error.message);
-      },
     });
   };
 
@@ -63,7 +60,7 @@ export const EditName = memo<EditNameProps>(({ user }) => {
         <form onSubmit={onPromise(form.handleSubmit(onSubmit))}>
           <CardHeader>
             <CardTitle className="text-xl">{t("name")}</CardTitle>
-            <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
+            <CardDescription className="flex flex-col gap-1 pb-1.5 text-foreground">
               {t("account.name.edit.description")}
             </CardDescription>
 

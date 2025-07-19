@@ -45,7 +45,7 @@ export const Passkeys = () => {
     <Card className="h-fit w-full overflow-hidden">
       <CardHeader className="pb-4">
         <CardTitle className="text-xl">{t("account.passkeys.title")}</CardTitle>
-        <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
+        <CardDescription className="flex flex-col gap-1 pb-1.5 text-foreground">
           {t("account.passkeys.description")}
         </CardDescription>
       </CardHeader>

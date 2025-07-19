@@ -2,7 +2,7 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
-import { Locale } from "../types";
+import { Locale } from "./types";
 
 export const env = createEnv({
   clientPrefix: "NEXT_PUBLIC_",

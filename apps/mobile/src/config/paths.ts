@@ -22,6 +22,7 @@ const pathsConfig = {
         email: `${SETTINGS_PREFIX}/account/email`,
         password: `${SETTINGS_PREFIX}/account/password`,
         accounts: `${SETTINGS_PREFIX}/account/accounts`,
+        twoFactor: `${SETTINGS_PREFIX}/account/two-factor`,
       },
     },
   },

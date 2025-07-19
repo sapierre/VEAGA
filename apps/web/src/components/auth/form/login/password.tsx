@@ -5,7 +5,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { AUTH_PROVIDER, passwordLoginSchema } from "@turbostarter/auth";
+import { AuthProvider, passwordLoginSchema } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import { Checkbox } from "@turbostarter/ui-web/checkbox";
@@ -30,10 +30,11 @@ import type { PasswordLoginPayload } from "@turbostarter/auth";
 
 interface PasswordLoginFormProps {
   readonly redirectTo?: string;
+  readonly onTwoFactorRedirect?: () => void;
 }
 
 export const PasswordLoginForm = memo<PasswordLoginFormProps>(
-  ({ redirectTo = pathsConfig.dashboard.index }) => {
+  ({ redirectTo = pathsConfig.dashboard.index, onTwoFactorRedirect }) => {
     const { t, errorMap } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
@@ -53,10 +54,16 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
         },
         {
           onRequest: () => {
-            setProvider(AUTH_PROVIDER.PASSWORD);
+            setProvider(AuthProvider.PASSWORD);
             setIsSubmitting(true);
           },
-          onSuccess: () => {
+          onSuccess: (ctx) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            if (ctx.data.twoFactorRedirect) {
+              toast.dismiss(loadingToast);
+              return onTwoFactorRedirect?.();
+            }
+
             toast.success(t("login.password.success"), {
               id: loadingToast,
             });
@@ -101,23 +108,25 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             name="password"
             render={({ field }) => (
               <FormItem>
-                <div className="flex w-full items-center justify-between">
-                  <FormLabel>{t("password")}</FormLabel>
-                  <TurboLink
-                    href={pathsConfig.auth.forgotPassword}
-                    className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
-                  >
-                    {t("account.password.forgot.label")}
-                  </TurboLink>
+                <div className="flex flex-col-reverse gap-2">
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="password"
+                      disabled={isSubmitting}
+                      autoComplete="current-password webauthn"
+                    />
+                  </FormControl>
+                  <div className="flex w-full items-center justify-between">
+                    <FormLabel>{t("password")}</FormLabel>
+                    <TurboLink
+                      href={pathsConfig.auth.forgotPassword}
+                      className="text-sm text-muted-foreground underline underline-offset-4 hover:text-primary"
+                    >
+                      {t("account.password.forgot.label")}
+                    </TurboLink>
+                  </div>
                 </div>
-                <FormControl>
-                  <Input
-                    {...field}
-                    type="password"
-                    disabled={isSubmitting}
-                    autoComplete="current-password webauthn"
-                  />
-                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -145,7 +154,7 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
             size="lg"
             disabled={isSubmitting}
           >
-            {isSubmitting && provider === AUTH_PROVIDER.PASSWORD ? (
+            {isSubmitting && provider === AuthProvider.PASSWORD ? (
               <Icons.Loader2 className="animate-spin" />
             ) : (
               t("login.cta")

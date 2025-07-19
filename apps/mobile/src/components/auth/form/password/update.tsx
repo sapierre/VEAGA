@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
 
 import { updatePasswordSchema } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
@@ -42,9 +42,6 @@ export const UpdatePasswordForm = memo<UpdatePasswordFormProps>(({ token }) => {
       },
       {
         onSuccess: () => router.replace(pathsConfig.tabs.auth.login),
-        onError: ({ error }) => {
-          Alert.alert(t("error.title"), error.message);
-        },
       },
     );
   };

@@ -57,9 +57,6 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
           onSuccess: () => {
             toast.success(t("account.email.confirm.email.sent"));
           },
-          onError: ({ error }) => {
-            toast.error(error.message);
-          },
         },
       ),
   });
@@ -73,9 +70,6 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
       {
         onSuccess: () => {
           toast.success(t("account.email.change.success"));
-        },
-        onError: ({ error }) => {
-          toast.error(error.message);
         },
       },
     );
@@ -114,7 +108,7 @@ export const EditEmail = memo<EditEmailProps>(({ user }) => {
               )}
             </div>
 
-            <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
+            <CardDescription className="flex flex-col gap-1 pb-1.5 text-foreground">
               {t("account.email.change.description")}
             </CardDescription>
 

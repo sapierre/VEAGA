@@ -55,9 +55,6 @@ export const EditPassword = () => {
           toast.success(t("account.password.update.success"));
           form.reset();
         },
-        onError: ({ error }) => {
-          toast.error(error.message);
-        },
       },
     );
   };
@@ -72,7 +69,7 @@ export const EditPassword = () => {
         <form onSubmit={onPromise(form.handleSubmit(onSubmit))}>
           <CardHeader>
             <CardTitle className="text-xl">{t("password")}</CardTitle>
-            <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
+            <CardDescription className="flex flex-col gap-1 pb-1.5 text-foreground">
               {t("account.password.update.description")}
             </CardDescription>
 

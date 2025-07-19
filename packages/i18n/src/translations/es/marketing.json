@@ -1,0 +1,93 @@
+{
+  "feature": {
+    "admin": {
+      "title": "Administración",
+      "description": "Panel interactivo para gestionar tu cuenta, análisis, configuración y otras funciones de la aplicación."
+    },
+    "auth": {
+      "title": "Autenticación",
+      "description": "Autentica usuarios en tu aplicación. Inicios de sesión sociales, enlaces mágicos, correo/contraseña y mucho más."
+    },
+    "ai": {
+      "title": "IA",
+      "description": "Integra IA en tu aplicación. Reconocimiento de imágenes, chatbots y más."
+    },
+    "billing": {
+      "title": "Facturación",
+      "description": "Recibe pagos de tus usuarios usando proveedores configurados - Stripe o LemonSqueezy."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Gestiona tu blog fácilmente con integración incorporada. Compatible con MDX y colecciones de contenido."
+    },
+    "docs": {
+      "title": "Documentación",
+      "description": "Aprende a usar TurboStarter. Desde la instalación hasta el despliegue."
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Contáctanos para cualquier pregunta o comentario",
+    "form": {
+      "name": {
+        "placeholder": "Juan Pérez"
+      },
+      "email": {
+        "placeholder": "tu@correo.com"
+      },
+      "message": {
+        "placeholder": "¿Cómo podemos ayudarte?"
+      },
+      "submit": "Enviar mensaje",
+      "success": {
+        "title": "¡Mensaje enviado!",
+        "description": "Gracias por tu mensaje. Te responderemos pronto."
+      }
+    },
+    "email": {
+      "subject": "Has recibido un nuevo envío del formulario de contacto",
+      "body": "Nuevo envío del formulario de contacto"
+    }
+  },
+  "ai": {
+    "prompt": {
+      "history": "Cuenta la historia de internet",
+      "capitals": "Hazme un cuestionario sobre las capitales del mundo",
+      "quantum": "Explica la computación cuántica",
+      "realWorld": "Describe un caso real de IA"
+    },
+    "placeholder": "Haz una pregunta...",
+    "cta": "Enviar"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Noticias y actualizaciones sobre la plataforma",
+    "timeToRead": "{{time}} min de lectura",
+    "tag": {
+      "learning": "aprendizaje",
+      "skills": "habilidades",
+      "progress": "progreso",
+      "product": "producto",
+      "development": "desarrollo",
+      "prototype": "prototipo",
+      "launch": "lanzamiento"
+    }
+  },
+  "dashboard": {
+    "title": "Panel",
+    "description": "Un resumen de la actividad de tu cuenta en todos tus proyectos.",
+    "chart": {
+      "cta": "Añadir gráfico",
+      "showing": "Mostrando visitantes totales del último período",
+      "trending": "Tendencia de hasta 5.2% este mes",
+      "period": "Enero - Junio 2024",
+      "bar": "Gráfico de barras",
+      "pie": "Gráfico circular",
+      "area": "Gráfico de área",
+      "line": "Gráfico de líneas",
+      "shape": "Gráfico de formas",
+      "radial": "Gráfico radial",
+      "radar": "Gráfico de radar"
+    }
+  }
+}

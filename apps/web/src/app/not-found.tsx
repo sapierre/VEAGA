@@ -19,7 +19,7 @@ export default async function NotFound() {
               t={t}
               i18nKey="editToReload"
               values={{
-                file: "src/app/[lang]/not-found.tsx",
+                file: "src/app/[locale]/not-found.tsx",
               }}
               components={{
                 code: (

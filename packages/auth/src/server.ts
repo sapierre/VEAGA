@@ -2,8 +2,7 @@ import { expo } from "@better-auth/expo";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { magicLink } from "better-auth/plugins";
-import { anonymous } from "better-auth/plugins";
+import { anonymous, magicLink, twoFactor } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
 
 import * as schema from "@turbostarter/db/schema";
@@ -13,9 +12,14 @@ import { sendEmail } from "@turbostarter/email/server";
 import { getLocaleFromRequest } from "@turbostarter/i18n/server";
 
 import { env } from "./env";
-import { SOCIAL_PROVIDER } from "./types";
+import { SocialProvider } from "./types";
 
 export const auth = betterAuth({
+  appName: "TurboStarter",
+  cookieCache: {
+    enabled: true,
+    maxAge: 5 * 60, // 5 minutes
+  },
   user: {
     deleteUser: {
       enabled: true,
@@ -93,16 +97,17 @@ export const auth = betterAuth({
         }),
     }),
     passkey(),
+    twoFactor(),
     anonymous(),
     expo(),
     nextCookies(),
   ],
   socialProviders: {
-    [SOCIAL_PROVIDER.GITHUB]: {
+    [SocialProvider.GITHUB]: {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     },
-    [SOCIAL_PROVIDER.GOOGLE]: {
+    [SocialProvider.GOOGLE]: {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     },

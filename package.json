@@ -30,6 +30,7 @@
     "@commitlint/types": "19.0.3",
     "@turbo/gen": "2.5.4",
     "@turbostarter/prettier-config": "workspace:*",
+    "cross-env": "7.0.3",
     "dotenv-cli": "7.4.2",
     "husky": "^9.1.5",
     "prettier": "catalog:",
@@ -39,6 +40,11 @@
   "engines": {
     "node": ">=22.15.0"
   },
-  "packageManager": "pnpm@10.12.4",
+  "pnpm": {
+    "overrides": {
+      "@types/minimatch": "5.1.2"
+    }
+  },
+  "packageManager": "pnpm@10.13.1",
   "prettier": "@turbostarter/prettier-config"
 }

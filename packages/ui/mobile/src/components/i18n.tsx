@@ -21,7 +21,7 @@ interface LocaleCustomizerProps {
 
 export const LocaleCustomizer = ({ onChange }: LocaleCustomizerProps) => {
   const { i18n } = useTranslation("common");
-  const locale = i18n.language as Locale;
+  const lang = i18n.language as Locale;
 
   const handleLocaleChange = async (lang: Locale) => {
     await onChange?.(lang);
@@ -31,20 +31,19 @@ export const LocaleCustomizer = ({ onChange }: LocaleCustomizerProps) => {
   return (
     <View className="mt-2 flex flex-1 flex-col items-center gap-4">
       <View className="flex-row flex-wrap gap-2">
-        {config.locales.map((lang) => (
+        {config.locales.map((locale) => (
           <Button
-            key={lang}
+            key={locale}
             variant="outline"
             size="sm"
-            onPress={() => handleLocaleChange(lang)}
+            onPress={() => handleLocaleChange(locale)}
             className={cn(
               "h-11 grow basis-[85px] flex-row justify-start gap-2 px-3",
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              lang === locale && "border-2 border-primary",
+              locale === lang && "border-2 border-primary",
             )}
           >
             <Text className="text-xs capitalize">
-              {LocaleFlag[lang]} {LocaleLabel[lang]}
+              {LocaleFlag[locale]} {LocaleLabel[locale]}
             </Text>
           </Button>
         ))}

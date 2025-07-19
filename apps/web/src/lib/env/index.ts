@@ -6,6 +6,7 @@ import { z } from "zod";
 import { env as analyticsEnv } from "@turbostarter/analytics-web/env";
 import { env as apiEnv } from "@turbostarter/api/env";
 import { env as authEnv } from "@turbostarter/auth/env";
+import { env as i18nEnv } from "@turbostarter/i18n/env";
 import { NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
@@ -18,7 +19,7 @@ const castStringToBool = z.preprocess((val) => {
 }, z.coerce.boolean());
 
 export const env = createEnv({
-  extends: [vercel(), apiEnv, authEnv, analyticsEnv],
+  extends: [vercel(), apiEnv, authEnv, analyticsEnv, i18nEnv],
   shared: {
     NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
   },

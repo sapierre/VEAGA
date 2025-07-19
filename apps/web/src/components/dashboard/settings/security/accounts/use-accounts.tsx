@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { SocialProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { capitalize } from "@turbostarter/shared/utils";
 
@@ -21,14 +21,14 @@ export const useAccounts = () => {
 
   const accounts = data?.data ?? [];
   const socials = accounts.filter((account) =>
-    Object.values(SOCIAL_PROVIDER).includes(account.provider),
+    Object.values(SocialProvider).includes(account.provider),
   );
-  const missing = Object.values(SOCIAL_PROVIDER).filter(
+  const missing = Object.values(SocialProvider).filter(
     (provider) => !socials.some((social) => social.provider === provider),
   );
 
   const connect = useMutation({
-    mutationFn: (provider: SOCIAL_PROVIDER) => {
+    mutationFn: (provider: SocialProvider) => {
       const loadingToast = toast.loading(
         t("account.accounts.connect.loading", { provider }),
       );
@@ -63,7 +63,7 @@ export const useAccounts = () => {
   });
 
   const disconnect = useMutation({
-    mutationFn: (provider: SOCIAL_PROVIDER) => {
+    mutationFn: (provider: SocialProvider) => {
       const loadingToast = toast.loading(
         t("account.accounts.disconnect.loading", { provider }),
       );

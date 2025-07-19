@@ -1,6 +1,9 @@
-import { magicLinkClient } from "better-auth/client/plugins";
-import { anonymousClient } from "better-auth/client/plugins";
-import { passkeyClient } from "better-auth/client/plugins";
+import {
+  magicLinkClient,
+  twoFactorClient,
+  anonymousClient,
+  passkeyClient,
+} from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
 import type { AuthClientOptions } from "../types";
@@ -13,5 +16,6 @@ export const createClient = (options?: AuthClientOptions) =>
       passkeyClient(),
       anonymousClient(),
       magicLinkClient(),
+      twoFactorClient(),
     ],
   });

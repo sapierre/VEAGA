@@ -1,7 +1,9 @@
-import { getTranslation } from "@turbostarter/i18n/server";
+"use client";
 
-export const AuthDivider = async () => {
-  const { t } = await getTranslation({ ns: "auth" });
+import { useTranslation } from "@turbostarter/i18n";
+
+export const AuthDivider = () => {
+  const { t } = useTranslation("auth");
 
   return (
     <div className="relative">

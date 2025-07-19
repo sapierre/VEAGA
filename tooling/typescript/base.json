@@ -20,7 +20,7 @@
 
     "module": "Preserve",
     "moduleResolution": "Bundler",
-    "noEmit": true
+    "noEmit": true,
   },
   "files": ["./reset.d.ts"],
   "exclude": ["node_modules", "build", "dist", ".next", ".expo", ".wxt"]

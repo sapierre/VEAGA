@@ -59,7 +59,7 @@ function useBottomSheetContext() {
 
 const CLOSED_INDEX = -1;
 
-type BottomSheetContentRef = React.ElementRef<typeof BottomSheetModal>;
+type BottomSheetContentRef = React.ComponentRef<typeof BottomSheetModal>;
 
 type BottomSheetContentProps = Omit<
   React.ComponentPropsWithoutRef<typeof BottomSheetModal>,
@@ -337,5 +337,6 @@ export {
   BottomSheetOpenTrigger,
   BottomSheetTextInput,
   BottomSheetView,
+  type BottomSheetContentRef,
   useBottomSheet,
 };

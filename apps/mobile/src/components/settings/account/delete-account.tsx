@@ -15,9 +15,11 @@ export const DeleteAccount = () => {
   const { t } = useTranslation(["common", "auth"]);
   const { mutate, isPending } = useMutation({
     mutationFn: () =>
-      deleteUser({
-        callbackURL: pathsConfig.index,
-        fetchOptions: {
+      deleteUser(
+        {
+          callbackURL: pathsConfig.index,
+        },
+        {
           onSuccess: () => {
             Alert.alert(t("account.delete.confirmation.success"), undefined, [
               {
@@ -27,11 +29,8 @@ export const DeleteAccount = () => {
               },
             ]);
           },
-          onError: ({ error }) => {
-            Alert.alert(t("error.title"), error.message);
-          },
         },
-      }),
+      ),
   });
 
   return (

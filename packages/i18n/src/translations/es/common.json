@@ -1,0 +1,113 @@
+{
+  "product": {
+    "title": "Lanza tu startup en todas partes. En minutos.",
+    "description": "El kit de inicio listo para producción de Next.js, React Native (Expo) y Plasmo SaaS. Lanza tu aplicación web, móvil y extensión de navegador con una plantilla de un solo clic."
+  },
+  "legal": {
+    "privacy": "Política de privacidad",
+    "terms": "Términos y condiciones",
+    "copyright": "Todos los derechos reservados"
+  },
+  "success": "¡Éxito!",
+  "auth": "Autenticación",
+  "code": "Código",
+  "security": "Seguridad",
+  "builtWith": "Construido con",
+  "contactUs": "Contáctanos",
+  "reset": "Restablecer",
+  "more": "Más",
+  "close": "Cerrar",
+  "toggle": "Alternar",
+  "enable": "Habilitar",
+  "disable": "Deshabilitar",
+  "download": "Descargar",
+  "edit": "Editar",
+  "add": "Añadir",
+  "regenerate": "Regenerar",
+  "done": "Listo",
+  "copy": "Copiar",
+  "getStarted": "Comenzar",
+  "goToDashboard": "Ir al panel",
+  "home": "Inicio",
+  "ai": "IA",
+  "settings": "Ajustes",
+  "billing": "Facturación",
+  "support": "Soporte",
+  "feedback": "Comentarios",
+  "dashboard": "Panel",
+  "platform": "Plataforma",
+  "account": "Cuenta",
+  "continue": "Continuar",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "verify": "Verificar",
+  "verified": "Verificado",
+  "unverified": "No verificado",
+  "addNew": "Añadir nuevo",
+  "connect": "Conectar",
+  "disconnect": "Desconectar",
+  "avatar": "Avatar",
+  "learnMore": "Más información",
+  "upgrade": "Mejorar",
+  "updatedAt": "Actualizado el",
+  "visitors": "Visitantes",
+  "desktop": "Escritorio",
+  "mobile": "Móvil",
+  "other": "Otro",
+  "views": "vistas",
+  "lastDays": "Últimos {{days}} días",
+  "lastMonths": "Últimos {{months}} meses",
+  "selectMonth": "Seleccionar mes",
+  "seeRoadmap": "Ver roadmap",
+  "general": "General",
+  "notifications": "Notificaciones",
+  "rate": "Calificar",
+  "share": "Compartir",
+  "privacy": "Privacidad",
+  "language": {
+    "label": "Idioma",
+    "description": "Elige un idioma para tu aplicación."
+  },
+  "theme": {
+    "title": "Tema",
+    "customization": {
+      "title": "Personalizar",
+      "label": "Personalizar tema",
+      "description": "Elige un estilo y color para tu aplicación."
+    },
+    "color": {
+      "label": "Color",
+      "orange": "Naranja",
+      "rose": "Rosa",
+      "red": "Rojo",
+      "yellow": "Amarillo",
+      "gray": "Gris",
+      "stone": "Piedra",
+      "green": "Verde",
+      "blue": "Azul",
+      "violet": "Violeta"
+    },
+    "mode": {
+      "label": "Modo",
+      "system": "Sistema",
+      "light": "Claro",
+      "dark": "Oscuro"
+    }
+  },
+  "name": "Nombre",
+  "message": "Mensaje",
+  "email": "Correo electrónico",
+  "two-factor": "Autenticación de dos factores",
+  "error": {
+    "title": "¡Ups!",
+    "general": "Algo salió mal, por favor intenta de nuevo.",
+    "invalid": "¡Datos inválidos!",
+    "notFound": "¡No encontrado!"
+  },
+  "editToReload": "Edita <code>{{file}}</code> y guarda para recargar.",
+  "goBackHome": "Volver al inicio",
+  "workInProgress": {
+    "title": "¡Estamos trabajando en ello!",
+    "description": "{{feature}} no está disponible en este momento. Estamos trabajando en ello y estará disponible pronto."
+  }
+}

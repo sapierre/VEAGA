@@ -2,9 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { toast } from "sonner";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { AuthProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-web/button";
 import { Icons } from "@turbostarter/ui-web/icons";
@@ -34,7 +33,7 @@ export const PasskeyLogin = ({
     await signIn.passkey({
       fetchOptions: {
         onRequest: () => {
-          setProvider(AUTH_PROVIDER.PASSKEY);
+          setProvider(AuthProvider.PASSKEY);
           setIsSubmitting(true);
         },
         onResponse: () => {
@@ -42,9 +41,6 @@ export const PasskeyLogin = ({
         },
         onSuccess: () => {
           router.replace(redirectTo);
-        },
-        onError: ({ error }) => {
-          toast.error(error.message);
         },
       },
     });
@@ -58,7 +54,7 @@ export const PasskeyLogin = ({
       onClick={handleSignIn}
       disabled={isSubmitting}
     >
-      {isSubmitting && provider === AUTH_PROVIDER.PASSKEY ? (
+      {isSubmitting && provider === AuthProvider.PASSKEY ? (
         <Icons.Loader className="size-4 animate-spin" />
       ) : (
         <>

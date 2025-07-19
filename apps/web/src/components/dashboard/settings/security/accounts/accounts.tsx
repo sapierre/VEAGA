@@ -1,6 +1,6 @@
 "use client";
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { SocialProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { capitalize } from "@turbostarter/shared/utils";
 import { useBreakpoint } from "@turbostarter/ui-web";
@@ -39,9 +39,9 @@ import { useAccounts } from "./use-accounts";
 
 import type { SVGProps } from "react";
 
-const ICONS: Record<SOCIAL_PROVIDER, React.FC<SVGProps<SVGElement>>> = {
-  [SOCIAL_PROVIDER.GITHUB]: Icons.Github,
-  [SOCIAL_PROVIDER.GOOGLE]: Icons.Google,
+const ICONS: Record<SocialProvider, React.FC<SVGProps<SVGElement>>> = {
+  [SocialProvider.GITHUB]: Icons.Github,
+  [SocialProvider.GOOGLE]: Icons.Google,
 };
 
 export const Accounts = () => {
@@ -53,7 +53,7 @@ export const Accounts = () => {
     <Card className="h-fit w-full overflow-hidden">
       <CardHeader className="pb-4">
         <CardTitle className="text-xl">{t("account.accounts.title")}</CardTitle>
-        <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
+        <CardDescription className="flex flex-col gap-1 pb-1.5 text-foreground">
           {t("account.accounts.description")}
         </CardDescription>
       </CardHeader>
@@ -63,7 +63,7 @@ export const Accounts = () => {
       {socials.length > 0 && !isLoading && (
         <ul className="m-6 mt-0 overflow-hidden rounded-md border">
           {socials.map((social) => {
-            const provider = social.provider as SOCIAL_PROVIDER;
+            const provider = social.provider as SocialProvider;
             const Icon = ICONS[provider];
 
             return (
@@ -122,7 +122,7 @@ export const Accounts = () => {
           <hr className="w-full bg-border" />
           <div className="flex flex-wrap gap-2">
             {missing.map((provider) => {
-              const Icon = ICONS[provider as SOCIAL_PROVIDER];
+              const Icon = ICONS[provider as SocialProvider];
 
               return (
                 <Button
@@ -157,7 +157,7 @@ const ConfirmModal = ({
   children,
   onConfirm,
 }: {
-  provider: SOCIAL_PROVIDER;
+  provider: SocialProvider;
   children: React.ReactNode;
   onConfirm: () => void;
 }) => {

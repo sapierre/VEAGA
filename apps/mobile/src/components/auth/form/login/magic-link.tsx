@@ -5,7 +5,7 @@ import { memo, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
 
-import { AUTH_PROVIDER, generateName } from "@turbostarter/auth";
+import { AuthProvider, generateName } from "@turbostarter/auth";
 import { magicLinkLoginSchema } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
@@ -26,7 +26,6 @@ import { magicLink, signIn } from "~/lib/auth";
 import type { MagicLinkLoginPayload } from "@turbostarter/auth";
 
 export const VerifyMagicLink = () => {
-  const { t } = useTranslation("common");
   const { token } = useLocalSearchParams<{ token?: string }>();
   const { mutate, isPending } = useMutation({
     mutationFn: async () => {
@@ -40,9 +39,6 @@ export const VerifyMagicLink = () => {
           onSuccess: () => {
             router.setParams({ token: undefined });
             router.navigate(pathsConfig.tabs.settings.index);
-          },
-          onError: ({ error }) => {
-            Alert.alert(t("error.title"), error.message);
           },
         },
       );
@@ -80,7 +76,7 @@ export const MagicLinkLoginForm = memo(() => {
       },
       {
         onRequest: () => {
-          setProvider(AUTH_PROVIDER.MAGIC_LINK);
+          setProvider(AuthProvider.MAGIC_LINK);
           setIsSubmitting(true);
         },
         onSuccess: () => {
@@ -89,9 +85,6 @@ export const MagicLinkLoginForm = memo(() => {
             t("login.magicLink.success.description"),
           );
           form.reset();
-        },
-        onError: ({ error }) => {
-          Alert.alert(t("error.title"), error.message);
         },
         onResponse: () => {
           setIsSubmitting(false);
@@ -124,7 +117,7 @@ export const MagicLinkLoginForm = memo(() => {
           onPress={form.handleSubmit(onSubmit)}
           disabled={isSubmitting}
         >
-          {isSubmitting && provider === AUTH_PROVIDER.MAGIC_LINK ? (
+          {isSubmitting && provider === AuthProvider.MAGIC_LINK ? (
             <Icons.Loader2 className="animate-spin text-primary-foreground" />
           ) : (
             <Text>{t("login.magicLink.cta")}</Text>

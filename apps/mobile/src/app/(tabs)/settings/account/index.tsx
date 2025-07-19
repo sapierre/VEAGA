@@ -57,7 +57,7 @@ const sections = [
       );
     },
     () => {
-      const { t } = useTranslation(["common", "auth"]);
+      const { t } = useTranslation("auth");
       return (
         <SettingsTile
           icon={Icons.Lock}
@@ -65,7 +65,20 @@ const sections = [
             router.navigate(pathsConfig.tabs.settings.account.password)
           }
         >
-          <Text className="mr-auto">{t("auth:password")}</Text>
+          <Text className="mr-auto">{t("password")}</Text>
+        </SettingsTile>
+      );
+    },
+    () => {
+      const { t } = useTranslation("auth");
+      return (
+        <SettingsTile
+          icon={Icons.ShieldCheck}
+          onPress={() =>
+            router.navigate(pathsConfig.tabs.settings.account.twoFactor)
+          }
+        >
+          <Text className="mr-auto">{t("account.twoFactor.title")}</Text>
         </SettingsTile>
       );
     },

@@ -23,7 +23,7 @@ export default function Error({ error }: { error: Error }) {
             i18nKey="editToReload"
             t={t}
             values={{
-              file: "src/app/[lang]/error.tsx",
+              file: "src/app/[locale]/error.tsx",
             }}
             components={{
               code: (

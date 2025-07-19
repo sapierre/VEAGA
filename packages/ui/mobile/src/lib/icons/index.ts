@@ -25,11 +25,13 @@ import {
   Loader,
   ChevronRight,
   Share2,
+  Download,
   Bell,
   ThumbsUp,
   Lock,
   ChevronLeft,
   X,
+  Copy,
   Languages,
   IdCard,
   AtSign,
@@ -38,6 +40,7 @@ import {
   LogOut,
   Trash,
   Trash2,
+  ShieldCheck,
   Pencil,
 } from "lucide-react-native";
 
@@ -77,6 +80,7 @@ export const Icons = {
   Loader,
   ChevronRight,
   Share2,
+  Download,
   Bell,
   ThumbsUp,
   Lock,
@@ -90,6 +94,8 @@ export const Icons = {
   Trash,
   Trash2,
   Pencil,
+  ShieldCheck,
+  Copy,
 };
 
 Object.values(Icons).forEach(iconWithClassName);

@@ -28,6 +28,7 @@ export default function AccountLayout() {
       <Stack.Screen name="email" />
       <Stack.Screen name="password" />
       <Stack.Screen name="accounts" />
+      <Stack.Screen name="two-factor" />
     </Stack>
   );
 }

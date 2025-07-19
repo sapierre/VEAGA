@@ -1,9 +1,8 @@
 "use client";
 
 import { memo } from "react";
-import { toast } from "sonner";
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { SocialProvider as SocialProviderType } from "@turbostarter/auth";
 import { Button } from "@turbostarter/ui-web/button";
 import { Icons } from "@turbostarter/ui-web/icons";
 
@@ -12,17 +11,17 @@ import { pathsConfig } from "~/config/paths";
 import { signIn } from "~/lib/auth/client";
 import { onPromise } from "~/utils";
 
-import type { AUTH_PROVIDER } from "@turbostarter/auth";
+import type { AuthProvider } from "@turbostarter/auth";
 import type { SVGProps } from "react";
 
 interface SocialProvidersProps {
-  readonly providers: SOCIAL_PROVIDER[];
+  readonly providers: SocialProviderType[];
   readonly redirectTo?: string;
 }
 
-const ICONS: Record<SOCIAL_PROVIDER, React.FC<SVGProps<SVGElement>>> = {
-  [SOCIAL_PROVIDER.GITHUB]: Icons.Github,
-  [SOCIAL_PROVIDER.GOOGLE]: Icons.Google,
+const ICONS: Record<SocialProviderType, React.FC<SVGProps<SVGElement>>> = {
+  [SocialProviderType.GITHUB]: Icons.Github,
+  [SocialProviderType.GOOGLE]: Icons.Google,
 };
 
 const SocialProvider = ({
@@ -31,10 +30,10 @@ const SocialProvider = ({
   onClick,
   actualProvider,
 }: {
-  provider: SOCIAL_PROVIDER;
+  provider: SocialProviderType;
   isSubmitting: boolean;
   onClick: () => Promise<void>;
-  actualProvider: AUTH_PROVIDER;
+  actualProvider: AuthProvider;
 }) => {
   const Icon = ICONS[provider];
 
@@ -71,7 +70,7 @@ export const SocialProviders = memo<SocialProvidersProps>(
       setIsSubmitting,
     } = useAuthFormStore();
 
-    const handleSignIn = async (provider: SOCIAL_PROVIDER) => {
+    const handleSignIn = async (provider: SocialProviderType) => {
       await signIn.social(
         {
           provider,
@@ -85,9 +84,6 @@ export const SocialProviders = memo<SocialProvidersProps>(
           },
           onResponse: () => {
             setIsSubmitting(false);
-          },
-          onError: ({ error }) => {
-            toast.error(error.message);
           },
         },
       );

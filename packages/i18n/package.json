@@ -5,7 +5,9 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./server": "./src/server/index.ts"
+    "./server": "./src/server/index.ts",
+    "./with-i18n": "./src/server/with-i18n.tsx",
+    "./env": "./src/env.ts"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",

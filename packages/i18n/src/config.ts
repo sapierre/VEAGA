@@ -1,9 +1,9 @@
-import { env } from "./server/env";
+import { env } from "./env";
 
 import type { InitOptions, Namespace } from "i18next";
 
 export const config = {
-  locales: ["en"],
+  locales: ["en", "es"],
   defaultLocale: env.NEXT_PUBLIC_DEFAULT_LOCALE,
   namespaces: ["common", "auth", "billing", "marketing", "validation"],
   cookie: "locale",

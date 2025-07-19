@@ -2,7 +2,7 @@ import { Link } from "expo-router";
 import { Suspense, useState } from "react";
 import { View } from "react-native";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { AuthProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import {
   Tabs,
@@ -20,11 +20,11 @@ import { PasswordLoginForm } from "./password";
 import type { LoginOption } from "./constants";
 
 const LOGIN_OPTIONS_DETAILS = {
-  [AUTH_PROVIDER.PASSWORD]: {
+  [AuthProvider.PASSWORD]: {
     component: PasswordLoginForm,
     label: "password",
   },
-  [AUTH_PROVIDER.MAGIC_LINK]: {
+  [AuthProvider.MAGIC_LINK]: {
     component: MagicLinkLoginForm,
     label: "login.magicLink.label",
   },
@@ -32,9 +32,10 @@ const LOGIN_OPTIONS_DETAILS = {
 
 interface LoginFormProps {
   readonly options: LoginOption[];
+  readonly onTwoFactorRedirect?: () => void;
 }
 
-export const LoginForm = ({ options }: LoginFormProps) => {
+export const LoginForm = ({ options, onTwoFactorRedirect }: LoginFormProps) => {
   const { t } = useTranslation("auth");
   const [mainOption] = options;
 
@@ -46,7 +47,7 @@ export const LoginForm = ({ options }: LoginFormProps) => {
 
   if (options.length === 1) {
     const Component = LOGIN_OPTIONS_DETAILS[value].component;
-    return <Component />;
+    return <Component onTwoFactorRedirect={onTwoFactorRedirect} />;
   }
 
   return (
@@ -68,7 +69,7 @@ export const LoginForm = ({ options }: LoginFormProps) => {
         return (
           <TabsContent key={provider} value={provider} className="w-full">
             <Suspense>
-              <Component />
+              <Component onTwoFactorRedirect={onTwoFactorRedirect} />
             </Suspense>
           </TabsContent>
         );

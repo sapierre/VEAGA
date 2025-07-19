@@ -10,6 +10,7 @@ import {
   RegisterForm,
 } from "~/components/auth/form/register-form";
 import { SocialProviders } from "~/components/auth/form/social-providers";
+import { TwoFactor } from "~/components/auth/form/two-factor";
 import { AuthDivider } from "~/components/auth/layout/auth-divider";
 import { AuthHeader } from "~/components/auth/layout/auth-header";
 
@@ -48,4 +49,5 @@ export const Auth = {
   Anonymous: AnonymousLogin,
   ForgotPassword: ForgotPasswordForm,
   UpdatePassword: UpdatePasswordForm,
+  TwoFactor,
 };

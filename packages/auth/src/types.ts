@@ -12,30 +12,37 @@ import type {
 
 type AuthMobileClientOptions = Parameters<typeof expoClient>[0];
 
-const SOCIAL_PROVIDER = {
+const SocialProvider = {
   GOOGLE: "google",
   GITHUB: "github",
 } as const;
 
-type SOCIAL_PROVIDER = (typeof SOCIAL_PROVIDER)[keyof typeof SOCIAL_PROVIDER];
+type SocialProvider = (typeof SocialProvider)[keyof typeof SocialProvider];
 
-const AUTH_PROVIDER = {
-  ...SOCIAL_PROVIDER,
+const AuthProvider = {
+  ...SocialProvider,
   PASSWORD: "password",
   MAGIC_LINK: "magicLink",
   ANONYMOUS: "anonymous",
   PASSKEY: "passkey",
 } as const;
 
-type AUTH_PROVIDER = (typeof AUTH_PROVIDER)[keyof typeof AUTH_PROVIDER];
+type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider];
+
+const SecondFactor = {
+  TOTP: "totp",
+  BACKUP_CODE: "backupCode",
+} as const;
+
+type SecondFactor = (typeof SecondFactor)[keyof typeof SecondFactor];
 
 const authConfigSchema = z.object({
   providers: z.object({
-    [AUTH_PROVIDER.PASSWORD]: z.boolean(),
-    [AUTH_PROVIDER.MAGIC_LINK]: z.boolean(),
-    [AUTH_PROVIDER.ANONYMOUS]: z.boolean(),
-    [AUTH_PROVIDER.PASSKEY]: z.boolean().optional(),
-    oAuth: z.array(z.nativeEnum(SOCIAL_PROVIDER)),
+    [AuthProvider.PASSWORD]: z.boolean(),
+    [AuthProvider.MAGIC_LINK]: z.boolean(),
+    [AuthProvider.ANONYMOUS]: z.boolean(),
+    [AuthProvider.PASSKEY]: z.boolean().optional(),
+    oAuth: z.array(z.nativeEnum(SocialProvider)),
   }),
 });
 
@@ -76,6 +83,15 @@ const ERROR_MESSAGES: Record<AuthErrorCode, TranslationKey> = {
   FAILED_TO_UPDATE_PASSKEY: "auth:error.passkey.updateFailed",
   ANONYMOUS_USERS_CANNOT_SIGN_IN_AGAIN_ANONYMOUSLY:
     "auth:error.anonymous.cannotSignInAgain",
+  OTP_NOT_ENABLED: "auth:error.otp.notEnabled",
+  OTP_HAS_EXPIRED: "auth:error.otp.expired",
+  TOTP_NOT_ENABLED: "auth:error.totp.notEnabled",
+  TWO_FACTOR_NOT_ENABLED: "auth:error.twoFactor.notEnabled",
+  BACKUP_CODES_NOT_ENABLED: "auth:error.backupCodes.notEnabled",
+  INVALID_BACKUP_CODE: "auth:error.code.invalid",
+  INVALID_CODE: "auth:error.code.invalid",
+  TOO_MANY_ATTEMPTS_REQUEST_NEW_CODE: "auth:error.code.tooManyAttempts",
+  INVALID_TWO_FACTOR_COOKIE: "auth:error.twoFactor.invalidCookie",
 } as const;
 
 export type {
@@ -88,4 +104,10 @@ export type {
   AuthErrorCode,
 };
 
-export { authConfigSchema, SOCIAL_PROVIDER, AUTH_PROVIDER, ERROR_MESSAGES };
+export {
+  authConfigSchema,
+  SocialProvider,
+  AuthProvider,
+  SecondFactor,
+  ERROR_MESSAGES,
+};

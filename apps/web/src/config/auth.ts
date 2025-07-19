@@ -1,4 +1,4 @@
-import { SOCIAL_PROVIDER, authConfigSchema } from "@turbostarter/auth";
+import { SocialProvider, authConfigSchema } from "@turbostarter/auth";
 
 import { env } from "~/lib/env";
 
@@ -10,6 +10,6 @@ export const authConfig = authConfigSchema.parse({
     magicLink: env.NEXT_PUBLIC_AUTH_MAGIC_LINK,
     passkey: env.NEXT_PUBLIC_AUTH_PASSKEY,
     anonymous: env.NEXT_PUBLIC_AUTH_ANONYMOUS,
-    oAuth: [SOCIAL_PROVIDER.GOOGLE, SOCIAL_PROVIDER.GITHUB],
+    oAuth: [SocialProvider.GOOGLE, SocialProvider.GITHUB],
   },
 }) satisfies AuthConfig;

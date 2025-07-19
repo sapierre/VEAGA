@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import { View } from "react-native";
 
-import { SOCIAL_PROVIDER } from "@turbostarter/auth";
+import { SocialProvider } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 import { capitalize } from "@turbostarter/shared/utils";
 import { Button } from "@turbostarter/ui-mobile/button";
@@ -12,9 +12,9 @@ import { useAccounts } from "./hooks/use-accounts";
 
 import type { SVGProps } from "react";
 
-const ICONS: Record<SOCIAL_PROVIDER, React.FC<SVGProps<SVGElement>>> = {
-  [SOCIAL_PROVIDER.GITHUB]: Icons.Github,
-  [SOCIAL_PROVIDER.GOOGLE]: Icons.Google,
+const ICONS: Record<SocialProvider, React.FC<SVGProps<SVGElement>>> = {
+  [SocialProvider.GITHUB]: Icons.Github,
+  [SocialProvider.GOOGLE]: Icons.Google,
 };
 
 export const Accounts = () => {
@@ -22,7 +22,7 @@ export const Accounts = () => {
   const { accounts, socials, missing, isLoading, connect, disconnect } =
     useAccounts();
 
-  const handleDisconnect = (provider: SOCIAL_PROVIDER) => {
+  const handleDisconnect = (provider: SocialProvider) => {
     Alert.alert(
       t("account.accounts.disconnect.cta", {
         provider: capitalize(provider),
@@ -58,7 +58,7 @@ export const Accounts = () => {
           {socials.length > 0 && (
             <View className="overflow-hidden rounded-lg border border-border">
               {socials.map((social) => {
-                const provider = social.provider as SOCIAL_PROVIDER;
+                const provider = social.provider as SocialProvider;
                 const Icon = ICONS[provider];
 
                 return (
@@ -105,7 +105,7 @@ export const Accounts = () => {
               <View className="h-px bg-border" />
               <View className="flex-row flex-wrap gap-2">
                 {missing.map((provider) => {
-                  const Icon = ICONS[provider as SOCIAL_PROVIDER];
+                  const Icon = ICONS[provider as SocialProvider];
 
                   return (
                     <Button

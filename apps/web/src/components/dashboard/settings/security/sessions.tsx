@@ -56,7 +56,7 @@ export const Sessions = () => {
     <Card className="h-fit w-full overflow-hidden">
       <CardHeader className="pb-4">
         <CardTitle className="text-xl">{t("account.sessions.title")}</CardTitle>
-        <CardDescription className="flex flex-col gap-1 py-1.5 text-foreground">
+        <CardDescription className="flex flex-col gap-1 pb-1.5 text-foreground">
           {t("account.sessions.description")}
         </CardDescription>
       </CardHeader>

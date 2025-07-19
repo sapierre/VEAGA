@@ -53,9 +53,6 @@ const EditEmail = memo(() => {
           onSuccess: () => {
             Alert.alert(t("message"), t("account.email.confirm.email.sent"));
           },
-          onError: ({ error }) => {
-            Alert.alert(t("error.title"), error.message);
-          },
         },
       ),
   });
@@ -70,9 +67,6 @@ const EditEmail = memo(() => {
         onSuccess: () => {
           Alert.alert(t("message"), t("account.email.change.success"));
           router.back();
-        },
-        onError: ({ error }) => {
-          Alert.alert(t("error.title"), error.message);
         },
       },
     );

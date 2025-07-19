@@ -1,4 +1,5 @@
-import { getTranslation, withI18n } from "@turbostarter/i18n/server";
+import { getTranslation } from "@turbostarter/i18n/server";
+import { withI18n } from "@turbostarter/i18n/with-i18n";
 
 import { ContactForm } from "~/components/marketing/contact/contact-form";
 import { getMetadata } from "~/lib/metadata";

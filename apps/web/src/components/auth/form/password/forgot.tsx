@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -27,11 +27,8 @@ import { onPromise } from "~/utils";
 
 import type { ForgotPasswordPayload } from "@turbostarter/auth";
 
-type Status = "pending" | "success" | "error" | "idle";
-
 export const ForgotPasswordForm = memo(() => {
   const { t, errorMap } = useTranslation(["common", "auth"]);
-  const [status, setStatus] = useState<Status>("idle");
   const form = useForm<ForgotPasswordPayload>({
     resolver: zodResolver(forgotPasswordSchema, { errorMap }),
   });
@@ -44,18 +41,13 @@ export const ForgotPasswordForm = memo(() => {
         redirectTo: pathsConfig.auth.updatePassword,
       },
       {
-        onRequest: () => {
-          setStatus("pending");
-        },
         onSuccess: () => {
           toast.success(t("account.password.forgot.success.notification"), {
             id: loadingToast,
           });
-          setStatus("success");
         },
         onError: ({ error }) => {
           toast.error(error.message, { id: loadingToast });
-          setStatus("error");
         },
       },
     );
@@ -63,7 +55,7 @@ export const ForgotPasswordForm = memo(() => {
 
   return (
     <AnimatePresence mode="wait">
-      {status === "success" ? (
+      {form.formState.isSubmitSuccessful ? (
         <motion.div
           className="mt-6 flex flex-col items-center justify-center gap-4"
           initial={{ opacity: 0 }}

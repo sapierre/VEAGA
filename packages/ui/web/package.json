@@ -37,6 +37,7 @@
     "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",
+    "input-otp": "1.4.2",
     "lucide-react": "0.439.0",
     "recharts": "2.15.0",
     "vaul": "1.1.2"

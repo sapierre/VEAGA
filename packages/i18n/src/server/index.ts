@@ -3,17 +3,13 @@ import dayjs from "dayjs";
 import { createInstance } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import Negotiator from "negotiator";
-import { cookies } from "next/headers";
-import { i18nRouter } from "next-i18n-router";
 import { initReactI18next } from "react-i18next/initReactI18next";
 
 import { config, getInitOptions } from "../config";
+import { env } from "../env";
 import { loadTranslation, makeZodI18nMap } from "../utils";
 
-import { env } from "./env";
-
 import type { i18n, Namespace, TFunction } from "i18next";
-import type { NextRequest } from "next/server";
 
 export const initializeServerI18n = async ({
   locale,
@@ -34,12 +30,12 @@ export const initializeServerI18n = async ({
   return i18n;
 };
 
-const getLocaleFromCookies = async () => {
+export const getLocaleFromCookies = async () => {
   try {
-    const locale = (await cookies()).get(config.cookie)?.value;
-    if (locale) return locale;
+    const { cookies } = await import("next/headers");
+    return (await cookies()).get(config.cookie)?.value;
   } catch {
-    return null;
+    return undefined;
   }
 };
 
@@ -78,11 +74,16 @@ export const getLocaleFromRequest = (request?: Request) => {
 
 export const getTranslation = async <T extends Namespace>({
   locale: passedLocale,
+  request,
   ns,
-}: { locale?: string; ns?: T } = {}) => {
-  const locale = passedLocale ?? (await getLocaleFromCookies()) ?? undefined;
+}: { locale?: string; request?: Request; ns?: T } = {}) => {
+  const locale =
+    passedLocale ??
+    (request ? getLocaleFromRequest(request) : null) ??
+    (await getLocaleFromCookies()) ??
+    undefined;
   const i18nextInstance = await initializeServerI18n({ locale, ns });
-  dayjs.locale(locale);
+  dayjs.locale(i18nextInstance.language);
 
   const t = i18nextInstance.getFixedT<T>(
     i18nextInstance.language,
@@ -97,18 +98,3 @@ export const getTranslation = async <T extends Namespace>({
     }),
   };
 };
-
-export const middleware = (
-  request: NextRequest,
-  options?: Partial<Parameters<typeof i18nRouter>[1]>,
-) =>
-  i18nRouter(request, {
-    locales: config.locales,
-    defaultLocale:
-      options?.defaultLocale ?? env.DEFAULT_LOCALE ?? config.defaultLocale,
-    localeCookie: config.cookie,
-    localeDetector: getLocaleFromRequest,
-    ...options,
-  });
-
-export * from "./with-i18n";

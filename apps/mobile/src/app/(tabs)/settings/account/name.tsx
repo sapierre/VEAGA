@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
 
 import { updateUserSchema } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
@@ -36,9 +36,6 @@ const EditName = memo(() => {
     await updateUser(data, {
       onSuccess: () => {
         router.back();
-      },
-      onError: ({ error }) => {
-        Alert.alert(t("error.title"), error.message);
       },
     });
   };

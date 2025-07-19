@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
-import { AUTH_PROVIDER } from "@turbostarter/auth";
+import { AuthProvider } from "@turbostarter/auth";
 
 export const useAuthFormStore = create<{
-  provider: AUTH_PROVIDER;
-  setProvider: (provider: AUTH_PROVIDER) => void;
+  provider: AuthProvider;
+  setProvider: (provider: AuthProvider) => void;
   isSubmitting: boolean;
   setIsSubmitting: (isSubmitting: boolean) => void;
 }>((set) => ({
-  provider: AUTH_PROVIDER.PASSWORD,
+  provider: AuthProvider.PASSWORD,
   setProvider: (provider) => set({ provider }),
   isSubmitting: false,
   setIsSubmitting: (isSubmitting) => set({ isSubmitting }),

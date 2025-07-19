@@ -1,4 +1,5 @@
 import * as SecureStore from "expo-secure-store";
+import { Alert } from "react-native";
 
 import { createClient } from "@turbostarter/auth/client/mobile";
 import { config } from "@turbostarter/i18n";
@@ -24,6 +25,7 @@ export const {
   linkSocial,
   unlinkAccount,
   magicLink,
+  twoFactor,
 } = createClient({
   baseURL: getBaseUrl(),
   mobile: {
@@ -32,6 +34,11 @@ export const {
   fetchOptions: {
     headers: {
       Cookie: `${config.cookie}=${useI18nConfig.getState().config.locale}`,
+    },
+    throw: true,
+    onError: ({ error }) => {
+      console.error(error);
+      Alert.alert(error.message);
     },
   },
 });
