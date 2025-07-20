@@ -16,9 +16,11 @@ import { SocialProvider } from "./types";
 
 export const auth = betterAuth({
   appName: "TurboStarter",
-  cookieCache: {
-    enabled: true,
-    maxAge: 5 * 60, // 5 minutes
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // 5 minutes
+    },
   },
   user: {
     deleteUser: {

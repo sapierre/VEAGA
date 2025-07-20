@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { SocialProvider } from "@turbostarter/auth";
-import { useTranslation } from "@turbostarter/i18n";
 
 import { pathsConfig } from "~/config/paths";
 import { listAccounts, unlinkAccount, signIn } from "~/lib/auth";
@@ -9,7 +8,6 @@ import { listAccounts, unlinkAccount, signIn } from "~/lib/auth";
 const QUERY_KEY = ["accounts"];
 
 export const useAccounts = () => {
-  const { t } = useTranslation(["auth", "common"]);
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: QUERY_KEY,

@@ -3,7 +3,7 @@ import { memo } from "react";
 import { View } from "react-native";
 
 import { SocialProvider as SocialProviderType } from "@turbostarter/auth";
-import { Trans, useTranslation } from "@turbostarter/i18n";
+import { Trans } from "@turbostarter/i18n";
 import { Button } from "@turbostarter/ui-mobile/button";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
@@ -70,7 +70,6 @@ const SocialProvider = ({
 };
 
 export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
-  const { t } = useTranslation("common");
   const {
     provider: actualProvider,
     setProvider,
