@@ -6,6 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "next-env.d.ts"],
       "env": [
+        "ANALYZE",
         "CONTACT_EMAIL",
 
         "BILLING_MODEL",

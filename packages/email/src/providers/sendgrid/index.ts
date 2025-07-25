@@ -1,5 +1,4 @@
-import { env } from "../../env";
-import { EmailProvider } from "../../types";
+import { env } from "./env";
 
 import type { EmailProviderStrategy } from "../types";
 
@@ -11,12 +10,6 @@ const send: EmailProviderStrategy["send"] = async ({
   html,
   text,
 }) => {
-  if (env.EMAIL_PROVIDER !== EmailProvider.SENDGRID) {
-    throw new Error(
-      `Invalid email provider! Expected ${EmailProvider.SENDGRID}, got ${env.EMAIL_PROVIDER}.`,
-    );
-  }
-
   const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
     headers: {
@@ -50,6 +43,4 @@ const send: EmailProviderStrategy["send"] = async ({
   }
 };
 
-export const sendgridStrategy: EmailProviderStrategy = {
-  send,
-};
+export { send };

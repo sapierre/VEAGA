@@ -1,5 +1,1 @@
-import { track } from "@vercel/analytics/server";
-
-export const vercelServerStrategy = {
-  track,
-};
+export { track } from "@vercel/analytics/server";

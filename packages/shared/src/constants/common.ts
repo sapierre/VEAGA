@@ -10,3 +10,11 @@ export const SortOrder = {
 } as const;
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
+
+export const envConfig = {
+  skipValidation:
+    (!!process.env.SKIP_ENV_VALIDATION &&
+      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
+    ["postinstall", "lint"].includes(process.env.npm_lifecycle_event ?? ""),
+  emptyStringAsUndefined: true,
+} as const;

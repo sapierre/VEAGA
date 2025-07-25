@@ -7,10 +7,10 @@ import {
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { env } from "../../env";
 import { updateCustomer, upsertCustomer } from "../../lib/customer";
 import { getCustomerByUserId } from "../../server";
-import { BillingProvider } from "../../types";
+
+import { env } from "./env";
 
 const getLemonSqueezyCustomerById = async (customerId: string) => {
   return getCustomer(customerId);
@@ -27,12 +27,6 @@ const getLemonSqueezyCustomerByEmail = async (email: string) => {
 };
 
 const createLemonSqueezyCustomer = async (email: string) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
-    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
-      code: "billing:error.invalidProvider",
-    });
-  }
-
   const newCustomer = await createCustomer(env.LEMON_SQUEEZY_STORE_ID, {
     name: email.split("@")[0] ?? "",
     email: email,

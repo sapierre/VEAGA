@@ -1,17 +1,12 @@
 import { PostHog } from "posthog-node";
 
-import { env } from "../../env";
-import { AnalyticsProvider } from "../../types";
+import { env } from "./env";
 
-import type { AllowedPropertyValues } from "../types";
+import type { AnalyticsProviderServerStrategy } from "../types";
 
 let client: PostHog | null = null;
 
 const getClient = () => {
-  if (env.NEXT_PUBLIC_ANALYTICS_PROVIDER !== AnalyticsProvider.POSTHOG) {
-    throw new Error("Invalid analytics provider!");
-  }
-
   if (client) {
     return client;
   }
@@ -23,7 +18,7 @@ const getClient = () => {
   return client;
 };
 
-const track = (event: string, data?: Record<string, AllowedPropertyValues>) => {
+const track: AnalyticsProviderServerStrategy["track"] = (event, data) => {
   const client = getClient();
 
   client.capture({
@@ -33,6 +28,4 @@ const track = (event: string, data?: Record<string, AllowedPropertyValues>) => {
   });
 };
 
-export const posthogServerStrategy = {
-  track,
-};
+export { track };

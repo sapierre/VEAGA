@@ -3,11 +3,11 @@ import { memo } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { Provider as AnalyticsProvider } from "@turbostarter/analytics-mobile";
+
 import { ApiProvider } from "~/lib/api";
 import { I18nProvider } from "~/providers/i18n";
 import { ThemeProvider } from "~/providers/theme";
-
-// import { Provider as AnalyticsProvider } from "@turbostarter/analytics-mobile";
 
 interface ProvidersProps {
   readonly children: React.ReactNode;
@@ -20,7 +20,9 @@ export const Providers = memo<ProvidersProps>(({ children }) => {
         <I18nProvider>
           <SafeAreaProvider>
             <ThemeProvider>
-              <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+              <BottomSheetModalProvider>
+                <AnalyticsProvider>{children}</AnalyticsProvider>
+              </BottomSheetModalProvider>
             </ThemeProvider>
           </SafeAreaProvider>
         </I18nProvider>

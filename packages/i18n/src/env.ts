@@ -2,9 +2,12 @@
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
+import { envConfig } from "@turbostarter/shared/constants";
+
 import { Locale } from "./types";
 
 export const env = createEnv({
+  ...envConfig,
   clientPrefix: "NEXT_PUBLIC_",
   client: {
     NEXT_PUBLIC_DEFAULT_LOCALE: z.string().optional().default(Locale.EN),
@@ -12,13 +15,8 @@ export const env = createEnv({
   server: {
     DEFAULT_LOCALE: z.string().optional(),
   },
-  skipValidation:
-    (!!process.env.SKIP_ENV_VALIDATION &&
-      ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
-    process.env.npm_lifecycle_event === "lint",
   runtimeEnv: {
     DEFAULT_LOCALE: process.env.DEFAULT_LOCALE,
     NEXT_PUBLIC_DEFAULT_LOCALE: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
   },
-  emptyStringAsUndefined: true,
 });

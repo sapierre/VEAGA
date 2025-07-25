@@ -2,7 +2,6 @@ import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
 import { config } from "../../config";
-import { env } from "../../env";
 import { getCustomerByCustomerId, updateCustomer } from "../../lib/customer";
 import { BillingModel } from "../../types";
 import { getHighestDiscountForPrice } from "../../utils";
@@ -12,6 +11,7 @@ import {
   createBillingPortalSession,
   createOrRetrieveCustomer,
 } from "./customer";
+import { env } from "./env";
 import {
   toCheckoutBillingStatus,
   toPaymentBillingStatus,
@@ -21,11 +21,7 @@ import {
   subscriptionStatusChangeHandler,
 } from "./subscription";
 
-import type {
-  CheckoutPayload,
-  GetBillingPortalPayload,
-} from "../../lib/schema";
-import type { User } from "@turbostarter/auth";
+import type { BillingProviderStrategy } from "../types";
 import type Stripe from "stripe";
 
 const createCheckoutSession = async (
@@ -106,11 +102,11 @@ export const checkoutStatusChangeHandler = async (
   );
 };
 
-export const checkout = async ({
+export const checkout: BillingProviderStrategy["checkout"] = async ({
   user,
   price: { id },
   redirect,
-}: CheckoutPayload & { user: User }) => {
+}) => {
   try {
     const price = config.plans
       .find((plan) => plan.prices.some((p) => p.id === id))
@@ -170,23 +166,21 @@ export const checkout = async ({
   }
 };
 
-export const getBillingPortal = async ({
-  redirectUrl,
-  user,
-}: GetBillingPortalPayload & { user: User }) => {
-  try {
-    const customer = await createOrRetrieveCustomer({
-      email: user.email,
-      id: user.id,
-    });
+export const getBillingPortal: BillingProviderStrategy["getBillingPortal"] =
+  async ({ redirectUrl, user }) => {
+    try {
+      const customer = await createOrRetrieveCustomer({
+        email: user.email,
+        id: user.id,
+      });
 
-    const { url } = await createBillingPortalSession({
-      customer,
-      return_url: redirectUrl,
-    });
+      const { url } = await createBillingPortalSession({
+        customer,
+        return_url: redirectUrl,
+      });
 
-    return { url };
-  } catch {
-    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR);
-  }
-};
+      return { url };
+    } catch {
+      throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR);
+    }
+  };

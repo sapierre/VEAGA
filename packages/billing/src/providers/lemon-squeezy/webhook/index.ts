@@ -1,27 +1,20 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { env } from "../../../env";
-import { BillingProvider } from "../../../types";
 import { checkoutStatusChangeHandler } from "../checkout";
+import { env } from "../env";
 import { subscriptionStatusChangeHandler } from "../subscription";
 
 import { LEMON_SQUEEZY_SIGNATURE_HEADER, relevantEvents } from "./constants";
 import { validateSignature } from "./signing";
 import { webhookHasData, webhookHasMeta } from "./type-guards";
 
-import type { WebhookCallbacks } from "../../types";
+import type { BillingProviderStrategy } from "../../types";
 
-export const webhookHandler = async (
-  req: Request,
-  callbacks?: WebhookCallbacks,
+export const webhookHandler: BillingProviderStrategy["webhookHandler"] = async (
+  req,
+  callbacks,
 ) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.LEMON_SQUEEZY) {
-    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
-      code: "billing:error.unsupportedProvider",
-    });
-  }
-
   const body = await req.text();
   const sig = req.headers.get(LEMON_SQUEEZY_SIGNATURE_HEADER);
 

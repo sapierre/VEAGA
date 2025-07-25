@@ -1,5 +1,4 @@
-import { env } from "../../env";
-import { EmailProvider } from "../../types";
+import { env } from "./env";
 
 import type { EmailProviderStrategy } from "../types";
 
@@ -11,12 +10,6 @@ const send: EmailProviderStrategy["send"] = async ({
   html,
   text,
 }) => {
-  if (env.EMAIL_PROVIDER !== EmailProvider.RESEND) {
-    throw new Error(
-      `Invalid email provider! Expected ${EmailProvider.RESEND}, got ${env.EMAIL_PROVIDER}.`,
-    );
-  }
-
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -38,6 +31,4 @@ const send: EmailProviderStrategy["send"] = async ({
   }
 };
 
-export const resendStrategy: EmailProviderStrategy = {
-  send,
-};
+export { send };

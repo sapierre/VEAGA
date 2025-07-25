@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
-// Import env files to validate at build time.
-import "./src/lib/env";
+import { env } from "./src/lib/env";
 
 const INTERNAL_PACKAGES = [
   "@turbostarter/analytics-web",
@@ -55,4 +54,8 @@ const config: NextConfig = {
   typescript: { ignoreBuildErrors: true },
 };
 
-export default config;
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: env.ANALYZE,
+});
+
+export default withBundleAnalyzer(config);

@@ -1,26 +1,19 @@
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { env } from "../../../env";
-import { BillingProvider } from "../../../types";
 import { checkoutStatusChangeHandler } from "../checkout";
+import { env } from "../env";
 import { subscriptionStatusChangeHandler } from "../subscription";
 
 import { STRIPE_SIGNATURE_HEADER, relevantEvents } from "./constants";
 import { constructEvent } from "./event";
 
-import type { WebhookCallbacks } from "../../types";
+import type { BillingProviderStrategy } from "../../types";
 
-export const webhookHandler = async (
-  req: Request,
-  callbacks?: WebhookCallbacks,
+export const webhookHandler: BillingProviderStrategy["webhookHandler"] = async (
+  req,
+  callbacks,
 ) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.STRIPE) {
-    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
-      code: "billing:error.unsupportedProvider",
-    });
-  }
-
   const body = await req.text();
   const sig = req.headers.get(STRIPE_SIGNATURE_HEADER);
 

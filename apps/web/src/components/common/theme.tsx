@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 
+import { track } from "@turbostarter/analytics-web";
 import { useTranslation } from "@turbostarter/i18n";
 import { useBreakpoint } from "@turbostarter/ui-web";
 import { Button } from "@turbostarter/ui-web/button";
@@ -52,6 +53,7 @@ const Customizer = () => {
           className="ml-auto rounded-[0.5rem]"
           onClick={() => {
             onChange(appConfig.theme);
+            track("theme.customization.reset");
           }}
         >
           <Icons.Undo2 className="size-4" />

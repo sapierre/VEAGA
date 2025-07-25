@@ -7,10 +7,12 @@ import { getSignedUrl as getSignedUrlCommand } from "@aws-sdk/s3-request-presign
 
 import { getClient } from "./client";
 
-import type { GetObjectUrlInput } from "../../lib/schema";
 import type { StorageProviderStrategy } from "../types";
 
-const getUploadUrl = async ({ path, bucket }: GetObjectUrlInput) => {
+const getUploadUrl: StorageProviderStrategy["getUploadUrl"] = async ({
+  path,
+  bucket,
+}) => {
   const client = getClient();
 
   const url = await getSignedUrlCommand(
@@ -27,7 +29,10 @@ const getUploadUrl = async ({ path, bucket }: GetObjectUrlInput) => {
   return { url };
 };
 
-const getSignedUrl = async ({ path, bucket }: GetObjectUrlInput) => {
+const getSignedUrl: StorageProviderStrategy["getSignedUrl"] = async ({
+  path,
+  bucket,
+}) => {
   const client = getClient();
 
   const url = await getSignedUrlCommand(
@@ -44,7 +49,10 @@ const getSignedUrl = async ({ path, bucket }: GetObjectUrlInput) => {
   return { url };
 };
 
-const getPublicUrl = async ({ path, bucket }: GetObjectUrlInput) => {
+const getPublicUrl: StorageProviderStrategy["getPublicUrl"] = async ({
+  path,
+  bucket,
+}) => {
   const client = getClient();
   const endpoint = await client.config.endpoint?.();
 
@@ -59,7 +67,10 @@ const getPublicUrl = async ({ path, bucket }: GetObjectUrlInput) => {
   };
 };
 
-const getDeleteUrl = async ({ path, bucket }: GetObjectUrlInput) => {
+const getDeleteUrl: StorageProviderStrategy["getDeleteUrl"] = async ({
+  path,
+  bucket,
+}) => {
   const client = getClient();
 
   const url = await getSignedUrlCommand(
@@ -76,9 +87,4 @@ const getDeleteUrl = async ({ path, bucket }: GetObjectUrlInput) => {
   return { url };
 };
 
-export const s3Strategy: StorageProviderStrategy = {
-  getUploadUrl,
-  getSignedUrl,
-  getPublicUrl,
-  getDeleteUrl,
-};
+export { getUploadUrl, getSignedUrl, getPublicUrl, getDeleteUrl };

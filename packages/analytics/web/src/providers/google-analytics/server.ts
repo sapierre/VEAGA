@@ -1,20 +1,16 @@
 import { randomUUID } from "crypto";
 
-import { env } from "../../env";
-import { AnalyticsProvider } from "../../types";
+import { env } from "./env";
 
-import type { AllowedPropertyValues } from "../types";
+import type {
+  AllowedPropertyValues,
+  AnalyticsProviderServerStrategy,
+} from "../types";
 
 const postEvent = async (
   event: string,
   data?: Record<string, AllowedPropertyValues>,
 ) => {
-  if (
-    env.NEXT_PUBLIC_ANALYTICS_PROVIDER !== AnalyticsProvider.GOOGLE_ANALYTICS
-  ) {
-    throw new Error("Invalid analytics provider!");
-  }
-
   const response = await fetch(
     `https://www.google-analytics.com/mp/collect?measurement_id=${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}&api_secret=${env.GOOGLE_ANALYTICS_SECRET}`,
     {
@@ -31,10 +27,8 @@ const postEvent = async (
   }
 };
 
-const track = (event: string, data?: Record<string, AllowedPropertyValues>) => {
+const track: AnalyticsProviderServerStrategy["track"] = (event, data) => {
   void postEvent(event, data);
 };
 
-export const googleAnalyticsServerStrategy = {
-  track,
-};
+export { track };

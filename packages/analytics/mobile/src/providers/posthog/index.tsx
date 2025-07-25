@@ -1,19 +1,15 @@
 import PostHog, { PostHogProvider } from "posthog-react-native";
 import { useEffect } from "react";
 
-import { env } from "../../env";
 import { useTrackingPermissions } from "../../hooks";
-import { AnalyticsProvider } from "../../types";
 
-import type { AllowedPropertyValues } from "../types";
+import { env } from "./env";
+
+import type { AnalyticsProviderStrategy } from "../types";
 
 let client: PostHog | null = null;
 
 const getClient = () => {
-  if (env.EXPO_PUBLIC_ANALYTICS_PROVIDER !== AnalyticsProvider.POSTHOG) {
-    return null;
-  }
-
   if (client) {
     return client;
   }
@@ -29,7 +25,7 @@ const getClient = () => {
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const client = getClient();
 
-  if (!client) {
+  if (client.optedOut) {
     return children;
   }
 
@@ -45,7 +41,7 @@ const Setup = () => {
   const granted = useTrackingPermissions();
 
   useEffect(() => {
-    const optedOut = client?.optedOut;
+    const optedOut = client.optedOut;
     if (granted && optedOut) {
       void client.optIn();
     }
@@ -54,7 +50,7 @@ const Setup = () => {
   return null;
 };
 
-const Provider = ({ children }: { children: React.ReactNode }) => {
+const Provider: AnalyticsProviderStrategy["Provider"] = ({ children }) => {
   return (
     <Wrapper>
       <Setup />
@@ -63,20 +59,14 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const track = (
-  name: string,
-  params?: Record<string, AllowedPropertyValues>,
-) => {
+const track: AnalyticsProviderStrategy["track"] = (name, params) => {
   const client = getClient();
 
-  if (!client) {
+  if (client.optedOut) {
     return;
   }
 
   client.capture(name, params);
 };
 
-export const posthogStrategy = {
-  Provider,
-  track,
-};
+export { Provider, track };

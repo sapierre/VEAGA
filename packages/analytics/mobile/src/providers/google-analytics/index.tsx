@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 import { useTrackingPermissions } from "../../hooks";
 
-import type { AllowedPropertyValues } from "../types";
+import type { AnalyticsProviderStrategy } from "../types";
 
 const setup = async () => {
   await analytics().setAnalyticsCollectionEnabled(true);
@@ -44,20 +44,14 @@ const useSetup = () => {
   }, [pathname, params, granted]);
 };
 
-const Provider = ({ children }: { children: React.ReactNode }) => {
+const Provider: AnalyticsProviderStrategy["Provider"] = ({ children }) => {
   useSetup();
 
   return children;
 };
 
-const track = (
-  name: string,
-  params?: Record<string, AllowedPropertyValues>,
-) => {
+const track: AnalyticsProviderStrategy["track"] = (name, params) => {
   void analytics().logEvent(name, params);
 };
 
-export const googleAnalyticsStrategy = {
-  Provider,
-  track,
-};
+export { Provider, track };

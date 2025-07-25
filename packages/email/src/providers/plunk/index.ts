@@ -1,5 +1,4 @@
-import { env } from "../../env";
-import { EmailProvider } from "../../types";
+import { env } from "./env";
 
 import type { EmailProviderStrategy } from "../types";
 
@@ -11,12 +10,6 @@ const send: EmailProviderStrategy["send"] = async ({
   html,
   text,
 }) => {
-  if (env.EMAIL_PROVIDER !== EmailProvider.PLUNK) {
-    throw new Error(
-      `Invalid email provider! Expected ${EmailProvider.PLUNK}, got ${env.EMAIL_PROVIDER}.`,
-    );
-  }
-
   const response = await fetch("https://api.useplunk.com/v1/send", {
     method: "POST",
     headers: {
@@ -38,6 +31,4 @@ const send: EmailProviderStrategy["send"] = async ({
   }
 };
 
-export const plunkStrategy: EmailProviderStrategy = {
-  send,
-};
+export { send };

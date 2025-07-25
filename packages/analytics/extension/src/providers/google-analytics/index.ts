@@ -1,6 +1,9 @@
-import { env } from "../../env";
+import { env } from "./env";
 
-import type { AllowedPropertyValues } from "../types";
+import type {
+  AllowedPropertyValues,
+  AnalyticsProviderStrategy,
+} from "../types";
 
 const postEvent = async (
   event: string,
@@ -22,13 +25,8 @@ const postEvent = async (
   }
 };
 
-const track = (
-  name: string,
-  params?: Record<string, AllowedPropertyValues>,
-) => {
+const track: AnalyticsProviderStrategy["track"] = (name, params) => {
   void postEvent(name, params);
 };
 
-export const googleAnalyticsStrategy = {
-  track,
-};
+export { track };

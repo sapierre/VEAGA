@@ -1,10 +1,5 @@
-import { HttpStatusCode } from "@turbostarter/shared/constants";
-import { HttpException } from "@turbostarter/shared/utils";
-
-import { env } from "../../env";
 import { updateCustomer, upsertCustomer } from "../../lib/customer";
 import { getCustomerByUserId } from "../../server";
-import { BillingProvider } from "../../types";
 
 import { polar } from "./client";
 
@@ -21,12 +16,6 @@ const getPolarCustomerByEmail = async (email: string) => {
 };
 
 const createPolarCustomer = async (email: string) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.POLAR) {
-    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
-      code: "billing:error.invalidProvider",
-    });
-  }
-
   const newCustomer = await polar().customers.create({
     email,
   });

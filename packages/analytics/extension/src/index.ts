@@ -1,4 +1,1 @@
-import { provider } from "./env";
-import { strategies } from "./providers";
-
-export const { track } = strategies[provider];
+export { track } from "./providers";

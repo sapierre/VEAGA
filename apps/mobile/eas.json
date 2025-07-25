@@ -15,8 +15,7 @@
         "EXPO_PUBLIC_AUTH_PASSWORD": "true",
         "EXPO_PUBLIC_AUTH_MAGIC_LINK": "false",
         "EXPO_PUBLIC_THEME_MODE": "system",
-        "EXPO_PUBLIC_THEME_COLOR": "orange",
-        "EXPO_PUBLIC_ANALYTICS_PROVIDER": "google-analytics"
+        "EXPO_PUBLIC_THEME_COLOR": "orange"
       }
     },
     // Development profile used for local development

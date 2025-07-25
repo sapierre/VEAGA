@@ -2,19 +2,17 @@ import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
 import { config } from "../../config";
-import { env } from "../../env";
 import { getCustomerByCustomerId, updateCustomer } from "../../lib/customer";
 import { getCustomerByUserId } from "../../server";
-import { BillingProvider } from "../../types";
 import { getHighestDiscountForPrice } from "../../utils";
 
 import { polar } from "./client";
 import { createOrRetrieveCustomer } from "./customer";
+import { env } from "./env";
 import { toCheckoutBillingStatus } from "./mappers/to-billing-status";
 import { subscriptionStatusChangeHandler } from "./subscription";
 
-import type { CheckoutPayload, GetBillingPortalPayload } from "../../server";
-import type { User } from "@turbostarter/auth";
+import type { BillingProviderStrategy } from "../types";
 
 const getPolarDiscountByCode = async (code: string) => {
   const discounts = await polar().discounts.list({
@@ -24,17 +22,11 @@ const getPolarDiscountByCode = async (code: string) => {
   return discounts.result.items[0];
 };
 
-export const checkout = async ({
+export const checkout: BillingProviderStrategy["checkout"] = async ({
   user,
   price: { id },
   redirect,
-}: CheckoutPayload & { user: User }) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.POLAR) {
-    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
-      code: "billing:error.invalidProvider",
-    });
-  }
-
+}) => {
   try {
     const plan = config.plans.find((plan) =>
       plan.prices.some((p) => p.id === id),
@@ -73,37 +65,30 @@ export const checkout = async ({
   }
 };
 
-export const getBillingPortal = async ({
-  user,
-}: GetBillingPortalPayload & { user: User }) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.POLAR) {
-    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
-      code: "billing:error.invalidProvider",
-    });
-  }
+export const getBillingPortal: BillingProviderStrategy["getBillingPortal"] =
+  async ({ user }) => {
+    const defaultUrl = `https://polar.sh/${env.POLAR_ORGANIZATION_SLUG}/portal`;
 
-  const defaultUrl = `https://polar.sh/${env.POLAR_ORGANIZATION_SLUG}/portal`;
+    try {
+      const customer = await getCustomerByUserId(user.id);
 
-  try {
-    const customer = await getCustomerByUserId(user.id);
+      if (!customer) {
+        return {
+          url: defaultUrl,
+        };
+      }
 
-    if (!customer) {
-      return {
-        url: defaultUrl,
-      };
+      const customerSession = await polar().customerSessions.create({
+        customerId: customer.customerId,
+      });
+
+      return { url: customerSession.customerPortalUrl || defaultUrl };
+    } catch {
+      throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
+        code: "billing:error.portal",
+      });
     }
-
-    const customerSession = await polar().customerSessions.create({
-      customerId: customer.customerId,
-    });
-
-    return { url: customerSession.customerPortalUrl || defaultUrl };
-  } catch {
-    throw new HttpException(HttpStatusCode.INTERNAL_SERVER_ERROR, {
-      code: "billing:error.portal",
-    });
-  }
-};
+  };
 export const checkoutStatusChangeHandler = async ({ id }: { id: string }) => {
   const order = await polar().orders.get({ id });
 

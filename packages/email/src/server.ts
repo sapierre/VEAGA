@@ -1,5 +1,4 @@
-import { provider } from "./env";
-import { strategies } from "./providers";
+import { send } from "./providers";
 import { getTemplate } from "./templates";
 
 import type { EmailTemplate, EmailVariables } from "./types";
@@ -15,14 +14,13 @@ const sendEmail = async <T extends EmailTemplate>({
   variables: EmailVariables[T];
   locale?: string;
 }) => {
-  const strategy = strategies[provider];
   const { html, text, subject } = await getTemplate({
     id: template,
     variables,
     locale,
   });
 
-  return strategy.send({ to, subject, html, text });
+  return send({ to, subject, html, text });
 };
 
 export { sendEmail };

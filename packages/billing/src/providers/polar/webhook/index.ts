@@ -6,25 +6,18 @@ import {
 import { HttpStatusCode } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
-import { env } from "../../../env";
-import { BillingProvider } from "../../../types";
 import { checkoutStatusChangeHandler } from "../checkout";
+import { env } from "../env";
 import { subscriptionStatusChangeHandler } from "../subscription";
 
 import { relevantEvents } from "./constants";
 
-import type { WebhookCallbacks } from "../../types";
+import type { BillingProviderStrategy } from "../../types";
 
-export const webhookHandler = async (
-  req: Request,
-  callbacks?: WebhookCallbacks,
+export const webhookHandler: BillingProviderStrategy["webhookHandler"] = async (
+  req,
+  callbacks,
 ) => {
-  if (env.BILLING_PROVIDER !== BillingProvider.POLAR) {
-    throw new HttpException(HttpStatusCode.BAD_REQUEST, {
-      code: "billing:error.unsupportedProvider",
-    });
-  }
-
   try {
     const raw = await req.text();
 

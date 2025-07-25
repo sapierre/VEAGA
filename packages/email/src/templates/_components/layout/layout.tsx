@@ -10,14 +10,14 @@ import {
 import { mapValues, hslToHex } from "@turbostarter/shared/utils";
 import { themes } from "@turbostarter/ui";
 
-import { theme } from "../../../env";
+import { env } from "../../../env";
 
 import { Footer } from "./footer";
 import { Header } from "./header";
 
 import type { PropsWithChildren } from "react";
 
-const colors = mapValues(themes[theme].light, (v) => hslToHex(...v));
+const colors = mapValues(themes[env.EMAIL_THEME].light, (v) => hslToHex(...v));
 
 export const Layout = ({
   children,

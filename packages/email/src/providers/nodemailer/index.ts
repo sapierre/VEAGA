@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 
-import { env } from "../../env";
-import { EmailProvider } from "../../types";
+import { env } from "./env";
 
 import type { EmailProviderStrategy } from "../types";
 
@@ -13,12 +12,6 @@ const send: EmailProviderStrategy["send"] = async ({
   html,
   text,
 }) => {
-  if (env.EMAIL_PROVIDER !== EmailProvider.NODEMAILER) {
-    throw new Error(
-      `Invalid email provider! Expected ${EmailProvider.NODEMAILER}, got ${env.EMAIL_PROVIDER}.`,
-    );
-  }
-
   const transporter = nodemailer.createTransport({
     host: env.NODEMAILER_HOST,
     port: env.NODEMAILER_PORT,
@@ -37,6 +30,4 @@ const send: EmailProviderStrategy["send"] = async ({
   });
 };
 
-export const nodemailerStrategy: EmailProviderStrategy = {
-  send,
-};
+export { send };

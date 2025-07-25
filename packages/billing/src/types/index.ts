@@ -18,12 +18,6 @@ const pricingPlanTypeEnumSchema = z.enum(pricingPlanTypeEnum.enumValues);
 export const BillingStatus = billingStatusEnumSchema.enum;
 export const PricingPlanType = pricingPlanTypeEnumSchema.enum;
 
-export const BillingProvider = {
-  STRIPE: "stripe",
-  LEMON_SQUEEZY: "lemon-squeezy",
-  POLAR: "polar",
-} as const;
-
 export const BillingModel = {
   ONE_TIME: "one-time",
   RECURRING: "recurring",
@@ -49,8 +43,6 @@ export const RecurringIntervalDuration: Record<RecurringInterval, number> = {
 };
 
 export type BillingStatus = z.infer<typeof billingStatusEnumSchema>;
-export type BillingProvider =
-  (typeof BillingProvider)[keyof typeof BillingProvider];
 export type PricingPlanType = z.infer<typeof pricingPlanTypeEnumSchema>;
 export type BillingModel = (typeof BillingModel)[keyof typeof BillingModel];
 export type RecurringInterval =

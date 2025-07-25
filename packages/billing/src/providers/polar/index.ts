@@ -1,8 +1,2 @@
-import { checkout, getBillingPortal } from "./checkout";
-import { webhookHandler } from "./webhook";
-
-export const polarStrategy = {
-  checkout,
-  getBillingPortal,
-  webhookHandler,
-};
+export { checkout, getBillingPortal } from "./checkout";
+export { webhookHandler } from "./webhook";

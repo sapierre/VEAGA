@@ -1,5 +1,4 @@
-import { env } from "../../env";
-import { EmailProvider } from "../../types";
+import { env } from "./env";
 
 import type { EmailProviderStrategy } from "../types";
 
@@ -11,12 +10,6 @@ const send: EmailProviderStrategy["send"] = async ({
   html,
   text,
 }) => {
-  if (env.EMAIL_PROVIDER !== EmailProvider.POSTMARK) {
-    throw new Error(
-      `Invalid email provider! Expected ${EmailProvider.POSTMARK}, got ${env.EMAIL_PROVIDER}.`,
-    );
-  }
-
   const response = await fetch("https://api.postmarkapp.com/email", {
     method: "POST",
     headers: {
@@ -38,6 +31,4 @@ const send: EmailProviderStrategy["send"] = async ({
   }
 };
 
-export const postmarkStrategy: EmailProviderStrategy = {
-  send,
-};
+export { send };

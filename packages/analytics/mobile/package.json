@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./env": "./src/env/index.ts"
+    "./env": "./src/env.ts"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
@@ -25,6 +25,7 @@
   "dependencies": {
     "@t3-oss/env-core": "catalog:",
     "@turbostarter/shared": "workspace:*",
+    "mixpanel-react-native": "3.1.2",
     "posthog-react-native": "3.3.1",
     "react-native": "catalog:",
     "zod": "catalog:"
