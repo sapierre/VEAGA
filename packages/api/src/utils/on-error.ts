@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 import { isKey } from "@turbostarter/i18n";
 import { getTranslation } from "@turbostarter/i18n/server";

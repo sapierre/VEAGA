@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-import { z } from "zod";
+import * as z from "zod";
 
 import type { ClientRequestOptions } from "hono";
 import type { ClientResponse } from "hono/client";

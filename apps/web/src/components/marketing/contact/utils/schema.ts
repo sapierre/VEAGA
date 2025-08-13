@@ -1,10 +1,10 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const MAX_MESSAGE_LENGTH = 4000;
 
 export const contactFormSchema = z.object({
   name: z.string().min(2),
-  email: z.string().email(),
+  email: z.email(),
   message: z.string().min(10).max(MAX_MESSAGE_LENGTH),
 });
 

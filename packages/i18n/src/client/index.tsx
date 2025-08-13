@@ -10,6 +10,7 @@ import {
   initReactI18next,
   useTranslation as useTranslationBase,
 } from "react-i18next";
+import * as z from "zod";
 
 import { getInitOptions, config } from "../config";
 import { loadTranslation, makeZodI18nMap } from "../utils";
@@ -68,15 +69,7 @@ export const useTranslation = <
 >(
   ns?: Ns,
   options?: UseTranslationOptions<KPrefix>,
-) => {
-  const { t, i18n } = useTranslationBase<Ns, KPrefix>(ns, options);
-
-  return {
-    t,
-    i18n,
-    errorMap: makeZodI18nMap({ t: t as TFunction }),
-  };
-};
+) => useTranslationBase<Ns, KPrefix>(ns, options);
 
 export const getI18n = async ({
   locale,
@@ -91,8 +84,14 @@ export const getI18n = async ({
     return initializeI18nClient({ locale, defaultLocale, ns });
   }
 
+  const t = client.getFixedT<Namespace>(client.language, ns);
+
   await client.changeLanguage(locale);
   dayjs.locale(locale);
+  z.config({
+    localeError: makeZodI18nMap({ t: t as TFunction }),
+  });
+
   if (ns) {
     await client.loadNamespaces(ns);
   }
@@ -124,10 +123,14 @@ export const I18nProvider = ({
     return null;
   }
 
-  if (locale !== i18nClient.language) {
-    dayjs.locale(locale);
-    void i18nClient.changeLanguage(locale);
-  }
+  const t = i18nClient.getFixedT<Namespace>(i18nClient.language, ns);
+
+  z.config({
+    localeError: makeZodI18nMap({ t: t as TFunction }),
+  });
+
+  dayjs.locale(locale);
+  void i18nClient.changeLanguage(locale);
 
   return <I18nextProvider i18n={i18nClient}>{children}</I18nextProvider>;
 };

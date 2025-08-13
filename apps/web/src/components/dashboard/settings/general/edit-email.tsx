@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useMutation } from "@tanstack/react-query";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -38,9 +38,9 @@ interface EditEmailProps {
 }
 
 export const EditEmail = memo<EditEmailProps>(({ user }) => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
-  const form = useForm<EmailPayload>({
-    resolver: zodResolver(emailSchema, { errorMap }),
+  const { t } = useTranslation(["common", "auth"]);
+  const form = useForm({
+    resolver: standardSchemaResolver(emailSchema),
     defaultValues: {
       email: user.email,
     },

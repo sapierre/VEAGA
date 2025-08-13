@@ -1,7 +1,7 @@
-import { z } from "zod";
+import * as z from "zod";
 
 const emailSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
 });
 
 const password = z.string().min(8);
@@ -23,27 +23,38 @@ const trustDeviceSchema = z.object({
 
 const updateUserSchema = z.object({
   name: z.string().min(2).max(32).optional(),
-  image: z.string().url().optional(),
+  image: z.url().optional(),
 });
 
-const changePasswordSchema = passwordSchema.merge(
-  z.object({
-    newPassword: password,
-  }),
-);
+const changePasswordSchema = z.object({
+  ...passwordSchema.shape,
+  newPassword: password,
+});
 
-const registerSchema = emailSchema.merge(passwordSchema);
-const passwordLoginSchema = emailSchema.merge(passwordSchema).merge(
-  z.object({
-    rememberMe: z.boolean().optional().default(true),
-  }),
-);
+const registerSchema = z.object({
+  ...emailSchema.shape,
+  ...passwordSchema.shape,
+});
+
+const passwordLoginSchema = z.object({
+  ...emailSchema.shape,
+  ...passwordSchema.shape,
+  rememberMe: z.boolean().optional().default(true),
+});
+
 const magicLinkLoginSchema = emailSchema;
 const forgotPasswordSchema = emailSchema;
 const updatePasswordSchema = passwordSchema;
 
-const otpVerificationSchema = otpSchema.merge(trustDeviceSchema);
-const backupCodeVerificationSchema = backupCodeSchema.merge(trustDeviceSchema);
+const otpVerificationSchema = z.object({
+  ...otpSchema.shape,
+  ...trustDeviceSchema.shape,
+});
+
+const backupCodeVerificationSchema = z.object({
+  ...backupCodeSchema.shape,
+  ...trustDeviceSchema.shape,
+});
 
 type EmailPayload = z.infer<typeof emailSchema>;
 type PasswordLoginPayload = z.infer<typeof passwordLoginSchema>;

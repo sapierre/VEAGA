@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { memo, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -106,11 +106,11 @@ export const RequirePassword = memo<RequirePasswordProps>(
     ...props
   }) => {
     const [open, setOpen] = useState(_open ?? false);
-    const { t, errorMap } = useTranslation(["common", "auth"]);
+    const { t } = useTranslation(["common", "auth"]);
     const isDesktop = useBreakpoint("md");
 
     const form = useForm({
-      resolver: zodResolver(passwordSchema, { errorMap }),
+      resolver: standardSchemaResolver(passwordSchema),
       defaultValues: {
         password: "",
       },

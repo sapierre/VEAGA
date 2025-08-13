@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import Constants from "expo-constants";
 import { Link } from "expo-router";
 import { memo } from "react";
@@ -23,10 +23,10 @@ import { forgetPassword } from "~/lib/auth";
 import type { ForgotPasswordPayload } from "@turbostarter/auth";
 
 export const ForgotPasswordForm = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
 
-  const form = useForm<ForgotPasswordPayload>({
-    resolver: zodResolver(forgotPasswordSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(forgotPasswordSchema),
   });
 
   const onSubmit = async (data: ForgotPasswordPayload) => {

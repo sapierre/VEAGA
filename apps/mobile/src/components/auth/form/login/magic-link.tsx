@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useMutation } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
 import { memo, useEffect } from "react";
@@ -59,12 +59,12 @@ export const VerifyMagicLink = () => {
 };
 
 export const MagicLinkLoginForm = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
 
-  const form = useForm<MagicLinkLoginPayload>({
-    resolver: zodResolver(magicLinkLoginSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(magicLinkLoginSchema),
   });
 
   const onSubmit = async (data: MagicLinkLoginPayload) => {

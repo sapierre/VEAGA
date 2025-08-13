@@ -4,6 +4,7 @@ import { createInstance } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import Negotiator from "negotiator";
 import { initReactI18next } from "react-i18next/initReactI18next";
+import * as z from "zod";
 
 import { config, getInitOptions } from "../config";
 import { env } from "../env";
@@ -90,11 +91,12 @@ export const getTranslation = async <T extends Namespace>({
     ns,
   ) as TFunction<T>;
 
+  z.config({
+    localeError: makeZodI18nMap({ t: t as TFunction }),
+  });
+
   return {
     t,
     i18n: i18nextInstance,
-    errorMap: makeZodI18nMap({
-      t: t as TFunction,
-    }),
   };
 };

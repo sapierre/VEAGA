@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable turbo/no-undeclared-env-vars */
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import * as z from "zod";
 
 import { env as analyticsEnv } from "@turbostarter/analytics-mobile/env";
 import { envConfig } from "@turbostarter/shared/constants";
@@ -24,14 +24,14 @@ export const env = createEnv({
     EXPO_PUBLIC_AUTH_MAGIC_LINK: castStringToBool.optional().default(false),
     EXPO_PUBLIC_AUTH_ANONYMOUS: castStringToBool.optional().default(true),
 
-    EXPO_PUBLIC_SITE_URL: z.string().url(),
+    EXPO_PUBLIC_SITE_URL: z.url(),
     EXPO_PUBLIC_DEFAULT_LOCALE: z.string().optional().default("en"),
     EXPO_PUBLIC_THEME_MODE: z
-      .nativeEnum(ThemeMode)
+      .enum(ThemeMode)
       .optional()
       .default(ThemeMode.SYSTEM),
     EXPO_PUBLIC_THEME_COLOR: z
-      .nativeEnum(ThemeColor)
+      .enum(ThemeColor)
       .optional()
       .default(ThemeColor.ORANGE),
   },

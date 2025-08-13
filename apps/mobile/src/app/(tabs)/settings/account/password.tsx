@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { Link, router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { Alert, View } from "react-native";
@@ -24,11 +24,11 @@ import { changePassword } from "~/lib/auth";
 import type { ChangePasswordPayload } from "@turbostarter/auth";
 
 export default function Password() {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { accounts, isLoading } = useAccounts();
 
-  const form = useForm<ChangePasswordPayload>({
-    resolver: zodResolver(changePasswordSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(changePasswordSchema),
   });
 
   const onSubmit = async (data: ChangePasswordPayload) => {

@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { Link, router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -31,11 +31,11 @@ interface PasswordLoginFormProps {
 
 export const PasswordLoginForm = memo<PasswordLoginFormProps>(
   ({ onTwoFactorRedirect }) => {
-    const { t, errorMap } = useTranslation(["common", "auth"]);
+    const { t } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
-    const form = useForm<PasswordLoginPayload>({
-      resolver: zodResolver(passwordLoginSchema, { errorMap }),
+    const form = useForm({
+      resolver: standardSchemaResolver(passwordLoginSchema),
       defaultValues: {
         rememberMe: true,
       },
@@ -108,7 +108,7 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
                 className="-ml-0.5 -mt-2"
                 name="rememberMe"
                 label={t("rememberMe")}
-                value={field.value}
+                value={!!field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
               />

@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { Link, router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -22,10 +22,10 @@ import { signUp } from "~/lib/auth";
 import type { RegisterPayload } from "@turbostarter/auth";
 
 export const RegisterForm = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
 
-  const form = useForm<RegisterPayload>({
-    resolver: zodResolver(registerSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(registerSchema),
   });
 
   const onSubmit = async (data: RegisterPayload) => {

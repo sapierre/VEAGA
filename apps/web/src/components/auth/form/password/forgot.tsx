@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { AnimatePresence, motion } from "motion/react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -28,9 +28,9 @@ import { onPromise } from "~/utils";
 import type { ForgotPasswordPayload } from "@turbostarter/auth";
 
 export const ForgotPasswordForm = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
-  const form = useForm<ForgotPasswordPayload>({
-    resolver: zodResolver(forgotPasswordSchema, { errorMap }),
+  const { t } = useTranslation(["common", "auth"]);
+  const form = useForm({
+    resolver: standardSchemaResolver(forgotPasswordSchema),
   });
 
   const onSubmit = async (data: ForgotPasswordPayload) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { AnimatePresence, motion } from "motion/react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -30,11 +30,11 @@ import { useAuthFormStore } from "./store";
 import type { RegisterPayload } from "@turbostarter/auth";
 
 export const RegisterForm = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { provider, setProvider, isSubmitting, setIsSubmitting } =
     useAuthFormStore();
-  const form = useForm<RegisterPayload>({
-    resolver: zodResolver(registerSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(registerSchema),
   });
 
   const onSubmit = async (data: RegisterPayload) => {

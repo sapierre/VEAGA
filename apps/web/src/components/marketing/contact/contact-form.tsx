@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -25,11 +25,9 @@ import { contactFormSchema, MAX_MESSAGE_LENGTH } from "./utils/schema";
 import type { ContactFormPayload } from "./utils/schema";
 
 export function ContactForm() {
-  const { t, errorMap } = useTranslation(["common", "marketing"]);
-  const form = useForm<ContactFormPayload>({
-    resolver: zodResolver(contactFormSchema, {
-      errorMap,
-    }),
+  const { t } = useTranslation(["common", "marketing"]);
+  const form = useForm({
+    resolver: standardSchemaResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",

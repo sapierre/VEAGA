@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useMutation } from "@tanstack/react-query";
 import { router, useFocusEffect } from "expo-router";
 import { memo, useCallback } from "react";
@@ -26,7 +26,7 @@ import { changeEmail, sendVerificationEmail, useSession } from "~/lib/auth";
 import type { EmailPayload } from "@turbostarter/auth";
 
 const EditEmail = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { data, refetch } = useSession();
 
   useFocusEffect(
@@ -35,8 +35,8 @@ const EditEmail = memo(() => {
     }, [refetch]),
   );
 
-  const form = useForm<EmailPayload>({
-    resolver: zodResolver(emailSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(emailSchema),
     defaultValues: {
       email: data?.user.email ?? "",
     },

@@ -22,8 +22,8 @@ export const billingRouter = new Hono()
   )
   .get(
     "/portal",
-    validate("query", getBillingPortalSchema),
     enforceAuth,
+    validate("query", getBillingPortalSchema),
     async (c) =>
       c.json(
         await getBillingPortal({

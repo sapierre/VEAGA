@@ -3,6 +3,7 @@ import { env } from "hono/adapter";
 import { createMiddleware } from "hono/factory";
 
 import { auth } from "@turbostarter/auth/server";
+import { makeZodI18nMap } from "@turbostarter/i18n";
 import {
   getLocaleFromRequest,
   getTranslation,
@@ -11,8 +12,9 @@ import { HttpStatusCode, NodeEnv } from "@turbostarter/shared/constants";
 import { HttpException } from "@turbostarter/shared/utils";
 
 import type { User } from "@turbostarter/auth";
+import type { TFunction } from "@turbostarter/i18n";
 import type { Context, ValidationTargets } from "hono";
-import type { ZodSchema } from "zod";
+import type { $ZodRawIssue, $ZodType } from "zod/v4/core";
 
 /**
  * Reusable middleware that enforces users are logged in before running the
@@ -73,7 +75,7 @@ export const localize = createMiddleware<{
  * Middleware for validating the request input using Zod.
  */
 export const validate = <
-  T extends ZodSchema,
+  T extends $ZodType,
   Target extends keyof ValidationTargets,
 >(
   target: Target,
@@ -84,19 +86,18 @@ export const validate = <
     schema,
     async (result, c: Context<{ Variables: { locale?: string } }>) => {
       if (!result.success) {
-        const { errorMap, t } = await getTranslation({
+        const { t } = await getTranslation({
           locale: c.var.locale,
         });
-        const error = result.error.errors[0];
+        const error = result.error.issues[0];
 
         if (!error) {
           throw new HttpException(HttpStatusCode.UNPROCESSABLE_ENTITY);
         }
 
-        const { message, code } = errorMap(error, {
-          defaultError: t("common:error.invalid"),
-          data: result.data,
-        });
+        const { message, code } = makeZodI18nMap({ t: t as TFunction })(
+          error as $ZodRawIssue,
+        );
 
         throw new HttpException(HttpStatusCode.UNPROCESSABLE_ENTITY, {
           code,

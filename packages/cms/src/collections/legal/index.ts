@@ -1,5 +1,6 @@
 import { defineCollection } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
+import * as z from "zod";
 
 import { ContentStatus } from "../../types";
 import { getLastModifiedAt } from "../../utils";
@@ -8,10 +9,10 @@ export const legal = defineCollection({
   name: "legal",
   directory: "src/collections/legal/content",
   include: "**/*.mdx",
-  schema: (z) => ({
+  schema: z.object({
     title: z.string(),
     description: z.string(),
-    status: z.nativeEnum(ContentStatus),
+    status: z.enum(ContentStatus),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document);

@@ -1,5 +1,7 @@
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { fetch as expoFetch } from "expo/fetch";
+import { useState } from "react";
 import { FlatList, ScrollView, View } from "react-native";
 import Markdown from "react-native-marked";
 
@@ -33,30 +35,29 @@ const EXAMPLES = [
 
 export default function AI() {
   const { t } = useTranslation("marketing");
-  const {
-    messages,
-    error,
-    append,
-    handleInputChange,
-    input,
-    handleSubmit,
-    isLoading,
-  } = useChat({
-    fetch: expoFetch as unknown as typeof globalThis.fetch,
-    api: api.ai.chat.$url().toString(),
+  const [input, setInput] = useState("");
+
+  const { messages, error, sendMessage, status } = useChat({
+    transport: new DefaultChatTransport({
+      fetch: expoFetch as unknown as typeof globalThis.fetch,
+      api: api.ai.chat.$url().toString(),
+    }),
     onError: (error) => console.error(error),
   });
 
-  if (error)
+  if (error) {
     return (
       <View className="flex-1 bg-background px-6">
         <Text>{error.message}</Text>
       </View>
     );
+  }
 
   const messagesToDisplay = messages.filter((message) =>
     ["assistant", "user"].includes(message.role),
   );
+
+  const isLoading = ["submitted", "streaming"].includes(status);
 
   return (
     <View className="flex-1 bg-background px-6">
@@ -66,25 +67,33 @@ export default function AI() {
       >
         {messagesToDisplay.map((message) => (
           <View
-            key={message.content}
+            key={message.id}
             className={cn("max-w-full", {
               "max-w-4/5 self-end rounded-lg bg-muted px-5 py-2.5":
                 message.role === "user",
             })}
           >
-            {message.role === "assistant" ? (
-              <Markdown
-                value={message.content.trim()}
-                flatListProps={{
-                  scrollEnabled: false,
-                  style: {
-                    flexGrow: 0,
-                  },
-                }}
-              />
-            ) : (
-              <Text className="text-lg">{message.content}</Text>
-            )}
+            {message.parts.map((part, i) => {
+              switch (part.type) {
+                case "text":
+                  return message.role === "assistant" ? (
+                    <Markdown
+                      value={part.text.trim()}
+                      flatListProps={{
+                        scrollEnabled: false,
+                        style: {
+                          flexGrow: 0,
+                        },
+                      }}
+                      key={`${message.id}-${i}`}
+                    />
+                  ) : (
+                    <Text className="text-lg" key={`${message.id}-${i}`}>
+                      {part.text}
+                    </Text>
+                  );
+              }
+            })}
           </View>
         ))}
         {isLoading && (
@@ -100,7 +109,7 @@ export default function AI() {
           contentContainerClassName="gap-2 mt-auto mb-6"
           renderItem={({ item }) => (
             <Button
-              onPress={() => append({ role: "user", content: t(item.prompt) })}
+              onPress={() => sendMessage({ text: t(item.prompt) })}
               key={item.prompt}
               variant="outline"
               className="native:h-auto h-auto grow flex-row justify-start gap-4 py-3 text-left"
@@ -123,25 +132,18 @@ export default function AI() {
           placeholder={t("ai.placeholder")}
           value={input}
           onSubmitEditing={(e) => {
-            handleSubmit(e);
             e.preventDefault();
+            void sendMessage({ text: input });
+            setInput("");
           }}
-          onChange={(e) =>
-            handleInputChange({
-              ...e,
-              target: {
-                ...e.target,
-                value: e.nativeEvent.text,
-              },
-            } as unknown as React.ChangeEvent<HTMLInputElement>)
-          }
+          onChange={(e) => setInput(e.nativeEvent.text)}
         />
 
         <Button
           size="icon"
           className="absolute bottom-6 right-2 rounded-full"
           disabled={isLoading}
-          onPress={() => handleSubmit()}
+          onPress={() => sendMessage({ text: input })}
           accessibilityLabel={t("ai.cta")}
         >
           <Icons.ArrowUp className="text-background" />

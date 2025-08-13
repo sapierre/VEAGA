@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 import {
   BillingDiscountType,
@@ -9,7 +9,7 @@ import {
 
 export const discountSchema = z.object({
   code: z.string(),
-  type: z.nativeEnum(BillingDiscountType),
+  type: z.enum(BillingDiscountType),
   off: z.number(),
   appliesTo: z.array(z.string()),
 });
@@ -40,7 +40,7 @@ const priceTypeSchema = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal(BillingModel.RECURRING),
-    interval: z.nativeEnum(RecurringInterval),
+    interval: z.enum(RecurringInterval),
     trialDays: z.number().optional(),
   }),
 ]);
@@ -48,7 +48,7 @@ const priceTypeSchema = z.discriminatedUnion("type", [
 export const priceSchema = z.intersection(sharedPriceSchema, priceTypeSchema);
 
 export const planSchema = z.object({
-  id: z.nativeEnum(PricingPlanType),
+  id: z.enum(PricingPlanType),
   name: z.string(),
   description: z.string(),
   badge: z.string().nullable().default(null),

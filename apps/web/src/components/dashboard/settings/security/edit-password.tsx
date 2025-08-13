@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -36,11 +36,11 @@ import { useAccounts } from "./accounts/use-accounts";
 import type { ChangePasswordPayload } from "@turbostarter/auth";
 
 export const EditPassword = () => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { accounts, isLoading } = useAccounts();
 
-  const form = useForm<ChangePasswordPayload>({
-    resolver: zodResolver(changePasswordSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(changePasswordSchema),
   });
 
   const onSubmit = async (data: ChangePasswordPayload) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -28,10 +28,10 @@ interface UpdatePasswordFormProps {
 }
 
 export const UpdatePasswordForm = memo<UpdatePasswordFormProps>(({ token }) => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
 
-  const form = useForm<UpdatePasswordPayload>({
-    resolver: zodResolver(updatePasswordSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(updatePasswordSchema),
   });
 
   const onSubmit = async (data: UpdatePasswordPayload) => {

@@ -1,17 +1,17 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const checkoutSchema = z.object({
   price: z.object({
     id: z.string(),
   }),
   redirect: z.object({
-    success: z.string().url(),
-    cancel: z.string().url(),
+    success: z.url(),
+    cancel: z.url(),
   }),
 });
 
 export const getBillingPortalSchema = z.object({
-  redirectUrl: z.string().url(),
+  redirectUrl: z.url(),
 });
 
 export type CheckoutPayload = z.infer<typeof checkoutSchema>;

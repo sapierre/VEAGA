@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
-import { z } from "zod";
+import * as z from "zod";
 
 import { isKey, useTranslation } from "@turbostarter/i18n";
 import {

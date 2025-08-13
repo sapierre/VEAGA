@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import * as z from "zod";
 
 import { env as analyticsEnv } from "@turbostarter/analytics-extension/env";
 import { envConfig } from "@turbostarter/shared/constants";
@@ -13,16 +13,10 @@ export const env = createEnv({
   clientPrefix: "VITE_",
   client: {
     VITE_PRODUCT_NAME: z.string(),
-    VITE_SITE_URL: z.string().url(),
+    VITE_SITE_URL: z.url(),
     VITE_DEFAULT_LOCALE: z.string().optional().default("en"),
-    VITE_THEME_MODE: z
-      .nativeEnum(ThemeMode)
-      .optional()
-      .default(ThemeMode.SYSTEM),
-    VITE_THEME_COLOR: z
-      .nativeEnum(ThemeColor)
-      .optional()
-      .default(ThemeColor.ORANGE),
+    VITE_THEME_MODE: z.enum(ThemeMode).optional().default(ThemeMode.SYSTEM),
+    VITE_THEME_COLOR: z.enum(ThemeColor).optional().default(ThemeColor.ORANGE),
   },
   runtimeEnv: {
     VITE_PRODUCT_NAME: import.meta.env.VITE_PRODUCT_NAME,

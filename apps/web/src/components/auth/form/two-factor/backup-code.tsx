@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -30,9 +30,9 @@ import type { BackupCodeVerificationPayload } from "@turbostarter/auth";
 const BackupCodeForm = memo<FormProps>(
   ({ redirectTo = pathsConfig.dashboard.index }) => {
     const router = useRouter();
-    const { t, errorMap } = useTranslation(["common", "auth"]);
-    const form = useForm<BackupCodeVerificationPayload>({
-      resolver: zodResolver(backupCodeVerificationSchema, { errorMap }),
+    const { t } = useTranslation(["common", "auth"]);
+    const form = useForm({
+      resolver: standardSchemaResolver(backupCodeVerificationSchema),
       defaultValues: {
         code: "",
         trustDevice: false,

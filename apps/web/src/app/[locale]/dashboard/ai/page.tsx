@@ -1,7 +1,9 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { marked } from "marked";
+import { useState } from "react";
 
 import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
@@ -35,10 +37,12 @@ const EXAMPLES = [
 
 const AI = () => {
   const { t } = useTranslation("marketing");
-  const { messages, handleSubmit, append, input, status, handleInputChange } =
-    useChat({
+  const [input, setInput] = useState("");
+  const { messages, sendMessage, status } = useChat({
+    transport: new DefaultChatTransport({
       api: api.ai.chat.$url().toString(),
-    });
+    }),
+  });
 
   const messagesToDisplay = messages.filter((message) =>
     ["assistant", "user"].includes(message.role),
@@ -49,7 +53,8 @@ const AI = () => {
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      handleSubmit();
+      void sendMessage({ text: input });
+      setInput("");
     }
   };
 
@@ -59,21 +64,27 @@ const AI = () => {
         <div className="prose flex flex-col gap-2 dark:prose-invert">
           {messagesToDisplay.map((message) => (
             <article
-              key={message.content}
+              key={message.id}
               className={cn("max-w-full", {
                 "max-w-4/5 self-end rounded-lg bg-muted px-5 py-2.5":
                   message.role === "user",
               })}
             >
-              {message.role === "assistant" ? (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: marked.parse(message.content) as string,
-                  }}
-                ></div>
-              ) : (
-                message.content
-              )}
+              {message.parts.map((part, i) => {
+                switch (part.type) {
+                  case "text":
+                    return message.role === "assistant" ? (
+                      <div
+                        key={`${message.id}-${i}`}
+                        dangerouslySetInnerHTML={{
+                          __html: marked.parse(part.text),
+                        }}
+                      ></div>
+                    ) : (
+                      <div key={`${message.id}-${i}`}>{part.text}</div>
+                    );
+                }
+              })}
             </article>
           ))}
           {isLoading && (
@@ -86,9 +97,7 @@ const AI = () => {
         <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
           {EXAMPLES.map((example) => (
             <Button
-              onClick={() =>
-                append({ role: "user", content: t(example.prompt) })
-              }
+              onClick={() => sendMessage({ text: t(example.prompt) })}
               key={example.prompt}
               variant="outline"
               className="h-auto grow flex-col items-start gap-2 whitespace-normal py-3 text-left text-muted-foreground"
@@ -101,7 +110,11 @@ const AI = () => {
       )}
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          void sendMessage({ text: input });
+          setInput("");
+        }}
         className="sticky bottom-0 w-full bg-background pb-4"
       >
         <Textarea
@@ -111,7 +124,7 @@ const AI = () => {
           onKeyDown={handleKeyDown}
           disabled={isLoading}
           value={input}
-          onChange={handleInputChange}
+          onChange={(e) => setInput(e.currentTarget.value)}
         />
 
         <Button

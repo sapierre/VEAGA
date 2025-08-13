@@ -2,6 +2,7 @@ import { defineCollection } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import rehypeShiki from "@shikijs/rehype";
 import readingTime from "reading-time";
+import * as z from "zod";
 
 import { ContentStatus, ContentTag } from "../../types";
 import { getLastModifiedAt } from "../../utils";
@@ -10,13 +11,13 @@ export const blog = defineCollection({
   name: "blog",
   directory: "src/collections/blog/content",
   include: "**/*.mdx",
-  schema: (z) => ({
+  schema: z.object({
     title: z.string(),
     description: z.string(),
     thumbnail: z.string(),
     publishedAt: z.coerce.date(),
-    tags: z.array(z.nativeEnum(ContentTag)),
-    status: z.nativeEnum(ContentStatus),
+    tags: z.array(z.enum(ContentTag)),
+    status: z.enum(ContentStatus),
   }),
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {

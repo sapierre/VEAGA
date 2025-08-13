@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -22,11 +22,11 @@ import { updateUser, useSession } from "~/lib/auth";
 import type { UpdateUserPayload } from "@turbostarter/auth";
 
 const EditName = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { data } = useSession();
 
   const form = useForm({
-    resolver: zodResolver(updateUserSchema, { errorMap }),
+    resolver: standardSchemaResolver(updateUserSchema),
     defaultValues: {
       name: data?.user.name ?? "",
     },
@@ -56,11 +56,12 @@ const EditName = memo(() => {
             render={({ field }) => (
               <FormItem>
                 <FormInput
+                  {...field}
                   label={t("name")}
                   autoCapitalize="words"
                   autoComplete="name"
                   editable={!form.formState.isSubmitting}
-                  {...field}
+                  value={field.value ?? ""}
                 />
 
                 <FormDescription>

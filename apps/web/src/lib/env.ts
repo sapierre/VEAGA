@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-properties */
 import { createEnv } from "@t3-oss/env-nextjs";
 import { vercel } from "@t3-oss/env-nextjs/presets-zod";
-import { z } from "zod";
+import * as z from "zod";
 
 import { env as analytics } from "@turbostarter/analytics-web/env";
 import { env as api } from "@turbostarter/api/env";
@@ -22,7 +22,7 @@ export const env = createEnv({
   ...envConfig,
   extends: [vercel(), api, auth, analytics, i18n],
   shared: {
-    NODE_ENV: z.nativeEnum(NodeEnv).default(NodeEnv.DEVELOPMENT),
+    NODE_ENV: z.enum(NodeEnv).default(NodeEnv.DEVELOPMENT),
     ANALYZE: castStringToBool.optional().default(false),
   },
   /**
@@ -30,7 +30,7 @@ export const env = createEnv({
    * This way you can ensure the app isn't built with invalid env vars.
    */
   server: {
-    CONTACT_EMAIL: z.string().email(),
+    CONTACT_EMAIL: z.email(),
   },
 
   /**
@@ -44,14 +44,14 @@ export const env = createEnv({
     NEXT_PUBLIC_AUTH_ANONYMOUS: castStringToBool.optional().default(true),
 
     NEXT_PUBLIC_PRODUCT_NAME: z.string(),
-    NEXT_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_URL: z.url(),
     NEXT_PUBLIC_DEFAULT_LOCALE: z.string().optional().default("en"),
     NEXT_PUBLIC_THEME_MODE: z
-      .nativeEnum(ThemeMode)
+      .enum(ThemeMode)
       .optional()
       .default(ThemeMode.SYSTEM),
     NEXT_PUBLIC_THEME_COLOR: z
-      .nativeEnum(ThemeColor)
+      .enum(ThemeColor)
       .optional()
       .default(ThemeColor.ORANGE),
   },

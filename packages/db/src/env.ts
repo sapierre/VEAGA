@@ -1,13 +1,13 @@
 /* eslint-disable no-restricted-properties */
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
 export const env = createEnv({
   ...envConfig,
   server: {
-    DATABASE_URL: z.string().url(),
+    DATABASE_URL: z.url(),
   },
   runtimeEnv: process.env,
 });

@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { memo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
@@ -37,13 +37,13 @@ interface RequirePasswordProps {
 
 export const RequirePassword = memo<RequirePasswordProps>(
   ({ title, description, onConfirm, cta, children, ref: passedRef }) => {
-    const { t, errorMap } = useTranslation(["common", "auth"]);
+    const { t } = useTranslation(["common", "auth"]);
     const { ref: bottomSheetRef } = useBottomSheet();
 
     const ref = passedRef ?? bottomSheetRef;
 
-    const form = useForm<PasswordPayload>({
-      resolver: zodResolver(passwordSchema, { errorMap }),
+    const form = useForm({
+      resolver: standardSchemaResolver(passwordSchema),
       defaultValues: {
         password: "",
       },

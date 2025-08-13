@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useTheme } from "next-themes";
 import { memo, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -103,12 +103,12 @@ interface TotpModalProps {
 export const TotpModal = ({ open, onOpenChange }: TotpModalProps) => {
   const { resolvedTheme } = useTheme();
   const [backupCodesOpen, setBackupCodesOpen] = useState(false);
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const isDesktop = useBreakpoint("md");
 
   const { uri, verify } = useTotp();
-  const form = useForm<OtpPayload>({
-    resolver: zodResolver(otpSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(otpSchema),
     defaultValues: {
       code: "",
     },

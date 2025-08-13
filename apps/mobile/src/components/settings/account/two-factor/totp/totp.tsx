@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
@@ -45,14 +45,14 @@ interface TotpSheetProps {
 
 export const TotpSheet = ({ ref: passedRef }: TotpSheetProps) => {
   const { resolvedTheme } = useTheme();
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const { ref: totpSheetRef } = useBottomSheet();
   const { ref: backupCodesRef } = useBottomSheet();
   const ref = passedRef ?? totpSheetRef;
 
   const { uri, verify } = useTotp();
-  const form = useForm<OtpPayload>({
-    resolver: zodResolver(otpSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(otpSchema),
     defaultValues: {
       code: "",
     },

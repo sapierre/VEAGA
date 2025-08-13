@@ -1,9 +1,9 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { memo, useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod";
 
 import { useTranslation } from "@turbostarter/i18n";
 import {
@@ -38,7 +38,7 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
-  const { t, i18n, errorMap } = useTranslation(["common", "auth"]);
+  const { t, i18n } = useTranslation(["common", "auth"]);
   const { upload, remove, previewUrl, setPreviewUrl } = useAvatar(user);
 
   const avatarSchema = z.object({
@@ -64,8 +64,8 @@ export const AvatarSettings = memo<AvatarSettingsProps>(({ user }) => {
       ),
   });
 
-  const form = useForm<z.infer<typeof avatarSchema>>({
-    resolver: zodResolver(avatarSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(avatarSchema),
   });
 
   const onSubmit = useCallback(

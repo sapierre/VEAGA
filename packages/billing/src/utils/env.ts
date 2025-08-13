@@ -1,5 +1,5 @@
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
@@ -9,7 +9,7 @@ export const sharedEnv = createEnv({
   ...envConfig,
   server: {
     BILLING_MODEL: z
-      .nativeEnum(BillingModel)
+      .enum(BillingModel)
       .optional()
       .default(BillingModel.RECURRING),
   },

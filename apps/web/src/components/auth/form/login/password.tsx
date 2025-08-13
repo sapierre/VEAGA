@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -35,11 +35,11 @@ interface PasswordLoginFormProps {
 
 export const PasswordLoginForm = memo<PasswordLoginFormProps>(
   ({ redirectTo = pathsConfig.dashboard.index, onTwoFactorRedirect }) => {
-    const { t, errorMap } = useTranslation(["common", "auth"]);
+    const { t } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
-    const form = useForm<PasswordLoginPayload>({
-      resolver: zodResolver(passwordLoginSchema, { errorMap }),
+    const form = useForm({
+      resolver: standardSchemaResolver(passwordLoginSchema),
       defaultValues: {
         rememberMe: true,
       },

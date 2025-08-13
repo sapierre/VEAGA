@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 import type { AuthErrorCode } from "./server";
 import type { expoClient } from "@better-auth/expo/client";
@@ -42,7 +42,7 @@ const authConfigSchema = z.object({
     [AuthProvider.MAGIC_LINK]: z.boolean(),
     [AuthProvider.ANONYMOUS]: z.boolean(),
     [AuthProvider.PASSKEY]: z.boolean().optional(),
-    oAuth: z.array(z.nativeEnum(SocialProvider)),
+    oAuth: z.array(z.enum(SocialProvider)),
   }),
 });
 

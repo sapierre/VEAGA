@@ -1,5 +1,5 @@
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
+import * as z from "zod";
 
 import { env as billingEnv } from "@turbostarter/billing/env";
 import { env as dbEnv } from "@turbostarter/db/env";

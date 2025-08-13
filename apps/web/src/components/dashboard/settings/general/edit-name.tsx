@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -36,10 +36,10 @@ interface EditNameProps {
 }
 
 export const EditName = memo<EditNameProps>(({ user }) => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
+  const { t } = useTranslation(["common", "auth"]);
   const router = useRouter();
   const form = useForm({
-    resolver: zodResolver(updateUserSchema, { errorMap }),
+    resolver: standardSchemaResolver(updateUserSchema),
     defaultValues: {
       name: user.name,
     },

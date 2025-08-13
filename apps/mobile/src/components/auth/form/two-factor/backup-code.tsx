@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { router } from "expo-router";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -24,9 +24,9 @@ import type { CtaProps } from ".";
 import type { BackupCodeVerificationPayload } from "@turbostarter/auth";
 
 const BackupCodeForm = memo(() => {
-  const { t, errorMap } = useTranslation(["common", "auth"]);
-  const form = useForm<BackupCodeVerificationPayload>({
-    resolver: zodResolver(backupCodeVerificationSchema, { errorMap }),
+  const { t } = useTranslation(["common", "auth"]);
+  const form = useForm({
+    resolver: standardSchemaResolver(backupCodeVerificationSchema),
     defaultValues: {
       code: "",
       trustDevice: false,

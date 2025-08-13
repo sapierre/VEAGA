@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -34,10 +34,10 @@ import type { OtpVerificationPayload } from "@turbostarter/auth";
 const TotpForm = memo<FormProps>(
   ({ redirectTo = pathsConfig.dashboard.index }) => {
     const router = useRouter();
-    const { t, errorMap } = useTranslation(["common", "auth"]);
+    const { t } = useTranslation(["common", "auth"]);
 
-    const form = useForm<OtpVerificationPayload>({
-      resolver: zodResolver(otpVerificationSchema, { errorMap }),
+    const form = useForm({
+      resolver: standardSchemaResolver(otpVerificationSchema),
       defaultValues: {
         code: "",
         trustDevice: false,

@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
@@ -32,10 +32,10 @@ interface UpdatePasswordFormProps {
 }
 
 export const UpdatePasswordForm = memo<UpdatePasswordFormProps>(({ token }) => {
-  const { t, errorMap } = useTranslation("auth");
+  const { t } = useTranslation("auth");
   const router = useRouter();
-  const form = useForm<UpdatePasswordPayload>({
-    resolver: zodResolver(updatePasswordSchema, { errorMap }),
+  const form = useForm({
+    resolver: standardSchemaResolver(updatePasswordSchema),
   });
 
   const onSubmit = async (data: UpdatePasswordPayload) => {

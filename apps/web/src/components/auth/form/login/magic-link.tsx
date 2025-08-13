@@ -1,6 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { AnimatePresence, motion } from "motion/react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
@@ -37,12 +37,12 @@ interface MagicLinkLoginFormProps {
 
 export const MagicLinkLoginForm = memo<MagicLinkLoginFormProps>(
   ({ redirectTo = pathsConfig.dashboard.index }) => {
-    const { t, errorMap } = useTranslation(["common", "auth"]);
+    const { t } = useTranslation(["common", "auth"]);
     const { provider, setProvider, isSubmitting, setIsSubmitting } =
       useAuthFormStore();
 
-    const form = useForm<MagicLinkLoginPayload>({
-      resolver: zodResolver(magicLinkLoginSchema, { errorMap }),
+    const form = useForm({
+      resolver: standardSchemaResolver(magicLinkLoginSchema),
     });
 
     const onSubmit = async (data: MagicLinkLoginPayload) => {
