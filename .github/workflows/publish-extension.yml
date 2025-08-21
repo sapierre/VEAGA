@@ -35,7 +35,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: 📦 Build
-        run: pnpm build:extension
+        run: pnpm turbo build --filter=extension
 
       - name: 🗃️ Archive artifacts
         uses: actions/upload-artifact@v4
@@ -47,13 +47,18 @@ jobs:
         run: |
           npx wxt submit \
             --chrome-zip apps/extension/build/*-chrome.zip  \
-            --firefox-zip apps/extension/build/*-firefox.zip \
-            --firefox-sources-zip apps/extension/build/*-sources.zip
+            --firefox-zip apps/extension/build/*-firefox.zip --firefox-sources-zip apps/extension/build/*-sources.zip \
+            --edge-zip apps/extension/build/*-chrome.zip
         env:
           CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
           CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
           CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
           CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+
           FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
           FIREFOX_JWT_ISSUER: ${{ secrets.FIREFOX_JWT_ISSUER }}
           FIREFOX_JWT_SECRET: ${{ secrets.FIREFOX_JWT_SECRET }}
+
+          EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
+          EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
+          EDGE_API_KEY: ${{ secrets.EDGE_API_KEY }}

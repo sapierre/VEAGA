@@ -1,6 +1,6 @@
-import { SocialProvider, authConfigSchema } from "@turbostarter/auth";
+import env from "env.config";
 
-import { env } from "~/lib/env";
+import { SocialProvider, authConfigSchema } from "@turbostarter/auth";
 
 import type { AuthConfig } from "@turbostarter/auth";
 

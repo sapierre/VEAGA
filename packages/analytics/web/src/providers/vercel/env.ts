@@ -1,9 +1,15 @@
-import { createEnv } from "@t3-oss/env-nextjs";
+import { defineEnv } from "envin";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "vercel",
+  server: {},
+} as const satisfies Preset;
+
+export const env = defineEnv({
   ...envConfig,
-  client: {},
-  experimental__runtimeEnv: {},
+  ...preset,
 });

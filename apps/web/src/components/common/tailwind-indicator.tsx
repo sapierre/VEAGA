@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import { env } from "~/lib/env";
+import env from "env.config";
 
 export const TailwindIndicator = () => {
   if (env.NODE_ENV === "production") return null;

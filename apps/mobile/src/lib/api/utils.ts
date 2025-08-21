@@ -1,6 +1,5 @@
+import env from "env.config";
 import Constants from "expo-constants";
-
-import { env } from "~/lib/env";
 
 export const getBaseUrl = () => {
   /**

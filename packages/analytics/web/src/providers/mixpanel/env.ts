@@ -1,15 +1,22 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { createEnv } from "@t3-oss/env-nextjs";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "mixpanel",
   client: {
     NEXT_PUBLIC_MIXPANEL_TOKEN: z.string(),
   },
-  experimental__runtimeEnv: {
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
+  env: {
     NEXT_PUBLIC_MIXPANEL_TOKEN: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN,
   },
 });

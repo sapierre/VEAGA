@@ -1,12 +1,11 @@
 /* eslint-disable no-restricted-properties */
-import { createEnv } from "@t3-oss/env-nextjs";
-import { vercel } from "@t3-oss/env-nextjs/presets-zod";
+import { defineEnv } from "envin";
+import { vercel } from "envin/presets/zod";
 import * as z from "zod";
 
-import { env as analytics } from "@turbostarter/analytics-web/env";
-import { env as api } from "@turbostarter/api/env";
-import { env as auth } from "@turbostarter/auth/env";
-import { env as i18n } from "@turbostarter/i18n/env";
+import { preset as analytics } from "@turbostarter/analytics-web/env";
+import { preset as api } from "@turbostarter/api/env";
+import { preset as i18n } from "@turbostarter/i18n/env";
 import { envConfig, NodeEnv } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
@@ -18,9 +17,9 @@ const castStringToBool = z.preprocess((val) => {
   return val;
 }, z.coerce.boolean());
 
-export const env = createEnv({
+export default defineEnv({
   ...envConfig,
-  extends: [vercel(), api, auth, analytics, i18n],
+  extends: [vercel, api, analytics, i18n],
   shared: {
     NODE_ENV: z.enum(NodeEnv).default(NodeEnv.DEVELOPMENT),
     ANALYZE: castStringToBool.optional().default(false),
@@ -37,6 +36,7 @@ export const env = createEnv({
    * Specify your client-side environment variables schema here.
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
    */
+  clientPrefix: "NEXT_PUBLIC_",
   client: {
     NEXT_PUBLIC_AUTH_PASSWORD: castStringToBool.optional().default(true),
     NEXT_PUBLIC_AUTH_MAGIC_LINK: castStringToBool.optional().default(false),
@@ -58,7 +58,8 @@ export const env = createEnv({
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
    */
-  experimental__runtimeEnv: {
+  env: {
+    ...process.env,
     NODE_ENV: process.env.NODE_ENV,
     ANALYZE: process.env.ANALYZE,
 
@@ -72,5 +73,8 @@ export const env = createEnv({
     NEXT_PUBLIC_DEFAULT_LOCALE: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
     NEXT_PUBLIC_THEME_MODE: process.env.NEXT_PUBLIC_THEME_MODE,
     NEXT_PUBLIC_THEME_COLOR: process.env.NEXT_PUBLIC_THEME_COLOR,
+
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
 });

@@ -1,9 +1,9 @@
 import { handle } from "@turbostarter/api/utils";
+import { env } from "@turbostarter/billing/env";
 
 import { Pricing } from "~/components/marketing/pricing/pricing";
 import { api } from "~/lib/api/server";
 import { getSession } from "~/lib/auth/server";
-import { env } from "~/lib/env";
 import { getMetadata } from "~/lib/metadata";
 
 export const generateMetadata = getMetadata({

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
-import { env as analyticsEnv } from "@turbostarter/analytics-extension/env";
+import { preset as analytics } from "@turbostarter/analytics-extension/env";
 import { envConfig } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
-export const env = createEnv({
+export default defineEnv({
   ...envConfig,
-  extends: [analyticsEnv],
+  extends: [analytics],
   clientPrefix: "VITE_",
   client: {
     VITE_PRODUCT_NAME: z.string(),
@@ -18,14 +18,18 @@ export const env = createEnv({
     VITE_THEME_MODE: z.enum(ThemeMode).optional().default(ThemeMode.SYSTEM),
     VITE_THEME_COLOR: z.enum(ThemeColor).optional().default(ThemeColor.ORANGE),
   },
-  runtimeEnv: {
+  env: {
+    ...import.meta.env,
     VITE_PRODUCT_NAME: import.meta.env.VITE_PRODUCT_NAME,
     VITE_SITE_URL: import.meta.env.VITE_SITE_URL,
     VITE_DEFAULT_LOCALE: import.meta.env.VITE_DEFAULT_LOCALE,
     VITE_THEME_MODE: import.meta.env.VITE_THEME_MODE,
     VITE_THEME_COLOR: import.meta.env.VITE_THEME_COLOR,
+
+    VITE_POSTHOG_KEY: import.meta.env.VITE_POSTHOG_KEY,
+    VITE_POSTHOG_HOST: import.meta.env.VITE_POSTHOG_HOST,
   },
-  skipValidation:
+  skip:
     (!!import.meta.env.SKIP_ENV_VALIDATION &&
       ["1", "true"].includes(import.meta.env.SKIP_ENV_VALIDATION)) ||
     ["postinstall", "lint"].includes(import.meta.env.npm_lifecycle_event),

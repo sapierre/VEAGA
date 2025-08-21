@@ -7,7 +7,7 @@ export default defineConfig({
     const { appConfig } = await import("./src/config/app");
     return {
       name: appConfig.name,
-      permissions: ["storage", "cookies", "sidePanel", "scripting"],
+      permissions: ["storage", "cookies", "sidePanel"],
       host_permissions: ["<all_urls>"],
     };
   },

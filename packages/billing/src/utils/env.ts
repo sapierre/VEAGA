@@ -1,17 +1,23 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
 import { BillingModel } from "../types";
 
-export const sharedEnv = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const sharedPreset = {
+  id: "shared",
   server: {
     BILLING_MODEL: z
       .enum(BillingModel)
       .optional()
       .default(BillingModel.RECURRING),
   },
-  runtimeEnv: process.env,
+} as const satisfies Preset;
+
+export const sharedEnv = defineEnv({
+  ...envConfig,
+  ...sharedPreset,
 });

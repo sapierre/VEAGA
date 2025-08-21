@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
-import { env as analyticsEnv } from "@turbostarter/analytics-mobile/env";
+import { preset as analytics } from "@turbostarter/analytics-mobile/env";
 import { envConfig } from "@turbostarter/shared/constants";
 import { ThemeColor, ThemeMode } from "@turbostarter/ui";
 
@@ -15,9 +15,9 @@ const castStringToBool = z.preprocess((val) => {
   return val;
 }, z.coerce.boolean());
 
-export const env = createEnv({
+export default defineEnv({
   ...envConfig,
-  extends: [analyticsEnv],
+  extends: [analytics],
   clientPrefix: "EXPO_PUBLIC_",
   client: {
     EXPO_PUBLIC_AUTH_PASSWORD: castStringToBool.optional().default(true),
@@ -35,7 +35,8 @@ export const env = createEnv({
       .optional()
       .default(ThemeColor.ORANGE),
   },
-  runtimeEnv: {
+  env: {
+    ...process.env,
     EXPO_PUBLIC_AUTH_PASSWORD: process.env.EXPO_PUBLIC_AUTH_PASSWORD,
     EXPO_PUBLIC_AUTH_MAGIC_LINK: process.env.EXPO_PUBLIC_AUTH_MAGIC_LINK,
     EXPO_PUBLIC_AUTH_ANONYMOUS: process.env.EXPO_PUBLIC_AUTH_ANONYMOUS,

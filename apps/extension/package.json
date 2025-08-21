@@ -1,11 +1,11 @@
 {
   "name": "extension",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build:chrome": "dotenv -c -- wxt zip",
-    "build:firefox": "dotenv -c -- wxt -b firefox zip",
+    "build:firefox": "dotenv -c -- wxt zip -b firefox",
     "clean": "git clean -xdf build .cache .wxt .turbo node_modules",
     "dev:chrome": "wxt",
     "dev:firefox": "wxt -b firefox",
@@ -17,7 +17,6 @@
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@t3-oss/env-core": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@turbostarter/analytics-extension": "workspace:*",
     "@turbostarter/api": "workspace:*",
@@ -28,6 +27,7 @@
     "@turbostarter/ui": "workspace:*",
     "@turbostarter/ui-web": "workspace:*",
     "@webext-core/messaging": "2.1.0",
+    "envin": "catalog:",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "vite-plugin-svgr": "4.3.0",

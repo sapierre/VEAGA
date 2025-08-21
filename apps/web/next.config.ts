@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-import { env } from "./src/lib/env";
+import env from "./env.config";
 
 const INTERNAL_PACKAGES = [
   "@turbostarter/analytics-web",

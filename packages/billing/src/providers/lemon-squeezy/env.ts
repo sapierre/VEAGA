@@ -1,17 +1,23 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-import { sharedEnv } from "../../utils/env";
+import { sharedPreset } from "../../utils/env";
 
-export const env = createEnv({
-  ...envConfig,
-  extends: [sharedEnv],
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "lemon-squeezy",
   server: {
     LEMON_SQUEEZY_API_KEY: z.string(),
     LEMON_SQUEEZY_SIGNING_SECRET: z.string(),
     LEMON_SQUEEZY_STORE_ID: z.string(),
   },
-  runtimeEnv: process.env,
+  extends: [sharedPreset],
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
 });

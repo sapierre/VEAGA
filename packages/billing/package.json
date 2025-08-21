@@ -26,10 +26,10 @@
   "dependencies": {
     "@lemonsqueezy/lemonsqueezy.js": "3.3.0",
     "@polar-sh/sdk": "0.32.13",
-    "@t3-oss/env-core": "catalog:",
     "@turbostarter/auth": "workspace:*",
     "@turbostarter/db": "workspace:*",
     "@turbostarter/shared": "workspace:*",
+    "envin": "catalog:",
     "stripe": "16.10.0",
     "zod": "catalog:"
   }

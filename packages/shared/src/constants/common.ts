@@ -12,7 +12,7 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
 export const envConfig = {
-  skipValidation:
+  skip:
     (!!process.env.SKIP_ENV_VALIDATION &&
       ["1", "true"].includes(process.env.SKIP_ENV_VALIDATION)) ||
     ["postinstall", "lint"].includes(process.env.npm_lifecycle_event ?? ""),

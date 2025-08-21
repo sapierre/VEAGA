@@ -1,17 +1,23 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 import { ThemeColor } from "@turbostarter/ui";
 
-import { env as providerEnv } from "./providers/env";
+import { preset as providerPreset } from "./providers/env";
 
-export const env = createEnv({
-  ...envConfig,
-  extends: [providerEnv],
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "email",
   server: {
     EMAIL_THEME: z.enum(ThemeColor).optional().default(ThemeColor.ORANGE),
     PRODUCT_NAME: z.string().optional(),
   },
-  runtimeEnv: process.env,
+  extends: [providerPreset],
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
 });

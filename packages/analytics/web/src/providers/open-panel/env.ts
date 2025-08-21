@@ -1,18 +1,25 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { createEnv } from "@t3-oss/env-nextjs";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "open-panel",
   client: {
     NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID: z.string(),
   },
   server: {
     OPEN_PANEL_SECRET: z.string(),
   },
-  experimental__runtimeEnv: {
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
+  env: {
     NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID:
       process.env.NEXT_PUBLIC_OPEN_PANEL_CLIENT_ID,
   },

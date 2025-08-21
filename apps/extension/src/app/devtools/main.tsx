@@ -3,7 +3,8 @@ import { browser } from "wxt/browser";
 
 import { Main } from "~/components/common/main";
 import { Layout, render } from "~/components/layout/layout";
-import { env } from "~/lib/env";
+
+import env from "../../../env.config";
 
 browser.devtools.panels.create(
   env.VITE_PRODUCT_NAME,

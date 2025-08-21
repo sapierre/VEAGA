@@ -1,11 +1,13 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { createEnv } from "@t3-oss/env-nextjs";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "umami",
   client: {
     NEXT_PUBLIC_UMAMI_HOST: z.string(),
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string(),
@@ -14,7 +16,12 @@ export const env = createEnv({
     UMAMI_API_HOST: z.string(),
     UMAMI_API_KEY: z.string().optional(),
   },
-  experimental__runtimeEnv: {
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
+  env: {
     NEXT_PUBLIC_UMAMI_HOST: process.env.NEXT_PUBLIC_UMAMI_HOST,
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID,
   },

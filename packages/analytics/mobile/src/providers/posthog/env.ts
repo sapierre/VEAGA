@@ -1,10 +1,12 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "posthog",
   clientPrefix: "EXPO_PUBLIC_",
   client: {
     EXPO_PUBLIC_POSTHOG_KEY: z.string(),
@@ -13,5 +15,9 @@ export const env = createEnv({
       .optional()
       .default("https://us.i.posthog.com"),
   },
-  runtimeEnv: process.env,
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
 });

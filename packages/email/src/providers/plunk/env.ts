@@ -1,15 +1,21 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-import { sharedEnv } from "../../utils/env";
+import { sharedPreset } from "../../utils/env";
 
-export const env = createEnv({
-  ...envConfig,
-  extends: [sharedEnv],
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "plunk",
   server: {
     PLUNK_API_KEY: z.string(),
   },
-  runtimeEnv: process.env,
+  extends: [sharedPreset],
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
 });

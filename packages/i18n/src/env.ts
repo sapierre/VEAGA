@@ -1,13 +1,15 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
 import { Locale } from "./types";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "i18n",
   clientPrefix: "NEXT_PUBLIC_",
   client: {
     NEXT_PUBLIC_DEFAULT_LOCALE: z.string().optional().default(Locale.EN),
@@ -15,7 +17,12 @@ export const env = createEnv({
   server: {
     DEFAULT_LOCALE: z.string().optional(),
   },
-  runtimeEnv: {
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
+  env: {
     DEFAULT_LOCALE: process.env.DEFAULT_LOCALE,
     NEXT_PUBLIC_DEFAULT_LOCALE: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
   },

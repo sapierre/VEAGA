@@ -1,10 +1,10 @@
 "use server";
 
+import env from "env.config";
+
 import { EmailTemplate } from "@turbostarter/email";
 import { sendEmail } from "@turbostarter/email/server";
 import { getTranslation } from "@turbostarter/i18n/server";
-
-import { env } from "~/lib/env";
 
 import type { ContactFormPayload } from "../utils/schema";
 

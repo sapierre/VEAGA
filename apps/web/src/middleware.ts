@@ -1,10 +1,10 @@
+import env from "env.config";
 import { i18nRouter } from "next-i18n-router";
 
 import { config as i18nConfig } from "@turbostarter/i18n";
 import { getLocaleFromRequest } from "@turbostarter/i18n/server";
 
 import { appConfig } from "~/config/app";
-import { env } from "~/lib/env";
 
 import type { NextRequest } from "next/server";
 

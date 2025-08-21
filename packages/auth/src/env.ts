@@ -1,10 +1,12 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "auth",
   server: {
     BETTER_AUTH_SECRET: z.string(),
 
@@ -13,5 +15,9 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string().optional().default(""),
     GOOGLE_CLIENT_SECRET: z.string().optional().default(""),
   },
-  runtimeEnv: process.env,
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
 });

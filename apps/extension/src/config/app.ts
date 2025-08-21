@@ -1,4 +1,4 @@
-import { env } from "../lib/env";
+import env from "../../env.config";
 
 export const appConfig = {
   name: env.VITE_PRODUCT_NAME,

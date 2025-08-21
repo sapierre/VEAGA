@@ -1,10 +1,12 @@
-import { createEnv } from "@t3-oss/env-core";
+import { defineEnv } from "envin";
 import * as z from "zod";
 
 import { envConfig } from "@turbostarter/shared/constants";
 
-export const env = createEnv({
-  ...envConfig,
+import type { Preset } from "envin/types";
+
+export const preset = {
+  id: "s3",
   server: {
     S3_BUCKET: z.string().optional(),
     S3_REGION: z.string().optional().default("us-east-1"),
@@ -12,5 +14,9 @@ export const env = createEnv({
     S3_ACCESS_KEY_ID: z.string(),
     S3_SECRET_ACCESS_KEY: z.string(),
   },
-  runtimeEnv: process.env,
+} as const satisfies Preset;
+
+export const env = defineEnv({
+  ...envConfig,
+  ...preset,
 });
