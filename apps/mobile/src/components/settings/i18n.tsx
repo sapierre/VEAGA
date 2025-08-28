@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-import { LocaleFlag, useTranslation } from "@turbostarter/i18n";
+import { useTranslation } from "@turbostarter/i18n";
 import {
   BottomSheet,
   BottomSheetCloseTrigger,
@@ -10,7 +10,7 @@ import {
   useBottomSheet,
 } from "@turbostarter/ui-mobile/bottom-sheet";
 import { Button } from "@turbostarter/ui-mobile/button";
-import { LocaleCustomizer } from "@turbostarter/ui-mobile/i18n";
+import { LocaleCustomizer, LocaleIcon } from "@turbostarter/ui-mobile/i18n";
 import { Icons } from "@turbostarter/ui-mobile/icons";
 import { Text } from "@turbostarter/ui-mobile/text";
 
@@ -23,13 +23,14 @@ export const I18nSettings = () => {
 
   const { ref } = useBottomSheet();
 
+  const Icon = LocaleIcon[config.locale as keyof typeof LocaleIcon];
+
   return (
     <BottomSheet>
       <BottomSheetOpenTrigger asChild>
         <SettingsTile icon={Icons.Languages}>
           <Text className="mr-auto">{t("language.label")}</Text>
-
-          <Text>{LocaleFlag[config.locale as keyof typeof LocaleFlag]}</Text>
+          <Icon className="size-5" />
         </SettingsTile>
       </BottomSheetOpenTrigger>
       <BottomSheetContent ref={ref} stackBehavior="replace" name="i18n">

@@ -119,6 +119,12 @@ export const I18nProvider = ({
     })();
   }, [client]);
 
+  useEffect(() => {
+    if (i18nClient) {
+      void i18nClient.changeLanguage(locale);
+    }
+  }, [locale]);
+
   if (!i18nClient) {
     return null;
   }
@@ -130,7 +136,6 @@ export const I18nProvider = ({
   });
 
   dayjs.locale(locale);
-  void i18nClient.changeLanguage(locale);
 
   return <I18nextProvider i18n={i18nClient}>{children}</I18nextProvider>;
 };

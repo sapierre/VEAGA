@@ -1,7 +1,7 @@
-import { PricingSkeleton } from "~/components/marketing/pricing/pricing";
+import { PricingSectionSkeleton } from "~/components/marketing/pricing/section";
 
 const PricingLoadingPage = () => {
-  return <PricingSkeleton />;
+  return <PricingSectionSkeleton />;
 };
 
 export default PricingLoadingPage;

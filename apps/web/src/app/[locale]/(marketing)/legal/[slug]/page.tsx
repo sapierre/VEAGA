@@ -5,9 +5,16 @@ import {
   getContentItemBySlug,
   getContentItems,
 } from "@turbostarter/cms";
+import { getTranslation } from "@turbostarter/i18n/server";
 
+import {
+  Section,
+  SectionBadge,
+  SectionDescription,
+  SectionHeader,
+  SectionTitle,
+} from "~/components/common/layout/section";
 import { Mdx } from "~/components/common/mdx";
-import { LEGAL_PREFIX } from "~/config/paths";
 import { getMetadata } from "~/lib/metadata";
 
 interface PageParams {
@@ -28,7 +35,18 @@ export default async function Page({ params }: PageParams) {
     notFound();
   }
 
-  return <Mdx data={item} base={LEGAL_PREFIX} />;
+  const { t } = await getTranslation({ ns: "common" });
+
+  return (
+    <Section>
+      <SectionHeader>
+        <SectionBadge>{t("legal.label")}</SectionBadge>
+        <SectionTitle as="h1">{item.title}</SectionTitle>
+        <SectionDescription>{item.description}</SectionDescription>
+      </SectionHeader>
+      <Mdx mdx={item.mdx} />
+    </Section>
+  );
 }
 
 export function generateStaticParams() {

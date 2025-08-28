@@ -19,7 +19,7 @@ export const BuiltWith = () => {
         className: "flex-row items-center justify-center gap-1",
       })}
     >
-      <Text className="text-sm">{t("builtWith")}</Text>
+      <Text>{t("builtWith")}</Text>
       <View className="shrink-0 flex-row items-center gap-1.5">
         <Icons.Logo className="ml-1.5 text-primary" height={16} width={16} />
         <Icons.LogoText className="text-foreground" height={10} width={82} />

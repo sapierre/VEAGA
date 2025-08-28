@@ -27,7 +27,8 @@ const generateThemeCSS = () => {
 ${generateCSSVariables(light)}
 }
 
-.dark[data-theme="${themeName}"] {
+.dark[data-theme="${themeName}"],
+[data-theme="${themeName}"]:is(.dark *) {
 ${generateCSSVariables(dark)}
 }`,
     )

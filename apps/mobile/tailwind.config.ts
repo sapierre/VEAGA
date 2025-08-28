@@ -17,11 +17,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["DMSans_400Regular"],
-        "sans-medium": ["DMSans_500Medium"],
-        "sans-bold": ["DMSans_700Bold"],
-        "sans-italic": ["DMSans_400Regular_Italic"],
-        mono: ["DMMono_400Regular"],
+        sans: ["Geist_400Regular"],
+        "sans-medium": ["Geist_500Medium"],
+        "sans-bold": ["Geist_700Bold"],
+        mono: ["GeistMono_400Regular"],
       },
       borderWidth: {
         hairline: hairlineWidth(),

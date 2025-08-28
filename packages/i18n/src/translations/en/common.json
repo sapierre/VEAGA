@@ -1,20 +1,22 @@
 {
-  "product": {
-    "title": "Ship your startup everywhere. In minutes.",
-    "description": "The Next.js, React Native (Expo) and Plasmo SaaS production-ready starter kit. Launch your web, mobile app and browser extension with one-click boilerplate."
-  },
   "legal": {
+    "label": "Legal",
     "privacy": "Privacy policy",
     "terms": "Terms and Conditions",
     "copyright": "All rights reserved"
   },
+  "product": "Product",
   "success": "Success!",
   "auth": "Auth",
+  "menu": "Menu",
+  "open": "Open",
   "code": "Code",
   "security": "Security",
   "builtWith": "Built with",
+  "about": "About",
   "contactUs": "Contact us",
   "reset": "Reset",
+  "resources": "Resources",
   "more": "More",
   "close": "Close",
   "toggle": "Toggle",
@@ -66,7 +68,8 @@
   "privacy": "Privacy",
   "language": {
     "label": "Language",
-    "description": "Pick a language for your app."
+    "description": "Pick a language for your app.",
+    "info": "This will change the language of the app. It will not change the language of the browser."
   },
   "theme": {
     "title": "Theme",

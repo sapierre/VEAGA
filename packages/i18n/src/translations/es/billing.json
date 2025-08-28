@@ -1,7 +1,8 @@
 {
   "currency": "eur",
   "pricing": {
-    "title": "Precios",
+    "label": "Precios",
+    "title": "Planes simples para todos",
     "description": "Elige el plan que se adapte a tus necesidades y comienza tu camino hacia el éxito."
   },
   "manage": {

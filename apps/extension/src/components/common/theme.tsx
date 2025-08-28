@@ -1,4 +1,5 @@
 import { useTranslation } from "@turbostarter/i18n";
+import { cn } from "@turbostarter/ui";
 import { Button } from "@turbostarter/ui-web/button";
 import { Icons } from "@turbostarter/ui-web/icons";
 import {
@@ -6,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@turbostarter/ui-web/popover";
-import { ThemeCustomizer, ThemeStatus } from "@turbostarter/ui-web/theme";
+import { ThemeCustomizer } from "@turbostarter/ui-web/theme";
 
 import { appConfig } from "~/config/app";
 import { StorageKey, useStorage } from "~/lib/storage";
@@ -48,11 +49,36 @@ const Customizer = () => {
   );
 };
 
+const Status = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof Button>) => {
+  const { t } = useTranslation("common");
+
+  return (
+    <Button
+      variant="outline"
+      className={cn(
+        "overflow-hidden rounded-full bg-transparent p-0 pr-3",
+        className,
+      )}
+      {...props}
+    >
+      <span className="sr-only">{t("theme.customization.label")}</span>
+      <div className="flex items-center justify-center gap-2.5">
+        <div className="size-[42px] bg-primary"></div>
+        <Icons.Sun className="size-[1.2rem] dark:hidden" />
+        <Icons.Moon className="hidden size-[1.2rem] dark:block" />
+      </div>
+    </Button>
+  );
+};
+
 export const ThemeControls = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ThemeStatus />
+        <Status />
       </PopoverTrigger>
       <PopoverContent
         align="center"

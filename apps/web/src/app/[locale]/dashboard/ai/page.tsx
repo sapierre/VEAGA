@@ -59,7 +59,7 @@ const AI = () => {
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl grow flex-col items-center justify-between gap-6 self-stretch px-4">
+    <div className="mx-auto flex w-full max-w-2xl grow flex-col items-center justify-between gap-6 self-stretch">
       <ScrollArea className="w-full grow">
         <div className="prose flex flex-col gap-2 dark:prose-invert">
           {messagesToDisplay.map((message) => (
@@ -115,7 +115,7 @@ const AI = () => {
           void sendMessage({ text: input });
           setInput("");
         }}
-        className="sticky bottom-0 w-full bg-background pb-4"
+        className="sticky bottom-4 w-full bg-background md:bottom-6"
       >
         <Textarea
           placeholder={t("ai.placeholder")}
@@ -128,7 +128,7 @@ const AI = () => {
         />
 
         <Button
-          className="absolute bottom-6 right-2 size-8 rounded-full"
+          className="absolute bottom-3 right-2 size-8 rounded-full"
           size="icon"
           type="submit"
           disabled={isLoading}

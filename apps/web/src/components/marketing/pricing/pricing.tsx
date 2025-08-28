@@ -1,82 +1,29 @@
-"use client";
+import { handle } from "@turbostarter/api/utils";
+import { env } from "@turbostarter/billing/env";
 
-import { memo, useState } from "react";
+import { api } from "~/lib/api/server";
+import { getSession } from "~/lib/auth/server";
 
-import {
-  RecurringInterval,
-  RecurringIntervalDuration,
-  config,
-  getPriceWithHighestDiscount,
-} from "@turbostarter/billing";
-import { useTranslation } from "@turbostarter/i18n";
-import { Skeleton } from "@turbostarter/ui-web/skeleton";
+import { PricingSection } from "./section";
 
-import { PricingHeader } from "./layout/header";
-import { Plans, PlansSkeleton } from "./plans/plans";
+export const Pricing = async () => {
+  const { user } = await getSession();
 
-import type { User } from "@turbostarter/auth";
-import type { BillingModel, Customer } from "@turbostarter/billing";
-
-interface PricingProps {
-  readonly user: User | null;
-  readonly customer: Customer | null;
-  readonly model: BillingModel;
-}
-
-export const Pricing = memo<PricingProps>(({ user, customer, model }) => {
-  const { t } = useTranslation("billing");
-  const intervals = [
-    ...new Set(
-      config.plans.flatMap((plan) =>
-        plan.prices
-          .flatMap((price) => ("interval" in price ? price.interval : null))
-          .filter((x): x is RecurringInterval => !!x),
-      ),
-    ),
-  ].sort((a, b) => RecurringIntervalDuration[a] - RecurringIntervalDuration[b]);
-
-  const [activeInterval, setActiveInterval] = useState<RecurringInterval>(
-    intervals[0] ?? RecurringInterval.MONTH,
-  );
-
-  const priceWithDiscount = getPriceWithHighestDiscount(
-    config.plans,
-    config.discounts,
-  );
+  const customer = user ? await handle(api.billing.customer.$get)() : null;
 
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-14 lg:gap-24">
-      <PricingHeader
-        currency={t("currency")}
-        model={model}
-        intervals={intervals}
-        activeInterval={activeInterval}
-        onIntervalChange={setActiveInterval}
-        {...(priceWithDiscount && { priceWithDiscount })}
-      />
-      <Plans
-        plans={config.plans}
-        interval={activeInterval}
-        model={model}
-        currency={t("currency")}
-        discounts={config.discounts}
-        user={user}
-        customer={customer}
-      />
-    </div>
-  );
-});
-
-export const PricingSkeleton = () => {
-  return (
-    <div className="mt-2 flex w-full flex-col items-center justify-start gap-14 pb-16 lg:gap-24 lg:pb-28">
-      <div className="flex flex-col items-center justify-center gap-3">
-        <Skeleton className="h-12 w-72" />
-        <Skeleton className="h-8 w-96" />
-      </div>
-      <PlansSkeleton />
-    </div>
+    <PricingSection
+      user={user}
+      customer={
+        customer
+          ? {
+              ...customer,
+              createdAt: new Date(customer.createdAt),
+              updatedAt: new Date(customer.updatedAt),
+            }
+          : null
+      }
+      model={env.BILLING_MODEL}
+    />
   );
 };
-
-Pricing.displayName = "Pricing";

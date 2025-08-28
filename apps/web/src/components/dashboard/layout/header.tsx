@@ -13,11 +13,11 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@turbostarter/ui-web/breadcrumb";
+import { buttonVariants } from "@turbostarter/ui-web/button";
+import { Icons } from "@turbostarter/ui-web/icons";
 import { Separator } from "@turbostarter/ui-web/separator";
 import { SidebarTrigger } from "@turbostarter/ui-web/sidebar";
 
-import { I18nControls } from "~/components/common/i18n/controls";
-import { ThemeControls } from "~/components/common/theme";
 import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 
@@ -67,7 +67,7 @@ export const DashboardHeader = () => {
   const last = path?.at(-1);
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 md:px-6 lg:px-7">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear md:px-6 lg:px-7">
       <div className="flex items-center gap-2 pr-4">
         <SidebarTrigger className="-ml-1" />
         {path ? (
@@ -108,9 +108,25 @@ export const DashboardHeader = () => {
           </>
         ) : null}
       </div>
-      <div className="flex items-center gap-3">
-        <I18nControls />
-        <ThemeControls />
+
+      <div className="flex items-center text-muted-foreground">
+        <a
+          href="https://github.com/turbostarter"
+          rel="noopener noreferrer"
+          target="_blank"
+          className={buttonVariants({ variant: "ghost", size: "icon" })}
+        >
+          <Icons.Github className="size-5" />
+        </a>
+
+        <a
+          href="https://discord.gg/KjpK2uk3JP"
+          rel="noopener noreferrer"
+          target="_blank"
+          className={buttonVariants({ variant: "ghost", size: "icon" })}
+        >
+          <Icons.Discord className="size-5" />
+        </a>
       </div>
     </header>
   );

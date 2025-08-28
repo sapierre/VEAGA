@@ -1,4 +1,40 @@
 {
+  "product": {
+    "title": "Lanza tu startup en todas partes. En minutos.",
+    "description": "Esta es una aplicación de demostración construida con TurboStarter. Te ahorrará tiempo y esfuerzo al crear tu próximo SaaS.",
+    "mobile": {
+      "ios": {
+        "title": "App para iOS",
+        "description": "Experiencia nativa en iPhone y iPad"
+      },
+      "android": {
+        "title": "App para Android",
+        "description": "Optimizada para teléfonos Android"
+      }
+    },
+    "extension": {
+      "chrome": {
+        "title": "Extensión de Chrome",
+        "description": "Integración con el navegador Chrome"
+      },
+      "firefox": {
+        "title": "Complemento de Firefox",
+        "description": "Navegación mejorada para usuarios de Firefox"
+      },
+      "edge": {
+        "title": "Complemento de Edge",
+        "description": "Herramientas potentes para Microsoft Edge"
+      }
+    }
+  },
+
+  "announcement": "¡Increíble función de tu SaaS!",
+  "shippedWith": "Enviado con herramientas increíbles",
+  "cta": {
+    "question": "¿Listo para empezar?",
+    "button": "Comienza gratis"
+  },
+
   "feature": {
     "admin": {
       "title": "Administración",
@@ -25,8 +61,106 @@
       "description": "Aprende a usar TurboStarter. Desde la instalación hasta el despliegue."
     }
   },
+
+  "features": {
+    "label": "Características",
+    "title": "Funciones potentes que nos hacen diferentes",
+    "description": "Todo lo que necesitas para crear, desplegar y escalar tus aplicaciones con confianza.",
+    "feature": {
+      "core": {
+        "title": "Plataforma principal",
+        "description": "Herramientas esenciales que potencian tu aplicación con autenticación, base de datos y API integradas."
+      },
+      "ai": {
+        "title": "Capacidades impulsadas por IA",
+        "description": "Funciones inteligentes con recomendaciones y flujos de trabajo automatizados impulsados por IA."
+      },
+      "mobile": {
+        "title": "Experiencia móvil nativa",
+        "description": "Aplicación móvil completamente equipada con sincronización perfecta en todos tus dispositivos."
+      },
+      "extension": {
+        "title": "Extensión de navegador",
+        "description": "Potente extensión que te da acceso a funciones clave directamente desde tu navegador."
+      }
+    }
+  },
+
+  "testimonials": {
+    "label": "Testimonios",
+    "title": "Lo que dicen nuestros usuarios",
+    "description": "Escucha a nuestros usuarios sobre su experiencia con la plataforma.",
+    "rating": "{{rating}} de {{count}}+ reseñas",
+    "reviews": {
+      "jack": {
+        "name": "Jack",
+        "position": "Desarrollador Full Stack",
+        "body": "Esta plataforma ha revolucionado mi flujo de trabajo. La integración perfecta y la documentación de primer nivel hacen que construir aplicaciones sea muy sencillo."
+      },
+      "jill": {
+        "name": "Jill",
+        "position": "Fundadora de startup",
+        "body": "Como fundadora, esta plataforma me llevó de la idea al MVP en dos semanas. Los componentes integrados ahorraron incontables horas de desarrollo."
+      },
+      "john": {
+        "name": "John",
+        "position": "Desarrollador senior",
+        "body": "La experiencia de desarrollador es inigualable. Desde la configuración de TypeScript hasta el despliegue funciona de maravilla, con un pulido e atención al detalle increíbles."
+      },
+      "sarah": {
+        "name": "Sarah",
+        "position": "Product Manager",
+        "body": "Todo escala de forma impecable. Del prototipo a miles de usuarios sin problemas. La analítica ofrece información increíble sobre el rendimiento."
+      },
+      "mike": {
+        "name": "Mike",
+        "position": "Líder de ingeniería",
+        "body": "El apoyo de la comunidad es increíble. Respuestas rápidas y detalladas y actualizaciones regulares hacen que la plataforma sea cada vez mejor."
+      }
+    }
+  },
+
+  "faq": {
+    "label": "Preguntas frecuentes",
+    "title": "¿Tienes una pregunta? Tenemos respuestas",
+    "description": "Encuentra respuestas a preguntas frecuentes sobre funciones, precios, implementación y cómo empezar con nuestra plataforma.",
+    "cta": "Contáctanos",
+    "question": {
+      "whatDoesOurPlatformDo": {
+        "question": "¿Qué hace nuestra plataforma?",
+        "answer": "Nuestra plataforma es una solución integral que ayuda a las empresas a construir, escalar y crecer al siguiente nivel con herramientas impulsadas por IA y automatización."
+      },
+      "howWillThisBenefitMyBusiness": {
+        "question": "¿Cómo beneficiará esto a mi negocio?",
+        "answer": "Nuestra plataforma aumenta la eficiencia del equipo, mejora las tasas de conversión y proporciona información valiosa mediante analítica y automatización para ayudar a tu negocio a crecer más rápido."
+      },
+      "isMyDataSafe": {
+        "question": "¿Mis datos están seguros?",
+        "answer": "Sí, implementamos funciones de seguridad de nivel empresarial y cumplimos con los estándares de la industria para garantizar que tus datos estén completamente seguros y protegidos."
+      },
+      "whatKindOfIntegrationsAreAvailable": {
+        "question": "¿Qué tipo de integraciones están disponibles?",
+        "answer": "Ofrecemos integraciones fluidas con herramientas y plataformas populares para optimizar tu flujo de trabajo y conectar con tu stack tecnológico existente."
+      },
+      "howEasyIsItToOnboardMyTeam": {
+        "question": "¿Qué tan fácil es incorporar a mi equipo?",
+        "answer": "Nuestra plataforma está diseñada para una incorporación rápida y fácil con interfaces intuitivas, documentación completa y soporte dedicado para poner a tu equipo en marcha rápidamente."
+      },
+      "whatTypesOfBusinessesCanUseThis": {
+        "question": "¿Qué tipos de empresas pueden usar esto?",
+        "answer": "Nuestra plataforma es adecuada para empresas de todos los tamaños, desde startups hasta grandes empresas, en diversas industrias como tecnología, salud, educación y más."
+      },
+      "canICustomizeThisToFitMyBusinessNeeds": {
+        "question": "¿Puedo personalizar esto para adaptarlo a las necesidades de mi negocio?",
+        "answer": "¡Absolutamente! Nuestra plataforma ofrece amplias opciones de personalización y flujos de trabajo flexibles que pueden adaptarse a tus requisitos y procesos específicos."
+      }
+    }
+  },
+
   "contact": {
-    "title": "Contacto",
+    "label": "Contacto",
+    "title": "Ponte en contacto con nosotros hoy para soporte",
+    "cta": "Hablar con ventas",
     "description": "Contáctanos para cualquier pregunta o comentario",
     "form": {
       "name": {
@@ -49,6 +183,7 @@
       "body": "Nuevo envío del formulario de contacto"
     }
   },
+
   "ai": {
     "prompt": {
       "history": "Cuenta la historia de internet",
@@ -59,9 +194,11 @@
     "placeholder": "Haz una pregunta...",
     "cta": "Enviar"
   },
+
   "blog": {
-    "title": "Blog",
-    "description": "Noticias y actualizaciones sobre la plataforma",
+    "label": "Blog",
+    "title": "Noticias y actualizaciones sobre la plataforma",
+    "description": "Mantente al día con las últimas noticias, ideas y actualizaciones de nuestra plataforma. Descubre nuevas funciones, buenas prácticas y tendencias del sector.",
     "timeToRead": "{{time}} min de lectura",
     "tag": {
       "learning": "aprendizaje",
@@ -73,6 +210,7 @@
       "launch": "lanzamiento"
     }
   },
+
   "dashboard": {
     "title": "Panel",
     "description": "Un resumen de la actividad de tu cuenta en todos tus proyectos.",
@@ -89,5 +227,20 @@
       "radial": "Gráfico radial",
       "radar": "Gráfico de radar"
     }
+  },
+
+  "api": {
+    "title": "Referencia de API",
+    "description": "Crea integraciones con nuestra API"
+  },
+
+  "roadmap": {
+    "title": "Hoja de ruta",
+    "description": "Mira lo que viene"
+  },
+
+  "docs": {
+    "title": "Documentación",
+    "description": "Aprende a usar TurboStarter"
   }
 }

@@ -10,5 +10,10 @@ const hslToHex = (h: number, s: number, l: number) => {
   return `#${f(0)}${f(8)}${f(4)}`;
 };
 
-export { hslToHex };
+const isExternal = (url: string) =>
+  ["http", "https", "mailto", "tel", "//", "www"].some((protocol) =>
+    url.startsWith(protocol),
+  );
+
+export { hslToHex, isExternal };
 export { capitalize, mapValues, transform } from "lodash";

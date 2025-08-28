@@ -1,20 +1,22 @@
 {
-  "product": {
-    "title": "Lanza tu startup en todas partes. En minutos.",
-    "description": "El kit de inicio listo para producción de Next.js, React Native (Expo) y Plasmo SaaS. Lanza tu aplicación web, móvil y extensión de navegador con una plantilla de un solo clic."
-  },
   "legal": {
+    "label": "Legal",
     "privacy": "Política de privacidad",
     "terms": "Términos y condiciones",
     "copyright": "Todos los derechos reservados"
   },
+  "product": "Producto",
   "success": "¡Éxito!",
   "auth": "Autenticación",
+  "menu": "Menú",
+  "open": "Abrir",
   "code": "Código",
   "security": "Seguridad",
   "builtWith": "Construido con",
+  "about": "Acerca de",
   "contactUs": "Contáctanos",
   "reset": "Restablecer",
+  "resources": "Recursos",
   "more": "Más",
   "close": "Cerrar",
   "toggle": "Alternar",
@@ -66,7 +68,8 @@
   "privacy": "Privacidad",
   "language": {
     "label": "Idioma",
-    "description": "Elige un idioma para tu aplicación."
+    "description": "Elige un idioma para tu aplicación.",
+    "info": "Esto cambiará el idioma de la aplicación. No cambiará el idioma del navegador."
   },
   "theme": {
     "title": "Tema",

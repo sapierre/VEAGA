@@ -14,8 +14,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["DM Sans", ...fontFamily.sans],
-        mono: ["DM Mono", ...fontFamily.mono],
+        sans: ["Geist", ...fontFamily.sans],
+        mono: ["Geist Mono", ...fontFamily.mono],
       },
     },
   },

@@ -49,10 +49,7 @@ import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
 import { iconWithClassName } from "./icon-with-classname";
 
 export const Icons = {
-  Logo: GlobalIcons.Logo,
-  LogoText: GlobalIcons.LogoText,
-  Google: GlobalIcons.Google,
-  Github: GlobalIcons.Github,
+  ...GlobalIcons,
   ArrowRight,
   ArrowLeft,
   House,
@@ -99,3 +96,5 @@ export const Icons = {
 };
 
 Object.values(Icons).forEach(iconWithClassName);
+
+export type Icon = (typeof Icons)[keyof typeof Icons];

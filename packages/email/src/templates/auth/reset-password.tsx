@@ -22,7 +22,9 @@ export const ResetPassword = async ({ url, locale }: Props) => {
   return (
     <Layout origin={origin}>
       <Preview>{t("account.password.update.email.preview")}</Preview>
-      <Heading>{t("account.password.update.email.subject")}</Heading>
+      <Heading className="tracking-tight">
+        {t("account.password.update.email.subject")}
+      </Heading>
 
       <Text>{t("account.password.update.email.body")}</Text>
 

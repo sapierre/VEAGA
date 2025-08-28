@@ -22,6 +22,7 @@ import {
   LogOut,
   Settings,
   Home,
+  Star,
   CreditCard,
   EllipsisVertical,
   User2,
@@ -36,8 +37,16 @@ import {
   Menu,
   MonitorSmartphone,
   Key,
+  PaintBucket,
+  ChartNoAxesGantt,
+  BookOpen,
+  Webhook,
   Download,
+  ChevronRight,
+  SendHorizontal,
   Copy,
+  ChevronsUpDown,
+  ArrowLeft,
 } from "lucide-react";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -49,6 +58,7 @@ export const Icons = {
   UserRound,
   Key,
   SunMoon,
+  ChevronRight,
   Moon,
   Sun,
   Undo2,
@@ -62,6 +72,10 @@ export const Icons = {
   ArrowUp,
   Globe2,
   GraduationCap,
+  ChartNoAxesGantt,
+  BookOpen,
+  Webhook,
+  Star,
   Atom,
   Brain,
   LogOut,
@@ -83,4 +97,10 @@ export const Icons = {
   MonitorSmartphone,
   Download,
   Copy,
+  PaintBucket,
+  SendHorizontal,
+  ChevronsUpDown,
+  ArrowLeft,
 };
+
+export type Icon = (typeof Icons)[keyof typeof Icons];

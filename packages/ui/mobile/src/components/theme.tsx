@@ -54,7 +54,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                   >
                     <View
                       className={cn(
-                        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white bg-primary",
+                        "flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary",
                       )}
                       {...(colors[color] && {
                         style: vars({

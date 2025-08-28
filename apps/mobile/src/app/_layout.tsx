@@ -1,12 +1,11 @@
 import { useReactNavigationDevTools } from "@dev-plugins/react-navigation";
-import { DMMono_400Regular } from "@expo-google-fonts/dm-mono";
 import {
-  DMSans_400Regular,
-  DMSans_500Medium,
-  DMSans_400Regular_Italic,
-  DMSans_700Bold,
+  Geist_400Regular,
+  Geist_500Medium,
+  Geist_700Bold,
   useFonts,
-} from "@expo-google-fonts/dm-sans";
+} from "@expo-google-fonts/geist";
+import { GeistMono_400Regular } from "@expo-google-fonts/geist-mono";
 import * as Application from "expo-application";
 import { Stack, useNavigationContainerRef } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -53,11 +52,10 @@ const RootLayoutNav = () => {
 
 const RootLayout = () => {
   const [fontsLoaded, fontsError] = useFonts({
-    DMMono_400Regular,
-    DMSans_400Regular,
-    DMSans_500Medium,
-    DMSans_400Regular_Italic,
-    DMSans_700Bold,
+    GeistMono_400Regular,
+    Geist_400Regular,
+    Geist_500Medium,
+    Geist_700Bold,
   });
 
   const { loaded: themeLoaded, setupTheme } = useTheme();

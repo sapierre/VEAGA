@@ -16,7 +16,7 @@ export const ContactForm = async (props: Props) => {
   return (
     <Layout>
       <Preview>{t("contact.email.subject")}</Preview>
-      <Heading>{t("contact.email.body")}</Heading>
+      <Heading className="tracking-tight">{t("contact.email.body")}</Heading>
 
       {Object.entries(props).map(([key, value]) => (
         <Row key={key}>

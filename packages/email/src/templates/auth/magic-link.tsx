@@ -21,7 +21,9 @@ export const MagicLink = async ({ url, token, locale }: Props) => {
   return (
     <Layout origin={origin} locale={locale}>
       <Preview>{t("login.magicLink.email.preview")}</Preview>
-      <Heading>{t("login.magicLink.email.subject")}</Heading>
+      <Heading className="tracking-tight">
+        {t("login.magicLink.email.subject")}
+      </Heading>
 
       <Text>{t("login.magicLink.email.body")}</Text>
 

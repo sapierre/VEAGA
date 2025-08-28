@@ -18,12 +18,8 @@ interface AuthLayoutProps {
 
 const AuthLayout = memo<AuthLayoutProps>(({ children }) => {
   return (
-    <div className="grow">
-      <div className="flex flex-1 flex-col justify-start lg:flex-none">
-        <div className="mx-auto w-full max-w-[26rem]">
-          <main className="flex flex-col gap-6">{children}</main>
-        </div>
-      </div>
+    <div className="mb-auto mt-16 flex w-full max-w-md flex-col gap-6 pb-16">
+      {children}
     </div>
   );
 });

@@ -1,6 +1,5 @@
 import { memo } from "react";
 
-import { PricingPlanType } from "@turbostarter/billing";
 import { useTranslation } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 import {
@@ -27,24 +26,6 @@ import { appConfig } from "~/config/app";
 import { Logout } from "./logout";
 
 import type { User } from "@turbostarter/auth";
-import type { Customer } from "@turbostarter/billing";
-
-const PLAN_EMOJIS: Record<PricingPlanType, string> = {
-  [PricingPlanType.FREE]: "🆓",
-  [PricingPlanType.PREMIUM]: "🔐",
-  [PricingPlanType.ENTERPRISE]: "💰",
-};
-
-const CustomerStatus = ({ customer }: { customer: Customer | null }) => {
-  const plan = customer?.plan ?? PricingPlanType.FREE;
-
-  return (
-    <div className="flex w-full items-center justify-center gap-2 rounded-md border border-dashed bg-muted/25 py-1.5">
-      <span>{PLAN_EMOJIS[plan]}</span>
-      <span>{plan}</span>
-    </div>
-  );
-};
 
 const AnonymousUser = () => {
   const { t } = useTranslation("auth");
@@ -68,82 +49,83 @@ const AnonymousUser = () => {
 
 interface UserNavigationProps {
   readonly user: User | null;
-  readonly customer: Customer | null;
 }
 
-export const UserNavigation = memo<UserNavigationProps>(
-  ({ user, customer }) => {
-    const { t } = useTranslation("common");
-    if (!user) {
-      return <AnonymousUser />;
-    }
+export const UserNavigation = memo<UserNavigationProps>(({ user }) => {
+  const { t } = useTranslation("common");
+  if (!user) {
+    return <AnonymousUser />;
+  }
 
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="relative flex items-center gap-4 rounded-md">
-            <Avatar className="size-10">
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="relative flex items-center gap-4 rounded-md">
+          <Avatar className="size-10">
+            <AvatarImage src={user.image ?? undefined} alt={user.name} />
+            <AvatarFallback>
+              <Icons.UserRound className="w-5" />
+            </AvatarFallback>
+          </Avatar>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuPortal container={document.querySelector("[data-theme]")}>
+        <DropdownMenuContent className="w-56" align="end" forceMount>
+          <DropdownMenuLabel className="flex items-center gap-2 font-normal">
+            <Avatar className="size-8">
               <AvatarImage src={user.image ?? undefined} alt={user.name} />
               <AvatarFallback>
                 <Icons.UserRound className="w-5" />
               </AvatarFallback>
             </Avatar>
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuPortal container={document.querySelector("[data-theme]")}>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
-            <DropdownMenuLabel className="font-normal">
-              <div className="flex flex-col space-y-2">
-                {user.name && (
-                  <p className="font-sans text-sm font-medium leading-none">
-                    {user.name}
-                  </p>
-                )}
-                {user.email && (
-                  <p className="font-sans text-xs leading-none text-muted-foreground">
-                    {user.email}
-                  </p>
-                )}
-                <CustomerStatus customer={customer} />
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
 
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <a
-                  href={`${appConfig.url}/dashboard`}
-                  target="_blank"
-                  className="flex w-full cursor-pointer items-center gap-1.5"
-                >
-                  <Icons.Home className="size-4" />
-                  {t("dashboard")}
-                </a>
-              </DropdownMenuItem>
+            <div className="flex w-full min-w-0 flex-col space-y-1">
+              {user.name && (
+                <p className="text-sm font-medium leading-none">{user.name}</p>
+              )}
+              {user.email && (
+                <p className="truncate text-xs leading-none text-muted-foreground">
+                  {user.email}
+                </p>
+              )}
+            </div>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
 
-              <DropdownMenuItem asChild>
-                <a
-                  href={`${appConfig.url}/dashboard/settings`}
-                  target="_blank"
-                  className="flex w-full cursor-pointer items-center gap-1.5"
-                >
-                  <Icons.Settings className="size-4" />
-                  {t("settings")}
-                </a>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem className="cursor-pointer">
-              <Logout />
+          <DropdownMenuGroup>
+            <DropdownMenuItem asChild>
+              <a
+                href={`${appConfig.url}/dashboard`}
+                target="_blank"
+                className="flex w-full cursor-pointer items-center gap-1.5"
+              >
+                <Icons.Home className="size-4" />
+                {t("dashboard")}
+              </a>
             </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenuPortal>
-      </DropdownMenu>
-    );
-  },
-);
+
+            <DropdownMenuItem asChild>
+              <a
+                href={`${appConfig.url}/dashboard/settings`}
+                target="_blank"
+                className="flex w-full cursor-pointer items-center gap-1.5"
+              >
+                <Icons.Settings className="size-4" />
+                {t("settings")}
+              </a>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem className="cursor-pointer">
+            <Logout />
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenuPortal>
+    </DropdownMenu>
+  );
+});
 
 export const UserNavigationSkeleton = () => {
   return <Skeleton className="size-10 rounded-full" />;

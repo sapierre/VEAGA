@@ -28,12 +28,12 @@ export const Layout = ({
     <Html lang={locale}>
       <Head>
         <Font
-          fontFamily="DM Sans"
+          fontFamily="Geist"
           fallbackFontFamily="Arial"
           fontWeight={400}
           fontStyle="normal"
           webFont={{
-            url: "https://fonts.gstatic.com/s/dmsans/v15/rP2Hp2ywxg089UriCZOIHTWEBlw.woff2",
+            url: "https://fonts.gstatic.com/s/geist/v3/gyByhwUxId8gMEwYGFWNOITddY4.woff2",
             format: "woff2",
           }}
         />

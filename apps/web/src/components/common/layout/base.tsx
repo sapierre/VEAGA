@@ -1,18 +1,16 @@
-import { DM_Mono } from "next/font/google";
-import { DM_Sans } from "next/font/google";
+import { Geist_Mono, Geist } from "next/font/google";
 
 import { cn } from "@turbostarter/ui";
 
-import { TailwindIndicator } from "~/components/common/tailwind-indicator";
 import { appConfig } from "~/config/app";
 
-const sans = DM_Sans({
+const sans = Geist({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
 });
 
-const mono = DM_Mono({
+const mono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono",
@@ -34,7 +32,6 @@ export const BaseLayout = ({ children, locale }: BaseLayoutProps) => {
     >
       <body className="flex min-h-screen flex-col items-center justify-center bg-background font-sans text-foreground antialiased">
         {children}
-        <TailwindIndicator />
       </body>
     </html>
   );

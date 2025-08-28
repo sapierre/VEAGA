@@ -6,6 +6,13 @@ import { BillingModel } from "@turbostarter/billing";
 import { useTranslation } from "@turbostarter/i18n";
 import { Tabs, TabsList, TabsTrigger } from "@turbostarter/ui-web/tabs";
 
+import {
+  SectionBadge,
+  SectionDescription,
+  SectionHeader,
+  SectionTitle,
+} from "~/components/common/layout/section";
+
 import { Discount } from "./discount";
 
 import type {
@@ -37,13 +44,12 @@ export const PricingHeader = memo<PricingHeaderProps>(
     const { t } = useTranslation("billing");
 
     return (
-      <header className="flex flex-col items-center justify-center gap-3">
-        <h1 className="lg:leading-tighter max-w-4xl text-center text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          {t("pricing.title")}
-        </h1>
-        <p className="max-w-2xl text-center text-muted-foreground">
+      <SectionHeader>
+        <SectionBadge>{t("pricing.label")}</SectionBadge>
+        <SectionTitle>{t("pricing.title")}</SectionTitle>
+        <SectionDescription className="max-w-2xl text-center text-muted-foreground">
           {t("pricing.description")}
-        </p>
+        </SectionDescription>
 
         <Discount
           {...(priceWithDiscount && {
@@ -54,7 +60,7 @@ export const PricingHeader = memo<PricingHeaderProps>(
 
         {model === BillingModel.RECURRING && intervals.length > 0 && (
           <Tabs
-            className="mt-4 lg:mt-6"
+            className="mt-2 lg:mt-4"
             value={activeInterval}
             onValueChange={(value) =>
               onIntervalChange(value as RecurringInterval)
@@ -73,7 +79,7 @@ export const PricingHeader = memo<PricingHeaderProps>(
             </TabsList>
           </Tabs>
         )}
-      </header>
+      </SectionHeader>
     );
   },
 );

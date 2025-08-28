@@ -1,7 +1,8 @@
 {
   "currency": "usd",
   "pricing": {
-    "title": "Pricing",
+    "label": "Pricing",
+    "title": "Simple plans for everyone",
     "description": "Choose the plan that suits your needs and start your journey to success."
   },
   "manage": {

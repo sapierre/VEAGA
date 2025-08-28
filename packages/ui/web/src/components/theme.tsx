@@ -25,25 +25,6 @@ const MODE_ICONS = {
   [ThemeMode.SYSTEM]: Icons.SunMoon,
 } as const;
 
-export const ThemeStatus = (props: React.ComponentProps<"button">) => {
-  const { t } = useTranslation("common");
-
-  return (
-    <Button
-      variant="outline"
-      className="rounded-full bg-transparent"
-      {...props}
-    >
-      <span className="sr-only">{t("theme.customization.label")}</span>
-      <div className="flex items-center justify-center gap-2">
-        <div className="size-4 rounded-full bg-primary"></div>
-        <Icons.Sun className="size-[1.2rem] dark:hidden" />
-        <Icons.Moon className="hidden size-[1.2rem] dark:block" />
-      </div>
-    </Button>
-  );
-};
-
 export const ThemeCustomizer = memo<ThemeCustomizerProps>(
   ({ config, onChange }) => {
     const { t } = useTranslation("common");
@@ -72,7 +53,7 @@ export const ThemeCustomizer = memo<ThemeCustomizerProps>(
                     <span
                       data-theme={color}
                       className={cn(
-                        "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full border border-white bg-primary",
+                        "mr-1 flex size-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-primary",
                       )}
                     ></span>
                     {t(`theme.color.${color}`)}

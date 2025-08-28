@@ -4,6 +4,7 @@ import { AvatarSettings } from "~/components/dashboard/settings/general/avatar/a
 import { DeleteAccount } from "~/components/dashboard/settings/general/delete-account";
 import { EditEmail } from "~/components/dashboard/settings/general/edit-email";
 import { EditName } from "~/components/dashboard/settings/general/edit-name";
+import { LanguageSwitcher } from "~/components/dashboard/settings/general/language-switcher";
 import { pathsConfig } from "~/config/paths";
 import { getSession } from "~/lib/auth/server";
 import { getMetadata } from "~/lib/metadata";
@@ -23,6 +24,7 @@ export default async function SettingsPage() {
   return (
     <>
       <AvatarSettings user={user} />
+      <LanguageSwitcher />
       <EditName user={user} />
       <EditEmail user={user} />
       <DeleteAccount />

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { config, isLocaleSupported } from "@turbostarter/i18n";
 
 import { BaseLayout } from "~/components/common/layout/base";
+import { TailwindIndicator } from "~/components/common/tailwind-indicator";
 import { Toaster } from "~/components/common/toast";
 import { getMetadata } from "~/lib/metadata";
 import { Providers } from "~/providers/providers";
@@ -30,6 +31,7 @@ export default async function RootLayout({
     <BaseLayout locale={locale}>
       <Providers locale={locale}>
         {children}
+        <TailwindIndicator />
         <Toaster />
       </Providers>
     </BaseLayout>

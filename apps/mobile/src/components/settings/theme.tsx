@@ -25,7 +25,7 @@ import type { ThemeConfig } from "@turbostarter/ui";
 
 export const ThemeSettings = () => {
   const { t } = useTranslation("common");
-  const { theme, changeTheme } = useTheme();
+  const { theme, changeTheme, resolvedTheme } = useTheme();
   const { config, setConfig } = useThemeConfig();
 
   const { ref } = useBottomSheet();
@@ -37,7 +37,7 @@ export const ThemeSettings = () => {
 
   const colors = Object.values(ThemeColor).reduce(
     (acc, color) => {
-      const [h, s, l] = themes[color].light.primary;
+      const [h, s, l] = themes[color][resolvedTheme].primary;
       return {
         ...acc,
         [color]: `${h} ${s * 100}% ${l * 100}%`,
@@ -54,7 +54,7 @@ export const ThemeSettings = () => {
 
           <View
             className={cn(
-              "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white bg-primary",
+              "flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary",
             )}
             {...(colors[config.color] && {
               style: vars({

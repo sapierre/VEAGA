@@ -22,7 +22,9 @@ export const DeleteAccount = async ({ url, locale }: Props) => {
   return (
     <Layout origin={origin} locale={locale}>
       <Preview>{t("account.delete.email.preview")}</Preview>
-      <Heading>{t("account.delete.email.subject")}</Heading>
+      <Heading className="tracking-tight">
+        {t("account.delete.email.subject")}
+      </Heading>
 
       <Text>{t("account.delete.email.body")}</Text>
 

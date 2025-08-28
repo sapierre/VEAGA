@@ -1,6 +1,4 @@
 import { getTranslation } from "@turbostarter/i18n/server";
-import { Button } from "@turbostarter/ui-web/button";
-import { Icons } from "@turbostarter/ui-web/icons";
 
 import { AreaChart } from "~/components/dashboard/charts/area";
 import { BarChart } from "~/components/dashboard/charts/bar";
@@ -30,11 +28,6 @@ export default async function AdminPage() {
             {t("dashboard.description")}
           </p>
         </div>
-
-        <Button className="gap-1.5">
-          <Icons.Plus className="size-5" />
-          {t("dashboard.chart.cta")}
-        </Button>
       </header>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">

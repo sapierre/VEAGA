@@ -18,6 +18,13 @@ import {
   CardTitle,
 } from "@turbostarter/ui-web/card";
 
+import {
+  Section,
+  SectionBadge,
+  SectionDescription,
+  SectionHeader,
+  SectionTitle,
+} from "~/components/common/layout/section";
 import { TurboLink } from "~/components/common/turbo-link";
 import { TagsPicker } from "~/components/marketing/blog/tags-picker";
 import { pathsConfig } from "~/config/paths";
@@ -29,7 +36,7 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
 export const generateMetadata = getMetadata({
-  title: "marketing:blog.title",
+  title: "marketing:blog.label",
   description: "marketing:blog.description",
   canonical: pathsConfig.marketing.blog.index,
 });
@@ -55,26 +62,25 @@ export default async function BlogPage({
   });
 
   return (
-    <div className="flex flex-col gap-6 self-start sm:gap-8 md:gap-10 lg:gap-12">
-      <header className="flex flex-col items-center justify-center gap-3">
-        <h1 className="lg:leading-tighter max-w-4xl text-center text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          {t("blog.title")}
-        </h1>
-        <p className="max-w-2xl text-center text-muted-foreground">
-          {t("blog.description")}
-        </p>
-      </header>
+    <Section>
+      <SectionHeader className="flex flex-col items-center justify-center gap-3">
+        <SectionBadge>{t("blog.label")}</SectionBadge>
+        <SectionTitle as="h1">{t("blog.title")}</SectionTitle>
+        <SectionDescription>{t("blog.description")}</SectionDescription>
+      </SectionHeader>
 
-      <TagsPicker />
+      <div className="-mt-2 sm:-mt-4 md:-mt-6 lg:-mt-10">
+        <TagsPicker />
+      </div>
 
-      <main className="grid grid-cols-1 items-start justify-center gap-x-10 gap-y-8 md:grid-cols-2 md:gap-y-12 lg:grid-cols-3 lg:gap-y-16">
+      <div className="grid grid-cols-1 items-start justify-center gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 lg:grid-cols-3 lg:gap-y-16">
         {items.map((post) => (
           <TurboLink
             key={post.slug}
             href={pathsConfig.marketing.blog.post(post.slug)}
-            className="group basis-[34rem]"
+            className="group h-full basis-[34rem]"
           >
-            <Card className="border-none shadow-none">
+            <Card className="h-full border-none shadow-none group-hover:bg-muted/50">
               <CardHeader className="space-y-2 p-3 pb-2">
                 <div className="-mx-3 -mt-3 mb-3 aspect-[12/8] overflow-hidden rounded-lg bg-muted">
                   <div className="relative h-full w-full transition-transform duration-300 group-hover:scale-105">
@@ -94,11 +100,7 @@ export default async function BlogPage({
                     </Badge>
                   ))}
                 </div>
-                <CardTitle className="leading-tight">
-                  <span className="bg-gradient-to-r from-primary to-primary bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-300 ease-out group-hover:bg-[length:100%_2px]">
-                    {post.title}
-                  </span>
-                </CardTitle>
+                <CardTitle className="leading-tight">{post.title}</CardTitle>
                 <div className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
                   <time dateTime={post.publishedAt.toISOString()}>
                     {dayjs(post.publishedAt).format("MMMM D, YYYY")}
@@ -122,7 +124,7 @@ export default async function BlogPage({
             </Card>
           </TurboLink>
         ))}
-      </main>
-    </div>
+      </div>
+    </Section>
   );
 }

@@ -22,7 +22,9 @@ export const ConfirmEmail = async ({ url, locale }: Props) => {
   return (
     <Layout origin={origin} locale={locale}>
       <Preview>{t("account.email.confirm.email.preview")}</Preview>
-      <Heading>{t("account.email.confirm.email.subject")}</Heading>
+      <Heading className="tracking-tight">
+        {t("account.email.confirm.email.subject")}
+      </Heading>
 
       <Text>{t("account.email.confirm.email.body")}</Text>
 
