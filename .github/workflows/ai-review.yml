@@ -2,10 +2,10 @@ name: CI / AI Review
 
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review]
+    types: [opened, reopened, ready_for_review, synchronize]
   issue_comment:
 jobs:
-  review:
+  gpt-review:
     if: ${{ github.event.sender.type != 'Bot' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -21,3 +21,26 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           github_action_config.auto_describe: "false"
+
+  claude-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_KEY }}
+          additional_permissions: |
+            actions: read
