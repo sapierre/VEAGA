@@ -81,8 +81,8 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
     await signIn.social(
       {
         provider,
-        callbackURL: pathsConfig.tabs.settings.index,
-        errorCallbackURL: pathsConfig.tabs.auth.error,
+        callbackURL: pathsConfig.index,
+        errorCallbackURL: pathsConfig.setup.auth.error,
       },
       {
         onRequest: () => {
@@ -98,7 +98,7 @@ export const SocialProviders = memo<SocialProvidersProps>(({ providers }) => {
     const session = await getSession();
 
     if (session.data) {
-      router.navigate(pathsConfig.tabs.settings.index);
+      router.navigate(pathsConfig.index);
     }
   };
 

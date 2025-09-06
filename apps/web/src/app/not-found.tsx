@@ -7,7 +7,7 @@ import { appConfig } from "~/config/app";
 import { pathsConfig } from "~/config/paths";
 
 export default async function NotFound() {
-  const { t } = await getTranslation({ ns: ["common"] });
+  const { t } = await getTranslation({ ns: ["marketing", "common"] });
 
   return (
     <BaseLayout locale={appConfig.locale}>

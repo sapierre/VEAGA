@@ -1,12 +1,12 @@
 import { getTranslation } from "@turbostarter/i18n/server";
 
-import { AreaChart } from "~/components/dashboard/charts/area";
-import { BarChart } from "~/components/dashboard/charts/bar";
-import { LineChart } from "~/components/dashboard/charts/line";
-import { PieChart } from "~/components/dashboard/charts/pie";
-import { RadarChart } from "~/components/dashboard/charts/radar";
-import { RadialChart } from "~/components/dashboard/charts/radial";
-import { ShapeChart } from "~/components/dashboard/charts/shape";
+import { AreaChart } from "~/components/dashboard/home/charts/area";
+import { BarChart } from "~/components/dashboard/home/charts/bar";
+import { LineChart } from "~/components/dashboard/home/charts/line";
+import { PieChart } from "~/components/dashboard/home/charts/pie";
+import { RadarChart } from "~/components/dashboard/home/charts/radar";
+import { RadialChart } from "~/components/dashboard/home/charts/radial";
+import { ShapeChart } from "~/components/dashboard/home/charts/shape";
 import { getMetadata } from "~/lib/metadata";
 
 export const generateMetadata = getMetadata({

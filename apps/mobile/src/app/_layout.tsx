@@ -6,14 +6,12 @@ import {
   useFonts,
 } from "@expo-google-fonts/geist";
 import { GeistMono_400Regular } from "@expo-google-fonts/geist-mono";
-import * as Application from "expo-application";
 import { Stack, useNavigationContainerRef } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { StatusBar } from "react-native";
 
 import "~/assets/styles/globals.css";
-import { Header } from "~/components/common/layout/header";
+import { useSession } from "~/lib/auth";
 import { useTheme } from "~/lib/hooks/use-theme";
 import "~/lib/polyfills";
 import { Providers } from "~/providers/providers";
@@ -25,59 +23,49 @@ SplashScreen.setOptions({
   fade: true,
 });
 
-const RootLayoutNav = () => {
+const RootNavigator = () => {
   const navigationRef = useNavigationContainerRef();
   useReactNavigationDevTools(
     navigationRef as Parameters<typeof useReactNavigationDevTools>[0],
   );
 
-  return (
-    <Providers>
-      <Stack
-        screenOptions={{
-          header: () => <Header title={Application.applicationName ?? ""} />,
-        }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-      <StatusBar
-        barStyle="light-content"
-        translucent
-        backgroundColor="transparent"
-      />
-    </Providers>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 };
 
 const RootLayout = () => {
-  const [fontsLoaded, fontsError] = useFonts({
+  const [fontsLoaded] = useFonts({
     GeistMono_400Regular,
     Geist_400Regular,
     Geist_500Medium,
     Geist_700Bold,
   });
 
+  const { isPending: sessionPending } = useSession();
   const { loaded: themeLoaded, setupTheme } = useTheme();
 
-  const loaded = fontsLoaded && themeLoaded;
-  const error = fontsError;
+  const loaded = fontsLoaded && themeLoaded && !sessionPending;
 
   useEffect(() => {
     void setupTheme();
   }, [setupTheme]);
 
   useEffect(() => {
-    if (loaded || error) {
+    if (loaded) {
       void SplashScreen.hideAsync();
     }
-  }, [loaded, error]);
+  }, [loaded]);
 
-  if (!loaded && !error) {
+  if (!loaded) {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <RootNavigator />;
 };
 
-export default RootLayout;
+export default function Root() {
+  return (
+    <Providers>
+      <RootLayout />
+    </Providers>
+  );
+}

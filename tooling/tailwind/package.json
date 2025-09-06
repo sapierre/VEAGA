@@ -13,6 +13,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@turbostarter/prettier-config",
   "dependencies": {
     "@tailwindcss/container-queries": "0.1.1",
     "@tailwindcss/typography": "0.5.15",
@@ -27,6 +28,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@turbostarter/prettier-config"
+  }
 }

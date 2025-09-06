@@ -40,9 +40,9 @@ export const orange = {
   dark: {
     background: [220, 0.37, 0.08],
     foreground: [0, 0, 0.98],
-    card: [240, 0.1, 0.039],
+    card: [220, 0.37, 0.08],
     "card-foreground": [0, 0, 0.98],
-    popover: [240, 0.1, 0.039],
+    popover: [220, 0.37, 0.08],
     "popover-foreground": [0, 0, 0.98],
     primary: [17, 0.97, 0.48],
     "primary-foreground": [0, 0, 0.98],

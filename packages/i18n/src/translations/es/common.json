@@ -57,8 +57,9 @@
   "mobile": "Móvil",
   "other": "Otro",
   "views": "vistas",
-  "lastDays": "Últimos {{days}} días",
-  "lastMonths": "Últimos {{months}} meses",
+  "lastDays": "Últimos {{count}} días",
+  "lastMonths_one": "Últimos mes",
+  "lastMonths_other": "Últimos {{count}} meses",
   "selectMonth": "Seleccionar mes",
   "seeRoadmap": "Ver roadmap",
   "general": "General",
@@ -100,6 +101,8 @@
   "name": "Nombre",
   "message": "Mensaje",
   "email": "Correo electrónico",
+  "skip": "Omitir",
+  "finish": "Finalizar",
   "two-factor": "Autenticación de dos factores",
   "error": {
     "title": "¡Ups!",
@@ -107,10 +110,5 @@
     "invalid": "¡Datos inválidos!",
     "notFound": "¡No encontrado!"
   },
-  "editToReload": "Edita <code>{{file}}</code> y guarda para recargar.",
-  "goBackHome": "Volver al inicio",
-  "workInProgress": {
-    "title": "¡Estamos trabajando en ello!",
-    "description": "{{feature}} no está disponible en este momento. Estamos trabajando en ello y estará disponible pronto."
-  }
+  "goBackHome": "Volver al inicio"
 }

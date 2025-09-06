@@ -50,8 +50,8 @@ export const TeamSwitcher = memo<TeamSwitcherProps>(({ user, customer }) => {
                 <span className="truncate font-medium">
                   {t("account.personal")}
                 </span>
-                <span className="truncate text-xs">
-                  {customer?.plan ?? PricingPlanType.FREE}
+                <span className="truncate text-xs capitalize">
+                  {(customer?.plan ?? PricingPlanType.FREE).toLowerCase()}
                 </span>
               </div>
 

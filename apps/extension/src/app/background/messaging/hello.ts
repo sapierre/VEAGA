@@ -5,9 +5,9 @@ import { Message, onMessage } from "~/lib/messaging";
 
 const getMessage = async (filename: string) => {
   const locale = await getLocale();
-  const { t } = await getI18n({ locale, ns: "common" });
+  const { t } = await getI18n({ locale, ns: "marketing" });
 
-  return t("editToReload", { file: filename });
+  return t("editToReload", "", { file: filename });
 };
 
 onMessage(Message.HELLO, ({ data }) => getMessage(data));

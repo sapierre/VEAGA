@@ -1,7 +1,7 @@
 {
   "name": "@turbostarter/storage",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -14,6 +14,12 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@turbostarter/prettier-config",
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.688.0",
+    "@aws-sdk/s3-request-presigner": "3.688.0",
+    "@turbostarter/shared": "workspace:*"
+  },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",
     "@turbostarter/prettier-config": "workspace:*",
@@ -21,11 +27,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@turbostarter/prettier-config",
-  "dependencies": {
-    "@aws-sdk/client-s3": "3.688.0",
-    "@aws-sdk/s3-request-presigner": "3.688.0",
-    "@turbostarter/shared": "workspace:*"
   }
 }

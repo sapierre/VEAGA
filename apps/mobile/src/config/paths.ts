@@ -1,8 +1,13 @@
-const AUTH_PREFIX = "/auth";
-const SETTINGS_PREFIX = "/settings";
+const SETUP_PREFIX = "/setup";
+const DASHBOARD_PREFIX = "/dashboard";
+
+const AUTH_PREFIX = `${SETUP_PREFIX}/auth`;
+const SETTINGS_PREFIX = `${DASHBOARD_PREFIX}/settings`;
+
 const pathsConfig = {
   index: "/",
-  tabs: {
+  setup: {
+    index: SETUP_PREFIX,
     auth: {
       login: `${AUTH_PREFIX}/login`,
       register: `${AUTH_PREFIX}/register`,
@@ -10,12 +15,23 @@ const pathsConfig = {
       updatePassword: `${AUTH_PREFIX}/password/update`,
       error: `${AUTH_PREFIX}/error`,
     },
-    billing: `/billing`,
-    ai: `/ai`,
+    steps: {
+      start: `${SETUP_PREFIX}/start`,
+      required: `${SETUP_PREFIX}/required`,
+      skip: `${SETUP_PREFIX}/skip`,
+      final: `${SETUP_PREFIX}/final`,
+    },
+  },
+  dashboard: {
+    index: DASHBOARD_PREFIX,
+    billing: `${DASHBOARD_PREFIX}/billing`,
+    ai: `${DASHBOARD_PREFIX}/ai`,
     settings: {
       index: SETTINGS_PREFIX,
-      general: `${SETTINGS_PREFIX}/general`,
-      notifications: `${SETTINGS_PREFIX}/notifications`,
+      general: {
+        index: `${SETTINGS_PREFIX}/general`,
+        notifications: `${SETTINGS_PREFIX}/general/notifications`,
+      },
       account: {
         index: `${SETTINGS_PREFIX}/account`,
         name: `${SETTINGS_PREFIX}/account/name`,
@@ -24,8 +40,9 @@ const pathsConfig = {
         accounts: `${SETTINGS_PREFIX}/account/accounts`,
         twoFactor: `${SETTINGS_PREFIX}/account/two-factor`,
       },
+      billing: `${SETTINGS_PREFIX}/billing`,
     },
   },
 } as const;
 
-export { pathsConfig };
+export { pathsConfig, AUTH_PREFIX, SETUP_PREFIX, DASHBOARD_PREFIX };

@@ -5,7 +5,6 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./icons": "./src/lib/icons/index.ts",
     "./*": "./src/components/*.tsx"
   },
   "scripts": {
@@ -13,23 +12,22 @@
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "ui:add": "pnpm dlx @react-native-reusables/cli@latest add && prettier src --write --list-different",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ui:add": "pnpm dlx @react-native-reusables/cli@latest add && prettier src --write --list-different"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
     "@gorhom/bottom-sheet": "5.1.1",
-    "@react-native-async-storage/async-storage": "1.23.1",
     "@rn-primitives/avatar": "1.1.0",
     "@rn-primitives/checkbox": "1.1.0",
     "@rn-primitives/context-menu": "1.1.0",
+    "@rn-primitives/dropdown-menu": "1.2.0",
     "@rn-primitives/label": "1.1.0",
     "@rn-primitives/radio-group": "1.1.0",
     "@rn-primitives/select": "1.1.0",
     "@rn-primitives/slot": "1.1.0",
     "@rn-primitives/switch": "1.1.0",
     "@rn-primitives/tabs": "1.1.0",
+    "@rn-primitives/tooltip": "1.2.0",
     "@rn-primitives/types": "1.1.0",
     "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
@@ -38,10 +36,7 @@
     "lucide-react-native": "0.525.0",
     "nativewind": "~4.1.23",
     "react-native": "catalog:",
-    "react-native-svg": "15.11.2",
-    "zustand": "5.0.2",
-    "expo": "~53.0.17",
-    "react": "19.0.0"
+    "react-native-svg": "15.11.2"
   },
   "devDependencies": {
     "@turbostarter/eslint-config": "workspace:*",

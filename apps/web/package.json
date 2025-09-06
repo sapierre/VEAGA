@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "browser": {
+    "crypto": false,
+    "stream": false
+  },
   "scripts": {
     "build": "next build",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
@@ -12,8 +16,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@turbostarter/prettier-config",
   "dependencies": {
-    "@ai-sdk/react": "2.0.9",
+    "@ai-sdk/react": "2.0.29",
     "@formatjs/intl-localematcher": "0.5.4",
     "@hookform/resolvers": "5.2.1",
     "@next/bundle-analyzer": "15.5.2",
@@ -60,10 +65,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@turbostarter/prettier-config",
-  "browser": {
-    "crypto": false,
-    "stream": false
   }
 }

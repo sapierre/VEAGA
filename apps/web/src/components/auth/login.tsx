@@ -7,7 +7,18 @@ import { useTranslation } from "@turbostarter/i18n";
 
 import { authConfig } from "~/config/auth";
 
-import { Auth } from "./auth";
+import {
+  AuthLayout,
+  AuthHeader,
+  AuthDivider,
+  SocialProviders,
+  LoginForm,
+  RegisterCta,
+  AnonymousLogin,
+  TwoFactorForm,
+  TwoFactorCta,
+  PasskeyLogin,
+} from "./auth";
 import { LOGIN_OPTIONS } from "./form/login/constants";
 
 import type { LoginOption } from "./form/login/constants";
@@ -27,88 +38,86 @@ export const LoginFlow = ({ redirectTo }: LoginFlowProps) => {
   const [step, setStep] = useState<LoginStep>(LoginStep.FORM);
 
   return (
-    <Auth.Layout>
+    <AuthLayout>
       {(() => {
         switch (step) {
           case LoginStep.FORM:
             return (
-              <LoginForm
+              <Login
                 redirectTo={redirectTo}
                 onTwoFactorRedirect={() => setStep(LoginStep.TWO_FACTOR)}
               />
             );
           case LoginStep.TWO_FACTOR:
-            return <TwoFactorForm redirectTo={redirectTo} />;
+            return <TwoFactor redirectTo={redirectTo} />;
         }
       })()}
-    </Auth.Layout>
+    </AuthLayout>
   );
 };
 
-interface LoginFormProps extends LoginFlowProps {
+interface LoginProps extends LoginFlowProps {
   readonly onTwoFactorRedirect?: () => void;
 }
 
-const LoginForm = memo<LoginFormProps>(
-  ({ redirectTo, onTwoFactorRedirect }) => {
-    const { t } = useTranslation("auth");
-    const options = Object.entries(authConfig.providers)
-      .filter(
-        ([provider, enabled]) =>
-          enabled && LOGIN_OPTIONS.includes(provider as LoginOption),
-      )
-      .map(([provider]) => provider as LoginOption);
-
-    return (
-      <>
-        <Auth.Header
-          title={t("login.header.title")}
-          description={t("login.header.description")}
-        />
-
-        <div className="flex flex-col gap-2">
-          <Auth.Providers
-            providers={authConfig.providers.oAuth}
-            redirectTo={redirectTo}
-          />
-          {authConfig.providers.passkey && (
-            <Auth.Passkey redirectTo={redirectTo} />
-          )}
-        </div>
-
-        {(authConfig.providers.oAuth.length > 0 ||
-          authConfig.providers.passkey) &&
-          options.length > 0 && <Auth.Divider />}
-
-        <div className="flex flex-col gap-2">
-          <Auth.Login
-            options={options}
-            redirectTo={redirectTo}
-            onTwoFactorRedirect={onTwoFactorRedirect}
-          />
-
-          {authConfig.providers.anonymous && <Auth.Anonymous />}
-        </div>
-
-        <Auth.RegisterCta />
-      </>
-    );
-  },
-);
-
-const TwoFactorForm = memo<LoginFlowProps>(({ redirectTo }) => {
-  const [factor, setFactor] = useState<SecondFactor>(SecondFactor.TOTP);
+const Login = memo<LoginProps>(({ redirectTo, onTwoFactorRedirect }) => {
   const { t } = useTranslation("auth");
-
-  const Form = Auth.TwoFactor.Form[factor];
-  const Cta =
-    factor === SecondFactor.TOTP
-      ? Auth.TwoFactor.Cta[SecondFactor.BACKUP_CODE]
-      : Auth.TwoFactor.Cta[SecondFactor.TOTP];
+  const options = Object.entries(authConfig.providers)
+    .filter(
+      ([provider, enabled]) =>
+        enabled && LOGIN_OPTIONS.includes(provider as LoginOption),
+    )
+    .map(([provider]) => provider as LoginOption);
 
   return (
     <>
-      <Auth.Header
+      <AuthHeader
+        title={t("login.header.title")}
+        description={t("login.header.description")}
+      />
+
+      <div className="flex flex-col gap-2">
+        <SocialProviders
+          providers={authConfig.providers.oAuth}
+          redirectTo={redirectTo}
+        />
+        {authConfig.providers.passkey && (
+          <PasskeyLogin redirectTo={redirectTo} />
+        )}
+      </div>
+
+      {(authConfig.providers.oAuth.length > 0 ||
+        authConfig.providers.passkey) &&
+        options.length > 0 && <AuthDivider />}
+
+      <div className="flex flex-col gap-2">
+        <LoginForm
+          options={options}
+          redirectTo={redirectTo}
+          onTwoFactorRedirect={onTwoFactorRedirect}
+        />
+
+        {authConfig.providers.anonymous && <AnonymousLogin />}
+      </div>
+
+      <RegisterCta />
+    </>
+  );
+});
+
+const TwoFactor = memo<LoginFlowProps>(({ redirectTo }) => {
+  const [factor, setFactor] = useState<SecondFactor>(SecondFactor.TOTP);
+  const { t } = useTranslation("auth");
+
+  const Form = TwoFactorForm[factor];
+  const Cta =
+    factor === SecondFactor.TOTP
+      ? TwoFactorCta[SecondFactor.BACKUP_CODE]
+      : TwoFactorCta[SecondFactor.TOTP];
+
+  return (
+    <>
+      <AuthHeader
         title={t(`login.twoFactor.${factor}.header.title`)}
         description={t(`login.twoFactor.${factor}.header.description`)}
       />

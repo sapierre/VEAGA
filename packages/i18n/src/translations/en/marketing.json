@@ -27,38 +27,17 @@
       }
     }
   },
-
   "announcement": "Amazing feature of your SaaS!",
   "shippedWith": "Shipped with awesome tools",
+
   "cta": {
     "question": "Ready to start?",
     "button": "Start for free"
   },
-  "feature": {
-    "admin": {
-      "title": "Admin",
-      "description": "Interactive dashboard for managing your account, analytics, settings and other app features."
-    },
-    "auth": {
-      "title": "Auth",
-      "description": "Authenticate users to your app. Social logins, magic link, email/password and many more."
-    },
-    "ai": {
-      "title": "AI",
-      "description": "Integrate AI into your app. Image recognition, chatbots, and more."
-    },
-    "billing": {
-      "title": "Billing",
-      "description": "Receive payments from your users using configured providers - Stripe, LemonSqueezy or Polar."
-    },
-    "blog": {
-      "title": "Blog",
-      "description": "Manage your blog with ease with built-in integration. Supports MDX and content collections."
-    },
-    "docs": {
-      "title": "Docs",
-      "description": "Learn how to use TurboStarter. From installation to deployment."
-    }
+  "editToReload": "Edit <code>{{file}}</code> and save to reload.",
+  "workInProgress": {
+    "title": "We're working on it!",
+    "description": "{{feature}} is currently not available. We're working on it and it will be available soon."
   },
   "features": {
     "label": "Features",
@@ -231,5 +210,31 @@
   "docs": {
     "title": "Docs",
     "description": "Learn how to use TurboStarter"
+  },
+  "setup": {
+    "steps": {
+      "step": {
+        "start": {
+          "title": "This is a simple step",
+          "description": "You need to press Continue button to proceed to the next step"
+        },
+        "required": {
+          "title": "This is a required step",
+          "description": "You have to complete all the required fields to proceed to the next step",
+          "fields": {
+            "data": "I understand that my data is private and encrypted",
+            "privacy": "I've read and agree to the <a>Privacy Policy</a>"
+          }
+        },
+        "skip": {
+          "title": "This is a skip step",
+          "description": "You can skip this step and proceed to the next step"
+        },
+        "final": {
+          "title": "This is a final step",
+          "description": "You have completed all the steps, enjoy your new app!"
+        }
+      }
+    }
   }
 }

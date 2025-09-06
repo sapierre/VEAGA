@@ -21,10 +21,10 @@ export const useAccounts = () => {
 
   const accounts = data?.data ?? [];
   const socials = accounts.filter((account) =>
-    Object.values(SocialProvider).includes(account.provider),
+    Object.values(SocialProvider).includes(account.providerId),
   );
   const missing = Object.values(SocialProvider).filter(
-    (provider) => !socials.some((social) => social.provider === provider),
+    (provider) => !socials.some((social) => social.providerId === provider),
   );
 
   const connect = useMutation({

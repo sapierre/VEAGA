@@ -10,7 +10,7 @@ import {
   RegisterForm,
 } from "~/components/auth/form/register-form";
 import { SocialProviders } from "~/components/auth/form/social-providers";
-import { TwoFactor } from "~/components/auth/form/two-factor";
+import { TwoFactorForm, TwoFactorCta } from "~/components/auth/form/two-factor";
 import { AuthDivider } from "~/components/auth/layout/auth-divider";
 import { AuthHeader } from "~/components/auth/layout/auth-header";
 
@@ -22,7 +22,7 @@ const AuthLayout = memo<AuthLayoutProps>(({ children }) => {
   return (
     <KeyboardAvoidingView className="flex-1 bg-background" behavior="padding">
       <ScrollView
-        contentContainerClassName="grow bg-background px-6 py-10"
+        contentContainerClassName="grow bg-background px-6 pb-10 pt-4"
         bounces={false}
       >
         <View className="flex flex-1 justify-start">
@@ -37,17 +37,18 @@ const AuthLayout = memo<AuthLayoutProps>(({ children }) => {
 
 AuthLayout.displayName = "AuthLayout";
 
-export const Auth = {
-  Layout: AuthLayout,
-  Header: AuthHeader,
-  Divider: AuthDivider,
-  Providers: SocialProviders,
-  Login: LoginForm,
-  LoginCta: LoginCta,
-  Register: RegisterForm,
-  RegisterCta: RegisterCta,
-  Anonymous: AnonymousLogin,
-  ForgotPassword: ForgotPasswordForm,
-  UpdatePassword: UpdatePasswordForm,
-  TwoFactor,
+export {
+  AuthLayout,
+  AuthHeader,
+  AuthDivider,
+  SocialProviders,
+  LoginForm,
+  LoginCta,
+  RegisterForm,
+  RegisterCta,
+  AnonymousLogin,
+  ForgotPasswordForm,
+  UpdatePasswordForm,
+  TwoFactorForm,
+  TwoFactorCta,
 };

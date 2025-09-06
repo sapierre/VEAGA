@@ -36,7 +36,7 @@ const BackupCodeForm = memo(() => {
   const onSubmit = async (data: BackupCodeVerificationPayload) => {
     await twoFactor.verifyBackupCode(data, {
       onSuccess: () => {
-        router.replace(pathsConfig.tabs.settings.index);
+        router.replace(pathsConfig.index);
       },
     });
   };

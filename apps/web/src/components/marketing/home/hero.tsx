@@ -44,7 +44,7 @@ export const Hero = async () => {
         </TurboLink>
       </div>
       <div className="relative -mb-10 mt-4 animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px] after:absolute after:inset-0 after:z-50 after:[background:linear-gradient(to_top,hsl(var(--color-background))_10%,transparent)] sm:mt-8 md:mt-12 lg:mt-16">
-        <div className="rounded-xl bg-opacity-[0.01] before:absolute before:bottom-1/2 before:left-0 before:top-0 before:h-full before:w-full before:animate-image-glow before:opacity-0 before:[background-image:linear-gradient(to_bottom,hsl(var(--color-primary)),hsl(var(--color-secondary)),transparent_40%)] before:[filter:blur(180px)]">
+        <div className="rounded-md bg-opacity-[0.01] before:absolute before:bottom-1/2 before:left-0 before:top-0 before:h-full before:w-full before:animate-image-glow before:opacity-0 before:[background-image:linear-gradient(to_bottom,hsl(var(--color-primary)),hsl(var(--color-secondary)),transparent_40%)] before:[filter:blur(180px)] md:rounded-lg lg:rounded-xl">
           <ThemedImage
             light="/images/hero/light.png"
             dark="/images/hero/dark.png"

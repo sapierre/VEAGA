@@ -25,7 +25,4 @@ const TwoFactorCta: Record<SecondFactor, (props: CtaProps) => React.ReactNode> =
     [SecondFactor.BACKUP_CODE]: BackupCodeCta,
   };
 
-export const TwoFactor = {
-  Form: TwoFactorForm,
-  Cta: TwoFactorCta,
-};
+export { TwoFactorForm, TwoFactorCta };

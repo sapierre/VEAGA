@@ -63,7 +63,7 @@ export const Accounts = () => {
       {socials.length > 0 && !isLoading && (
         <ul className="m-6 mt-0 overflow-hidden rounded-md border">
           {socials.map((social) => {
-            const provider = social.provider as SocialProvider;
+            const provider = social.providerId as SocialProvider;
             const Icon = ICONS[provider];
 
             return (
@@ -75,7 +75,7 @@ export const Accounts = () => {
 
                 <div className="mr-auto flex flex-col">
                   <span className="text-sm font-medium capitalize">
-                    {social.provider}
+                    {social.providerId}
                   </span>
                   <span className="text-xs text-muted-foreground">
                     {t("account.accounts.connectedAt", {

@@ -60,7 +60,7 @@ export const EditPassword = () => {
   };
 
   const hasPassword = accounts
-    .map((account) => account.provider)
+    .map((account) => account.providerId)
     .includes("credential");
 
   return (

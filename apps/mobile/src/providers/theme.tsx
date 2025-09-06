@@ -7,7 +7,7 @@ import {
 import * as NavigationBar from "expo-navigation-bar";
 import { vars } from "nativewind";
 import { memo } from "react";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -55,16 +55,22 @@ export const ThemeProvider = memo<ThemeProviderProps>(({ children }) => {
   const config = useThemeConfig((state) => state.config);
 
   if (isAndroid) {
-    void NavigationBar.setPositionAsync("absolute");
-    void NavigationBar.setBackgroundColorAsync("transparent");
     void NavigationBar.setButtonStyleAsync(isDark ? "light" : "dark");
   }
 
   return (
     <NavigationThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
-      <View style={colors[config.color][resolvedTheme]} className="flex-1">
+      <View
+        style={colors[config.color][resolvedTheme]}
+        className="flex-1 bg-background"
+      >
         {children}
       </View>
+      <StatusBar
+        barStyle={isDark ? "light-content" : "dark-content"}
+        translucent
+        backgroundColor="transparent"
+      />
     </NavigationThemeProvider>
   );
 });

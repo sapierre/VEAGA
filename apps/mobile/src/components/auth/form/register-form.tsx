@@ -33,7 +33,7 @@ export const RegisterForm = memo(() => {
       {
         ...data,
         name: generateName(data.email),
-        callbackURL: pathsConfig.tabs.settings.index,
+        callbackURL: pathsConfig.setup.steps.start,
       },
       {
         onSuccess: () => {
@@ -44,7 +44,7 @@ export const RegisterForm = memo(() => {
               {
                 text: t("continue"),
                 onPress: () => {
-                  router.navigate(pathsConfig.tabs.auth.login);
+                  router.navigate(pathsConfig.setup.auth.login);
                   form.reset();
                 },
               },
@@ -117,7 +117,7 @@ export const RegisterCta = () => {
           {t("login.noAccount")}
         </Text>
         <Link
-          href={pathsConfig.tabs.auth.register}
+          href={pathsConfig.setup.auth.register}
           className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
         >
           {t("register.cta")}

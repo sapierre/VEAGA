@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: 🔍 Check database
-        run: pnpm db:check
+        run: pnpm --filter @turbostarter/db check
 
       - name: 💨 Migrate!
-        run: pnpm db:migrate
+        run: pnpm --filter @turbostarter/db migrate

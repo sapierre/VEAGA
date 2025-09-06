@@ -4,8 +4,8 @@ A dedicated guide for coding agents working on the Turbostarter monorepo. Use th
 
 ## Environment & Tooling
 
-- Node: >= 22.15.0
-- Package manager: pnpm 10.13.x
+- Node: >= 22.17.0
+- Package manager: pnpm 10.15.x
 - Monorepo: Turborepo (`turbo.json`)
 - Env loader: `dotenv-cli` via `with-env` script
 - Global envs (turborepo): `DATABASE_URL`, `PRODUCT_NAME`, `URL`, `DEFAULT_LOCALE`
@@ -29,11 +29,14 @@ A dedicated guide for coding agents working on the Turbostarter monorepo. Use th
 
 - Build all packages/apps: `pnpm build`
 - Build specific app:
-  - Web: `pnpm -F web build`
-  - Mobile: `pnpm -F mobile build` (if applicable for CI artefacts)
+  - Web: `pnpm --filter web build`
+  - Mobile: No generic build script. Use platform builds:
+    - iOS (local run): `pnpm --filter mobile ios`
+    - Android (local run): `pnpm --filter mobile android`
+    - For CI/release builds, use EAS or platform toolchains
   - Extension zips:
-    - Chrome: `pnpm -F extension build:chrome`
-    - Firefox: `pnpm -F extension build:firefox`
+    - Chrome: `pnpm --filter extension build:chrome`
+    - Firefox: `pnpm --filter extension build:firefox`
 
 ## Quality & Types
 
@@ -45,15 +48,16 @@ A dedicated guide for coding agents working on the Turbostarter monorepo. Use th
 
 ## Database (Drizzle)
 
-- Start DB (docker/local): `pnpm db:start`
-- Stop DB: `pnpm db:stop`
-- Status: `pnpm db:status`
-- First-time setup: `pnpm db:setup`
-- Generate migrations: `pnpm db:generate`
-- Apply migrations: `pnpm db:migrate`
-- Push schema (safe envs): `pnpm db:push`
-- Check schema drift: `pnpm db:check`
-- Studio: `pnpm db:studio`
+- Start services (Docker): `pnpm services:start`
+- Stop services: `pnpm services:stop`
+- Services status: `pnpm services:status`
+- Services logs: `pnpm services:logs`
+- First-time setup: `pnpm --filter @turbostarter/db setup`
+- Generate migrations: `pnpm with-env -F @turbostarter/db generate`
+- Apply migrations: `pnpm with-env -F @turbostarter/db migrate`
+- Push schema (safe envs): `pnpm with-env -F @turbostarter/db push`
+- Check schema drift: `pnpm with-env -F @turbostarter/db check`
+- Studio: `pnpm with-env -F @turbostarter/db studio`
 
 Note: All db commands will load `.env` via `with-env`.
 
@@ -148,4 +152,4 @@ Note: All db commands will load `.env` via `with-env`.
 ## Notes
 
 - There is no repository-wide `test` script currently defined. Add tests and scripts when introducing testable modules.
-- Use root scripts for monorepo operations; prefer `pnpm -F <pkg> <cmd>` when targeting a specific package.
+- Use root scripts for monorepo operations; prefer `pnpm --filter <pkg> <cmd>` when targeting a specific package.

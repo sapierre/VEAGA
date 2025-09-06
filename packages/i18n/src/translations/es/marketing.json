@@ -34,32 +34,10 @@
     "question": "¿Listo para empezar?",
     "button": "Comienza gratis"
   },
-
-  "feature": {
-    "admin": {
-      "title": "Administración",
-      "description": "Panel interactivo para gestionar tu cuenta, análisis, configuración y otras funciones de la aplicación."
-    },
-    "auth": {
-      "title": "Autenticación",
-      "description": "Autentica usuarios en tu aplicación. Inicios de sesión sociales, enlaces mágicos, correo/contraseña y mucho más."
-    },
-    "ai": {
-      "title": "IA",
-      "description": "Integra IA en tu aplicación. Reconocimiento de imágenes, chatbots y más."
-    },
-    "billing": {
-      "title": "Facturación",
-      "description": "Recibe pagos de tus usuarios usando proveedores configurados - Stripe o LemonSqueezy."
-    },
-    "blog": {
-      "title": "Blog",
-      "description": "Gestiona tu blog fácilmente con integración incorporada. Compatible con MDX y colecciones de contenido."
-    },
-    "docs": {
-      "title": "Documentación",
-      "description": "Aprende a usar TurboStarter. Desde la instalación hasta el despliegue."
-    }
+  "editToReload": "Edita <code>{{file}}</code> y guarda para recargar.",
+  "workInProgress": {
+    "title": "¡Estamos trabajando en ello!",
+    "description": "{{feature}} no está disponible en este momento. Estamos trabajando en ello y estará disponible pronto."
   },
 
   "features": {
@@ -242,5 +220,31 @@
   "docs": {
     "title": "Documentación",
     "description": "Aprende a usar TurboStarter"
+  },
+  "setup": {
+    "steps": {
+      "step": {
+        "start": {
+          "title": "Este es un paso simple",
+          "description": "Necesitas presionar el botón Continuar para proceder al siguiente paso"
+        },
+        "required": {
+          "title": "Este es un paso requerido",
+          "description": "Tienes que completar todos los campos requeridos para proceder al siguiente paso",
+          "fields": {
+            "data": "Entiendo que mis datos son privados y están encriptados",
+            "privacy": "He leído y acepto la <a>Política de Privacidad</a>"
+          }
+        },
+        "skip": {
+          "title": "Este es un paso opcional",
+          "description": "Puedes omitir este paso y proceder al siguiente paso"
+        },
+        "final": {
+          "title": "Este es el paso final",
+          "description": "Has completado todos los pasos, ¡disfruta de tu nueva aplicación!"
+        }
+      }
+    }
   }
 }

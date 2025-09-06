@@ -52,7 +52,7 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
           if (ctx.data.twoFactorRedirect) {
             return onTwoFactorRedirect?.();
           }
-          router.navigate(pathsConfig.tabs.settings.index);
+          router.navigate(pathsConfig.index);
           form.reset();
         },
         onResponse: () => {
@@ -89,7 +89,7 @@ export const PasswordLoginForm = memo<PasswordLoginFormProps>(
                   <FormLabel nativeID="password">{t("password")}</FormLabel>
 
                   <Link
-                    href={pathsConfig.tabs.auth.forgotPassword}
+                    href={pathsConfig.setup.auth.forgotPassword}
                     className="text-muted-foreground underline"
                   >
                     {t("account.password.forgot.label")}

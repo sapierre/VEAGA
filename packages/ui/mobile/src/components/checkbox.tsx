@@ -4,7 +4,7 @@ import { Platform } from "react-native";
 
 import { cn } from "@turbostarter/ui";
 
-import { Icons } from "../lib/icons";
+import { Icons } from "./icons";
 
 const Checkbox = React.forwardRef<
   CheckboxPrimitive.RootRef,

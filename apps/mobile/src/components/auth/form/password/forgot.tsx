@@ -33,7 +33,7 @@ export const ForgotPasswordForm = memo(() => {
     await forgetPassword(
       {
         ...data,
-        redirectTo: `${Constants.expoConfig?.scheme?.toString()}://${pathsConfig.tabs.auth.updatePassword}`,
+        redirectTo: `${Constants.expoConfig?.scheme?.toString()}://${pathsConfig.setup.auth.updatePassword}`,
       },
       {
         onSuccess: () => {
@@ -80,7 +80,8 @@ export const ForgotPasswordForm = memo(() => {
 
         <View className="items-center justify-center pt-2">
           <Link
-            href={pathsConfig.tabs.auth.login}
+            replace
+            href={pathsConfig.setup.auth.login}
             className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
           >
             {t("account.password.forgot.back")}

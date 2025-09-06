@@ -4,7 +4,17 @@ import { View } from "react-native";
 import { SecondFactor } from "@turbostarter/auth";
 import { useTranslation } from "@turbostarter/i18n";
 
-import { Auth } from "~/components/auth/auth";
+import {
+  AuthLayout,
+  AuthHeader,
+  AuthDivider,
+  SocialProviders,
+  LoginForm,
+  RegisterCta,
+  AnonymousLogin,
+  TwoFactorForm,
+  TwoFactorCta,
+} from "~/components/auth/auth";
 import { LOGIN_OPTIONS } from "~/components/auth/form/login/constants";
 import { VerifyMagicLink } from "~/components/auth/form/login/magic-link";
 import { authConfig } from "~/config/auth";
@@ -22,28 +32,28 @@ export const LoginFlow = () => {
   const [step, setStep] = useState<LoginStep>(LoginStep.FORM);
 
   return (
-    <Auth.Layout>
+    <AuthLayout>
       {(() => {
         switch (step) {
           case LoginStep.FORM:
             return (
-              <LoginForm
+              <Login
                 onTwoFactorRedirect={() => setStep(LoginStep.TWO_FACTOR)}
               />
             );
           case LoginStep.TWO_FACTOR:
-            return <TwoFactorForm />;
+            return <TwoFactor />;
         }
       })()}
-    </Auth.Layout>
+    </AuthLayout>
   );
 };
 
-interface LoginFormProps {
+interface LoginProps {
   readonly onTwoFactorRedirect?: () => void;
 }
 
-const LoginForm = memo<LoginFormProps>(({ onTwoFactorRedirect }) => {
+const Login = memo<LoginProps>(({ onTwoFactorRedirect }) => {
   const { t } = useTranslation("auth");
   const options = Object.entries(authConfig.providers)
     .filter(
@@ -54,42 +64,42 @@ const LoginForm = memo<LoginFormProps>(({ onTwoFactorRedirect }) => {
 
   return (
     <>
-      <Auth.Header
+      <AuthHeader
         title={t("login.header.title")}
         description={t("login.header.description")}
       />
-      <Auth.Providers providers={authConfig.providers.oAuth} />
+      <SocialProviders providers={authConfig.providers.oAuth} />
       {authConfig.providers.oAuth.length > 0 && options.length > 0 && (
-        <Auth.Divider />
+        <AuthDivider />
       )}
       <VerifyMagicLink />
 
       <View className="gap-2">
-        <Auth.Login
+        <LoginForm
           options={options}
           onTwoFactorRedirect={onTwoFactorRedirect}
         />
-        {authConfig.providers.anonymous && <Auth.Anonymous />}
+        {authConfig.providers.anonymous && <AnonymousLogin />}
       </View>
 
-      <Auth.RegisterCta />
+      <RegisterCta />
     </>
   );
 });
 
-const TwoFactorForm = () => {
+const TwoFactor = () => {
   const [factor, setFactor] = useState<SecondFactor>(SecondFactor.TOTP);
   const { t } = useTranslation("auth");
 
-  const Form = Auth.TwoFactor.Form[factor];
+  const Form = TwoFactorForm[factor];
   const Cta =
     factor === SecondFactor.TOTP
-      ? Auth.TwoFactor.Cta[SecondFactor.BACKUP_CODE]
-      : Auth.TwoFactor.Cta[SecondFactor.TOTP];
+      ? TwoFactorCta[SecondFactor.BACKUP_CODE]
+      : TwoFactorCta[SecondFactor.TOTP];
 
   return (
     <>
-      <Auth.Header
+      <AuthHeader
         title={t(`login.twoFactor.${factor}.header.title`)}
         description={t(`login.twoFactor.${factor}.header.description`)}
       />

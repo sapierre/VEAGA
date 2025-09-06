@@ -30,34 +30,10 @@
       "cache": false,
       "persistent": false
     },
-    "db:start": {
-      "cache": false
-    },
-    "db:stop": {
-      "cache": false
-    },
-    "db:status": {
-      "cache": false
-    },
-    "db:setup": {
-      "cache": false
-    },
-    "db:migrate": {
-      "cache": false
-    },
-    "db:generate": {
-      "cache": false,
-      "interactive": true
-    },
-    "db:push": {
-      "cache": false
-    },
-    "db:check": {},
-    "db:studio": {
-      "cache": false,
-      "persistent": true
-    },
     "clean": {
+      "cache": false
+    },
+    "setup": {
       "cache": false
     }
   },

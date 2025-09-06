@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import { AnonymousLogin } from "~/components/auth/form/anonymous";
-import { TwoFactor } from "~/components/auth/form/two-factor";
+import { TwoFactorForm, TwoFactorCta } from "~/components/auth/form/two-factor";
 
 import { LoginCta, LoginForm } from "./form/login/form";
 import { PasskeyLogin } from "./form/login/passkey";
@@ -26,18 +26,19 @@ const AuthLayout = memo<AuthLayoutProps>(({ children }) => {
 
 AuthLayout.displayName = "AuthLayout";
 
-export const Auth = {
-  Layout: AuthLayout,
-  Header: AuthHeader,
-  Providers: SocialProviders,
-  Divider: AuthDivider,
-  Login: LoginForm,
-  LoginCta: LoginCta,
-  Register: RegisterForm,
-  RegisterCta: RegisterCta,
-  ForgotPassword: ForgotPasswordForm,
-  UpdatePassword: UpdatePasswordForm,
-  Anonymous: AnonymousLogin,
-  Passkey: PasskeyLogin,
-  TwoFactor,
+export {
+  AuthLayout,
+  AuthHeader,
+  AuthDivider,
+  SocialProviders,
+  PasskeyLogin,
+  LoginForm,
+  LoginCta,
+  RegisterForm,
+  RegisterCta,
+  AnonymousLogin,
+  ForgotPasswordForm,
+  UpdatePasswordForm,
+  TwoFactorForm,
+  TwoFactorCta,
 };

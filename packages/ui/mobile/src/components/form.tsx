@@ -10,10 +10,12 @@ import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { Label } from "./label";
 import { RadioGroup } from "./radio-group";
+import { Select } from "./select";
 import { Switch } from "./switch";
 import { Text } from "./text";
 import { Textarea } from "./textarea";
 
+import type { Option } from "./select";
 import type {
   ControllerProps,
   FieldPath,
@@ -75,26 +77,29 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 );
 
-const FormItem = React.forwardRef<
-  React.ElementRef<typeof View>,
-  React.ComponentPropsWithoutRef<typeof View>
->(({ className, ...props }, ref) => {
+const FormItem = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof View>) => {
   const nativeID = React.useId();
 
   return (
     <FormItemContext.Provider value={{ nativeID }}>
-      <View ref={ref} className={cn("space-y-2", className)} {...props} />
+      <View className={cn("space-y-2", className)} {...props} />
     </FormItemContext.Provider>
   );
-});
+};
 FormItem.displayName = "FormItem";
 
-const FormLabel = React.forwardRef<
-  React.ElementRef<typeof Label>,
-  Omit<React.ComponentPropsWithoutRef<typeof Label>, "children"> & {
-    children: string;
-  }
->(({ className, nativeID: _nativeID, ...props }, ref) => {
+const FormLabel = ({
+  className,
+  nativeID: _nativeID,
+  children,
+  ref,
+  ...props
+}: Omit<React.ComponentProps<typeof Label>, "children"> & {
+  children: React.ReactNode;
+}) => {
   const { error, formItemNativeID } = useFormField();
 
   return (
@@ -107,15 +112,18 @@ const FormLabel = React.forwardRef<
       )}
       nativeID={formItemNativeID}
       {...props}
-    />
+    >
+      {children}
+    </Label>
   );
-});
+};
 FormLabel.displayName = "FormLabel";
 
-const FormDescription = React.forwardRef<
-  React.ElementRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->(({ className, ...props }, ref) => {
+const FormDescription = ({
+  className,
+  ref,
+  ...props
+}: React.ComponentProps<typeof Text>) => {
   const { formDescriptionNativeID } = useFormField();
 
   return (
@@ -126,13 +134,14 @@ const FormDescription = React.forwardRef<
       {...props}
     />
   );
-});
+};
 FormDescription.displayName = "FormDescription";
 
-const FormMessage = React.forwardRef<
-  React.ElementRef<typeof Animated.Text>,
-  React.ComponentPropsWithoutRef<typeof Animated.Text>
->(({ className, children, ...props }, ref) => {
+const FormMessage = ({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof Animated.Text>) => {
   const { t, i18n } = useTranslation();
   const { error, formMessageNativeID } = useFormField();
   const body = error ? String(error.message) : children;
@@ -145,7 +154,6 @@ const FormMessage = React.forwardRef<
     <Animated.Text
       entering={FadeInDown}
       exiting={FadeOut.duration(275)}
-      ref={ref}
       nativeID={formMessageNativeID}
       className={cn("text-sm text-destructive", className)}
       {...props}
@@ -153,7 +161,7 @@ const FormMessage = React.forwardRef<
       {typeof body === "string" && isKey(body, i18n) ? t(body) : body}
     </Animated.Text>
   );
-});
+};
 FormMessage.displayName = "FormMessage";
 
 type Override<T, U> = Omit<T, keyof U> & U;
@@ -171,14 +179,19 @@ type FormItemProps<T extends React.ElementType<any>, U> = Override<
   React.ComponentPropsWithoutRef<T>,
   FormFieldFieldProps<U>
 > & {
-  label?: string;
-  description?: string;
+  label?: React.ReactNode;
+  description?: React.ReactNode;
 };
 
-const FormInput = React.forwardRef<
-  React.ElementRef<typeof Input>,
-  FormItemProps<typeof Input, string>
->(({ label, description, onChange, ...props }, ref) => {
+const FormInput = ({
+  label,
+  description,
+  onChange,
+  ref,
+  ...props
+}: FormItemProps<typeof Input, string> & {
+  ref?: React.Ref<React.ComponentRef<typeof Input>>;
+}) => {
   const inputRef = React.useRef<React.ComponentRef<typeof Input>>(null);
   const {
     error,
@@ -230,14 +243,19 @@ const FormInput = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+};
 
 FormInput.displayName = "FormInput";
 
-const FormTextarea = React.forwardRef<
-  React.ElementRef<typeof Textarea>,
-  FormItemProps<typeof Textarea, string>
->(({ label, description, onChange, ...props }, ref) => {
+const FormTextarea = ({
+  label,
+  description,
+  onChange,
+  ref,
+  ...props
+}: FormItemProps<typeof Textarea, string> & {
+  ref?: React.Ref<React.ComponentRef<typeof Textarea>>;
+}) => {
   const textareaRef = React.useRef<React.ComponentRef<typeof Textarea>>(null);
   const {
     error,
@@ -289,14 +307,21 @@ const FormTextarea = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+};
 
 FormTextarea.displayName = "FormTextarea";
 
-const FormCheckbox = React.forwardRef<
-  React.ElementRef<typeof Checkbox>,
-  Omit<FormItemProps<typeof Checkbox, boolean>, "checked" | "onCheckedChange">
->(({ label, description, value, onChange, ...props }, ref) => {
+const FormCheckbox = ({
+  label,
+  description,
+  value,
+  onChange,
+  ref,
+  ...props
+}: Omit<
+  FormItemProps<typeof Checkbox, boolean>,
+  "checked" | "onCheckedChange"
+> & { ref?: React.Ref<React.ComponentRef<typeof Checkbox>> }) => {
   const {
     error,
     formItemNativeID,
@@ -338,14 +363,20 @@ const FormCheckbox = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+};
 
 FormCheckbox.displayName = "FormCheckbox";
 
-const FormRadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroup>,
-  Omit<FormItemProps<typeof RadioGroup, string>, "onValueChange">
->(({ label, description, value, onChange, ...props }, ref) => {
+const FormRadioGroup = ({
+  label,
+  description,
+  value,
+  onChange,
+  ref,
+  ...props
+}: Omit<FormItemProps<typeof RadioGroup, string>, "onValueChange"> & {
+  ref?: React.Ref<React.ComponentRef<typeof RadioGroup>>;
+}) => {
   const {
     error,
     formItemNativeID,
@@ -378,14 +409,67 @@ const FormRadioGroup = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+};
 
 FormRadioGroup.displayName = "FormRadioGroup";
 
-const FormSwitch = React.forwardRef<
-  React.ElementRef<typeof Switch>,
-  Omit<FormItemProps<typeof Switch, boolean>, "checked" | "onCheckedChange">
->(({ label, description, value, onChange, ...props }, ref) => {
+const FormSelect = ({
+  label,
+  description,
+  onChange,
+  value,
+  ref,
+  ...props
+}: Omit<
+  FormItemProps<typeof Select, Partial<Option>>,
+  "open" | "onOpenChange" | "onValueChange"
+> & { ref?: React.Ref<React.ComponentRef<typeof Select>> }) => {
+  const {
+    error,
+    formItemNativeID,
+    formDescriptionNativeID,
+    formMessageNativeID,
+  } = useFormField();
+
+  return (
+    <FormItem>
+      {!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
+      <Select
+        ref={ref}
+        aria-labelledby={formItemNativeID}
+        aria-describedby={
+          !error
+            ? `${formDescriptionNativeID}`
+            : `${formDescriptionNativeID} ${formMessageNativeID}`
+        }
+        aria-invalid={!!error}
+        value={
+          value
+            ? { label: value.label ?? "", value: value.label ?? "" }
+            : undefined
+        }
+        onValueChange={onChange}
+        {...props}
+      />
+      {!!description && <FormDescription>{description}</FormDescription>}
+      <FormMessage />
+    </FormItem>
+  );
+};
+
+FormSelect.displayName = "FormSelect";
+
+const FormSwitch = ({
+  label,
+  description,
+  value,
+  onChange,
+  ref,
+  ...props
+}: Omit<
+  FormItemProps<typeof Switch, boolean>,
+  "checked" | "onCheckedChange"
+> & { ref?: React.Ref<React.ComponentRef<typeof Switch>> }) => {
   const switchRef = React.useRef<React.ComponentRef<typeof Switch>>(null);
   const {
     error,
@@ -436,7 +520,7 @@ const FormSwitch = React.forwardRef<
       <FormMessage />
     </FormItem>
   );
-});
+};
 
 FormSwitch.displayName = "FormSwitch";
 
@@ -451,6 +535,7 @@ export {
   FormMessage,
   FormRadioGroup,
   FormSwitch,
+  FormSelect,
   FormTextarea,
   useFormField,
 };

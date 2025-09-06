@@ -6,12 +6,11 @@ import { config, LocaleLabel, useTranslation } from "@turbostarter/i18n";
 import { Locale } from "@turbostarter/i18n";
 import { cn } from "@turbostarter/ui";
 
-import { Icons } from "../lib/icons";
-
 import { Button } from "./button";
+import { Icons } from "./icons";
 import { Text } from "./text";
 
-import type { Icon } from "../lib/icons";
+import type { Icon } from "./icons";
 
 export const LocaleIcon: Record<Locale, Icon> = {
   [Locale.EN]: Icons.UnitedKingdom,

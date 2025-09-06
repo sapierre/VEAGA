@@ -57,8 +57,9 @@
   "mobile": "Mobile",
   "other": "Other",
   "views": "views",
-  "lastDays": "Last {{days}} days",
-  "lastMonths": "Last {{months}} months",
+  "lastDays": "Last {{count}} days",
+  "lastMonths_one": "Last month",
+  "lastMonths_other": "Last {{count}} months",
   "selectMonth": "Select month",
   "seeRoadmap": "See roadmap",
   "general": "General",
@@ -100,6 +101,8 @@
   "name": "Name",
   "message": "Message",
   "email": "Email",
+  "skip": "Skip",
+  "finish": "Finish",
   "two-factor": "Two-factor Authentication",
   "error": {
     "title": "Oops!",
@@ -107,10 +110,5 @@
     "invalid": "Invalid payload!",
     "notFound": "Not found!"
   },
-  "editToReload": "Edit <code>{{file}}</code> and save to reload.",
-  "goBackHome": "Go back home",
-  "workInProgress": {
-    "title": "We're working on it!",
-    "description": "{{feature}} is currently not available. We're working on it and it will be available soon."
-  }
+  "goBackHome": "Go back home"
 }

@@ -38,7 +38,7 @@ export const VerifyMagicLink = () => {
         {
           onSuccess: () => {
             router.setParams({ token: undefined });
-            router.navigate(pathsConfig.tabs.settings.index);
+            router.navigate(pathsConfig.index);
           },
         },
       );
@@ -72,7 +72,7 @@ export const MagicLinkLoginForm = memo(() => {
       {
         name: generateName(data.email),
         email: data.email,
-        callbackURL: pathsConfig.tabs.auth.login,
+        callbackURL: pathsConfig.setup.auth.login,
       },
       {
         onRequest: () => {

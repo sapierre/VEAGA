@@ -28,7 +28,7 @@ export const AnonymousLogin = () => {
         setIsSubmitting(false);
       },
       onSuccess: () => {
-        router.navigate(pathsConfig.tabs.settings.index);
+        router.navigate(pathsConfig.index);
       },
     });
   };

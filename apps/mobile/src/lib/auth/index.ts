@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/order
+import "react-native-webcrypto";
+
 import * as SecureStore from "expo-secure-store";
 import { Alert } from "react-native";
 

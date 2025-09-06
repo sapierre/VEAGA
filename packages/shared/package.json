@@ -1,7 +1,7 @@
 {
   "name": "@turbostarter/shared",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "exports": {
     "./*": "./src/*/index.ts"
@@ -12,6 +12,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@turbostarter/prettier-config",
   "dependencies": {
     "lodash": "4.17.21",
     "react": "catalog:react19",
@@ -26,6 +27,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@turbostarter/prettier-config"
+  }
 }

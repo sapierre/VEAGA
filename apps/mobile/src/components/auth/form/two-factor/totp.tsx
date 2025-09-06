@@ -42,7 +42,7 @@ const TotpForm = memo(() => {
   const onSubmit = async (data: OtpVerificationPayload) => {
     await twoFactor.verifyTotp(data, {
       onSuccess: () => {
-        router.replace(pathsConfig.tabs.settings.index);
+        router.replace(pathsConfig.index);
       },
     });
   };

@@ -1,15 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useColorScheme } from "nativewind";
 import { useCallback, useEffect, useState } from "react";
 
 import { ThemeMode } from "@turbostarter/ui";
-import { useColorScheme } from "@turbostarter/ui-mobile";
 
 import { appConfig } from "~/config/app";
 
 export const useTheme = () => {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { colorScheme, setColorScheme } = useColorScheme();
   const [loaded, setLoaded] = useState(true);
-  const [theme, setTheme] = useState<ThemeMode>(colorScheme);
+  const [theme, setTheme] = useState<ThemeMode>(colorScheme ?? ThemeMode.DARK);
 
   const setupTheme = useCallback(async () => {
     const storedTheme = await AsyncStorage.getItem("theme");
@@ -49,7 +50,7 @@ export const useTheme = () => {
   );
 
   useEffect(() => {
-    setTheme(colorScheme);
+    setTheme(colorScheme ?? ThemeMode.DARK);
   }, [colorScheme]);
 
   const isDark =

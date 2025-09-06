@@ -2,28 +2,25 @@
   "name": "core",
   "private": true,
   "scripts": {
-    "prepare": "husky",
     "build": "pnpm with-env turbo build",
-    "clean": "turbo clean",
+    "clean": "turbo clean && git clean -xdf .turbo .cache node_modules",
     "dev": "pnpm with-env turbo dev",
-    "db:setup": "pnpm with-env turbo db:setup",
-    "db:stop": "turbo db:stop",
-    "db:start": "turbo db:start",
-    "db:status": "turbo db:status",
-    "db:generate": "pnpm with-env turbo db:generate",
-    "db:push": "pnpm with-env turbo db:push",
-    "db:migrate": "pnpm with-env turbo db:migrate",
-    "db:check": "pnpm with-env turbo db:check",
-    "db:studio": "pnpm with-env turbo db:studio",
     "format": "turbo format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo format --continue -- --write --cache --cache-location .cache/.prettiercache",
+    "postinstall": "pnpm lint:ws",
     "lint": "turbo lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest -r packages-without-package-json",
-    "postinstall": "pnpm lint:ws",
+    "prepare": "husky",
+    "services:logs": "docker compose logs -f",
+    "services:setup": "pnpm services:start && pnpm with-env turbo setup",
+    "services:start": "docker compose up -d --wait",
+    "services:status": "docker compose ps",
+    "services:stop": "docker compose down",
     "typecheck": "turbo typecheck",
     "with-env": "dotenv -c --"
   },
+  "prettier": "@turbostarter/prettier-config",
   "devDependencies": {
     "@commitlint/cli": "19.4.1",
     "@commitlint/config-conventional": "19.4.1",
@@ -37,9 +34,13 @@
     "turbo": "2.5.6",
     "typescript": "catalog:"
   },
+  "packageManager": "pnpm@10.15.1",
   "engines": {
-    "node": ">=22.15.0"
+    "node": ">=22.17.0"
   },
-  "packageManager": "pnpm@10.13.1",
-  "prettier": "@turbostarter/prettier-config"
+  "pnpm": {
+    "overrides": {
+      "jose": "^6.0.0"
+    }
+  }
 }

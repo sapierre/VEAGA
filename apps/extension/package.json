@@ -7,13 +7,13 @@
     "build:chrome": "dotenv -c -- wxt zip",
     "build:firefox": "dotenv -c -- wxt zip -b firefox",
     "clean": "git clean -xdf build .cache .wxt .turbo node_modules",
+    "dev": "dotenv -c -- pnpm dev:chrome",
     "dev:chrome": "wxt",
     "dev:firefox": "wxt -b firefox",
-    "dev": "dotenv -c -- pnpm dev:chrome",
     "format": "prettier --check . --ignore-path ../../.gitignore",
+    "postinstall": "wxt prepare",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "typecheck": "tsc --noEmit"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
@@ -21,7 +21,6 @@
     "@turbostarter/analytics-extension": "workspace:*",
     "@turbostarter/api": "workspace:*",
     "@turbostarter/auth": "workspace:*",
-    "@turbostarter/billing": "workspace:*",
     "@turbostarter/i18n": "workspace:*",
     "@turbostarter/shared": "workspace:*",
     "@turbostarter/ui": "workspace:*",

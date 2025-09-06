@@ -8,7 +8,7 @@ import { TurboLink } from "~/components/common/turbo-link";
 import { pathsConfig } from "~/config/paths";
 
 export default function Error({ error }: { error: Error }) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["marketing", "common"]);
 
   useEffect(() => {
     console.error(error);

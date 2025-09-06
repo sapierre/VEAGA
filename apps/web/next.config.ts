@@ -9,8 +9,8 @@ const INTERNAL_PACKAGES = [
   "@turbostarter/billing",
   "@turbostarter/cms",
   "@turbostarter/db",
-  "@turbostarter/shared",
   "@turbostarter/i18n",
+  "@turbostarter/shared",
   "@turbostarter/ui",
   "@turbostarter/ui-web",
 ];

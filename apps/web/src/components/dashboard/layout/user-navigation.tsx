@@ -38,7 +38,7 @@ interface UserNavigationProps {
 export const UserNavigation = memo<UserNavigationProps>(({ user }) => {
   const { t } = useTranslation(["common", "auth"]);
   const router = useRouter();
-  const { isMobile } = useSidebar();
+  const { isMobile, setOpenMobile } = useSidebar();
 
   return (
     <DropdownMenu>
@@ -99,6 +99,7 @@ export const UserNavigation = memo<UserNavigationProps>(({ user }) => {
               <TurboLink
                 href={pathsConfig.dashboard.index}
                 className="flex w-full cursor-pointer items-center gap-1.5"
+                onClick={() => setOpenMobile(false)}
               >
                 <Icons.Home className="size-4" />
                 {t("dashboard")}
@@ -109,6 +110,7 @@ export const UserNavigation = memo<UserNavigationProps>(({ user }) => {
               <TurboLink
                 href={pathsConfig.dashboard.settings.index}
                 className="flex w-full cursor-pointer items-center gap-1.5"
+                onClick={() => setOpenMobile(false)}
               >
                 <Icons.Settings className="size-4" />
                 {t("settings")}
@@ -143,7 +145,7 @@ export const UserNavigation = memo<UserNavigationProps>(({ user }) => {
                   {},
                   {
                     onSuccess: () => {
-                      router.replace("/");
+                      router.replace(pathsConfig.index);
                       router.refresh();
                       toast.success(t("logout.success"), {
                         id: loadingToast,

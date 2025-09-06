@@ -1,7 +1,7 @@
 {
   "name": "@turbostarter/email",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -15,6 +15,15 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@turbostarter/prettier-config",
+  "dependencies": {
+    "@react-email/components": "0.3.2",
+    "@turbostarter/i18n": "workspace:*",
+    "@turbostarter/ui": "workspace:*",
+    "nodemailer": "6.9.15",
+    "react-email": "4.2.4",
+    "zod": "catalog:"
+  },
   "devDependencies": {
     "@react-email/preview-server": "4.2.4",
     "@turbostarter/eslint-config": "workspace:*",
@@ -25,14 +34,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@turbostarter/prettier-config",
-  "dependencies": {
-    "@react-email/components": "0.3.2",
-    "@turbostarter/i18n": "workspace:*",
-    "@turbostarter/ui": "workspace:*",
-    "nodemailer": "6.9.15",
-    "react-email": "4.2.4",
-    "zod": "catalog:"
   }
 }

@@ -1,6 +1,8 @@
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { PortalHost } from "@rn-primitives/portal";
 import { memo } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Provider as AnalyticsProvider } from "@turbostarter/analytics-mobile";
@@ -20,9 +22,14 @@ export const Providers = memo<ProvidersProps>(({ children }) => {
         <I18nProvider>
           <SafeAreaProvider>
             <ThemeProvider>
-              <BottomSheetModalProvider>
-                <AnalyticsProvider>{children}</AnalyticsProvider>
-              </BottomSheetModalProvider>
+              <KeyboardProvider>
+                <BottomSheetModalProvider>
+                  <AnalyticsProvider>
+                    {children}
+                    <PortalHost />
+                  </AnalyticsProvider>
+                </BottomSheetModalProvider>
+              </KeyboardProvider>
             </ThemeProvider>
           </SafeAreaProvider>
         </I18nProvider>

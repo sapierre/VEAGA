@@ -87,7 +87,7 @@ export const LoginCta = () => {
           {t("register.alreadyHaveAccount")}
         </Text>
         <Link
-          href={pathsConfig.tabs.auth.login}
+          href={pathsConfig.setup.auth.login}
           className="pl-2 text-sm text-muted-foreground underline hover:text-primary"
         >
           {t("login.cta")}

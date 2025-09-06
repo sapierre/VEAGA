@@ -10,9 +10,9 @@ interface AuthHeaderProps {
 
 export const AuthHeader = memo<AuthHeaderProps>(({ title, description }) => {
   return (
-    <View>
+    <View className="gap-1">
       <Text className="font-sans-bold text-3xl tracking-tighter">{title}</Text>
-      <Text className="mt-2 text-muted-foreground">{description}</Text>
+      <Text className="text-muted-foreground">{description}</Text>
     </View>
   );
 });

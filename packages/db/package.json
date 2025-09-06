@@ -1,7 +1,7 @@
 {
   "name": "@turbostarter/db",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -10,28 +10,16 @@
     "./env": "./src/env.ts"
   },
   "scripts": {
+    "check": "drizzle-kit check",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "db:start": "docker compose up -d --wait",
-    "db:stop": "docker compose down",
-    "db:setup": "pnpm run db:start && pnpm run db:migrate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:push": "drizzle-kit push",
-    "db:generate": "drizzle-kit generate && eslint --fix && prettier --write . --ignore-path ../../.gitignore",
-    "db:check": "drizzle-kit check",
-    "db:studio": "drizzle-kit studio",
-    "db:status": "docker compose logs -f",
     "format": "prettier --check . --ignore-path ../../.gitignore",
+    "generate": "drizzle-kit generate && eslint --fix && prettier --write . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "migrate": "drizzle-kit migrate",
+    "push": "drizzle-kit push",
+    "setup": "pnpm migrate",
+    "studio": "drizzle-kit studio",
     "typecheck": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@turbostarter/eslint-config": "workspace:*",
-    "@turbostarter/prettier-config": "workspace:*",
-    "@turbostarter/tsconfig": "workspace:*",
-    "drizzle-kit": "0.30.1",
-    "eslint": "catalog:",
-    "prettier": "catalog:",
-    "typescript": "catalog:"
   },
   "prettier": "@turbostarter/prettier-config",
   "dependencies": {
@@ -41,5 +29,14 @@
     "envin": "catalog:",
     "postgres": "3.4.4",
     "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@turbostarter/eslint-config": "workspace:*",
+    "@turbostarter/prettier-config": "workspace:*",
+    "@turbostarter/tsconfig": "workspace:*",
+    "drizzle-kit": "0.30.1",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
   }
 }

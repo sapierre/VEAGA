@@ -4,7 +4,7 @@ import { memo } from "react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { I18nProvider as I18nClientProvider } from "@turbostarter/i18n";
+import { config, I18nProvider as I18nClientProvider } from "@turbostarter/i18n";
 
 import { appConfig } from "~/config/app";
 
@@ -16,7 +16,7 @@ export const useI18nConfig = create<{
 }>()(
   persist(
     (set) => ({
-      config: { locale: getLocales()[0]?.languageCode ?? undefined },
+      config: { locale: getLocales()[0]?.languageCode ?? config.defaultLocale },
       setConfig: (config) => set({ config }),
     }),
     {

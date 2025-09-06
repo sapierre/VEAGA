@@ -41,7 +41,7 @@ export const UpdatePasswordForm = memo<UpdatePasswordFormProps>(({ token }) => {
         token,
       },
       {
-        onSuccess: () => router.replace(pathsConfig.tabs.auth.login),
+        onSuccess: () => router.replace(pathsConfig.setup.auth.login),
       },
     );
   };
