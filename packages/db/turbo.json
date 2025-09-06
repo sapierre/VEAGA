@@ -3,7 +3,10 @@
   "extends": ["//"],
   "tasks": {
     "db:generate": {
+      "interactive": true,
+      "cache": false,
       "dependsOn": ["@turbostarter/auth#db:generate"]
-    }
+    },
+    "db:setup": {}
   }
 }

@@ -34,7 +34,8 @@
       "cache": false
     },
     "setup": {
-      "cache": false
+      "cache": false,
+      "dependsOn": ["@turbostarter/db#db:setup"]
     }
   },
   "globalEnv": ["DATABASE_URL", "PRODUCT_NAME", "URL", "DEFAULT_LOCALE"],

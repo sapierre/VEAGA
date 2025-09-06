@@ -10,15 +10,15 @@
     "./env": "./src/env.ts"
   },
   "scripts": {
-    "check": "drizzle-kit check",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "db:check": "drizzle-kit check",
+    "db:generate": "drizzle-kit generate && eslint --fix && prettier --write . --ignore-path ../../.gitignore",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:setup": "pnpm db:migrate",
+    "db:studio": "drizzle-kit studio",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "generate": "drizzle-kit generate && eslint --fix && prettier --write . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "migrate": "drizzle-kit migrate",
-    "push": "drizzle-kit push",
-    "setup": "pnpm migrate",
-    "studio": "drizzle-kit studio",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@turbostarter/prettier-config",
