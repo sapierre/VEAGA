@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+
+# Pre-push hook for VEAGA project
+# Offers to create a database backup before pushing
+
+echo "🚀 Pre-push hook: Preparing to push changes..."
+
+# Check if this is a significant push (has database migrations or schema changes)
+has_db_changes=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -E "(schema|migration|db)" || echo "")
+
+if [ -n "$has_db_changes" ]; then
+    echo "🗄️  Database-related changes detected:"
+    echo "$has_db_changes" | sed 's/^/   /'
+    echo ""
+
+    # Offer to create backup
+    echo "💾 Would you like to create a database backup before pushing?"
+    echo "   This will help other machines sync your current database state."
+    read -p "Create backup? (Y/n): " create_backup
+
+    if [ "$create_backup" != "n" ] && [ "$create_backup" != "N" ]; then
+        echo "📊 Creating database backup..."
+        if ./scripts/db-backup.sh; then
+            echo "✅ Database backup created successfully"
+
+            # Stage the backup if it's not ignored
+            if [ -d "backups" ]; then
+                git add backups/ 2>/dev/null || echo "   (backups directory not tracked - that's fine)"
+            fi
+        else
+            echo "❌ Database backup failed"
+            read -p "Continue with push anyway? (y/N): " continue_push
+            if [ "$continue_push" != "y" ] && [ "$continue_push" != "Y" ]; then
+                echo "🛑 Push cancelled"
+                exit 1
+            fi
+        fi
+    fi
+fi
+
+# Check if environment template should be updated
+if [ -f ".env" ] && [ -f ".env.sync" ]; then
+    if [ ".env" -nt ".env.sync" ]; then
+        echo "🔧 Your .env file is newer than .env.sync template"
+        read -p "Update environment template? (Y/n): " update_template
+
+        if [ "$update_template" != "n" ] && [ "$update_template" != "N" ]; then
+            ./scripts/sync-env.sh --create
+            git add .env.sync 2>/dev/null || echo "   (env template updated)"
+        fi
+    fi
+fi
+
+echo "✅ Pre-push checks completed"

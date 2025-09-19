@@ -17,6 +17,13 @@
     "services:start": "docker compose up -d --wait",
     "services:status": "docker compose ps",
     "services:stop": "docker compose down",
+    "sync:backup": "./scripts/machine-sync.sh backup",
+    "sync:from": "./scripts/machine-sync.sh pull",
+    "sync:pull": "./scripts/machine-sync.sh pull",
+    "sync:push": "./scripts/machine-sync.sh push",
+    "sync:restore": "./scripts/db-restore.sh --latest",
+    "sync:status": "./scripts/machine-sync.sh status",
+    "sync:to": "./scripts/machine-sync.sh push",
     "typecheck": "turbo typecheck",
     "with-env": "dotenv -c --"
   },

@@ -1,0 +1,53 @@
+#!/usr/bin/env sh
+
+# Post-merge hook for VEAGA project
+# Helps synchronize environment and database after pulling changes
+
+echo "🔄 Post-merge hook: Processing incoming changes..."
+
+# Check if there are new dependencies
+if git diff --name-only HEAD@{1} HEAD 2>/dev/null | grep -q "package.json\|pnpm-lock.yaml"; then
+    echo "📦 Package changes detected, installing dependencies..."
+    pnpm install
+fi
+
+# Check if there are database-related changes
+db_changes=$(git diff --name-only HEAD@{1} HEAD 2>/dev/null | grep -E "(schema|migration|\.sql)" || echo "")
+
+if [ -n "$db_changes" ]; then
+    echo "🗄️  Database changes detected:"
+    echo "$db_changes" | sed 's/^/   /'
+    echo ""
+
+    echo "🔄 You may need to:"
+    echo "   1. Run migrations: pnpm with-env -F @turbostarter/db migrate"
+    echo "   2. Or restore from backup: pnpm sync:restore"
+    echo ""
+
+    read -p "Run database migrations now? (Y/n): " run_migrations
+    if [ "$run_migrations" != "n" ] && [ "$run_migrations" != "N" ]; then
+        echo "📊 Running database migrations..."
+        if pnpm services:status > /dev/null 2>&1; then
+            pnpm with-env -F @turbostarter/db migrate
+            echo "✅ Migrations completed"
+        else
+            echo "⚠️  Database services not running. Start with: pnpm services:start"
+        fi
+    fi
+fi
+
+# Check if environment template was updated
+if git diff --name-only HEAD@{1} HEAD 2>/dev/null | grep -q ".env.sync"; then
+    echo "🔧 Environment template was updated"
+
+    if [ ! -f ".env" ]; then
+        echo "📝 No .env file found, applying template..."
+        ./scripts/sync-env.sh --apply
+        echo "⚠️  Don't forget to fill in your secret values in .env"
+    else
+        echo "💡 You may want to check for new environment variables:"
+        echo "   Run: ./scripts/sync-env.sh --diff"
+    fi
+fi
+
+echo "✅ Post-merge processing completed"

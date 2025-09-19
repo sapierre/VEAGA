@@ -43,6 +43,10 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+
+# development backups (optional - remove this line if you want to track backups in git)
+# backups/
 
 # vercel
 .vercel
