@@ -1,0 +1,197 @@
+{
+  "name": "Matching Gift Follow-up",
+  "description": "Identify and engage donors whose employers offer matching gift programs",
+  "type": "CHATFLOW",
+  "flowData": {
+    "nodes": [
+      {
+        "id": "employer_lookup",
+        "type": "customFunction",
+        "data": {
+          "label": "Check Employer Match Database",
+          "code": "// Look up employer in matching gift database\nconst employer = inputs.employerName?.toLowerCase();\nconst matchingCompanies = inputs.matchingGiftCompanies || [];\n\nconst matchInfo = matchingCompanies.find(c => \n  c.name.toLowerCase().includes(employer) ||\n  employer?.includes(c.name.toLowerCase())\n);\n\nif (matchInfo) {\n  return {\n    hasMatch: true,\n    matchRatio: matchInfo.ratio || '1:1',\n    matchLimit: matchInfo.limit || 'No limit',\n    deadlineDays: matchInfo.deadlineDays || 365,\n    formUrl: matchInfo.formUrl,\n    requirements: matchInfo.requirements\n  };\n}\n\nreturn {\n  hasMatch: false,\n  shouldResearch: employer && employer.length > 2\n};"
+        },
+        "position": { "x": 100, "y": 150 }
+      },
+      {
+        "id": "match_analyzer",
+        "type": "conditionalBranch",
+        "data": {
+          "label": "Route Based on Match Status",
+          "condition": "inputs.hasMatch",
+          "branches": [
+            { "value": true, "target": "confirmed_match_flow" },
+            { "value": false, "target": "potential_match_flow" }
+          ]
+        },
+        "position": { "x": 250, "y": 150 }
+      },
+      {
+        "id": "confirmed_match_prompt",
+        "type": "promptTemplate",
+        "data": {
+          "label": "Confirmed Match Template",
+          "template": "Create a matching gift follow-up email:\n\nDonor: {{donorName}}\nRecent Gift: ${{giftAmount}} on {{giftDate}}\nEmployer: {{employerName}}\nMatch Ratio: {{matchRatio}}\nMatch Limit: {{matchLimit}}\nForm URL: {{formUrl}}\nDeadline: {{deadlineDays}} days from gift date\n\nCreate an enthusiastic email that:\n1. Thanks them for their recent gift of ${{giftAmount}}\n2. Excitedly shares that {{employerName}} will {{matchRatio}} match their gift\n3. Explains the simple process (usually 5 minutes online)\n4. Provides direct link to {{formUrl}} if available\n5. Offers assistance if needed\n6. Creates urgency around the {{deadlineDays}} day deadline\n7. Shows impact of doubled/tripled gift\n\nTone: Excited, helpful, and appreciative"
+        },
+        "position": { "x": 400, "y": 100 }
+      },
+      {
+        "id": "potential_match_prompt",
+        "type": "promptTemplate",
+        "data": {
+          "label": "Potential Match Template",
+          "template": "Create a matching gift inquiry email:\n\nDonor: {{donorName}}\nRecent Gift: ${{giftAmount}}\nEmployer: {{employerName}} (if provided)\n\nCreate a friendly email that:\n1. Thanks them for their recent support\n2. Asks if their employer offers matching gifts\n3. Mentions that thousands of companies match donations\n4. Provides a link to check eligibility\n5. Shares that matching gifts double or triple impact\n6. Offers to help with the process\n\nTone: Informative, helpful, non-presumptuous"
+        },
+        "position": { "x": 400, "y": 200 }
+      },
+      {
+        "id": "message_generator",
+        "type": "chatOpenAI",
+        "data": {
+          "label": "Generate Match Message",
+          "model": "gpt-4",
+          "temperature": 0.7,
+          "systemMessage": "You are a nonprofit matching gift specialist. Create engaging, action-oriented messages that motivate donors to submit matching gift requests. Emphasize ease, impact multiplication, and provide clear next steps."
+        },
+        "position": { "x": 550, "y": 150 }
+      },
+      {
+        "id": "approval_node",
+        "type": "approvalNode",
+        "data": {
+          "label": "Review Match Message",
+          "requireApproval": true,
+          "approvalMessage": "Review matching gift message",
+          "allowEdit": true,
+          "metadata": {
+            "showMatchDetails": true
+          }
+        },
+        "position": { "x": 700, "y": 150 }
+      },
+      {
+        "id": "email_sender",
+        "type": "emailSender",
+        "data": {
+          "label": "Send Match Email",
+          "provider": "{{ESP_PROVIDER}}",
+          "from": "{{FROM_EMAIL}}",
+          "subject": "{{donorName}}, {{employerName}} can {{matchRatio}} your gift!",
+          "trackOpens": true,
+          "trackClicks": true,
+          "priority": "high",
+          "tags": ["matching_gift", "employer_match"]
+        },
+        "position": { "x": 850, "y": 150 }
+      },
+      {
+        "id": "reminder_scheduler",
+        "type": "scheduler",
+        "data": {
+          "label": "Schedule Follow-up",
+          "delayDays": 7,
+          "maxReminders": 3,
+          "condition": "!inputs.matchSubmitted"
+        },
+        "position": { "x": 1000, "y": 150 }
+      },
+      {
+        "id": "crm_updater",
+        "type": "customFunction",
+        "data": {
+          "label": "Update CRM Records",
+          "code": "// Update donor record with matching gift status\nreturn {\n  donorId: inputs.donorId,\n  updates: {\n    employerName: inputs.employerName,\n    matchingGiftEligible: inputs.hasMatch,\n    matchingGiftRatio: inputs.matchRatio,\n    matchingGiftRequested: new Date().toISOString(),\n    expectedMatchAmount: inputs.giftAmount * (inputs.matchRatio === '2:1' ? 2 : 1)\n  },\n  activityLog: {\n    type: 'matching_gift_outreach',\n    status: inputs.hasMatch ? 'confirmed' : 'inquiry',\n    sentAt: new Date().toISOString()\n  }\n};"
+        },
+        "position": { "x": 1000, "y": 250 }
+      },
+      {
+        "id": "impact_calculator",
+        "type": "customFunction",
+        "data": {
+          "label": "Calculate Match Impact",
+          "code": "// Calculate and format the impact of the matched gift\nconst baseGift = inputs.giftAmount;\nconst ratio = inputs.matchRatio || '1:1';\nlet totalImpact = baseGift;\n\nif (ratio === '2:1') totalImpact = baseGift * 3;\nelse if (ratio === '3:1') totalImpact = baseGift * 4;\nelse totalImpact = baseGift * 2;\n\n// Convert to tangible impact\nconst impactExamples = {\n  50: '10 children with school supplies',\n  100: 'Clean water for a family for a month',\n  250: 'Job training for one person',\n  500: 'Emergency shelter for a family',\n  1000: 'Complete home repair project'\n};\n\nlet impactDescription = 'significant program support';\nfor (const [amount, description] of Object.entries(impactExamples)) {\n  if (totalImpact >= parseInt(amount)) {\n    impactDescription = description;\n  }\n}\n\nreturn {\n  totalImpact,\n  impactDescription,\n  multiplier: ratio === '2:1' ? 'triple' : ratio === '3:1' ? 'quadruple' : 'double'\n};"
+        },
+        "position": { "x": 400, "y": 300 }
+      }
+    ],
+    "edges": [
+      {
+        "source": "employer_lookup",
+        "target": "match_analyzer"
+      },
+      {
+        "source": "match_analyzer",
+        "target": "confirmed_match_prompt",
+        "condition": "hasMatch=true"
+      },
+      {
+        "source": "match_analyzer",
+        "target": "potential_match_prompt",
+        "condition": "hasMatch=false"
+      },
+      {
+        "source": "confirmed_match_prompt",
+        "target": "impact_calculator"
+      },
+      {
+        "source": "potential_match_prompt",
+        "target": "message_generator"
+      },
+      {
+        "source": "impact_calculator",
+        "target": "message_generator"
+      },
+      {
+        "source": "message_generator",
+        "target": "approval_node"
+      },
+      {
+        "source": "approval_node",
+        "target": "email_sender",
+        "condition": "approved"
+      },
+      {
+        "source": "email_sender",
+        "target": "reminder_scheduler"
+      },
+      {
+        "source": "email_sender",
+        "target": "crm_updater"
+      }
+    ],
+    "variables": [
+      {
+        "name": "donorId",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "donorName",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "giftAmount",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "giftDate",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "employerName",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "matchingGiftCompanies",
+        "type": "array",
+        "required": false,
+        "description": "List of companies with matching gift programs"
+      }
+    ]
+  },
+  "category": "MATCHING_GIFT"
+}

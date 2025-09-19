@@ -1,0 +1,183 @@
+{
+  "name": "Lapsed Donor Reactivation",
+  "description": "Re-engage donors who haven't given in 6+ months with personalized win-back campaigns",
+  "type": "CHATFLOW",
+  "flowData": {
+    "nodes": [
+      {
+        "id": "data_fetch",
+        "type": "documentLoader",
+        "data": {
+          "label": "Retrieve Donor History",
+          "vectorStore": "{{TEAM_VECTOR_STORE}}",
+          "topK": 10,
+          "filter": {
+            "donorId": "{{donorId}}"
+          }
+        },
+        "position": { "x": 100, "y": 150 }
+      },
+      {
+        "id": "segment_analyzer",
+        "type": "customFunction",
+        "data": {
+          "label": "Analyze Lapse Reason",
+          "code": "// Analyze why donor lapsed\nconst lapseMonths = inputs.monthsSinceLastGift;\nconst lastGiftAmount = inputs.lastGiftAmount;\nconst totalGifts = inputs.totalGiftsCount;\n\nlet strategy = 'standard';\nlet tone = 'warm_reconnection';\n\nif (lapseMonths > 12) {\n  strategy = 'deep_reengagement';\n  tone = 'nostalgic_impact';\n} else if (totalGifts > 5) {\n  strategy = 'loyalty_recognition';\n  tone = 'grateful_update';\n} else {\n  strategy = 'gentle_reminder';\n  tone = 'friendly_check_in';\n}\n\nreturn {\n  strategy,\n  tone,\n  personalizedHook: totalGifts > 10 ? 'long_term_supporter' : 'valued_donor'\n};"
+        },
+        "position": { "x": 250, "y": 150 }
+      },
+      {
+        "id": "message_generator",
+        "type": "chatOpenAI",
+        "data": {
+          "label": "Generate Reactivation Message",
+          "model": "gpt-4",
+          "temperature": 0.8,
+          "systemMessage": "You are a nonprofit donor relations specialist focused on reactivating lapsed donors. Create warm, personal messages that acknowledge their past support, share recent impact, and gently invite them back without being pushy."
+        },
+        "position": { "x": 400, "y": 150 }
+      },
+      {
+        "id": "reactivation_prompt",
+        "type": "promptTemplate",
+        "data": {
+          "label": "Reactivation Template",
+          "template": "Create a reactivation email for a lapsed donor:\n\nDonor: {{donorName}}\nLast Gift: ${{lastGiftAmount}} ({{monthsSinceLastGift}} months ago)\nTotal Past Gifts: {{totalGiftsCount}}\nPrimary Interest Area: {{interestArea}}\nCommunication Strategy: {{strategy}}\nTone: {{tone}}\n\nRecent Impact to Highlight:\n{{recentImpactStories}}\n\nCraft a message that:\n1. Acknowledges their specific past support\n2. Shows we noticed their absence (gently)\n3. Shares exciting updates in their interest area\n4. Includes a specific, tangible impact story\n5. Offers multiple ways to re-engage (not just giving)\n6. Includes a special 'welcome back' incentive if appropriate\n\nAvoid: Guilt, pressure, or mentioning the lapse directly"
+        },
+        "position": { "x": 400, "y": 50 }
+      },
+      {
+        "id": "approval_checkpoint",
+        "type": "approvalNode",
+        "data": {
+          "label": "Review Reactivation Message",
+          "requireApproval": true,
+          "approvalMessage": "Review reactivation message for {{donorName}}",
+          "allowEdit": true,
+          "metadata": {
+            "showDonorHistory": true,
+            "showStrategy": true
+          }
+        },
+        "position": { "x": 550, "y": 150 }
+      },
+      {
+        "id": "multichannel_sender",
+        "type": "conditionalBranch",
+        "data": {
+          "label": "Select Channel",
+          "condition": "inputs.preferredChannel",
+          "branches": [
+            { "value": "email", "target": "email_sender" },
+            { "value": "sms", "target": "sms_sender" },
+            { "value": "mail", "target": "direct_mail_queue" }
+          ]
+        },
+        "position": { "x": 700, "y": 150 }
+      },
+      {
+        "id": "email_sender",
+        "type": "emailSender",
+        "data": {
+          "label": "Send Reactivation Email",
+          "provider": "{{ESP_PROVIDER}}",
+          "from": "{{FROM_EMAIL}}",
+          "subject": "{{donorName}}, we have exciting news to share!",
+          "trackOpens": true,
+          "trackClicks": true,
+          "tags": ["reactivation", "lapsed_donor"]
+        },
+        "position": { "x": 850, "y": 100 }
+      },
+      {
+        "id": "sms_sender",
+        "type": "smsSender",
+        "data": {
+          "label": "Send Reactivation SMS",
+          "provider": "{{SMS_PROVIDER}}",
+          "credentials": "{{SMS_CREDENTIALS}}",
+          "shortenUrls": true
+        },
+        "position": { "x": 850, "y": 200 }
+      },
+      {
+        "id": "activity_logger",
+        "type": "customFunction",
+        "data": {
+          "label": "Log Reactivation Attempt",
+          "code": "return {\n  donorId: inputs.donorId,\n  campaignType: 'lapsed_reactivation',\n  strategy: inputs.strategy,\n  channel: inputs.preferredChannel,\n  sentAt: new Date().toISOString(),\n  lapseMonths: inputs.monthsSinceLastGift\n};"
+        },
+        "position": { "x": 1000, "y": 150 }
+      }
+    ],
+    "edges": [
+      {
+        "source": "data_fetch",
+        "target": "segment_analyzer"
+      },
+      {
+        "source": "segment_analyzer",
+        "target": "reactivation_prompt"
+      },
+      {
+        "source": "reactivation_prompt",
+        "target": "message_generator"
+      },
+      {
+        "source": "message_generator",
+        "target": "approval_checkpoint"
+      },
+      {
+        "source": "approval_checkpoint",
+        "target": "multichannel_sender",
+        "condition": "approved"
+      },
+      {
+        "source": "multichannel_sender",
+        "target": "email_sender",
+        "condition": "email"
+      },
+      {
+        "source": "multichannel_sender",
+        "target": "sms_sender",
+        "condition": "sms"
+      },
+      {
+        "source": "email_sender",
+        "target": "activity_logger"
+      },
+      {
+        "source": "sms_sender",
+        "target": "activity_logger"
+      }
+    ],
+    "variables": [
+      {
+        "name": "donorId",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "donorName",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "monthsSinceLastGift",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "lastGiftAmount",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "preferredChannel",
+        "type": "string",
+        "default": "email"
+      }
+    ]
+  },
+  "category": "LAPSED_REACTIVATION"
+}

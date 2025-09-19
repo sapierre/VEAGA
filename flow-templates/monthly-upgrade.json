@@ -1,0 +1,134 @@
+{
+  "name": "Monthly Upgrade Campaign",
+  "description": "Engage monthly donors for upgrade opportunities based on giving history and engagement metrics",
+  "type": "CHATFLOW",
+  "flowData": {
+    "nodes": [
+      {
+        "id": "start_node",
+        "type": "documentLoader",
+        "data": {
+          "label": "Load Donor Knowledge Base",
+          "vectorStore": "{{TEAM_VECTOR_STORE}}",
+          "topK": 5
+        },
+        "position": { "x": 100, "y": 100 }
+      },
+      {
+        "id": "llm_node",
+        "type": "chatOpenAI",
+        "data": {
+          "label": "Generate Upgrade Message",
+          "model": "gpt-4",
+          "temperature": 0.7,
+          "systemMessage": "You are a nonprofit fundraising assistant specializing in donor upgrades. Use the donor's giving history and past communications to craft a personalized upgrade request. Be warm, grateful, and specific about impact."
+        },
+        "position": { "x": 400, "y": 100 }
+      },
+      {
+        "id": "prompt_template",
+        "type": "promptTemplate",
+        "data": {
+          "label": "Upgrade Request Template",
+          "template": "Based on the following donor information:\n\nDonor Name: {{donorName}}\nCurrent Monthly Gift: {{currentGift}}\nGiving Duration: {{givingMonths}} months\nEngagement Score: {{engagementScore}}\nPast Campaign Responses: {{campaignHistory}}\n\nCraft a personalized email requesting an upgrade from ${{currentGift}} to ${{suggestedAmount}}. Highlight specific programs their increased support would help. Reference their {{givingMonths}} months of support.\n\nInclude:\n1. Personal greeting and gratitude\n2. Specific impact of their current giving\n3. Compelling case for upgrade\n4. Clear ask with suggested amount\n5. Easy upgrade link\n\nTone: Warm, appreciative, and inspiring"
+        },
+        "position": { "x": 250, "y": 200 }
+      },
+      {
+        "id": "approval_node",
+        "type": "approvalNode",
+        "data": {
+          "label": "Review & Approve Message",
+          "requireApproval": true,
+          "approvalMessage": "Please review the generated upgrade request before sending",
+          "allowEdit": true
+        },
+        "position": { "x": 550, "y": 100 }
+      },
+      {
+        "id": "email_node",
+        "type": "emailSender",
+        "data": {
+          "label": "Send Upgrade Email",
+          "provider": "{{ESP_PROVIDER}}",
+          "credentials": "{{ESP_CREDENTIALS}}",
+          "from": "{{FROM_EMAIL}}",
+          "subject": "{{donorName}}, your support means the world to us",
+          "trackOpens": true,
+          "trackClicks": true
+        },
+        "position": { "x": 700, "y": 100 }
+      },
+      {
+        "id": "log_node",
+        "type": "customFunction",
+        "data": {
+          "label": "Log Campaign Activity",
+          "code": "const result = {\n  donorId: inputs.donorId,\n  campaignType: 'monthly_upgrade',\n  messageSent: new Date().toISOString(),\n  suggestedAmount: inputs.suggestedAmount,\n  messageContent: inputs.finalMessage\n};\n\nreturn result;"
+        },
+        "position": { "x": 850, "y": 100 }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge1",
+        "source": "start_node",
+        "target": "prompt_template",
+        "type": "default"
+      },
+      {
+        "id": "edge2",
+        "source": "prompt_template",
+        "target": "llm_node",
+        "type": "default"
+      },
+      {
+        "id": "edge3",
+        "source": "llm_node",
+        "target": "approval_node",
+        "type": "default"
+      },
+      {
+        "id": "edge4",
+        "source": "approval_node",
+        "target": "email_node",
+        "type": "approved"
+      },
+      {
+        "id": "edge5",
+        "source": "email_node",
+        "target": "log_node",
+        "type": "default"
+      }
+    ],
+    "variables": [
+      {
+        "name": "donorName",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "currentGift",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "suggestedAmount",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "givingMonths",
+        "type": "number",
+        "required": true
+      },
+      {
+        "name": "engagementScore",
+        "type": "string",
+        "required": false,
+        "default": "high"
+      }
+    ]
+  },
+  "category": "MONTHLY_UPGRADE"
+}

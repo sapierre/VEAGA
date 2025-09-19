@@ -56,7 +56,7 @@ export const auth = betterAuth({
   ],
   emailAndPassword: {
     enabled: true,
-    requireEmailVerification: true,
+    requireEmailVerification: false, // Disabled for development
     sendResetPassword: async ({ user, url }, request) =>
       sendEmail({
         to: user.email,
@@ -68,7 +68,7 @@ export const auth = betterAuth({
       }),
   },
   emailVerification: {
-    sendOnSignUp: true,
+    sendOnSignUp: false, // Disabled for development
     autoSignInAfterVerification: true,
     sendVerificationEmail: async ({ user, url }, request) =>
       sendEmail({

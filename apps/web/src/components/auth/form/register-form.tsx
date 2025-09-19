@@ -35,6 +35,10 @@ export const RegisterForm = memo(() => {
     useAuthFormStore();
   const form = useForm({
     resolver: standardSchemaResolver(registerSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = async (data: RegisterPayload) => {

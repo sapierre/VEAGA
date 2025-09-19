@@ -4,3 +4,5 @@ export const { createInsertSchema, createSelectSchema, createUpdateSchema } =
   createSchemaFactory({
     coerce: true,
   });
+
+export * from "./ids";
