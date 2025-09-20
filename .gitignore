@@ -46,7 +46,7 @@ yarn-error.log*
 .env
 
 # development backups (optional - remove this line if you want to track backups in git)
-# backups/
+backups/
 
 # vercel
 .vercel
