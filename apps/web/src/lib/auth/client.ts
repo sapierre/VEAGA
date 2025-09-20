@@ -22,7 +22,7 @@ export const {
   revokeSession,
   twoFactor,
 } = createClient({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3003",
   fetchOptions: {
     throw: true,
     onError: ({ error, response }) => {
