@@ -4,7 +4,11 @@ import {
   timestamp,
   boolean,
   integer,
+  pgEnum,
 } from "drizzle-orm/pg-core";
+
+// User role enum
+export const userRoleEnum = pgEnum("user_role", ["user", "admin", "super_admin"]);
 
 export const users = pgTable("users", {
   id: text("id").primaryKey(),
@@ -22,6 +26,7 @@ export const users = pgTable("users", {
     .notNull(),
   twoFactorEnabled: boolean("two_factor_enabled"),
   isAnonymous: boolean("is_anonymous"),
+  role: userRoleEnum("role").$default(() => "user"),
 });
 
 export const sessions = pgTable("sessions", {

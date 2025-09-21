@@ -47,6 +47,8 @@ import {
   Copy,
   ChevronsUpDown,
   ArrowLeft,
+  Workflow,
+  Shield,
 } from "lucide-react";
 
 import { Icons as GlobalIcons } from "@turbostarter/ui/assets";
@@ -101,6 +103,8 @@ export const Icons = {
   SendHorizontal,
   ChevronsUpDown,
   ArrowLeft,
+  Workflow,
+  Shield,
 };
 
 export type Icon = (typeof Icons)[keyof typeof Icons];
